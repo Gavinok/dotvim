@@ -26,25 +26,6 @@ nnoremap <buffer><silent> [[ :call CustomSections('up', '^\# ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\# ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\# ')<CR>
 
-call SyntaxRange#Include('\S\@<=\$\|\$\S\@=', "\S\@<=\$\|\$\S\@=", 'tex')
-"show leading chars
-" setlocal list listchars=space:·,tab:>\ 
-" highlight WhiteSpaceBol ctermfg=darkgrey
-" highlight WhiteSpaceMol ctermfg=black
-" match WhiteSpaceMol / /
-" 2match WhiteSpaceBol /^ \+/
-
-" iabbrev xxx  print("xxx")
-" nnoremap <buffer><silent> [[ :call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
-" nnoremap <buffer><silent> [[ :call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
-" xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
-" xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '\v^(\s+<bar>)def ')<CR>
-
-" LaTeX
-" call SyntaxRange#Include('\\begin[.*]{.*}', '\\end{.*}', 'tex')
-" call SyntaxRange#Include('\\begin{.*}', '\\end{.*}', 'tex')
-" call SyntaxRange#Include('\\\[', '\\\]', 'tex')
-
 " Let's try this heading-based fold method out (Tim Pope)
 function! MarkdownFold()
   let line = getline(v:lnum)
