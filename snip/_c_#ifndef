@@ -1,0 +1,4 @@
+#ifndef {{+INCLUDE_GUARD+}}
+#define {{+~\~1+}}
+{{++}}
+#endif

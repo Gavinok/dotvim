@@ -1,0 +1,4 @@
+my {{+$filename+}} = '{{+/path/to/file.name+}}';
+
+open my {{+$FILE+}}, '<', {{+$filename+}}
+    or croak "Cannot open '{{+$filename+}}': $OS_ERROR";

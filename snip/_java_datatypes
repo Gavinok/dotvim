@@ -1,0 +1,55 @@
+/*
+byte:
+    8-bit signed two's complement
+    minimum value of -128
+    maximum value of 127 (inclusive)
+
+short:
+    16-bit signed two's complement integer
+    minimum value of -32,768
+    maximum value of 32,767 (inclusive)
+
+int:
+    32-bit signed two's complement integer
+    minimum value of -231
+    maximum value of 231-1
+
+    In Java SE 8 and later, you can use the int data type
+    to represent an unsigned 32-bit integer:
+
+    minimum value of 0
+    maximum value of 232-1.
+
+long:
+    64-bit two's complement integer
+    minimum value of -263
+    maximum value of 263-1
+
+    In Java SE 8 and later, you can use the long data type
+    to represent an unsigned 64-bit long:
+
+    minimum value of 0
+    maximum value of 264-1
+
+float:
+    single-precision 32-bit IEEE 754 floating point
+
+    Its range of values is beyond the scope of this discussion,
+    but is specified in the Floating-Point Types, Formats, and
+    Values section of the Java Language Specification.
+
+double:
+    double-precision 64-bit IEEE 754 floating point
+
+    Its range of values is beyond the scope of this discussion,
+    but is specified in the Floating-Point Types, Formats, and
+    Values section of the Java Language Specification.
+
+char:
+    single 16-bit Unicode character
+    minimum value of '\u0000' (or 0)
+    maximum value of '\uffff' (or 65,535 inclusive).
+
+boolean:
+    The boolean data type has only two possible values: true and false.
+*/

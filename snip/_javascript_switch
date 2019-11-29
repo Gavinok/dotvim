@@ -1,0 +1,8 @@
+switch({{+expression+}}) {
+	case '{{+/* case */+}}':
+		{{-/* case body */-}}
+		break;
+
+	default:
+		{{+/* default */+}}
+}

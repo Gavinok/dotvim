@@ -1,0 +1,885 @@
+" File: .vimrc
+" Author: Gavin Jaeger-Freeborn
+"
+"    ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
+"    ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
+"     ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
+"      ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
+"       ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
+"       ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
+"       ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
+"         ░░   ▒ ░░      ░     ░░   ░ ░
+"          ░   ░         ░      ░     ░ ░
+"         
+" Quick Init: {{{1 "
+let g:python_host_prog  = '/usr/bin/python2' "speed up python2 startup
+let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
+" 1}}} "Quick Init
+" Plugins: {{{1 "
+" install vim-plug if it's not already
+augroup PLUGGED
+	if empty(glob('~/.vim/autoload/plug.vim'))  " vim
+		silent !curl -fo ~/.vim/autoload/plug.vim --create-dirs
+					\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
+augroup end
+call plug#begin('~/.vim/plugged')
+if has('patch-8.0.0283')
+	" lsp {{{2 
+	" using:
+	" c: clangd
+	" java: jdtls (eclips.jdt.ls)
+	" python: python-language-server
+	if exists('*job_start') || exists('*jobstart') 
+		Plug 'prabirshrestha/vim-lsp' | Plug 'prabirshrestha/async.vim'
+		" basically just used for async omni complete
+	endif
+	" 2}}} "lsp
+endif
+" Autocompletion {{{2 "
+"better default completion used for easyier vim scripting
+Plug 'fcpg/vim-complimentary', { 'for': 'vim' } 
+Plug 'lifepillar/vim-mucomplete' "main source for completion 
+if has('nvim')
+	Plug 'ncm2/float-preview.nvim'
+	let g:float_preview#docked = 0
+endif
+" 2}}} "Autocompletion
+" Snippets {{{2 "
+Plug 'joereynolds/vim-minisnip' | Plug 'jonasw234/vim-mucomplete-minisnip'
+let g:skeletondir = expand('~/.vim/minisnip/skeleton')
+let g:name = 'Gavin Jaeger-Freeborn'
+let g:email = 'gavinfreeborn@gmail.com'
+let g:minisnip_trigger = '<C-f>'
+let g:minisnip_dir='~/.vim/snip'
+" 2}}} "Snippets
+" Terminal {{{2 "
+Plug 'christoomey/vim-tmux-navigator'
+" 2}}} "Terminal
+" Git {{{2 "
+Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gpush'] }
+Plug 'mhinz/vim-signify'
+" 2}}} "Git
+" Writing {{{2 "
+Plug 'junegunn/goyo.vim' "goyo for distraction free wrighting
+Plug 'lervag/vimtex' " Latex support
+Plug 'vim-pandoc/vim-pandoc' " work on replacing
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after' " work on replacing
+let g:pandoc#modules#enabled = ['formatting', 'spell', 'hypertext']
+let g:pandoc#formatting#mode = 'sA'
+let g:pandoc#after#modules#enabled = ['nrrwrgn']
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeEnable' }
+let g:table_mode_map_prefix = '<Leader>T'
+Plug 'KeitaNakamura/tex-conceal.vim'
+set conceallevel=2
+let g:tex_conceal='abdgm'
+" 2}}} "Writing
+" Org Mode {{{2 "
+Plug 'dhruvasagar/vim-dotoo' 
+" Plug '~/vim-dotoo' 
+Plug 'vim-scripts/SyntaxRange', { 'for': ['dotoo'] }
+Plug 'chrisbra/nrrwrgn' "narrow range
+nmap <F3> <Plug>NrrwrgnWinIncr
+" 2}}} "Org Mode
+" My Pluggins {{{2 "
+Plug 'gavinok/vim-togglelist'
+if !has('nvim')
+	Plug 'gavinok/vim-togglecursor'
+endif
+Plug 'gavinok/spaceway.vim'
+" 2}}} " My Plugins
+" Tpope god bless the man {{{2 "
+Plug 'airblade/vim-rooter'
+let g:rooter_manual_only = 1
+Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat' "Surround motion
+Plug 'tpope/vim-dispatch',{ 'on': ['Make', 'Dispatch', 'Start', 'Spawn'] } "async building
+
+Plug 'wellle/targets.vim'
+Plug 'tpope/vim-commentary'
+" 2}}} "Tpope
+" vimscript {{{2 "
+Plug 'tpope/vim-scriptease'
+Plug 'mhinz/vim-lookup'
+" 2}}} "vimscript
+" Fzf {{{2 "
+if executable('fzf')
+	Plug 'junegunn/fzf.vim'
+else
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+	Plug 'junegunn/fzf.vim'
+endif
+" 2}}} "Fzf
+" etc {{{2 "
+Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
+let g:colorizer_colornames_disable = 1
+
+"Interactive Supstitute So I Learn To Be 
+"Better With It at using it
+Plug 'markonm/traces.vim'
+
+Plug 'junegunn/vim-plug' "for vim-plug help files
+Plug 'dhruvasagar/vim-zoom'
+" 2}}} "etc.
+call plug#end()
+" Lazy Load {{{2 "
+"lazy load these plugins to speedup start time
+" augroup LazyLoadPlug
+" autocmd!
+" autocmd CursorHold,CursorHoldI * call plug#load('vim-dispatch') | autocmd! LazyLoadPlug
+" augroup end
+" 2}}} "Lazy Load
+"" Aesthetics: {{{ "
+"" set termguicolors
+colorscheme spaceway
+highlight Normal ctermbg=NONE
+highlight StatusLine ctermbg=NONE ctermfg=Grey
+highlight Terminal ctermbg=NONE
+highlight Terminal guibg=NONE
+highlight Normal guibg=NONE
+augroup WinEnterGroup
+	" this one is which you're most likely to use?
+	autocmd WinNew,WinEnter,BufHidden,BufDelete,BufWinLeave * if (winnr('j') > 1) || (winnr('l') > 1)
+				\| hi StatusLine ctermbg=145 ctermfg=235 guibg=#303537 guifg=#B3B8C4 cterm=NONE gui=NONE | 
+				\else 
+				\| highlight StatusLine ctermbg=NONE ctermfg=Grey 
+				\| endif
+
+augroup end
+
+" function! StatusLineEcho()
+" 	echohl WarningMsg | echo printf( '%s', FugitiveStatusline()) | echohl None
+" endfunction
+
+" augroup QuickStat
+" 	" set updatetime=1000
+" 	au BufRead,VimEnter * call StatusLineEcho()
+" augroup end
+" }}} Aesthetics "
+" 1}}} "Plugins
+
+"General Mappings: {{{1
+let g:mapleader="\\"
+let maplocalleader = '|'
+nmap <space> <leader>
+vmap <space> <leader>
+" shortcut to files and dirs uses shortcuts.sh
+" it can be found at my scripts repo
+runtime vimshortcuts.vim
+
+nnoremap <leader>y :let @+ = expand("%:p")<cr>
+
+vmap <expr> g+  VMATH_YankAndAnalyse()
+
+if has('nvim')
+	augroup TERMINAL
+		autocmd!
+		" autocmd BufWinEnter,WinEnter term://* startinsert
+		autocmd BufLeave term://* stopinsert
+		au TermOpen * setlocal nonumber
+		au TermOpen * setlocal norelativenumber
+	augroup end
+	map <leader>cr :w! \| Start compiler <c-r>%<CR>i
+	map <leader>ct :w! \| :split \| te cheat.sh <c-r>%
+	tnoremap <leader>esc <C-\><C-N>
+	nnoremap <leader><cr>  :split \| te<cr>i
+	tnoremap <C-\>       <C-\><C-N>
+	tnoremap <C-H>       <C-\><C-N><C-W><C-H>
+	tnoremap <C-J>       <C-\><C-N><C-W><C-J>
+	tnoremap <C-K>       <C-\><C-N><C-W><C-K>
+	tnoremap <C-L>       <C-\><C-N><C-W><C-L>
+else
+	set ttimeout
+	set ttimeoutlen=50
+	set ttyfast           " should make scrolling faster
+	packadd matchit
+endif
+
+" Open or compile file
+map <silent><leader>co :!opout <c-r>%<CR><CR>
+map <leader>cc :w! \| !compiler <c-r>%<CR>
+" Write To File As Sudo
+nnoremap <leader>sudo :w !sudo tee > /dev/null %
+
+" POSIX Commands
+nnoremap <leader>cp :!cp  <C-R>% ~/
+nnoremap <leader>mv :!mv  <C-R>% ~/
+nnoremap <leader>rn :file <C-R>%
+
+" Toggle *conceallevel*
+nnoremap <Leader>cl :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>
+
+" Alignment Text
+xnoremap <silent> gl :<C-u>silent call Align()<CR>
+
+" Quick format file
+nnoremap gq :call QuickFormat()<CR>
+
+nnoremap <silent> <leader>/        :nohlsearch<CR>
+nnoremap <script> <silent> <leader>v :call togglelist#ToggleQuickfixList()<CR>
+nnoremap <script> <silent> <leader>V :call togglelist#ToggleLocationList()<CR>
+" quick folding except in quickfix and cmd line
+" nmap encase plugins need it
+nmap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : 'za'
+augroup ENTERMAPPING
+	autocmd!
+	autocmd CmdwinEnter * unmap <CR>
+	autocmd CmdwinLeave * nmap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : 'za'
+augroup end
+
+" Find References
+nnoremap <leader>gr :Ggrep! <C-R><C-W><CR>:Copen<CR>
+
+" change variable and repeat with .
+nnoremap c*			*Ncgn
+nnoremap <C-N>      yiW/<C-r>0<CR>Ncgn
+vnoremap <C-N>      y/<C-r>0<CR>Ncgn
+
+map ]a :cnext<CR>
+map [a :cprevious<CR>
+map ]A :lnext<CR>
+map [A :lprevious<CR>
+
+"quick buffer navigation
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
+
+" mapping from Vim vinegar
+nnoremap - :e <C-R>=fnameescape(expand('%:p:h'))<CR>/<CR>
+" better navigation of command history
+cnoremap <C-N> <down>
+cnoremap <C-P> <up>
+
+" better alternative to <C-W>_<C-W>\|
+nnoremap <C-W>f		:call zoom#toggle()<cr>
+nnoremap <C-W><C-f>	:call zoom#toggle()<cr>
+
+" win resize
+nnoremap <C-W>- :call RepeatResize('-')<CR>
+nnoremap <C-W>+ :call RepeatResize('+')<CR>
+nnoremap <C-W>< :call RepeatResize('<')<CR>
+nnoremap <C-W>> :call RepeatResize('>')<CR>
+
+"Better Mappings Imho
+nnoremap Y  y$
+vnoremap * "xy/<C-R>x<CR>
+
+" Using Fugitive
+nnoremap Q  :Gstatus<CR>
+
+" Some Readline Keybindings When In Insertmode
+inoremap <C-A> <C-O>^<C-g>u
+inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>
+			\strlen(getline('.'))?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
+
+"For Proper Tabbing And Bracket Insertion"
+inoremap {<CR> {<CR>}<c-o><s-o>
+
+" commandline mappings
+cnoremap <C-A> <Home>
+cnoremap <C-B> <Left>
+cnoremap <C-E> <End>
+
+" when rightclicking highlight copy it
+vnoremap <RightMouse> "*y
+" 1}}} "General
+
+" Editing: {{{1 "
+" use syntax for omnicomplete if none exists
+augroup SyntaxComplete
+	" this one is which you're most likely to use?
+	autocmd Filetype *
+				\	if &omnifunc == '' |
+				\		setlocal omnifunc=syntaxcomplete#Complete |
+				\	endif
+augroup end
+" Capital Quick first letter of a word or a regain
+nnoremap + m[viwb<esc>gUl`[
+nnoremap <leader>+ V:s/\<./\u&/g <BAR> nohlsearch<CR>
+vnoremap + :s/\<./\u&/g <BAR> nohlsearch<CR>
+
+"Insert Empty Line Above And Below
+map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
+
+" Quick spell correction shortcut
+nnoremap <silent> <leader>ss :WP<CR>
+nmap <silent> <Left>     mz[s1z=`z
+imap <silent> <Left>     <C-G>u<esc>mz[s1z=`za
+
+" Move a line of text using ALT+[jk] and shift the indentation with ALT+[hl]
+vnoremap J :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap K :m'<-2<cr>`>my`<mzgv`yo`z
+vnoremap < <gv
+vnoremap > >gv
+" 1}}} "Editing
+
+" Plugin Configuration: {{{1 "
+" Surround {{{2 "
+nmap ysw ysiw
+nmap ysW ysiW
+" 2}}} "Surround
+" Dispatch {{{2 "
+map `<TAB> :Dispatch! <Up>
+map m<TAB> :Make! <Up>
+" lazy load dispatch
+nnoremap <leader>t :call Quicktag()<CR>
+function! Quicktag()
+	let g:rootdir = FindRootDirectory()
+	if g:rootdir !=# ''
+		exec 'Dispatch! ctags  -f ".tag" -R ' . g:rootdir
+	else 
+		echo 'no root'
+	endif
+endfunction
+nnoremap m<CR>                   :Make<CR>
+nnoremap m<Space>                :Make<Space>
+nnoremap m!                      :Make!
+nnoremap `<CR>                   :Dispatch<CR>
+nnoremap `<Space>                :Dispatch<Space>
+nnoremap `!                      :Dispatch!
+nnoremap `?                      :FocusDispatch<CR>
+nnoremap '<CR>                   :Start<CR>
+nnoremap '<Space>                :Start<Space>
+nnoremap '!                      :Start!
+nnoremap g'<CR>                  :Spawn<CR>
+nnoremap g'<Space>               :Spawn<Space>
+nnoremap g'!                     :Spawn!
+" 2}}} "Dispatch
+" RepeatResize {{{2 "
+function! RepeatResize(first)
+	let l:command = a:first
+	while stridx('+-><', l:command) != -1
+		execute "normal! \<C-w>" . l:command
+		redraw
+		let l:command = nr2char(getchar())
+	endwhile
+endfunction
+" 2}}} "RepeatResize
+" MiniSnip {{{2"
+command! -nargs=+ -complete=file MiniNew call MinisnipNew(<f-args>)
+function! MinisnipNew(snippet,...)
+	let l:ft = a:0 ? a:1 : &filetype
+	if l:ft !=# ''
+		exe 'split ' . g:minisnip_dir .'/_'. l:ft . '_' . a:snippet
+	else
+		echo 'No FileType'
+	endif
+endfunction
+" 2}}} "MiniSnip
+" Orgmode {{{2 "
+map <silent>gO :e ~/Documents/org/mylife.org<CR>
+" 2}}} "Orgmode
+" vim-lsp {{{2 "
+if has('patch-8.0.0283')
+
+	"diagnostics settings
+	let g:lsp_virtual_text_enabled = 0
+	let g:lsp_highlights_enabled = 0
+	let g:lsp_signs_enabled = 1         " enable signs
+	let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+	let g:lsp_signs_error = {'text': '✖'}
+	let g:lsp_signs_warning = {'text': '‼'} " icons require GUI
+	let g:lsp_signs_hint = {'text': 'ⓘ'} " icons require GUI
+	let g:lsp_preview_float = 1
+	hi LspErrorText       ctermfg=red    ctermbg=NONE
+	hi LspWarningText     ctermfg=blue   ctermbg=NONE
+	hi LspInformationText ctermfg=yellow ctermbg=NONE
+	hi LspHintText        ctermfg=red    ctermbg=NONE
+
+	"Specific lsp setup
+	augroup LSP
+		autocmd!
+		if executable('pyls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'pyls',
+						\ 'cmd': {server_info->['pyls']},
+						\ 'whitelist': ['python'],
+						\ })
+		endif
+		if executable('ccls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'ccls',
+						\ 'cmd': {server_info->['ccls']},
+						\ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+						\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+						\ })
+
+		elseif executable('clangd')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'clangd',
+						\ 'cmd': {server_info->['clangd', '--background-index']},
+						\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+						\ })
+		endif
+		if executable('gopls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'gopls',
+						\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+						\ 'whitelist': ['go'],
+						\ })
+			autocmd BufWritePre *.go LspDocumentFormatSync
+		endif
+		if executable('typescript-language-server')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'javascript support using typescript-language-server',
+						\ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+						\ 'root_uri': { server_info->lsp#utils#path_to_uri
+						\(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+						\ 'whitelist': ['javascript', 'javascript.jsx']
+						\ })
+		endif
+		if executable('bash-language-server')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'bash-language-server',
+						\ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+						\ 'whitelist': ['sh'],
+						\ })
+		endif
+		if executable('java') && executable('jdtls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'jdt.ls',
+						\ 'cmd': {server_info->["jdtls"]},
+						\ 'whitelist': ['java'],
+						\ })
+		endif
+		nmap ]l <plug>(lsp-next-error)
+		nmap [l <plug>(lsp-previouse-error)
+		nnoremap <leader>K :Man <C-r><C-w>
+
+		autocmd FileType cpp,c,python,javascript,java,go   nmap <silent><buffer> K <plug>(lsp-hover)
+		autocmd FileType cpp,c,python,javascript,java,go   nmap <silent><buffer> gd <plug>(lsp-definition)
+		autocmd FileType cpp,c,python,javascript,java,go   setlocal omnifunc=lsp#complete
+
+
+		let g:lsp_diagnostics_enabled = 1 
+
+
+		"prevent mucomplete from blocking input
+		autocmd FileType cpp,c,python,javascript,java,go   let g:mucomplete#completion_delay = 50
+		autocmd FileType cpp,c,python,javascript,java,go   let g:mucomplete#reopen_immediately = 0
+
+	augroup end
+endif
+" 2}}} "vim-lsp
+" vimtex {{{2 "
+augroup LATEX
+	autocmd!
+	autocmd VimLeave *.tex !texclear %
+	let g:vimtex_enabled = 1
+	let g:tex_flavor='latex'
+	let g:vimtex_fold_enabled = 1
+	autocmd filetype tex setlocal omnifunc=vimtex#complete#omnifunc
+augroup END
+" 2}}} "vimtex
+" Mucomplete {{{2 "
+let g:mucomplete#user_mappings = {
+			\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>"
+			\ }
+set completeopt+=menuone
+"-----------
+if has('patch-8.0.0283')
+	" Tab complete dont accept until told to
+	set completeopt+=noselect
+	let g:mucomplete#enable_auto_at_startup = 1
+	"----------- completion chains
+	set complete-=i
+	set complete-=t
+
+	let g:mucomplete#wordlist = {
+				\       '': ['gavinfreeborn@gmail.com', 'Gavin Jaeger-freeborn'],
+				\ }
+	let g:mucomplete#chains = {
+				\ 'default'     : ['mini', 'list', 'omni', 'path',  'c-n',   'uspl'],
+				\ 'html'        : ['mini', 'omni', 'path', 'c-n',   'uspl'],
+				\ 'vim'         : ['mini', 'list', 'omni', 'path', 	'cmd',   'keyp'],
+				\ 'tex'         : ['mini', 'path', 'omni', 'spel',  'c-n'],
+				\ 'sh'          : ['mini', 'omni', 'file', 'dict',  'keyp'],
+				\ 'java'        : ['mini', 'xyz',  'tags', 'keyp', 'c-n'],
+				\ 'c'           : ['mini', 'list', 'omni', 'c-n'],
+				\ 'dotoo'		: ['mini', 'list', 'uspl', 'c-n'],
+				\ 'python'      : ['mini', 'omni', 'c-n'],
+				\ 'javascript'  : ['mini', 'omni', 'c-n'],
+				\ 'groff'       : ['mini', 'uspl', 'c-n'],
+				\ 'pandoc'    	: ['mini', 'uspl', 'c-n'],
+				\ 'mail'   		: ['mini', 'uspl', 'list', 'c-n'],
+				\ 'txt'         : ['uspl', 'list', 'c-n'],
+				\ 'gitcommit'   : ['uspl', 'list', 'c-n']
+				\ }
+
+	"spelling
+	let g:mucomplete#spel#good_words = 1
+endif
+" 2}}} "Mucomplete
+" TableMode {{{2 "
+function! s:isAtStartOfLine(mapping)
+	let text_before_cursor = getline('.')[0 : col('.')-1]
+	let mapping_pattern = '\V' . escape(a:mapping, '\')
+	let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+	return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+			\ <SID>isAtStartOfLine('\|\|') ?
+			\ '<c-o>:TableModeEnable<cr><bar>' : '<bar><bar>'
+" 2}}} "TableMode
+" Goyo {{{2 "
+" Goyo plugin makes text more readable when writing prose:
+map <leader>G :Goyo<CR>
+" 2}}} "Goyo
+" FZF {{{2 "
+"" Define mappings
+nnoremap <leader>fo :!xdg-open <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
+if executable('fzf')
+	let FZF_DEFAULT_COMMAND="find . -path '*/\.*' -type d -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
+	let g:fzf_tags_command = 'ctags -f ".tags" -R'
+	let g:fzf_buffers_jump = 1
+
+	nnoremap <silent> <leader>ff :Root<CR>:Files
+	nnoremap <silent> <leader>ff :Files <c-r>=fnameescape(expand('%:p:h'))<cr>/<cr>
+	nnoremap <silent> <leader>fF :Files <c-r>=fnameescape(expand('%:p:h'))<cr>/<cr>
+	nnoremap <silent> <leader>ct :Files ~/Documents/cheatsheets<CR>
+	nnoremap <silent> <leader>fw :Files ~/Dropbox/DropsyncFiles/vimwiki<CR>
+	nnoremap <silent> <leader>fp :Files ~/Programming<CR>
+	nnoremap <silent> <leader>fv :Files ~/.vim<CR>
+	nnoremap <silent> <leader>fm :Files ~/.vim/snip/<CR>
+	nnoremap <silent> <leader>ft :Tags<CR>
+
+	nnoremap <silent> <leader>ag :Root<CR>:Ag<CR>
+	nnoremap <silent> <leader>fj :History<CR>
+	nnoremap <silent> <leader>fT :Filetype<CR>
+	nnoremap <silent> <leader>fl :Lines<CR>
+	nnoremap <silent> <leader>hh :Help<CR>
+	" quickly edit configs and scripts
+	nnoremap <silent> <leader>fs	:call fzf#run({ 'window': 'enew', 'source':
+				\'find ~/.config/ ~/.scripts/  -path */.config/coc -prune -o -path "*.git" -prune -o -print', 'sink':  'edit'})<CR>
+else 
+	nnoremap <leader>ff :find <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*<Left>
+	nnoremap <leader>fV :find ~/.vim/**<Left>
+	nnoremap <leader>ft :tjump<space>
+endif
+" 2}}} "FZF
+" Signify {{{2 "
+nnoremap <leader>hp :SignifyHunkDiff<cr>
+nnoremap <leader>hu :SignifyHunkUndo<cr>
+command! Diff :SignifyDiff
+" 2}}} "Signify
+" 1}}} "Plugin Configuration
+
+" Functions And Commands: {{{1 "
+" VisSort {{{2 
+command! -range -nargs=0 -bang VsSort sil! keepj <line1>,<line2>call <SID>VisSort(<bang>0)
+vnoremap <leader>s :'<,'>sil! keepj <line1>,<line2>call <SID>VisSort(<bang>0)
+function! s:VisSort(isnmbr) range abort
+	if visualmode() !=# "\<c-v>"
+		execute 'silent! '.a:firstline.','.a:lastline.'sort i'
+		return
+	endif
+	let firstline = line("'<")
+	let lastline  = line("'>")
+	let keeprega  = @a
+	silent normal! gv"ay
+	'<,'>s/^/@@@/
+	silent! keepjumps normal! '<0"aP
+	if a:isnmbr
+		silent! '<,'>s/^\s\+/\=substitute(submatch(0),' ','0','g')/
+	endif
+	execute "sil! keepj '<,'>sort i"
+	execute "sil! keepj ".firstline.",".lastline.'s/^.\{-}@@@//'
+	let @a = keeprega
+endfun
+" 2}}} "VisSort
+" UndoList {{{2 
+" Alternative to Undotree/Gundo/Mundo
+function! s:UndoList() abort    " TODO: improvements and polishing
+	let name = " ".expand('%')."\n\n"
+	let parent0 = bufnr()
+	let list = execute('undolist')
+	silent! bdelete! UndoList
+	silent! topleft 30 vnew UndoList
+	let b:parent = parent0
+	let b:pattern = '^\s*\(\d*\)\s'
+	setlocal nonumber buftype=nofile bufhidden=hide noswapfile
+	setlocal statusline=\ UndoList
+	put=list
+	g/^/m3 | noh
+	3,$norm elde
+	silent! 3,$s/\(.*\ \ \)\@!\s\d*$//g | 3s/saved
+	silent! %s/\s\+$//e
+	normal ggdj
+	put! =name
+	setlocal nomodifiable
+	autocmd WinEnter <buffer> if winnr('$') == 1 | q | endif
+	nnoremap <buffer> <CR> :exec winbufnr(b:parent)."wincmd w <bar> undo ".matchstr(getline('.'), b:pattern)<CR>
+endfunction
+command! UndoList call s:UndoList()
+" 2}}} "UndoList
+" QuickFormat() {{{2 
+" quickly format the file without moving the cursor or window
+function! QuickFormat()
+	let b:PlugView=winsaveview()
+	exe 'silent normal! gg=G'
+	call winrestview(b:PlugView) 
+	echo "file indented"
+endfunction
+" 2}}} "QuickFormat()
+" termdebug {{{2 
+command! -nargs=0 Debug :packadd termdebug<CR>:Termdebug
+nnoremap <leader>bb :Break<CR>
+nnoremap <leader>b] :Step<CR>
+nnoremap <leader>b} :Over<CR>
+nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
+" 2}}} "termdebug
+" Dead Simple Align {{{2 "
+" Use a bunch of standard UNIX commands for quick an dirty
+function! Align()
+	'<,'>!column -t|sed 's/  \(\S\)/ \1/g'
+	normal! gv=
+endfunction
+" 2}}} "Dead Simple Align
+" CustomSections {{{2 "
+function! CustomSections(dir, regex)
+	if a:dir ==# 'up'
+		call search(a:regex,'bW')
+	else
+		call search(a:regex,'W')
+	endif
+endfunction
+" 2}}} "CustomSections
+" QuickSource {{{2 "
+function! Source(begin, end)
+	let lines = getline(a:begin, a:end)
+	for line in lines
+		execute line
+	endfor
+endfunction 
+" 2}}} "QuickSource
+" Show Documentation {{{2 "
+function! s:show_documentation()
+	if &filetype ==# 'vim'
+		execute 'h '.expand('<cword>')
+	else
+		execute 'Man '.expand('<cword>')
+	endif
+endfunction
+" 2}}} "Show Documentation
+" White space {{{2 " TODO: simplify this
+" Highlight whitespace problems.
+nnoremap <Leader>ws :call ToggleShowWhitespace()<CR>
+function! ToggleShowWhitespace()
+	if !exists('b:showws')
+		let b:showws = 1
+	endif
+	let pat = '^\t*\zs \+\|\s\+$\| \+\ze\t\|[^\t]\zs\t\+'
+	if !b:showws
+		syntax clear ExtraWhitespace
+		let b:showws = 1
+	else
+		exec 'syntax match ExtraWhitespace "'.pat.'" containedin=ALL'
+		let b:showws = 0
+	endif
+endfunction
+" Highlight trailing whitespace characters
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+
+" remove trailing whitespaces
+command! StripWhitespace :%s/\s\+$//e
+" 2}}} "White Space
+" MkdirWrite {{{2 "
+" mkdir with same name and
+"write file to it with :MW
+command! MW call MkdirWrite()
+function! MkdirWrite()
+	w
+	!mkdir '%:t:r'
+	!mv % '%:t:r'/
+	e %:t:r/%
+	" redraw!
+endfunction
+" 2}}} "MkdirWrite
+" Toggle Prose Mode {{{2 "
+"toggle prose and code mode
+command! WP call WordProcessor()
+function! WordProcessor()
+	if !exists('b:prose')
+		let b:prose = 0
+	endif
+	if exists('b:prose')
+		if b:prose
+			let b:prose=0
+			echo 'Code Mode'
+			silent! nunmap <buffer> j
+			silent! nunmap <buffer> k
+			silent! iunmap <buffer> .
+			silent! iunmap <buffer> !
+			silent! iunmap <buffer> ?
+			silent! iunmap <buffer> :
+			silent! setlocal nospell
+			silent! setlocal nolinebreak
+			silent! let g:goyo_width=80
+		else
+			let b:prose=1
+			echo 'Prose Mode'
+			nnoremap <buffer> j gj
+			nnoremap <buffer> k gk
+			inoremap <buffer> . .<C-g>u
+			inoremap <buffer> ! !<C-g>u
+			inoremap <buffer> ? ?<C-g>u
+			inoremap <buffer> : :<C-g>u
+			setlocal spell spelllang=en_us
+			setlocal linebreak
+			let g:goyo_width=80
+		endif
+	endif
+endfu
+" 2}}} "
+" 1}}} "Functions and Commands
+
+" General Settings: {{{1 "
+filetype plugin indent on
+scriptencoding utf-8      " allow emojis in vimrc
+if has('virtualedit')
+	set virtualedit=block " virtual block can go anywhere
+endif
+set mouse=a           "Add mouse control not that I use them very much
+set clipboard^=unnamed,unnamedplus	"xclip support
+set tags=./.tags					"make tagefiles hidden
+set title             "Update window title
+set hidden            "Allow to leave buffer without saving
+set showcmd           "Show keys pressed in normal
+set autochdir         "Auto cd
+set tabstop=4         "Shorter hard tabs
+set softtabstop=0     "Spaces are for wimps
+set smarttab
+set shiftwidth=4      "Shorter shiftwidth
+set autoindent        "Auto indent newline
+set ruler             "Show line number and column
+set scrolljump=-15    "Jump 15 when moving cursor bellow screen
+set belloff=all
+set undofile          "Undo function after reopening
+set autowrite         autoread  "read/file when switching buffers
+set lazyredraw        "redraw only when needed faster macros
+set shortmess=aAtcTF   "get rid of annoying messagesc
+set incsearch         smartcase ignorecase hlsearch "better search
+set backspace=2       "backspace through anything
+set foldmethod=syntax "Enable folding
+set foldlevel=99      "start with all folds open
+set path+=**          "Autocompletion of path
+set completeopt-=preview "I find this super distracting
+set wildmenu          "Autocompletion of commands
+" set wildmode=longest:full:list
+set wildmode=longest:full,full
+set wildignorecase
+set splitbelow        splitright
+set laststatus=2      "hide status bar for nvim
+let g:netrw_browsex_viewer='setsid xdg-open' "force gx to use xdg-open
+
+" makes the StatusLine's background blend in when there is only one window on
+" screen and then turnd grey when there when there are multiple
+" Do not use smart case in command line mode,
+" extracted from https://goo.gl/vCTYdK
+if exists('##CmdLineEnter')
+	augroup dynamic_smartcase
+		autocmd!
+		autocmd CmdLineEnter : set nosmartcase
+		autocmd CmdLineLeave : set smartcase
+	augroup END
+endif
+" 1}}} "General Settings
+
+" FileType Specific Stuff: {{{1 "
+augroup Linting
+	autocmd!
+	autocmd FileType * compiler aio
+augroup END
+augroup GITCOMMITS
+	" spelling for gitcommits
+	autocmd FileType gitcommit silent call WordProcessor()
+	autocmd FileType gitcommit startinsert
+augroup end
+augroup AUTOEXEC
+	autocmd!
+	autocmd BufWritePost ~/.config/bmdirs,~/.config/bmfiles !shortcuts.sh
+	" Run xrdb whenever Xdefaults or Xresources are updated.
+	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+augroup end
+augroup VIM
+	autocmd!
+	autocmd FileType vim nmap <silent> <leader>sc :call Source(line('.'), line('.'))<CR>
+	autocmd FileType vim vmap <silent> <leader>sc :call Source(line('v'), line('.'))<CR>
+	autocmd FileType vim nnoremap <buffer><silent> gd  :call lookup#lookup()<cr>
+	autocmd Filetype vim set foldmethod=marker
+	autocmd FileType vim nnoremap <silent><leader>cc :PlugInstall<CR>
+	autocmd FileType vim nnoremap <silent><leader>cl :PlugClean<CR>
+	autocmd BufRead *.vimrc nnoremap <silent>gx yi':!xdg-open https://github.com/<C-r>0<CR>
+augroup END
+augroup CSETTINGS
+	let ch_syntax_for_h = 1
+	let g:compiler_gcc_ignore_unmatched_lines = 1
+augroup END
+augroup SHELLSCRIPTS
+	autocmd!
+	" make sure the file can be executed
+	autocmd FileType sh setlocal dictionary+=~/.cache/dmenu_run'
+	autocmd FileType pandoc execute 'setlocal dictionary+=/usr/share/dict/british-english'
+	autocmd BufWritePost *
+				\ if getline(1) =~ "^#!/bin/[a-z]*sh" |
+				\   exe "silent !chmod a+x <afile>" |
+				\ endif
+
+	let g:sh_fold_enabled = 5 "enable if/do/for/function folding)
+augroup END
+augroup WRIGHTING
+	autocmd!
+	autocmd FileType pandoc nnoremap <buffer> cic :call pandoc#after#nrrwrgn#NarrowCodeblock()<cr>
+	autocmd BufRead,BufNewFile /tmp/neomutt* call WordProcessor()
+	autocmd FileType markdown,pandoc nnoremap <buffer> <leader>i V:s/ /_/ge<cr>V"ryV:s/_/ /ge<cr>I![<esc>A](pic/<esc>A<c-r>r<bs>.png)
+				\{ width=50% }<esc>:nohlsearch<CR>:! import "pic/<c-r>r.png"
+	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call WordProcessor()
+	autocmd FileType markdown execute 'setlocal dictionary+=/usr/share/dict/british-english'
+augroup END
+" 1 }}}" FileType Specific Stuff
+
+" Abbreviations: {{{1 "
+augroup ABBREV
+	autocmd!
+	cab man		Man
+	iab <expr> dts strftime("%c")	" quickly print the date
+	iab pyhton python
+	autocmd FileType c      iab xxx  printf("xxx");
+	autocmd FileType go     iab xxx  fmt.Println("xxx")
+	autocmd FileType go     iab errr if err != nil {<CR>fmt.Println("error", err)<CR>return<CR>}
+	autocmd FileType sh     iab xxx  echo xxx;
+	autocmd FileType sh     iab XXX  notify-send XXX;
+	autocmd FileType c,java	iab com /**/<C-O>F*
+augroup END
+" 1}}} "Abbreviations
+
+" Diffs: {{{1 "
+if has('patch-8.0.0283')
+	set diffopt=vertical,filler,context:3,
+				\indent-heuristic,algorithm:patience,internal
+endif
+
+if &diff
+	highlight! link DiffText MatchParen
+	highlight! clear DiffChange
+	highlight! link DiffChange NONE
+endif
+" 1}}} "Diffs
+" Etc {{{ "
+if filereadable(expand('~/.config/vimlocal'))
+	source ~/.config/vimlocal
+endif
+" Autoclose Quickfix {{{2 "
+" auto close quickfix when quitting vim
+augroup QFClose
+	autocmd!
+	autocmd WinEnter * if winnr('$') == 1
+				\&& &buftype == "quickfix"|q|endif
+augroup END
+
+" 2}}}" Autoclose Quickfix
+"}}} Etc "
+" vim:foldmethod=marker:foldlevel=1

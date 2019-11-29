@@ -1,0 +1,14 @@
+% vim:ft=tex:
+%
+\documentclass[12pt]{article}
+
+\title{ {{+`~expand('%:t')+}} }
+
+\author{ {{+~g:name+}} --- \texttt{{{+~g:email+}}} }
+
+\begin{document}
+\maketitle
+
+{{--}}
+
+\end{document}

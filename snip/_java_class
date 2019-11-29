@@ -1,0 +1,25 @@
+/**
+ * {{+Class description+}}
+ *
+ * @version {{++}}
+ * @author  {{+~g:name+}}
+ */
+{{+private+}}class {{+Class Name+}} {
+    // fields
+    private {{+type+}} {{+name+}};
+
+    // constructors
+    public {{+~\~3+}}({{++}}) {
+        {{+/* Set Args */+}};
+    }
+
+    // methods
+    public {{+~\~5+}} get{{+~\~5+}}({{++}}) {
+        return {{+~\~7+}};
+    }
+
+    public void set{{+~\~8+}}({{++}}) {
+        {{++}};
+    }
+
+}

@@ -1,0 +1,3 @@
+typedef struct {{+Name+}} {
+	{{+/* fields */+}}
+} {{+~/~1+}};

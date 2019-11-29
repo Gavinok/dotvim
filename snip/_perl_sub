@@ -1,0 +1,12 @@
+############################################
+# Usage      : {{+1:????+}}
+# Purpose    : {{+????+}}
+# Returns    : {{+????+}}
+# Parameters : {{+????+}}
+# Throws     : {{+no exceptions+}}
+# Comments   : {{+none+}}
+# See Also   : {{+n/a+}}
+#####
+sub {{+name+}} {
+	{{+#code+}}
+}

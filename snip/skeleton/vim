@@ -1,0 +1,9 @@
+" File: {{+~expand('%:t')+}}
+" Maintainer: {{+~g:name+}} <{{+~g:email+}}>
+" Created: {{+~strftime("%c")+}}
+" License:
+" Copyright (c) {{+~g:name+}}.  Distributed under the same terms as Vim itself.
+" See :help license
+"
+" Description: 
+" {{+Desc+}}

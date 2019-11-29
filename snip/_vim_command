@@ -1,0 +1,1 @@
+command! -nargs={{+args+}} {{+CommandName+}} call {{+Function+}}({{+<f-args>+}})

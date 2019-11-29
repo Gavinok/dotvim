@@ -1,0 +1,5 @@
+try
+	{{+"What To Test+}}
+catch /{{+Error Pattern+}}/
+	{++}
+endtry

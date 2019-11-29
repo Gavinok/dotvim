@@ -1,0 +1,9 @@
+/*
+ * {{+ClassName+}}
+ *
+ * {{+version+}}
+ *
+ * {{+~strftime("%Y-%M-%d")+}}
+ *
+ * {{+copyright+}}
+ */

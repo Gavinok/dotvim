@@ -1,0 +1,8 @@
+switch ({{+condition+}}) {
+    {{++case1+}}: {{+//code+}}
+             break;
+    {{+case2+}}:  {{+//code+}}
+             break;
+    default: {{+//code+}}
+             break;
+}

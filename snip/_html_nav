@@ -1,0 +1,5 @@
+<nav>
+  <a href="{{+LINK1+}}">{{+NAV1+}}</a> |
+  <a href="{{+LINK2+}}">{{+NAV2+}}</a> |
+  <a href="{{+LINK3+}}">{{+NAV3+}}</a>
+</nav>

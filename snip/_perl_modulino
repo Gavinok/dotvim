@@ -1,0 +1,13 @@
+package {{+name+}}
+
+use strict;
+use warnings;
+use Carp;
+
+__PACKAGE__->run() unless caller;
+
+sub run {
+    {{+#stuff to run+}}
+}
+
+1;

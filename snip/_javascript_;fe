@@ -1,0 +1,3 @@
+;(function({{+argument+}}) {
+	{{-/* body */-}}
+}(pre_args))

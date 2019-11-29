@@ -1,0 +1,5 @@
+" File: {{+~expand('%:t')+}}
+" Maintainer: {{+~g:name+}}
+" Created: {{+~strftime("%c")+}}
+" Description: 
+" {{+CURSOR+}}

@@ -1,0 +1,3 @@
+\begin[${1:author}]{${2:thm}}
+	${0:${VISUAL}}
+\end{$2}

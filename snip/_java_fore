@@ -1,0 +1,3 @@
+for ({{+int+}} {{+item+}} : {{+array_name+}}) {
+    {{+//code+}}
+}

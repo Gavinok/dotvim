@@ -1,0 +1,4 @@
+until [[ {{+condition+}} ]]; do
+  {{+#statements+}}
+done
+

@@ -1,0 +1,3 @@
+class {{+Name+}}({{+object+}}):
+    def __init__(self, {{+args+}}):
+        {{+#constructor body+}}

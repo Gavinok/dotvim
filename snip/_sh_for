@@ -1,0 +1,3 @@
+for {{+Needle+}} in {{+Haystack+}}; do
+  {{+#code+}}
+done

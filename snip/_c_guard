@@ -1,0 +1,4 @@
+#ifndef {{+~substitute(substitute(expand('%:t'), '.*', '\U&', 'g'), '\v\..*', '_H', 'g')+}}
+#define {{~\~1}}
+{{+/* header body */+}}
+#endif /* {{~\~1}} */

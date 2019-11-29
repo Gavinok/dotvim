@@ -1,0 +1,3 @@
+{{+var+}} {{+function_name+}} = function $2({{+arguments+}}) {
+	{{+/* body */+}}
+};

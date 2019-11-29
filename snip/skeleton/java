@@ -1,0 +1,13 @@
+/**
+ * @author      : {{+~g:name+}} ({{+~g:email+}})
+ * @file        : {{+~expand('%:t')+}}
+ * @created     : {{+~strftime("%c")+}}
+ */
+
+public class {{+CLASS+}}
+{
+    public {{{+~\~1+}}}()
+    {
+        {{+CURSOR+}}
+    }
+}

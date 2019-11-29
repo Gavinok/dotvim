@@ -1,0 +1,6 @@
+try:
+    {{+#try body+}}
+except {{+Expression+}}:
+    {{+#exp body+}}
+finally:
+    {{+#fin body+}}

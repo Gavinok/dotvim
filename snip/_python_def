@@ -1,0 +1,5 @@
+def {{+function_name+}}({{+args+}}):
+    """{{+ Function Description +}}
+    :returns: {{+ Return Value +}}
+    """
+    {{+#function_body+}}

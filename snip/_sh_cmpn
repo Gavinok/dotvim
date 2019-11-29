@@ -1,0 +1,3 @@
+if [[ ${{+number+}} {{+-eq -ne -lt -gt+}} {{+number+}} ]]; then
+  {{+#code}+}}
+fi

@@ -1,0 +1,3 @@
+{{+public private+}} class {{+ClassName+}} {
+    {{+//code+}}
+}

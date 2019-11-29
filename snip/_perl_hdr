@@ -1,0 +1,14 @@
+#! /usr/bin/env perl
+
+#===============================================================================
+#         FILE: {{+~expand('%:t')+}}
+#
+#  DESCRIPTION: {{+synopsis to include usage+}}
+#       AUTHOR: {{+~g:name+}}
+#      CREATED: {{+~strftime("%c")+}}
+#      VERSION: {{+0.0.1+}}
+#===============================================================================
+use strict;
+use warnings;
+use Carp;
+{{++}}

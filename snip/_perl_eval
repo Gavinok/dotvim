@@ -1,0 +1,6 @@
+eval {
+    {{+# do something risky...+}}
+};
+if ($@) {
+    {{+# handle failure...+}}
+}

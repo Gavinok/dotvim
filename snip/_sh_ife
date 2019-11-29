@@ -1,0 +1,5 @@
+if [ {{+condition+}} ]; then
+  {{+#code+}}
+else
+  {{+#code+}}
+fi

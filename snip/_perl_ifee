@@ -1,0 +1,9 @@
+if ({{+condition+}}) {
+    {{+#code+}}
+}
+elsif ({{+condition+}}) {
+    {{+#code+}}
+}
+else {
+    {{+#code+}}
+}

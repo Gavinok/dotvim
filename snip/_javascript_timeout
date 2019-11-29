@@ -1,0 +1,3 @@
+setTimeout(function() {
+	{{-/* body */-}}
+}.bind({{+this+}}), {{+10+}});

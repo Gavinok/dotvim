@@ -1,0 +1,2 @@
+" {{+ foldname +}} {{+~substitute(&foldmarker,',.*','','')+}}{{+ foldlevel +}} 
+" {{+~\~1+}}{{+~substitute(&foldmarker,'.*,','','')+}} "{{+~\~5+}}{{--}}
