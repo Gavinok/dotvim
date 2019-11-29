@@ -1,1 +1,1 @@
-{{+~substitute(&commentstring,'%s',' TODO: {{--}} <' . strftime('%d-%m-%y') . ' ' . g:name . '> ','')+}}
+{{+~substitute(&commentstring,'%s',' TODO: {{--}} <' . strftime('%d-%m-%y') . ' ' . g:name . '>','')+}}
