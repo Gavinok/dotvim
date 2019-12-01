@@ -1,1 +1,1 @@
-{{+~substitute(&commentstring,'%s.*','','')+}} {{+ foldname +}} {{+~substitute(&foldmarker,',.*','','')+}}{{+ foldlevel +}} {{+~substitute(&commentstring,'%s.*','','')+}}
+Plug '{{+~substitute(getreg('+'),'https://github.com/','','')+}}'{{--}}
