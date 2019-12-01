@@ -19,6 +19,7 @@ setlocal makeprg=python\ %
 setlocal foldmethod=indent
 
 "show leading chars
+setlocal expandtab
 setlocal list listchars=space:·,tab:>\ 
 highlight WhiteSpaceBol ctermfg=237
 highlight WhiteSpaceMol ctermfg=black
@@ -30,6 +31,7 @@ nnoremap <buffer><silent> [[ :call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
 nnoremap <buffer><silent> [[ :call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '\v^(\s+<bar>)def ')<CR>
+setl commentstring=#\ %s
 
 " set the path to the approptiate 
 " location for python
