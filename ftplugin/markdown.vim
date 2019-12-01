@@ -9,14 +9,15 @@
 " markdown specific settings
 
 " Only do this when not yet done for this buffer
-if exists('b:did_ftplugin') finish
+if exists('b:did_ftplugin') 
+	finish
 endif
 let b:did_ftplugin = 1
 
 setlocal expandtab
 setlocal shiftwidth=2
 setlocal softtabstop=2
-setlocal nowrap
+setlocal wrap
 setlocal errorformat="%f",\ line\ %l:\ %m
 setlocal makeprg=compiler\ %
 setlocal foldmethod=indent
