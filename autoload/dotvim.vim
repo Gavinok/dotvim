@@ -9,12 +9,15 @@
 " Functions I want to autoload in my config
 
 function! dotvim#ToggleQuickfix()
-    let nr = winnr("$")
-    cwindow
-    let nr2 = winnr("$")
-    if nr == nr2
-        cclose
-    endif
+	let nr = winnr("$")
+	copen
+	if exists('g:autoloaded_dispatch')
+		Copen
+	endif
+	let nr2 = winnr("$")
+	if nr == nr2
+		cclose
+	endif
 endfunction
 
 function! dotvim#Quicktag()
