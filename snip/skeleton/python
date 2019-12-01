@@ -8,7 +8,7 @@
 # @created     : {{+~strftime("%c")+}}
 # @description : {{++}}
 #
-# @Copyright © {{+~strftime("%Y")}} {{+~g:name+}} {{+~g:email+}}
+# @Copyright © {{+~strftime("%Y")+}} {{+~g:name+}} {{+~g:email+}}
 #
 # Distributed under terms of the {{+LICENSE+}} license.
 
