@@ -356,3 +356,12 @@ if has('patch-8.0.0283')
 endif
 " 1}}} "gutentags
 
+" emmet {{{1 
+Plug 'mattn/emmet-vim'
+
+let g:user_emmet_leader_key='<C-L>'
+augroup HTML
+	" this one is which you're most likely to use?
+	autocmd FileType html setlocal completefunc=emmet#completeTag
+augroup end
+" 1}}} "emmet
