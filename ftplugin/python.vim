@@ -19,12 +19,15 @@ setlocal makeprg=python\ %
 setlocal foldmethod=indent
 
 "show leading chars
-setlocal expandtab
+setlocal autoindent ts=4 sw=4 sts=4 expandtab
 setlocal list listchars=space:·,tab:>\ 
 highlight WhiteSpaceBol ctermfg=237
 highlight WhiteSpaceMol ctermfg=black
-match WhiteSpaceMol / /
-2match WhiteSpaceBol /^ \+/
+" match WhiteSpaceMol / /
+" 2match WhiteSpaceBol /^ \+/
+
+" syntax
+let python_highlight_all = 1
 
 iabbrev xxx  print("xxx")
 nnoremap <buffer><silent> [[ :call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
