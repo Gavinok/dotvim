@@ -13,7 +13,7 @@ if exists('b:did_ftplugin')
 	finish
 endif
 let b:did_ftplugin = 1
-
+let markdown_fenced_languages = ['c', 'python']
 compiler aio
 setlocal expandtab
 setlocal shiftwidth=2
@@ -26,6 +26,8 @@ setlocal foldmethod=expr
 setlocal foldlevel=99
 setlocal commentstring=<!--%s-->
 autocmd BufWrite *.md :silent AbortDispatch<CR>:Make!
+autocmd BufRead *.md call SyntaxRange#Include('\$[^$]', '\$', 'tex')
+" setlocal keywordprg=ducksearch
 " Spellcheck documents we're actually editing (not just viewing)
 if &modifiable && !&readonly
   setlocal spell
