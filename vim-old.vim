@@ -365,3 +365,19 @@ augroup HTML
 	autocmd FileType html setlocal completefunc=emmet#completeTag
 augroup end
 " 1}}} "emmet
+" fzf {{{1 
+ if executable('fzf')
+ 	Plug 'junegunn/fzf.vim'
+ else
+ 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+ 	Plug 'junegunn/fzf.vim'
+ endif
+" 1}}} "fzf
+" pandoc {{{1 
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after' " work on replacing
+let g:pandoc#modules#enabled = ['formatting', 'spell', 'hypertext']
+let g:pandoc#formatting#mode = 'sA'
+let g:pandoc#after#modules#enabled = ['nrrwrgn']
+" 1}}} "pandoc
