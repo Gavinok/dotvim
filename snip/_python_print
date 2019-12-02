@@ -1,1 +1,1 @@
-print("{{+ Value is %d+}}"{{+~Argmaker(' % ')+}},"\n"){{--}}
+print("{{+ Value is %d+}}"{{++}}, "\n"){{--}}
