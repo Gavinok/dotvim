@@ -53,6 +53,9 @@ function! dotvim#WordProcessor()
 			echo 'Code Mode'
 			silent! nunmap <buffer> j
 			silent! nunmap <buffer> k
+			silent! nunmap <buffer> $
+			silent! nunmap <buffer> 0
+			silent! nunmap <buffer> ^
 			silent! iunmap <buffer> .
 			silent! iunmap <buffer> !
 			silent! iunmap <buffer> ?
@@ -65,6 +68,9 @@ function! dotvim#WordProcessor()
 			echo 'Prose Mode'
 			nnoremap <buffer> j gj
 			nnoremap <buffer> k gk
+			nnoremap <buffer> $ g$
+			nnoremap <buffer> 0 g0
+			nnoremap <buffer> ^ g^
 			inoremap <buffer> . .<C-g>u
 			inoremap <buffer> ! !<C-g>u
 			inoremap <buffer> ? ?<C-g>u
