@@ -25,7 +25,6 @@ setlocal foldexpr=MarkdownFold()
 setlocal foldmethod=expr
 setlocal foldlevel=99
 setlocal commentstring=<!--%s-->
-autocmd BufWrite *.md :silent AbortDispatch<CR>:Make!
 autocmd BufRead *.md call SyntaxRange#Include('\$[^$]', '\$', 'tex')
 " setlocal keywordprg=ducksearch
 " Spellcheck documents we're actually editing (not just viewing)
