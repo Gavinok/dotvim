@@ -381,3 +381,110 @@ let g:pandoc#modules#enabled = ['formatting', 'spell', 'hypertext']
 let g:pandoc#formatting#mode = 'sA'
 let g:pandoc#after#modules#enabled = ['nrrwrgn']
 " 1}}} "pandoc
+" minimal asyncdo {{{1 
+func! s:populate(file, cmd) abort
+    unlet! t:job
+    try
+        exe 'cgetfile '.a:file
+    finally
+        call setqflist([], 'a', {'title': a:cmd})
+    endtry
+endfunc
+
+func! AsyncDo(...) abort
+    if exists('t:job')
+        echoerr 'There is currently running job, just wait'
+        return
+    endif
+
+    call setqflist([], 'r')
+    let tmp = tempname()
+    let cmd = join(a:000)
+
+    let g:qf_quickfix_titles = []
+    if has('nvim')
+        let t:job = jobstart([&sh, &shcf, printf(cmd.&srr, tmp)], {
+                    \ 'on_exit': {id, data, event -> s:populate(tmp, cmd)}
+                    \ })
+    else
+        let t:job = job_start([&sh, &shcf, printf(cmd.&srr, tmp)], {
+                    \ 'in_io': 'null','out_io': 'null','err_io': 'null',
+                    \ 'exit_cb': {job, result -> s:populate(tmp, cmd)}
+                    \ })
+    endif
+endfunc
+
+com! -nargs=+ AsyncDo call AsyncDo(<f-args>)
+
+" Functions And Commands: {{{1 "
+function! ToggleAutocompile()
+	if !exists('b:autocompile')
+		let b:autocompile = 0
+	endif
+	if !b:autocompile
+		augroup AUTOCOMP
+			autocmd!
+			autocmd BufWrite <buffer> :Make!
+		augroup END
+		let b:autocompile = 1
+	else
+		augroup AUTOCOMP
+			autocmd!
+		augroup END
+	endif
+endfunction 
+" 1}}} "minimal asyncdo
+
+" textobjects {{{1 
+" 24 simple text-objects
+" ----------------------
+" i_ i. i: i, i; i| i/ i\ i* i+ i- i#
+" a_ a. a: a, a; a| a/ a\ a* a+ a- a#
+for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' ]
+	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
+
+" line text-objects
+" -----------------
+" il al
+xnoremap il g_o^
+onoremap il :normal vil<CR>
+xnoremap al $o0
+onoremap al :normal val<CR>
+
+" number text-objects (integer and float)
+" ---------------------------------------
+" in an
+function! VisualNumber()
+	call search('\d\([^0-9\.]\|$\)', 'cW')
+	normal v
+	call search('\(^\|[^0-9\.]\d\)', 'becW')
+endfunction
+xnoremap in :<C-u>call VisualNumber()<CR>
+onoremap in :normal vin<CR>
+
+" buffer text-objects
+" -------------------
+" i% a%
+xnoremap i% :<C-u>let z = @/\|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z
+onoremap i% :normal vi%<CR>
+xnoremap a% GoggV
+onoremap a% :normal va%<CR>
+
+" comment text-objects
+" --------------------
+" i? a?
+xnoremap <buffer> i? ?/\*<CR>o/\*\/<CR>
+onoremap <buffer> i? :normal vi?<CR>
+
+" square brackets text-objects
+" ----------------------------
+" ir ar
+xnoremap ir i[
+xnoremap ar a[
+onoremap ir :normal vi[<CR>
+onoremap ar :normal va[<CR>
+" 1}}} "textobjects
