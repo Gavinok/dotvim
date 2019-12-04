@@ -18,11 +18,13 @@ compiler pyunit
 setlocal makeprg=python\ %
 setlocal foldmethod=indent
 
-"show leading chars
+"indents
 setlocal autoindent ts=4 sw=4 sts=4 expandtab
-setlocal list listchars=space:·,tab:>\ 
-highlight WhiteSpaceBol ctermfg=237
-highlight WhiteSpaceMol ctermfg=black
+
+"show leading chars
+" setlocal list listchars=space:·,tab:>\ 
+" highlight WhiteSpaceBol ctermfg=237
+" highlight WhiteSpaceMol ctermfg=black
 " match WhiteSpaceMol / /
 " 2match WhiteSpaceBol /^ \+/
 
@@ -35,7 +37,18 @@ nnoremap <buffer><silent> [[ :call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '\v^(\s+<bar>)def ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '\v^(\s+<bar>)def ')<CR>
 setl commentstring=#\ %s
-
+function! Pydoc()
+	"code
+	if exists('g:autoloaded_dispatch')
+		exec 'silent Dispatch pydoc '. expand('<cword>')
+	else
+		exec 'new|read !pydoc '. expand('<cword>')
+		setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+		setfiletype man
+	endif
+endfunction
+command! -nargs=0 Pydoc call Pydoc()
+setl keywordprg=:Pydoc
 " set the path to the approptiate 
 " location for python
 python << EOF
