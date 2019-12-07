@@ -15,14 +15,16 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "--------------------------FUNCTIONS------------------------------------------
 " QFixToggle {{{1"
 " will toggle the quickfix open and closed
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
-function! QFixToggle(forced)
-	if exists('g:qfix_win') && a:forced == 0
+command -nargs=0 QFix call ToggleQuickfix()
+function! ToggleQuickfix()
+	let nr = winnr("$")
+	copen
+	if exists('g:autoloaded_dispatch')
+		Copen
+	endif
+	let nr2 = winnr("$")
+	if nr == nr2
 		cclose
-		unlet g:qfix_win
-	else
-		copen 10
-		let g:qfix_win = bufnr('$')
 	endif
 endfunction
 "2}}} QFixToggle "
@@ -297,6 +299,98 @@ if executable('go')
 endif
 " 1}}} "Go
 
+" vim-lsp {{{2 "
+if has('patch-8.0.0283')
+
+	"diagnostics settings
+	let g:lsp_virtual_text_enabled = 0
+	let g:lsp_highlights_enabled = 0
+	let g:lsp_signs_enabled = 1         " enable signs
+	let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+	let g:lsp_signs_error = {'text': '✖'}
+	let g:lsp_signs_warning = {'text': '‼'} " icons require GUI
+	let g:lsp_signs_hint = {'text': 'ⓘ'} " icons require GUI
+	let g:lsp_preview_float = 1
+	hi LspErrorText       ctermfg=red    ctermbg=NONE
+	hi LspWarningText     ctermfg=blue   ctermbg=NONE
+	hi LspInformationText ctermfg=yellow ctermbg=NONE
+	hi LspHintText        ctermfg=red    ctermbg=NONE
+
+	"Specific lsp setup
+	augroup LSP
+		autocmd!
+		if executable('pyls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'pyls',
+						\ 'cmd': {server_info->['pyls']},
+						\ 'whitelist': ['python'],
+						\ })
+		endif
+		if executable('ccls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'ccls',
+						\ 'cmd': {server_info->['ccls']},
+						\ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+						\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+						\ })
+
+		elseif executable('clangd')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'clangd',
+						\ 'cmd': {server_info->['clangd', '--background-index']},
+						\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+						\ })
+		endif
+		if executable('gopls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'gopls',
+						\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+						\ 'whitelist': ['go'],
+						\ })
+			autocmd BufWritePre *.go "silent! LspDocumentFormatSync<CR>"
+		endif
+		if executable('typescript-language-server')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'javascript support using typescript-language-server',
+						\ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+						\ 'root_uri': { server_info->lsp#utils#path_to_uri
+						\(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+						\ 'whitelist': ['javascript', 'javascript.jsx']
+						\ })
+		endif
+		if executable('bash-language-server')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'bash-language-server',
+						\ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+						\ 'whitelist': ['sh'],
+						\ })
+		endif
+		if executable('java') && executable('jdtls')
+			au User lsp_setup call lsp#register_server({
+						\ 'name': 'jdt.ls',
+						\ 'cmd': {server_info->["jdtls"]},
+						\ 'whitelist': ['java'],
+						\ })
+		endif
+		nmap ]l <plug>(lsp-next-error)
+		nmap [l <plug>(lsp-previouse-error)
+		nnoremap <leader>K :Man <C-r><C-w>
+
+		autocmd FileType cpp,c,python,javascript,java,go   nmap <silent><buffer> K <plug>(lsp-hover)
+		autocmd FileType cpp,c,python,javascript,java,go   nmap <silent><buffer> gd <plug>(lsp-definition)
+		autocmd FileType cpp,c,python,javascript,java,go   setlocal omnifunc=lsp#complete
+
+
+		let g:lsp_diagnostics_enabled = 1 
+
+
+		"prevent mucomplete from blocking input
+		autocmd FileType cpp,c,python,javascript,java,go   let g:mucomplete#completion_delay = 50
+		autocmd FileType cpp,c,python,javascript,java,go   let g:mucomplete#reopen_immediately = 0
+
+	augroup end
+endif
+" 2}}} "vim-lsp
 
 
 " asyncomplete {{{1 
