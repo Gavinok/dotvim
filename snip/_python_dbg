@@ -1,0 +1,1 @@
+print("{{+~printf("[%s:%d]", expand("%") , line("."))+}} DEBUG PASS\n"){{--}}
