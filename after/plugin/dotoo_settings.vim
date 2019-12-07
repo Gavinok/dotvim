@@ -5,35 +5,27 @@ let g:dotoo_headline_shade_leading_stars = 1
 let g:dotoo#agenda#warning_days = '3d'
 let g:dotoo#agenda#files = ['~/Dropbox/Documents/org/*.org']
 let g:dotoo#capture#refile = expand('~/Dropbox/Documents/org/refile.org')
-" let g:dotoo#capture#templates = [
-" 			\ ['t', 'Todo', ['* TODO %?',
-" 			\                'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]']],
-" 			\ ['T', 'Todo with file', ['* TODO %?', 
-" 			\ 				 '[[%(GetDotooFilePath())][{{++}}]]',
-" 			\                'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]']],
-" 			\ ['n', 'Note', ['* %? :NOTE:']],
-" 			\ ]
-let g:dotoo#capture#templates = {
-			\ 't':{ 
-			\'description': 'Todo', 
-			\'lines': [
-			\ 			'* TODO %?',
-			\           'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
-			\ 		  ],
-			\ },
-			\ 'T':{ 
-			\ 'description': 'Todo with file', 
-			\ 'lines': [
-			\ 			'* TODO %?', 
-			\ 			'[[%(GetDotooFilePath())][{{++}}]]',
-			\            'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
-			\ 			],
-			\ },
-			\ 'n':{
-			\ 'description': 'Note', 
-			\ 'lines': ['* %? :NOTE:'],
-			\ }
-			\ }
+" let g:dotoo#capture#templates = {
+" 			\ 't':{ 
+" 			\'description': 'Todo', 
+" 			\'lines': [
+" 			\ 			'* TODO %?',
+" 			\           'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
+" 			\ 		  ],
+" 			\ },
+" 			\ 'T':{ 
+" 			\ 'description': 'Todo with file', 
+" 			\ 'lines': [
+" 			\ 			'* TODO %?', 
+" 			\ 			'[[%(GetDotooFilePath())][{{++}}]]',
+" 			\            'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
+" 			\ 			],
+" 			\ },
+" 			\ 'n':{
+" 			\ 'description': 'Note', 
+" 			\ 'lines': ['* %? :NOTE:'],
+" 			\ }
+" 			\ }
 
 " let g:dotoo#parser#todo_keywords = [
 " 			\ 'TODO',
