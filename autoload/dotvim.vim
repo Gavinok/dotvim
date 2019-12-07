@@ -120,3 +120,19 @@ function! dotvim#WordProcessor()
 	endif
 endfu
 " 2}}} "
+
+function! dotvim#Opendir(cmd) abort  
+    if expand('%') =~# '^$\|^term:[\/][\/]'  
+        execute a:cmd '.'  
+    else  
+        execute a:cmd '%:h'  
+        let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'  
+        call search(pattern, 'wc')  
+    endif  
+endfunction
+
+" now - doesnt use <space> after moving up a directory
+function! dotvim#NetrwMapping() abort
+  let netrw_sid = maparg('s', 'n', 0, 1)['sid']
+  execute 'nnoremap <buffer> - :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
+endfunction
