@@ -1,7 +1,13 @@
-" File: v.vim
-" Author: Gavin Jaeger-Freeborn
-" Description: Simple Template functionality
-  
+" File: snippet_helpers.vim
+" Maintainer: Gavin Jaeger-Freeborn <gavinfreeborn@gmail.com>
+" Created: Mon 02 Dec 2019 10:10:49 PM MST
+" License:
+" Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
+" See :help license
+"
+" Description: 
+" Simple Template functionality using read and a file
+
 function! s:load_skeleton(type, name)
 	" do nothing if no filetype
 	if empty(a:type) | return | endif
