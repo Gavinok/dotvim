@@ -509,24 +509,6 @@ func! AsyncDo(...) abort
 endfunc
 
 com! -nargs=+ AsyncDo call AsyncDo(<f-args>)
-
-" Functions And Commands: {{{1 "
-function! ToggleAutocompile()
-	if !exists('b:autocompile')
-		let b:autocompile = 0
-	endif
-	if !b:autocompile
-		augroup AUTOCOMP
-			autocmd!
-			autocmd BufWrite <buffer> :Make!
-		augroup END
-		let b:autocompile = 1
-	else
-		augroup AUTOCOMP
-			autocmd!
-		augroup END
-	endif
-endfunction 
 " 1}}} "minimal asyncdo
 
 " textobjects {{{1 

@@ -8,7 +8,7 @@
 " Description: 
 " Functions I want to autoload in my config
 
-function! dotvim#ToggleQuickfix()
+function! dotvim#ToggleQuickfix() abort
 	let nr = winnr("$")
 	copen
 	if exists('g:autoloaded_dispatch')
@@ -20,7 +20,7 @@ function! dotvim#ToggleQuickfix()
 	endif
 endfunction
 
-function! dotvim#Quicktag()
+function! dotvim#Quicktag() abort
 	let g:rootdir = FindRootDirectory()
 	if g:rootdir !=# ''
 		exec 'Dispatch! ctags  -f ".tag" -R ' . g:rootdir
@@ -31,7 +31,7 @@ endfunction
 
 
 " RepeatResize {{{2 "
-function! dotvim#RepeatResize(first)
+function! dotvim#RepeatResize(first) abort
 	let l:command = a:first
 	while stridx('+-><', l:command) != -1
 		execute "normal! \<C-w>" . l:command
@@ -43,7 +43,7 @@ endfunction
 
 " Toggle Prose Mode {{{2 "
 "toggle prose and code mode
-function! dotvim#WordProcessor()
+function! dotvim#WordProcessor() abort
 	if !exists('b:prose')
 		let b:prose = 0
 	endif
@@ -99,3 +99,22 @@ function! dotvim#NetrwMapping() abort
 	execute 'nnoremap <buffer> - :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
 	execute 'nnoremap <buffer> <leader>cp :!cp <C-R><C-F> ~/'
 endfunction
+
+" ToggleAutocompile {{{2 
+function! dotvim#ToggleAutocompile() abort
+	if !exists('b:autocompile')
+		let b:autocompile = 0
+	endif
+	if !b:autocompile
+		augroup AUTOCOMP
+			autocmd!
+			autocmd BufWrite <buffer> :Make!
+		augroup END
+		let b:autocompile = 1
+	else
+		augroup AUTOCOMP
+			autocmd!
+		augroup END
+	endif
+endfunction 
+" 2}}} "ToggleAutocompile
