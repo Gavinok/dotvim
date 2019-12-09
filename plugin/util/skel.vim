@@ -19,14 +19,14 @@ function! s:load_skeleton(type, name)
 	" let skeletons = globpath(&rtp, 'skeleton/' . a:type , 0, 1)
 	" echoerr 'skeletons is ' . skeletons
 	if empty(skeletons) 
-		let skeletons = globpath(&rtp, 'snip/skeleton/' . a:type , 0, 1)
+		let skeletons = globpath(&rtp, 'snip/_skeleton/' . a:type , 0, 1)
 		if empty(skeletons)
 			return 
 		endif
 	endif
 	" read last skeleton into 1st line.
-	exe '0read ' . skeletons[-1]
-	exec 'normal! i'
+	exe 'silent! 0read ' . skeletons[-1]
+	call feedkeys("i\<Plug>(minisnip)", 'i')
 endfunction
 
 augroup aug_skeleton

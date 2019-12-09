@@ -1,51 +1,40 @@
 
 let g:dotoo#capture#clock = 0
 let g:dotoo_headline_shade_leading_stars = 1
-"let g:dotoo_headline_highlight_levels = 9
+let g:dotoo_headline_highlight_levels = 9
 let g:dotoo#agenda#warning_days = '3d'
 let g:dotoo#agenda#files = ['~/Dropbox/Documents/org/*.org']
 let g:dotoo#capture#refile = expand('~/Dropbox/Documents/org/refile.org')
-" let g:dotoo#capture#templates = {
-" 			\ 't':{ 
-" 			\'description': 'Todo', 
-" 			\'lines': [
-" 			\ 			'* TODO %?',
-" 			\           'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
-" 			\ 		  ],
-" 			\ },
-" 			\ 'T':{ 
-" 			\ 'description': 'Todo with file', 
-" 			\ 'lines': [
-" 			\ 			'* TODO %?', 
-" 			\ 			'[[%(GetDotooFilePath())][{{++}}]]',
-" 			\            'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
-" 			\ 			],
-" 			\ },
-" 			\ 'n':{
-" 			\ 'description': 'Note', 
-" 			\ 'lines': ['* %? :NOTE:'],
-" 			\ }
-" 			\ }
+let g:dotoo#capture#templates = {
+			\ 't' : {
+			\   'description': 'Todo',
+			\   'lines': [
+			\ 			'* TODO %?', 
+			\ 			'[[%(GetDotooFilePath())][{{++}}]]',
+			\            'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
+			\   ],
+			\ }
+			\}
 
-" let g:dotoo#parser#todo_keywords = [
-" 			\ 'TODO',
-" 			\ 'NEXT',
-" 			\ 'SOMEDAY',
-" 			\ 'WAITING',
-" 			\ 'HOLD',
-" 			\ '|',
-" 			\ 'CANCELLED',
-" 			\ 'DONE',
-" 			\]
-" let g:dotoo_todo_keyword_faces = [
-" 			\ ['TODO',      [':foreground 160', ':weight bold']],
-" 			\ ['SOMEDAY',   [':foreground 10',  ':weight none']],
-" 			\ ['NEXT',      [':foreground 27',  ':weight bold']],
-" 			\ ['DONE',      [':foreground 22',  ':weight bold']],
-" 			\ ['WAITING',   [':foreground 202', ':weight bold']],
-" 			\ ['HOLD',      [':foreground 53',  ':weight bold']],
-" 			\ ['CANCELLED', [':foreground 22',  ':weight bold']],
-" 			\ ]
+let g:dotoo#parser#todo_keywords = [
+			\ 'TODO',
+			\ 'NEXT',
+			\ 'SOMEDAY',
+			\ 'WAITING',
+			\ 'HOLD',
+			\ '|',
+			\ 'CANCELLED',
+			\ 'DONE',
+			\]
+let g:dotoo_todo_keyword_faces = [
+			\ ['TODO',      [':foreground 160', ':weight bold']],
+			\ ['SOMEDAY',   [':foreground 10',  ':weight none']],
+			\ ['NEXT',      [':foreground 27',  ':weight bold']],
+			\ ['DONE',      [':foreground 22',  ':weight bold']],
+			\ ['WAITING',   [':foreground 202', ':weight bold']],
+			\ ['HOLD',      [':foreground 53',  ':weight bold']],
+			\ ['CANCELLED', [':foreground 22',  ':weight bold']],
+			\ ]
 
 function! GetDotooFilePath()
 	let num = printf("file:%s:%d", expand("%:p") , line("."))

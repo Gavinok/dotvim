@@ -8,44 +8,6 @@
 " Description: 
 " Functions I want to autoload in my config
 
-function! dotvim#CCR()
-    let cmdline = getcmdline()
-    command! -bar Z silent set more|delcommand Z
-    if cmdline =~ '\v\C^(ls|files|buffers)'
-        " like :ls but prompts for a buffer command
-        return "\<CR>:b"
-    elseif cmdline =~ '\v\C/(#|nu|num|numb|numbe|number)$'
-        " like :g//# but prompts for a command
-        return "\<CR>:"
-    elseif cmdline =~ '\v\C^(dli|il)'
-        " like :dlist or :ilist but prompts for a count for :djump or :ijump
-        return "\<CR>:" . cmdline[0] . "j  " . split(cmdline, " ")[1] . "\<S-Left>\<Left>"
-    elseif cmdline =~ '\v\C^(cli|lli)'
-        " like :clist or :llist but prompts for an error/location number
-        return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
-    elseif cmdline =~ '\C^old'
-        " like :oldfiles but prompts for an old file to edit
-        set nomore
-        return "\<CR>:Z|e #<"
-    elseif cmdline =~ '\C^changes'
-        " like :changes but prompts for a change to jump to
-        set nomore
-        return "\<CR>:Z|norm! g;\<S-Left>"
-    elseif cmdline =~ '\C^ju'
-        " like :jumps but prompts for a position to jump to
-        set nomore
-        return "\<CR>:Z|norm! \<C-o>\<S-Left>"
-    elseif cmdline =~ '\C^marks'
-        " like :marks but prompts for a mark to jump to
-        return "\<CR>:norm! `"
-    elseif cmdline =~ '\C^undol'
-        " like :undolist but prompts for a change to undo
-        return "\<CR>:u "
-    else
-        return "\<CR>"
-    endif
-endfunction
-
 function! dotvim#ToggleQuickfix()
 	let nr = winnr("$")
 	copen
@@ -122,17 +84,18 @@ endfu
 " 2}}} "
 
 function! dotvim#Opendir(cmd) abort  
-    if expand('%') =~# '^$\|^term:[\/][\/]'  
-        execute a:cmd '.'  
-    else  
-        execute a:cmd '%:h'  
-        let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'  
-        call search(pattern, 'wc')  
-    endif  
+	if expand('%') =~# '^$\|^term:[\/][\/]'  
+		execute a:cmd '.'  
+	else  
+		execute a:cmd '%:h'  
+		let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'  
+		call search(pattern, 'wc')  
+	endif  
 endfunction
 
 " now - doesnt use <space> after moving up a directory
 function! dotvim#NetrwMapping() abort
-  let netrw_sid = maparg('s', 'n', 0, 1)['sid']
-  execute 'nnoremap <buffer> - :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
+	let netrw_sid = maparg('s', 'n', 0, 1)['sid']
+	execute 'nnoremap <buffer> - :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
+	execute 'nnoremap <buffer> <leader>cp :!cp <C-R><C-F> ~/'
 endfunction

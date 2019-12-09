@@ -26,7 +26,7 @@ let b:completion_keys = get(b:, 'completion_keys', "\<C-P>\<C-N>")
 inoremap <expr> <Tab> TabComplete(1)
 inoremap <expr> <S-Tab> TabComplete(0)
 fun! TabComplete(dir)
-    if getline('.')[col('.') - 1] =~ '\K' || pumvisible()
+    if getline('.')[col('.') - 1] =~# '\K' || pumvisible()
         return a:dir ? "\<C-N>" : "\<C-P>"
     else
         return "\<Tab>"
@@ -36,12 +36,11 @@ endfun
 " Minimalist-AutoCompletePop-Plugin
 set completeopt=menu,noselect,menuone,noinsert
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-autocmd InsertCharPre * call AutoComplete()
 fun! AutoComplete()
-    if v:char =~ '\K'
-        \ && getline('.')[col('.') - 4] !~ '\K'
-        \ && getline('.')[col('.') - 2] =~ '\K' " last char
-        \ && getline('.')[col('.') - 1] !~ '\K'
+    if v:char =~# '\K'
+        \ && getline('.')[col('.') - 4] !~# '\K'
+        \ && getline('.')[col('.') - 2] =~# '\K' " last char
+        \ && getline('.')[col('.') - 1] !~# '\K'
 
 
         call feedkeys("\<C-R>=MUcompleteMinisnip#complete()\<CR>", 'n')
@@ -51,3 +50,7 @@ fun! AutoComplete()
     end
 endfun
 
+augroup NeomuComplete
+	" this one is which you're most likely to use?
+	autocmd InsertCharPre * call AutoComplete()
+augroup end
