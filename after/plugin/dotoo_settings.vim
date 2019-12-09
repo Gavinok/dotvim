@@ -13,9 +13,15 @@ let g:dotoo#capture#templates = {
 			\ 			'[[%(GetDotooFilePath())][{{++}}]]',
 			\            'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
 			\   ],
+			\ },
+			\ 'h' : {
+			\ 	'target': 'mylife:Vim',
+			\   'description': 'Vim Note',
+			\   'lines': [
+			\ 			'* SOMEDAY %?'
+			\   ],
 			\ }
 			\}
-
 let g:dotoo#parser#todo_keywords = [
 			\ 'TODO',
 			\ 'NEXT',
