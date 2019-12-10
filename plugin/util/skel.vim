@@ -15,7 +15,7 @@ function! s:load_skeleton(type, name)
 		return
 	endif
 	" glob every directory of rtp to search for skeleton/filetype
-	let skeletons = globpath(&rtp, 'snip/skeleton/' . a:name , 0, 1)
+	let skeletons = globpath(&rtp, 'skeleton/' . a:name , 0, 1)
 	" let skeletons = globpath(&rtp, 'skeleton/' . a:type , 0, 1)
 	" echoerr 'skeletons is ' . skeletons
 	if empty(skeletons) 
