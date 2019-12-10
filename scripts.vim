@@ -23,3 +23,4 @@ elseif s:line =~# '\<.*bash\d*\>'
 elseif s:line =~# '\<.*sh\>'
   let b:is_posix = 1
   setfiletype sh
+endif
