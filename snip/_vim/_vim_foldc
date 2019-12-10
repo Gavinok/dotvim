@@ -1,1 +1,1 @@
-" {{-foldlevel-}}}}} "{{+foldname+}}
+{{+~substitute(&commentstring,'%s.*','','')+}} {{-`~FoldManage(1,'foldlevel')-}}{{+~substitute(&foldmarker,'.*,','','')+}} {{+~substitute(&commentstring,'%s.*','','')+}}{{+`~FoldManage(0,'foldname')+}}

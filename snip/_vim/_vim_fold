@@ -1,1 +1,1 @@
-{{+~substitute(&commentstring,'%s.*','','')+}} {{+ foldname +}} {{+~substitute(&foldmarker,',.*','','')+}}{{+ foldlevel +}} {{+~substitute(&commentstring,'%s.*','','')+}}{{--}}
+{{+~substitute(&commentstring,'%s.*','','')+}} {{+`~FoldManage(0, 'foldname')+}} {{+~substitute(&foldmarker,',.*','','')+}} {{+~substitute(&commentstring,'%s.*','','')+}}{{+`~FoldManage(1, 'foldlevel')+}}

@@ -7,6 +7,8 @@
 "
 " Description: 
 " helper funcitons used in my minisnips
+" snippet support for surround
+let g:surround_insert_tail = "{{++}}"
 
 function! Argmaker(prearg)
 	"code
@@ -17,4 +19,17 @@ function! Argmaker(prearg)
 	else
 		return ''
 	endif
+endfunction
+
+function! FoldManage(on, ret)
+	if !exists('b:oldfold')
+		let b:oldfold = &foldlevel
+	endif
+	if a:on == 0
+		setlocal foldmethod=manual
+		let w:oldfold = &foldmethod
+	else
+		let &foldmethod=w:oldfold
+	endif
+	return a:ret
 endfunction
