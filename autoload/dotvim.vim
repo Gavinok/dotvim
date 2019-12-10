@@ -8,6 +8,7 @@
 " Description: 
 " Functions I want to autoload in my config
 
+" ToggleQuickfix {{{1 
 function! dotvim#ToggleQuickfix() abort
 	let nr = winnr("$")
 	copen
@@ -19,7 +20,9 @@ function! dotvim#ToggleQuickfix() abort
 		cclose
 	endif
 endfunction
+" 1}}} "ToggleQuickfix
 
+" Quicktag {{{1 
 function! dotvim#Quicktag() abort
 	let g:rootdir = FindRootDirectory()
 	if g:rootdir !=# ''
@@ -28,9 +31,10 @@ function! dotvim#Quicktag() abort
 		echo 'no root'
 	endif
 endfunction
+" 1}}} "Quicktag
 
 
-" RepeatResize {{{2 "
+" RepeatResize {{{1 "
 function! dotvim#RepeatResize(first) abort
 	let l:command = a:first
 	while stridx('+-><', l:command) != -1
@@ -39,9 +43,9 @@ function! dotvim#RepeatResize(first) abort
 		let l:command = nr2char(getchar())
 	endwhile
 endfunction
-" 2}}} "RepeatResize
+" 1}}} "RepeatResize
 
-" Toggle Prose Mode {{{2 "
+" Toggle Prose Mode {{{1 "
 "toggle prose and code mode
 function! dotvim#WordProcessor() abort
 	if !exists('b:prose')
@@ -81,8 +85,10 @@ function! dotvim#WordProcessor() abort
 		endif
 	endif
 endfu
-" 2}}} "
+" 2}}} "Toggle Prose Mode
 
+" netrwmappings {{{1 
+" for - in vim
 function! dotvim#Opendir(cmd) abort  
 	if expand('%') =~# '^$\|^term:[\/][\/]'  
 		execute a:cmd '.'  
@@ -99,8 +105,9 @@ function! dotvim#NetrwMapping() abort
 	execute 'nnoremap <buffer> - :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
 	execute 'nnoremap <buffer> <leader>cp :!cp <C-R><C-F> ~/'
 endfunction
+" 1}}} "netrwmappings
 
-" ToggleAutocompile {{{2 
+" ToggleAutocompile {{{1 
 function! dotvim#ToggleAutocompile() abort
 	if !exists('b:autocompile')
 		let b:autocompile = 0
@@ -117,4 +124,86 @@ function! dotvim#ToggleAutocompile() abort
 		augroup END
 	endif
 endfunction 
-" 2}}} "ToggleAutocompile
+" 1}}} "ToggleAutocompile
+
+" VisSort {{{1
+function! dotvim#VisSort(isnmbr) range abort
+	if visualmode() !=# "\<c-v>"
+		execute 'silent! '.a:firstline.','.a:lastline.'sort i'
+		return
+	endif
+	let firstline = line("'<")
+	let lastline  = line("'>")
+	let keeprega  = @a
+	execute 'silent normal! gv"ay'
+	execute "'<,'>s/^/@@@/"
+	execute "silent! keepjumps normal! '<0\"aP"
+	if a:isnmbr
+		execute "silent! '<,'>s/^\s\+/\=substitute(submatch(0),' ','0','g')/"
+	endif
+	execute "sil! keepj '<,'>sort i"
+	execute 'sil! keepj '.firstline.','.lastline.'s/^.\{-}@@@//'
+	let @a = keeprega
+endfun
+" 1}}} "VisSort
+
+" shcompletion {{{1 
+function! dotvim#OmniShell(findstart, base) abort
+	echo a:base
+	if a:findstart
+		let l:line = getline('.')
+	else
+		let s:res = getcompletion(a:base, 'shellcmd')
+		return {'words': s:res, 'refresh': 'always'}
+	endif
+endfunction
+" 1}}} "shcompletion
+
+" CopyMatches {{{1 
+" copy the contents of all matches from the last search
+function! dotvim#CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+" 1}}} "CopyMatches
+
+" MkdirWrite {{{1 "
+" mkdir with same name and
+"write file to it with :MW
+function! dotvim#MkdirWrite()
+	w
+	!mkdir '%:t:r'
+	!mv % '%:t:r'/
+	e %:t:r/%
+	" redraw!
+endfunction
+" 1}}} "MkdirWrite
+
+" MRU {{{1 
+" MRU command-line completion
+function! dotvim#MRUComplete(ArgLead, CmdLine, CursorPos)
+	return filter(v:oldfiles, 'v:val =~ a:ArgLead')
+endfunction
+
+" MRU function
+function! dotvim#MRU(command, arg)
+	execute a:command . ' ' . a:arg
+endfunction
+" 1}}} "MRU
+" Open {{{1 
+" What command to use
+function! dotvim#Open() abort
+	if executable('rifle')
+		return 'rifle'
+	endif
+	if executable('xdg-open')
+		return 'xdg-open'
+	endif
+	if executable('open')
+		return 'open'
+	endif
+	return 'explorer'
+endfunction
+" 1}}} "Open
