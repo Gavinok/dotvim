@@ -52,7 +52,7 @@ elseif &filetype == 'c'
 " 1}}} "c
 " vim {{{
 elseif &filetype == 'vim'
-	CompilerSet makeprg=vint\ -s\ %:S
+	CompilerSet makeprg=vint\ -s\ %
 	CompilerSet errorformat=%f:%l:%c:\ %m
 " }}} "vim
 " sh {{{ 

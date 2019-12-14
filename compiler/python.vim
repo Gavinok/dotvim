@@ -13,15 +13,15 @@ set cpo&vim
 
 CompilerSet makeprg=python3\ %
 
-CompilerSet errorformat=
-	\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
-	\%C\ \ \ \ %.%#,
-	\%+Z%.%#Error\:\ %.%#,
-	\%A\ \ File\ \"%f\"\\\,\ line\ %l,
-	\%+C\ \ %.%#,
-	\%-C%p^,
-	\%Z%m,
-	\%-G%.%#
+" CompilerSet errorformat=
+" 	\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+" 	\%C\ \ \ \ %.%#,
+" 	\%+Z%.%#Error\:\ %.%#,
+" 	\%A\ \ File\ \"%f\"\\\,\ line\ %l,
+" 	\%+C\ \ %.%#,
+" 	\%-C%p^,
+" 	\%Z%m,
+" 	\%-G%.%#
 
 let &cpo = s:cpo_save
 unlet s:cpo_save

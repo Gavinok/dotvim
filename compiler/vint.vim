@@ -12,5 +12,5 @@ if exists('current_compiler') || &compatible || !has('patch-7.4.191')
 endif
 let current_compiler = 'vimlint'
 
-CompilerSet makeprg=vint\ -s\ %:S
+CompilerSet makeprg=vint\ -s\ %
 CompilerSet errorformat=%f:%l:%c:\ %m
