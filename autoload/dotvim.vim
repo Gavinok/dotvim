@@ -23,10 +23,10 @@ endfunction
 " 1}}} "ToggleQuickfix
 
 " Quicktag {{{1 
-function! dotvim#Quicktag() abort
+function! dotvim#Quicktag(force) abort
 	let g:rootdir = FindRootDirectory()
-	if g:rootdir !=# ''
-		exec 'Dispatch! ctags  -f ".tag" -R ' . g:rootdir
+	if g:rootdir !=# '' || a:force
+		exec 'Dispatch ctags  -f ".tags" -R ' . g:rootdir
 	else 
 		echo 'no root'
 	endif
@@ -162,10 +162,10 @@ endfunction
 " CopyMatches {{{1 
 " copy the contents of all matches from the last search
 function! dotvim#CopyMatches(reg)
-  let hits = []
-  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
-  let reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+	let hits = []
+	%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+	let reg = empty(a:reg) ? '+' : a:reg
+	execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 " 1}}} "CopyMatches
 
@@ -207,3 +207,49 @@ function! dotvim#Open() abort
 	return 'explorer'
 endfunction
 " 1}}} "Open
+
+" FormatFile() {{{2
+" quickly format the file without moving the cursor or window
+function! dotvim#FormatFile()
+	let b:PlugView=winsaveview()
+	exe 'silent normal! gg=G'
+	call winrestview(b:PlugView)
+	echo 'file indented'
+endfunction
+" 2}}} "FormatFile()
+
+" Minimal Async Command {{{1 
+" based on https://gist.github.com/hauleth/0cce9962ffc9a09b3893d53dbcd3abf9
+function! s:populate(file, cmd, done) abort
+	if a:done 
+		echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
+		unlet! b:job
+	endif
+	try
+		exe 'cgetfile '.a:file
+	finally
+		call setqflist([], 'a', {'title': a:cmd}) "update list
+	endtry
+endfunction
+
+function! dotvim#Do(...) abort
+	if exists('b:job')
+		echohl ErrorMsg | echom 'There is currently running job, just wait' | echohl None
+		return
+	endif
+	call setqflist([], 'r') " clear list
+	let tmp = tempname()
+	let cmd = substitute(join(a:000), '%', expand('%'), '') 
+	if has('nvim')
+		let b:job = jobstart([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
+					\ 'on_stdout': {id, data, event -> s:populate(tmp, cmd, 0)},
+					\ 'on_exit': {id, data, event -> s:populate(tmp, cmd, 1)}
+					\ })
+	else
+		let b:job = job_start([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
+					\ 'in_io': 'null','out_io': 'null','err_io': 'null',
+					\ 'exit_cb': {job, result -> s:populate(tmp, cmd, 1)}
+					\ })
+	endif
+endfunction
+" 1}}} "Minimal Async Command
