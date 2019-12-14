@@ -460,12 +460,12 @@ augroup HTML
 augroup end
 " 1}}} "emmet
 " fzf {{{1 
- if executable('fzf')
- 	Plug 'junegunn/fzf.vim'
- else
- 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
- 	Plug 'junegunn/fzf.vim'
- endif
+if executable('fzf')
+	Plug 'junegunn/fzf.vim'
+else
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+	Plug 'junegunn/fzf.vim'
+endif
 " 1}}} "fzf
 " pandoc {{{1 
 Plug 'vim-pandoc/vim-pandoc'
@@ -477,35 +477,35 @@ let g:pandoc#after#modules#enabled = ['nrrwrgn']
 " 1}}} "pandoc
 " minimal asyncdo {{{1 
 func! s:populate(file, cmd) abort
-    unlet! t:job
-    try
-        exe 'cgetfile '.a:file
-    finally
-        call setqflist([], 'a', {'title': a:cmd})
-    endtry
+	unlet! t:job
+	try
+		exe 'cgetfile '.a:file
+	finally
+		call setqflist([], 'a', {'title': a:cmd})
+	endtry
 endfunc
 
 func! AsyncDo(...) abort
-    if exists('t:job')
-        echoerr 'There is currently running job, just wait'
-        return
-    endif
+	if exists('t:job')
+		echoerr 'There is currently running job, just wait'
+		return
+	endif
 
-    call setqflist([], 'r')
-    let tmp = tempname()
-    let cmd = join(a:000)
+	call setqflist([], 'r')
+	let tmp = tempname()
+	let cmd = join(a:000)
 
-    let g:qf_quickfix_titles = []
-    if has('nvim')
-        let t:job = jobstart([&sh, &shcf, printf(cmd.&srr, tmp)], {
-                    \ 'on_exit': {id, data, event -> s:populate(tmp, cmd)}
-                    \ })
-    else
-        let t:job = job_start([&sh, &shcf, printf(cmd.&srr, tmp)], {
-                    \ 'in_io': 'null','out_io': 'null','err_io': 'null',
-                    \ 'exit_cb': {job, result -> s:populate(tmp, cmd)}
-                    \ })
-    endif
+	let g:qf_quickfix_titles = []
+	if has('nvim')
+		let t:job = jobstart([&sh, &shcf, printf(cmd.&srr, tmp)], {
+					\ 'on_exit': {id, data, event -> s:populate(tmp, cmd)}
+					\ })
+	else
+		let t:job = job_start([&sh, &shcf, printf(cmd.&srr, tmp)], {
+					\ 'in_io': 'null','out_io': 'null','err_io': 'null',
+					\ 'exit_cb': {job, result -> s:populate(tmp, cmd)}
+					\ })
+	endif
 endfunc
 
 com! -nargs=+ AsyncDo call AsyncDo(<f-args>)
@@ -564,3 +564,143 @@ xnoremap ar a[
 onoremap ir :normal vi[<CR>
 onoremap ar :normal va[<CR>
 " 1}}} "textobjects
+
+" makery {{{ "1
+function! Setopts(options)
+	let l:save_options = {}
+	if has_key(a:options, 'compiler')
+		execute 'compiler' get(a:options, 'compiler')
+	endif
+	if has_key(a:options, 'makeprg')
+		let l:save_options.makeprg = &l:makeprg
+		let &l:makeprg = get(a:options, 'makeprg')
+	endif
+	if has_key(a:options, 'errorformat') && !has_key(a:options, 'compiler')
+		let l:save_options.errorformat = &l:errorformat
+		let &l:errorformat = get(a:options, 'errorformat')
+	endif
+
+	return l:save_options
+endfunction
+
+function! s:GetMakeCommand() abort
+	return exists(':Make') == 2 ? 'Make' : 'make'
+endfunction
+
+function! ExecuteMake(bang, args) abort
+	let l:make_command = s:GetMakeCommand() . a:bang
+	execute l:make_command a:args
+endfunction
+
+function! RestoreOptions(options) abort
+	for [l:option, l:value] in items(a:options)
+		execute 'let &l:' . l:option '= "' . l:value . '"'
+	endfor
+endfunction
+
+command! -bang -nargs=* -complete=file Mlint call RunMake( 'lint', <q-bang>, <q-args>)
+command! -bang -nargs=* -complete=file Mbuild call RunMake( 'build', <q-bang>, <q-args>)
+command! -bang -nargs=* -complete=file Mrun call RunMake( 'run', <q-bang>, <q-args>)
+command! -bang -nargs=* -complete=file Mcomp call RunMake( 'compiler', <q-bang>, <q-args>)
+
+function! RunMake(type, bang, args) abort
+	if !has_key(g:makery_config, &filetype) || !has_key(g:makery_config[&filetype], a:type)
+		return
+	endif
+	let l:options = g:makery_config[&filetype][a:type]
+
+	let l:save_options = Setopts(l:options)
+	call ExecuteMake(a:bang, a:args)
+	call RestoreOptions(l:save_options)
+endfunction
+let g:makery_config = {
+			\     "sh": {
+			\ 		"lint":{"compiler": "shellcheck"},
+			\ 		"run":{"makeprg": "compile %"}
+			\ 		},
+			\     "c": {
+			\ 		"lint":{"makeprg": "make"},
+			\ 		"build":{"makeprg": "gcc %"},
+			\ 		"run":{"makeprg": "compile %"}
+			\ 		},
+			\     "python": {
+			\ 		"lint":{"makeprg": "python3 %"},
+			\ 		"run":{"compiler": "python"}
+			\ 		},
+			\     "vim": {
+			\ 		"lint":{"compiler": "vint"}
+			\ 		}
+			\ }
+" 1}}} "makery
+
+
+" ----------------------------------------------------------------------------
+" Todo
+" ----------------------------------------------------------------------------
+function! s:todo() abort
+  let entries = []
+  for cmd in ['git grep -niI -e TODO -e FIXME -e XXX 2> /dev/null',
+            \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
+    let lines = split(system(cmd), '\n')
+    if v:shell_error != 0 | continue | endif
+    for line in lines
+      let [fname, lno, text] = matchlist(line, '^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
+      call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
+    endfor
+    break
+  endfor
+
+  if !empty(entries)
+    call setqflist(entries)
+    copen
+  endif
+endfunction
+command! Todo call s:todo()
+" ----------------------------------------------------------------------------
+" Common
+" ----------------------------------------------------------------------------
+function! s:textobj_cancel()
+  if v:operator == 'c'
+    augroup textobj_undo_empty_change
+      autocmd InsertLeave <buffer> execute 'normal! u'
+            \| execute 'autocmd! textobj_undo_empty_change'
+            \| execute 'augroup! textobj_undo_empty_change'
+    augroup END
+  endif
+endfunction
+
+noremap         <Plug>(TOC) <nop>
+inoremap <expr> <Plug>(TOC) exists('#textobj_undo_empty_change')?"\<esc>":''
+" ----------------------------------------------------------------------------
+" Comment Object
+" ----------------------------------------------------------------------------
+function! s:inner_comment(vis)
+  if synIDattr(synID(line('.'), col('.'), 0), 'name') !~? 'comment'
+    call s:textobj_cancel()
+    if a:vis
+      normal! gv
+    endif
+    return
+  endif
+
+  let origin = line('.')
+  let lines = []
+  for dir in [-1, 1]
+    let line = origin
+    let line += dir
+    while line >= 1 && line <= line('$')
+      execute 'normal!' line.'G^'
+      if synIDattr(synID(line('.'), col('.'), 0), 'name') !~? 'comment'
+        break
+      endif
+      let line += dir
+    endwhile
+    let line -= dir
+    call add(lines, line)
+  endfor
+
+  execute 'normal!' lines[0].'GV'.lines[1].'G'
+endfunction
+
+xmap <silent> iC :<C-U>call <SID>inner_comment(1)<CR><Plug>(TOC)
+omap <silent> iC :<C-U>call <SID>inner_comment(0)<CR><Plug>(TOC)
