@@ -19,7 +19,7 @@ function! s:load_skeleton(type, name)
 	" let skeletons = globpath(&rtp, 'skeleton/' . a:type , 0, 1)
 	" echoerr 'skeletons is ' . skeletons
 	if empty(skeletons) 
-		let skeletons = globpath(&rtp, 'snip/_skeleton/' . a:type , 0, 1)
+		let skeletons = globpath(&rtp, 'skeleton/' . a:type , 0, 1)
 		if empty(skeletons)
 			return 
 		endif
