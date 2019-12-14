@@ -1,0 +1,1 @@
+fmt.Println("{{+~printf("%s:%d:", expand("%") , line("."))+}} DEBUG PASS"){{--}}

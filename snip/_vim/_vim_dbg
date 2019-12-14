@@ -1,1 +1,1 @@
-echo '{{+~printf("[%s:%d]", expand("%") , line("."))+}} DEBUG PASS'{{--}}
+echoerr '{{+~printf("%s:%d:", expand("%") , line("."))+}} DEBUG PASS'{{--}}

@@ -1,1 +1,1 @@
-printf("{{+~printf("[%s:%d]", expand("%") , line("."))+}} DEBUG PASS\n");{{--}}
+printf("{{+~printf("%s:%d:", expand("%") , line("."))+}} DEBUG PASS\n");{{--}}
