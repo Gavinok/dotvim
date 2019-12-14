@@ -9,10 +9,6 @@
 " markdown specific settings
 
 " Only do this when not yet done for this buffer
-if exists('b:did_ftplugin') 
-	finish
-endif
-let b:did_ftplugin = 1
 let markdown_fenced_languages = ['c', 'python']
 compiler aio
 setlocal expandtab
@@ -21,8 +17,6 @@ setlocal softtabstop=2
 setlocal wrap
 setlocal errorformat="%f",\ line\ %l:\ %m
 setlocal makeprg=compiler\ %
-setlocal foldexpr=MarkdownFold()
-setlocal foldmethod=expr
 setlocal foldlevel=99
 setlocal commentstring=<!--%s-->
 autocmd BufRead *.md call SyntaxRange#Include('\$[^$]', '\$', 'tex')
