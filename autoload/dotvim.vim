@@ -152,7 +152,7 @@ function! dotvim#VisSort(isnmbr) range abort
 endfun
 " 1}}} "VisSort
 
-" shcompletion {{{1 
+" shellcompletion {{{1 
 function! dotvim#OmniShell(findstart, base) abort
 	echo a:base
 	if a:findstart
@@ -162,7 +162,7 @@ function! dotvim#OmniShell(findstart, base) abort
 		return {'words': s:res, 'refresh': 'always'}
 	endif
 endfunction
-" 1}}} "shcompletion
+" 1}}} "shellcompletion
 
 " CopyMatches {{{1 
 " copy the contents of all matches from the last search
