@@ -164,6 +164,22 @@ function! dotvim#OmniShell(findstart, base) abort
 endfunction
 " 1}}} "shellcompletion
 
+" TODO: needs some work <15-12-19 Gavin Jaeger-Freeborn>
+" shellcompletion {{{1 
+function! dotvim#OmniVim(findstart, base) abort
+	if a:findstart
+		let l:line = getline('.')
+	else
+		" TODO: add type f to these <15-12-19 Gavin Jaeger-Freeborn>
+		let s:res = getcompletion(a:base, 'cmdline')
+		call extend(s:res, getcompletion(a:base, 'function'))
+		call extend(s:res, getcompletion(a:base, 'var'))
+		call extend(s:res, getcompletion('let ' . a:base, 'cmdline'))
+		return {'words': s:res, 'refresh': 'always'}
+	endif
+endfunction
+" 1}}} "shellcompletion
+
 " CopyMatches {{{1 
 " copy the contents of all matches from the last search
 function! dotvim#CopyMatches(reg)
