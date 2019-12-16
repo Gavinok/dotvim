@@ -25,11 +25,13 @@ autocmd BufRead *.md call SyntaxRange#Include('\$[^$]', '\$', 'tex')
 if &modifiable && !&readonly
   setlocal spell
 endif
-
+setlocal dictionary='~/LatexComp-default.txt'
 nnoremap <buffer><silent> ]] :call CustomSections('down', '^\# ')<CR>
 nnoremap <buffer><silent> [[ :call CustomSections('up', '^\# ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\# ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\# ')<CR>
+
+inoremap <buffer> <c-\> $$<c-o>i
 
 " Let's try this heading-based fold method out (Tim Pope)
 function! MarkdownFold()
