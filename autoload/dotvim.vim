@@ -120,7 +120,7 @@ function! dotvim#ToggleAutocompile() abort
 	if !b:autocompile
 		augroup AUTOCOMP
 			autocmd!
-			autocmd BufWrite <buffer> :Make!
+			autocmd BufWrite <buffer> :silent! Make!
 		augroup END
 		let b:autocompile = 1
 	else
