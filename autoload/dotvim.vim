@@ -24,7 +24,12 @@ endfunction
 
 " Quicktag {{{1 
 function! dotvim#Quicktag(force) abort
-	let g:rootdir = FindRootDirectory()
+	if !filereadable('tags') && !filereadable('.tags')
+		let g:rootdir = FindRootDirectory()
+	else 
+		let g:rootdir = getcwd()
+		autocmd mine InsertLeave <buffer> call dotvim#Quicktag(0)
+	endif
 	if g:rootdir !=# '' || a:force
 		exec 'Dispatch ctags  -f ".tags" -R ' . g:rootdir
 	else 
