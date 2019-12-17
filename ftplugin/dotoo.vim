@@ -14,6 +14,7 @@ setlocal nowrap
 setlocal errorformat="%f",\ line\ %l:\ %m
 setlocal makeprg=compiler\ %
 highlight dotoo_shade_stars ctermfg=black
+inoremap <buffer> <c-\> $$<c-o>i
 inoremap <buffer><silent> <c-l> $$
 nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
 nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
