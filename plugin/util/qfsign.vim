@@ -17,6 +17,8 @@ sign define QFErr texthl=QFErrMarker text=E
 sign define QFWarn texthl=QFWarnMarker text=W
 sign define QFInfo texthl=QFInfoMarker text=I
 
+command! -nargs=0 QfClearSigns call s:clear_signs()
+
 augroup qfsign
 autocmd!
 autocmd QuickFixCmdPre [^l]* call s:clear_signs()
