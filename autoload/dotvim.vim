@@ -242,10 +242,8 @@ endfunction
 " Minimal Async Command {{{1 
 " based on https://gist.github.com/hauleth/0cce9962ffc9a09b3893d53dbcd3abf9
 function! s:populate(file, cmd, done) abort
-	if a:done 
-		echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
-		unlet! b:job
-	endif
+	echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
+	unlet! g:job
 	try
 		exe 'cgetfile '.a:file
 	finally
@@ -254,7 +252,7 @@ function! s:populate(file, cmd, done) abort
 endfunction
 
 function! dotvim#Do(...) abort
-	if exists('b:job')
+	if exists('g:job')
 		echohl ErrorMsg | echom 'There is currently running job, just wait' | echohl None
 		return
 	endif
@@ -262,15 +260,74 @@ function! dotvim#Do(...) abort
 	let tmp = tempname()
 	let cmd = substitute(join(a:000), '%', expand('%'), '') 
 	if has('nvim')
-		let b:job = jobstart([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
-					\ 'on_stdout': {id, data, event -> s:populate(tmp, cmd, 0)},
+		let g:job = jobstart([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
 					\ 'on_exit': {id, data, event -> s:populate(tmp, cmd, 1)}
 					\ })
 	else
-		let b:job = job_start([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
+		let g:job = job_start([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
 					\ 'in_io': 'null','out_io': 'null','err_io': 'null',
 					\ 'exit_cb': {job, result -> s:populate(tmp, cmd, 1)}
 					\ })
 	endif
 endfunction
 " 1}}} "Minimal Async Command
+" Simple Todo using grep {{{1 
+function! dotvim#Todo(dir)
+    if exists(':Grep') == 2
+		execute 'Grep TODO . ' . a:dir 
+	else	
+		execute 'grep TODO . ' . a:dir
+	endif
+	copen
+endfunction
+" 1}}} "Simple Todo using grep
+" WebSearch {{{1 
+function! dotvim#WebSearch(type, ...)
+
+  let sel_save = &selection
+  let &selection = 'inclusive'
+  let reg_save = @@
+
+  if a:0  " Invoked from Visual mode, use '< and '> marks.
+    silent exe 'normal! `<' . a:type . '`>y'
+  elseif a:type ==# 'line'
+    silent exe "normal! '[V']y"
+  elseif a:type ==# 'block'
+    silent exe "normal! `[\<C-V>`]y"
+  else
+    silent exe 'normal! `[v`]y'
+  endif
+
+  let search = substitute(trim(@@), ' \+', '+', 'g')
+  silent exe "!linkhandler 'https://duckduckgo.com/?q=" . search . "'"
+
+  let &selection = sel_save
+  let @@ = reg_save
+
+endfunction
+" 1}}} "WebSearch
+" ScreenShots in Markup {{{1 
+function! dotvim#OrgScreenShot(desc, dir, filename)
+	call setline('.', printf('[[file:%s/%s]]', a:dir, a:filename))
+endfunction
+
+function! dotvim#MarkdownScreenShot(desc, dir, filename)
+	call setline('.', '!['.a:desc.']('.a:dir.'/'.a:filename.'){ width=50% }')
+endfunction
+
+"add a screenshot to a markdown file
+function! dotvim#ImportScreenShot(screenshotfunc)
+	let dir = 'pic'
+	let desc = getline('.')
+	let filename = substitute(getline('.'), ' ', '_', 'g').'.png'
+	if !isdirectory(dir)
+		call mkdir(dir)
+	endif
+	call a:screenshotfunc(desc, dir, filename)
+	call system('import "'.dir.'/'.filename.'"')
+	if v:shell_error
+		call setline('.', desc)
+	endif
+endfunction
+" 1}}} "ScreenShots in Markup
+" vim:foldmethod=marker:foldlevel=0
