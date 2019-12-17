@@ -6,6 +6,11 @@
 all: sync
 
 sync:
+	if [ -d $(PWD)/.git ]; then
+		git pull
+	else
+		git clone https://github.com/Gavinok/dotvim.git
+	fi
 	[ -f ~/.vimrc ] || ln -s $(PWD)/vimrc ~/.vimrc
 
 clean:
