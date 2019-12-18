@@ -9,7 +9,7 @@ sync:
 	[ -d $(PWD)/.git ] && git pull
 	[ -f ~/.vimrc ] || ln -s $(PWD)/vimrc ~/.vimrc
 	mkdir -p ~/.config/nvim
-	[ -f ~/.config/nvim/init.vim ] || ln -s $(PWD)/init.vim ~/.config/nvim/init.vim
+	[ -f ~/.config/nvim/init.vim ] || ln -s $(PWD)/vimrc ~/.config/nvim/init.vim
 
 clean:
 	rm -f ~/.vimrc 
