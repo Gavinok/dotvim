@@ -48,17 +48,19 @@ if exists('*job_start') || exists('*jobstart')
 endif
 " 2}}} "lsc
 " Autocompletion {{{2 "
-"better default completion used for easyier vim scripting
 Plug 'fcpg/vim-complimentary', { 'for': 'vim' }
-Plug 'lifepillar/vim-mucomplete' "main source for completion
+"better default completion used for easyier vim scripting
 if has('nvim')
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
-Plug 'joereynolds/vim-minisnip'
+if has('patch-7.4.775')
+Plug 'lifepillar/vim-mucomplete' "main source for completion
 Plug 'jonasw234/vim-mucomplete-minisnip'
+endif
+Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
@@ -499,7 +501,7 @@ let g:mucomplete#user_mappings = {
 			\ }
 set completeopt+=menuone
 "-----------
-if has('patch-8.0.0283')
+if has('patch-7.4.775')
 	" Tab complete dont accept until told to
 	set completeopt+=noselect
 	let g:mucomplete#enable_auto_at_startup = 1
@@ -515,9 +517,9 @@ if has('patch-8.0.0283')
 				\ 'default'     : ['mini', 'list', 'omni', 'path', 'c-p',   'uspl'],
 				\ 'html'        : ['mini', 'omni', 'path', 'c-p',  'uspl'],
 				\ 'vim'         : ['mini', 'list', 'omni', 'path', 'cmd',   'keyp'],
-				\ 'tex'         : ['mini', 'path', 'omni', 'spel', 'c-p'],
-				\ 'markdown'    : ['mini', 'path', 'c-p', 'spel', 'dict', 'user'],
-				\ 'dotoo'   	: ['mini', 'path', 'c-p', 'spel', 'dict', 'user'],
+				\ 'tex'         : ['mini', 'path', 'omni', 'uspl', 'c-p'],
+				\ 'markdown'    : ['mini', 'path', 'c-p',  'uspl', 'user'],
+				\ 'dotoo'   	: ['mini', 'path', 'c-p',  'uspl', 'user'],
 				\ 'sh'          : ['mini', 'omni', 'file', 'dict', 'keyp'],
 				\ 'java'        : ['mini', 'tags', 'keyp', 'omni', 'c-n'],
 				\ 'c'           : ['mini', 'list', 'omni', 'c-n'],
@@ -772,13 +774,6 @@ augroup ABBREV
 	" spelling 
 	iab pyhton python
 	iab hte the
-
-	autocmd FileType c      iab xxx  printf("xxx");
-	autocmd FileType go     iab xxx  fmt.Println("xxx")
-	autocmd FileType go     iab errr if err != nil {<CR>fmt.Println("error", err)<CR>return<CR>}
-	autocmd FileType sh     iab xxx  echo xxx;
-	autocmd FileType sh     iab XXX  notify-send XXX;
-
 augroup END
 " 1}}} "Abbreviations
 
