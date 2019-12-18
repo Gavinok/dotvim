@@ -479,11 +479,6 @@ if exists('*job_start') || exists('*jobstart')
 					\    },
 					\}
 	endif
-	" \    'message_hooks': {
-	" \        'initialize': {
-	" \            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-	" \        },
-	" \    },
 endif
 " 2}}} LSC
 " vimtex {{{2 "
