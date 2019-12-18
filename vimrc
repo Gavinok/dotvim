@@ -738,7 +738,7 @@ augroup WRIGHTING
 	autocmd FileType dotoo,org nnoremap <buffer> <leader>i :call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'))
 	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call dotvim#WordProcessor()
 	" TODO: update this so that it works based on runtime path <15-12-19 Gavin Jaeger-Freeborn>
-	autocmd FileType markdown,pandoc,org execute 'setlocal dict=~/.vim/dict/latex_comp.txt'
+	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dict=~/.vim/dict/latex_comp.txt'
 augroup END
 
 " 1 }}}" FileType Specific Stuff
