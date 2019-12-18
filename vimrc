@@ -153,7 +153,7 @@ augroup end
 function! s:statusline_expr()
 	let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-	let fug = "%{exists('g:loaded_fugitive') ? 'Branch: ' . fugitive#statusline() : ''}"
+	let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
 	let job = "%2*%{exists('g:job') ? 'Job Running!' : ''}%*"
 	let sep = ' %= '
 	let pos = ' %-14.(%l,%c%V%) '
