@@ -704,3 +704,12 @@ endfunction
 
 xmap <silent> iC :<C-U>call <SID>inner_comment(1)<CR><Plug>(TOC)
 omap <silent> iC :<C-U>call <SID>inner_comment(0)<CR><Plug>(TOC)
+
+" Zoom allow edit the same file {{{2 
+augroup ZOOM
+	" this one is which you're most likely to use?
+	autocmd!
+	autocmd SwapExists * let v:swapchoice='e'
+				\| autocmd! Zoom
+augroup end
+" 2}}} "Zoom

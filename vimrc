@@ -296,8 +296,6 @@ endfunction
 " better alternative to <C-W>_<C-W>\|
 nnoremap <C-W>f		:call ZoomToggle()<CR>
 nnoremap <C-W><C-f>	:call ZoomToggle()<CR>
-" nnoremap <C-W>f		:call zoom#toggle()<cr>
-" nnoremap <C-W><C-f>	:call zoom#toggle()<cr>
 " nnoremap <C-W>f		<c-w><bar><c-w>_
 " nnoremap <C-W><C-f>	<c-w><bar><c-w>_
 
@@ -373,14 +371,6 @@ xnoremap > >gv
 " 1}}} "Editing
 
 " Plugin Configuration: {{{1 "
-" Zoom {{{2 
-augroup ZOOM
-	" this one is which you're most likely to use?
-	autocmd!
-	autocmd SwapExists * let v:swapchoice='e'
-				\| autocmd! Zoom
-augroup end
-" 2}}} "Zoom
 " Minimal Async Command {{{2 
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ Term call dotvim#TermCmd(<f-args>)
