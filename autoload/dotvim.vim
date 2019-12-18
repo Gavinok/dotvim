@@ -292,31 +292,33 @@ function! dotvim#Todo(dir)
 	copen
 endfunction
 " 1}}} "Simple Todo using grep
+
 " WebSearch {{{1 
 function! dotvim#WebSearch(type, ...)
 
-  let sel_save = &selection
-  let &selection = 'inclusive'
-  let reg_save = @@
+	let sel_save = &selection
+	let &selection = 'inclusive'
+	let reg_save = @@
 
-  if a:0  " Invoked from Visual mode, use '< and '> marks.
-    silent exe 'normal! `<' . a:type . '`>y'
-  elseif a:type ==# 'line'
-    silent exe "normal! '[V']y"
-  elseif a:type ==# 'block'
-    silent exe "normal! `[\<C-V>`]y"
-  else
-    silent exe 'normal! `[v`]y'
-  endif
+	if a:0  " Invoked from Visual mode, use '< and '> marks.
+		silent exe 'normal! `<' . a:type . '`>y'
+	elseif a:type ==# 'line'
+		silent exe "normal! '[V']y"
+	elseif a:type ==# 'block'
+		silent exe "normal! `[\<C-V>`]y"
+	else
+		silent exe 'normal! `[v`]y'
+	endif
 
-  let search = substitute(trim(@@), ' \+', '+', 'g')
-  silent exe "!linkhandler 'https://duckduckgo.com/?q=" . search . "'"
+	let search = substitute(trim(@@), ' \+', '+', 'g')
+	silent exe "!linkhandler 'https://duckduckgo.com/?q=" . search . "'"
 
-  let &selection = sel_save
-  let @@ = reg_save
+	let &selection = sel_save
+	let @@ = reg_save
 
 endfunction
 " 1}}} "WebSearch
+
 " ScreenShots in Markup {{{1 
 function! dotvim#OrgScreenShot(desc, dir, filename)
 	call setline('.', printf('[[file:%s/%s]]', a:dir, a:filename))
