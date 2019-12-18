@@ -10,6 +10,7 @@
 "      ░░   ▒ ░░      ░     ░░   ░ ░
 "       ░   ░         ░      ░     ░ ░
 "      ░                           ░
+
 " Quick Init: {{{1 "
 let g:python_host_prog  = '/usr/bin/python2' "speed up python2 startup
 let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
@@ -62,6 +63,7 @@ let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
 let g:minisnip_dir = '~/.vim/extra/snip:' . join(split(glob('~/.vim/extra/snip/**/'), '\n'), ':')
+imap <Nop> <Plug>(minisnip-complete)
 " Plug 'mattn/emmet-vim', { 'on': [] }
 " let g:user_emmet_expandabbr_key = '<C-V>'
 " 2}}} "Snippets
