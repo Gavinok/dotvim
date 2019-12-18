@@ -90,7 +90,7 @@ function! dotvim#WordProcessor() abort
 		endif
 	endif
 endfu
-" 2}}} "Toggle Prose Mode
+" 1}}} "Toggle Prose Mode
 
 " netrwmappings {{{1 
 " for - in vim
@@ -213,12 +213,10 @@ function! dotvim#MRU(command, arg)
 	execute a:command . ' ' . a:arg
 endfunction
 " 1}}} "MRU
+
 " Open {{{1 
 " What command to use
 function! dotvim#Open() abort
-	if executable('rifle')
-		return 'rifle'
-	endif
 	if executable('xdg-open')
 		return 'xdg-open'
 	endif
@@ -229,7 +227,7 @@ function! dotvim#Open() abort
 endfunction
 " 1}}} "Open
 
-" FormatFile() {{{2
+" FormatFile() {{{1
 " quickly format the file without moving the cursor or window
 function! dotvim#FormatFile()
 	let b:PlugView=winsaveview()
@@ -237,7 +235,7 @@ function! dotvim#FormatFile()
 	call winrestview(b:PlugView)
 	echo 'file indented'
 endfunction
-" 2}}} "FormatFile()
+" 1}}} "FormatFile()
 
 " Minimal Async Command {{{1 
 " based on https://gist.github.com/hauleth/0cce9962ffc9a09b3893d53dbcd3abf9
@@ -273,7 +271,7 @@ endfunction
 " 1}}} "Minimal Async Command
 " Simple Todo using grep {{{1 
 function! dotvim#Todo(dir)
-    if exists(':Grep') == 2
+	if exists(':Grep') == 2
 		execute 'Grep TODO . ' . a:dir 
 	else	
 		execute 'grep TODO . ' . a:dir
