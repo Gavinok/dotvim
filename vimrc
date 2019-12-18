@@ -61,7 +61,7 @@ Plug 'jonasw234/vim-mucomplete-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
-let g:minisnip_dir = '~/.vim/snip:' . join(split(glob('~/.vim/snip/**/'), '\n'), ':')
+let g:minisnip_dir = '~/.vim/extra/snip:' . join(split(glob('~/.vim/extra/snip/**/'), '\n'), ':')
 " Plug 'mattn/emmet-vim', { 'on': [] }
 " let g:user_emmet_expandabbr_key = '<C-V>'
 " 2}}} "Snippets
@@ -738,7 +738,7 @@ augroup WRIGHTING
 	autocmd FileType dotoo,org nnoremap <buffer> <leader>i :call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'))
 	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call dotvim#WordProcessor()
 	" TODO: update this so that it works based on runtime path <15-12-19 Gavin Jaeger-Freeborn>
-	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dict=~/.vim/dict/latex_comp.txt'
+	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dict=~/.vim/extra/dict/latex_comp.txt'
 augroup END
 
 " 1 }}}" FileType Specific Stuff
