@@ -108,9 +108,8 @@ let g:colorizer_colornames_disable = 1
 "Interactive Supstitute So I Learn To Be
 "Better With It at using it
 Plug 'markonm/traces.vim'
-" Plug 'wellle/targets.vim'
 Plug 'dhruvasagar/vim-zoom'
-let g:zoom#statustext = 'Z'
+let g:zoom#statustext = '[Z]'
 " 2}}} "etc.
 call plug#end()
 
@@ -155,19 +154,21 @@ augroup WinEnterGroup
 augroup end
 
 function! s:statusline_expr()
-	let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
-	let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-	let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
-	let job = "%2*%{exists('g:job') ? 'Job Running!' : ''}%*"
-	let sep = ' %= '
-	let pos = ' %-14.(%l,%c%V%) '
-	let pct = ' %P'
+	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
+	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
+	let fug  = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
+	let job  = "%2*%{exists('g:job') ? 'Job Running!' : ''}%*"
+	let zoom = "%3*%{exists('t:zoomed') ? zoom#statusline() : ''}%*"
+	let sep  = ' %= '
+	let pos  = ' %-14.(%l,%c%V%) '
+	let pct  = ' %P'
 
-	return '%<%f %<'.mod.fug.job.sep.pos.pct
+	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
 endfunction
 let &statusline = s:statusline_expr()
 highlight User1 ctermbg=green ctermfg=black
 highlight User2 ctermbg=blue ctermfg=black
+highlight User3 ctermbg=yellow ctermfg=black
 " 2}}} Aesthetics "
 " 1}}} "Plugins
 
