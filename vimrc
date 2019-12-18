@@ -108,8 +108,6 @@ let g:colorizer_colornames_disable = 1
 "Interactive Supstitute So I Learn To Be
 "Better With It at using it
 Plug 'markonm/traces.vim'
-Plug 'dhruvasagar/vim-zoom'
-let g:zoom#statustext = '[Z]'
 " 2}}} "etc.
 call plug#end()
 
@@ -158,7 +156,7 @@ function! s:statusline_expr()
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
 	let fug  = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
 	let job  = "%2*%{exists('g:job') ? 'Job Running!' : ''}%*"
-	let zoom = "%3*%{exists('t:zoomed') ? zoom#statusline() : ''}%*"
+	let zoom = "%3*%{exists('t:maximize_hidden_save') ? 'zoom' : ''}%*"
 	let sep  = ' %= '
 	let pos  = ' %-14.(%l,%c%V%) '
 	let pct  = ' %P'
@@ -280,9 +278,26 @@ nnoremap <leader>fj  :ME<space>
 cnoremap <C-N> <down>
 cnoremap <C-P> <up>
 
+function! ZoomToggle()
+  if exists("t:maximize_session")
+    exec "source " . t:maximize_session
+    call delete(t:maximize_session)
+    unlet t:maximize_session
+    let &hidden=t:maximize_hidden_save
+    unlet t:maximize_hidden_save
+  else
+    let t:maximize_hidden_save = &hidden
+    let t:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . t:maximize_session
+    only
+  endif
+endfunction
 " better alternative to <C-W>_<C-W>\|
-nnoremap <C-W>f		:call zoom#toggle()<cr>
-nnoremap <C-W><C-f>	:call zoom#toggle()<cr>
+nnoremap <C-W>f		:call ZoomToggle()<CR>
+nnoremap <C-W><C-f>	:call ZoomToggle()<CR>
+" nnoremap <C-W>f		:call zoom#toggle()<cr>
+" nnoremap <C-W><C-f>	:call zoom#toggle()<cr>
 " nnoremap <C-W>f		<c-w><bar><c-w>_
 " nnoremap <C-W><C-f>	<c-w><bar><c-w>_
 
@@ -368,16 +383,7 @@ augroup end
 " 2}}} "Zoom
 " Minimal Async Command {{{2 
 if exists('*job_start') || exists('*jobstart')
-	function! TermCmd(...)
-		let cmd = substitute(join(a:000), '%', expand('%'), '') 
-		if has('nvim')
-			exec 'split term://' . cmd 
-			exec 'normal! i'
-		else
-			exec 'term ' . cmd
-		endif
-	endfunction
-	command! -nargs=+ Term call TermCmd(<f-args>)
+	command! -nargs=+ Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 	" dispatch compatability
 	command! -bang -nargs=+ -complete=file Dispatch call dotvim#Do(<f-args>)
@@ -598,15 +604,6 @@ function! Source(begin, end)
 	endfor
 endfunction
 " 2}}} "QuickSource
-" Show Documentation {{{2 "
-function! s:show_documentation()
-	if &filetype ==# 'vim'
-		execute 'h '.expand('<cword>')
-	else
-		execute 'Man '.expand('<cword>')
-	endif
-endfunction
-" 2}}} "Show Documentation
 " White space {{{2
 " Highlight whitespace problems.
 nnoremap <Leader>ws :call ToggleShowWhitespace()<CR>
