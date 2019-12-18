@@ -528,10 +528,12 @@ if has('patch-8.0.0283')
 		let  s:latex_cond= { t -> t =~# '\%(\\\)$' }
 		let  s:html_cond= { t -> t =~# '\%(<\/\)$' }
 		let  g:mucomplete#can_complete = {}
-		let  g:mucomplete#can_complete.default   =  {  'uspl':  s:spl_cond  }
-		let  g:mucomplete#can_complete.cpp       =  {  'omni':  s:cpp_cond  }
+		let  g:mucomplete#can_complete.default   =  {  'uspl':  s:spl_cond    }
+		let  g:mucomplete#can_complete.cpp       =  {  'omni':  s:cpp_cond    }
 		let  g:mucomplete#can_complete.markdown  =  {  'dict':  s:latex_cond  }
-		let  g:mucomplete#can_complete.html  	 =  {  'omni':  s:html_cond  }
+		let  g:mucomplete#can_complete.dotoo     =  {  'dict':  s:latex_cond  }
+		let  g:mucomplete#can_complete.org       =  {  'dict':  s:latex_cond  }
+		let  g:mucomplete#can_complete.html      =  {  'omni':  s:html_cond   }
 	endif
 	let g:mucomplete#no_popup_mappings = 0
 	"spelling
