@@ -269,6 +269,19 @@ function! dotvim#Do(...) abort
 	endif
 endfunction
 " 1}}} "Minimal Async Command
+
+" Run command in Terminal {{{1 
+function! dotvim#TermCmd(...)
+	let cmd = substitute(join(a:000), '%', expand('%'), '') 
+	if has('nvim')
+		exec 'split term://' . cmd 
+		exec 'normal! i'
+	else
+		exec 'term ' . cmd
+	endif
+endfunction
+" 1}}} "Run command in Terminal
+
 " Simple Todo using grep {{{1 
 function! dotvim#Todo(dir)
 	if exists(':Grep') == 2
