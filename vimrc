@@ -223,6 +223,8 @@ nnoremap <Leader>cl :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' .
 " Alignment Text
 xnoremap <silent> gl :<C-u>silent call Align()<CR>
 
+" mark position before search
+nnoremap / ms/
 
 nnoremap <silent> <leader>/        :nohlsearch<CR>
 
