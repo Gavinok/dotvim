@@ -385,7 +385,7 @@ if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 	" dispatch compatability
 	command! -bang -nargs=+ -complete=file Dispatch call dotvim#Do(<f-args>)
-	command! -bang -nargs=+ -complete=file Grep call dotvim#Do(&grepprg,<f-args>)
+	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do(&grepprg,<f-args>)
 	command! -bang -nargs=0 -complete=file Make call dotvim#Do(&makeprg,<f-args>)
 	nnoremap  '<CR>     :Term<Up><CR>
 	nnoremap  '<Space>  :Term<Space>
