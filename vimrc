@@ -738,10 +738,6 @@ augroup END
 
 " Abbreviations: {{{1 "
 " Command Alias:  {{{2
-
-cnoremap *** **/*
-iabbr %% <C-R>=fnameescape(expand('%:p'))<CR>
-
 fun! SetupCommandAlias(from, to)
 	exec 'cnoreabbrev <expr> '.a:from
 				\ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
@@ -751,8 +747,6 @@ call SetupCommandAlias('W','w')
 call SetupCommandAlias('Wq','wq')
 call SetupCommandAlias('Q','q')
 call SetupCommandAlias('man','Man')
-call SetupCommandAlias('git','Git')
-
 " 2}}} Command Alias
 
 " if we have 3 * in a row make them into **/*
