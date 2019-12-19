@@ -141,26 +141,19 @@ command! Root call s:root()
 " set termguicolors
 colorscheme spaceway
 highlight Normal ctermbg=NONE
-highlight Normal guibg=NONE
-highlight StatusLine ctermbg=NONE ctermfg=Grey
-highlight Terminal ctermbg=NONE
-highlight Terminal guibg=NONE
-augroup WinEnterGroup
-	" this one is which you're most likely to use?
-	autocmd WinNew,WinEnter,BufHidden,BufDelete,BufWinLeave * if (winnr('j') > 1) || (winnr('l') > 1)
-				\| highlight StatusLine ctermbg=145 ctermfg=235 guibg=#303537 guifg=#B3B8C4 cterm=NONE gui=NONE |
-				\else
-				\| highlight StatusLine ctermbg=NONE ctermfg=Grey
-				\| endif
+" highlight Normal guibg=NONE
+" highlight StatusLine ctermbg=239  ctermfg=233 guibg=#1C1F20 guifg=#7C7F88
+" highlight StatusLineNC ctermbg=235  ctermfg=233 guibg=#1C1F20 guifg=#7C7F88
+" highlight Terminal ctermbg=NONE
+" highlight Terminal guibg=NONE
 
-augroup end
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-	let fug  = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
+	let fug  = "%3*%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
 	let job  = "%2*%{exists('g:job') ? 'Job Running!' : ''}%*"
-	let zoom = "%3*%{exists('t:maximize_hidden_save') ? 'zoom' : ''}%*"
+	let zoom = "%3*%{exists('t:maximize_hidden_save') ? '[Z]' : ''}%*"
 	let sep  = ' %= '
 	let pos  = ' %-14.(%l,%c%V%) '
 	let pct  = ' %P'
@@ -168,9 +161,9 @@ function! s:statusline_expr()
 	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
 endfunction
 let &statusline = s:statusline_expr()
-highlight User1 ctermbg=green ctermfg=black
-highlight User2 ctermbg=blue ctermfg=black
-highlight User3 ctermbg=yellow ctermfg=black
+highlight User1 ctermbg=107 ctermfg=black
+highlight User2 ctermbg=103   ctermfg=black
+highlight User3 ctermbg=59    ctermfg=black
 " 2}}} Aesthetics "
 " 1}}} "Plugins
 
