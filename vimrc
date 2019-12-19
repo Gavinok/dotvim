@@ -368,7 +368,7 @@ map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 
 " Quick spell correction shortcut
-nnoremap <silent> <leader>S :call dotvim#WordProcessor()<CR>
+nnoremap <silent> <leader>ss :call dotvim#WordProcessor()<CR>
 nmap <silent> <Left>     mz[s1z=`z
 imap <silent> <Left>     <C-G>u<esc>mz[s1z=`za
 
