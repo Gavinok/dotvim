@@ -127,6 +127,7 @@ function! dotvim#ToggleAutocompile() abort
 		augroup AUTOCOMP
 			autocmd!
 		augroup END
+		let b:autocompile = 0
 	endif
 endfunction 
 " 1}}} "ToggleAutocompile
