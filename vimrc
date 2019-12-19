@@ -677,8 +677,6 @@ set wildignore=*.tags,tags,*.o,*.class
 set laststatus=2      "hide status bar for nvim
 set splitbelow splitright
 
-" makes the StatusLine's background blend in when there is only one window on
-" screen and then turnd grey when there when there are multiple
 " Do not use smart case in command line mode,
 " extracted from https://goo.gl/vCTYdK
 if exists('##CmdLineEnter')
