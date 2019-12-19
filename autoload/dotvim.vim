@@ -353,6 +353,9 @@ function! dotvim#CSPACE()
 	if cmdline =~ '\v\C^ss$'
 		" like :ls but prompts for a buffer command
 		return "\<c-u>%s//g\<left>\<left>"
+	elseif cmdline =~ '\v\C^sl$'
+		" like :ls but prompts for a buffer command
+		return "\<c-u>s//g\<left>\<left>"
 	elseif cmdline =~ '\v\C^gs$'
 		" like :ls but prompts for a buffer command
 		return "\<c-u>g//#\<left>\<left>"
