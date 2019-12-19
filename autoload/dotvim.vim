@@ -38,7 +38,6 @@ function! dotvim#Quicktag(force) abort
 endfunction
 " 1}}} "Quicktag
 
-
 " RepeatResize {{{1 "
 function! dotvim#RepeatResize(first) abort
 	let l:command = a:first
