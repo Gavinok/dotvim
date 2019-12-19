@@ -367,7 +367,7 @@ map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 
 " Quick spell correction shortcut
-nnoremap <silent> <leader>ss :WP<CR>
+nnoremap <silent> <leader>S :WP<CR>
 nmap <silent> <Left>     mz[s1z=`z
 imap <silent> <Left>     <C-G>u<esc>mz[s1z=`za
 
