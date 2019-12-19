@@ -316,7 +316,7 @@ xnoremap * "xy/<C-R>x<CR>
 function! Sort(type, ...)
 	'[,']sort
 endfunction
-nmap <silent> s :set opfunc=Sort<CR>g@
+nmap <silent> gS :set opfunc=Sort<CR>g@
 
 " Using Fugitive
 nnoremap Q  :Gstatus<CR>
