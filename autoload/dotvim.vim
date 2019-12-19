@@ -386,7 +386,8 @@ function! dotvim#CCR()
 		" like registers bug 
 		return "\<CR>:norm! \"p\<Left>"
 	else
-		return "\<CR>"
+		" <C-]> fixes abbreviation compatability
+		return "\<C-]>\<CR>"
 	endif
 endfunction
 " 1}}} "CCR
