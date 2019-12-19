@@ -344,4 +344,53 @@ function! dotvim#ImportScreenShot(screenshotfunc)
 	endif
 endfunction
 " 1}}} "ScreenShots in Markup
+
+function! dotvim#CSPACE()
+	let cmdline = getcmdline()
+
+	if getcmdtype() isnot# ":" | return "\<SPACE>" | endif
+
+	if cmdline =~ '\v\C^ss$'
+		" like :ls but prompts for a buffer command
+		return "\<c-u>%s//g\<left>\<left>"
+	elseif cmdline =~ '\v\C^gs$'
+		" like :ls but prompts for a buffer command
+		return "\<c-u>g//#\<left>\<left>"
+	endif
+	return "\<SPACE>"
+endfunction
+
+" CCR {{{1 
+" minor adjustments to romainl's function found here
+" https://gist.github.com/romainl/5b2cfb2b81f02d44e1d90b74ef555e31
+function! dotvim#CCR()
+	let cmdline = getcmdline()
+
+	if getcmdtype() isnot# ":" | return "\<CR>" | endif
+
+	command! -bar Z silent set more|delcommand Z
+	if cmdline =~ '\v\C^(ls|files|buffers)'
+		" like :ls but prompts for a buffer command
+		return "\<CR>:b "
+	elseif cmdline =~ '\v\C^(cli|lli)'
+		" like :clist or :llist but prompts for an error/location number
+		return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
+    elseif cmdline =~ '\C^old'
+		" like :oldfiles but prompts for an old file to edit
+		set nomore
+		return "\<CR>:Z|e #<"
+	elseif cmdline =~ '\C^marks'
+		" like :marks but prompts for a mark to jump to
+		return "\<CR>:norm! `"
+	elseif cmdline =~ '\C^undol'
+		" like :undolist but prompts for a change to undo
+		return "\<CR>:u "
+	elseif cmdline =~ '\C^reg'
+		" like registers bug 
+		return "\<CR>:norm! \"p\<Left>"
+	else
+		return "\<CR>"
+	endif
+endfunction
+" 1}}} "CCR
 " vim:foldmethod=marker:foldlevel=0
