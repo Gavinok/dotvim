@@ -276,6 +276,8 @@ nnoremap <leader>fj  :ME<space>
 " better navigation of command history
 cnoremap <C-N> <down>
 cnoremap <C-P> <up>
+cnoremap <expr> <SPACE> dotvim#CSPACE()
+cnoremap <expr> <CR> dotvim#CCR()
 
 function! ZoomToggle()
   if exists("t:maximize_session")
