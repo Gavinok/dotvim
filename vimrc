@@ -754,16 +754,20 @@ call SetupCommandAlias('man','Man')
 call SetupCommandAlias('git','Git')
 
 " 2}}} Command Alias
-augroup ABBREV
-	autocmd!
-	iab <expr> dts strftime("%c")	" quickly print the date
-	"add a comment in any language
-	iab com <C-R>=&commentstring<CR><esc>F%c2w
 
-	" spelling 
-	iab pyhton python
-	iab hte the
-augroup END
+" if we have 3 * in a row make them into **/*
+" this is only applied on the end of a line
+cnoremap <expr> * getcmdline() =~ '.*\*\*$' ? '/*' : '*'
+" file path shortcut
+iabbr %% <C-R>=fnameescape(expand('%:p'))<CR>
+" quickly print the date
+iab <expr> dts strftime("%c")	
+"add a comment in any language
+iab com <C-R>=&commentstring<CR><esc>F%c2w
+
+" spelling 
+iab pyhton python
+iab hte the
 " 1}}} "Abbreviations
 
 " Textobjects: {{{1 
