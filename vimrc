@@ -279,26 +279,33 @@ cnoremap <C-P> <up>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
 cnoremap <expr> <CR> dotvim#CCR()
 
+" TODO: Need to check that more then one window exists <18-12-19 Gavin Jaeger-Freeborn>
 function! ZoomToggle()
-  if exists("t:maximize_session")
-    exec "source " . t:maximize_session
-    call delete(t:maximize_session)
-    unlet t:maximize_session
-    let &hidden=t:maximize_hidden_save
-    unlet t:maximize_hidden_save
-  else
-    let t:maximize_hidden_save = &hidden
-    let t:maximize_session = tempname()
-    set hidden
-    exec "mksession! " . t:maximize_session
-    only
-  endif
+	if exists("t:maximize_session")
+		" Zoom allow edit the same file {{{2 
+		" only an issue if the file has an extra swap value
+		augroup ZOOM
+			autocmd!
+			autocmd SwapExists * let v:swapchoice='e'
+		augroup end
+		" 2}}} "Zoom
+		exec "source " . t:maximize_session
+		call delete(t:maximize_session)
+		unlet t:maximize_session
+		let &hidden=t:maximize_hidden_save
+		unlet t:maximize_hidden_save
+	else
+		let t:maximize_hidden_save = &hidden
+		let t:maximize_session = tempname()
+		set hidden
+		exec "mksession! " . t:maximize_session
+		only
+	endif
 endfunction
+
 " better alternative to <C-W>_<C-W>\|
 nnoremap <C-W>f		:call ZoomToggle()<CR>
 nnoremap <C-W><C-f>	:call ZoomToggle()<CR>
-" nnoremap <C-W>f		<c-w><bar><c-w>_
-" nnoremap <C-W><C-f>	<c-w><bar><c-w>_
 
 
 "Better Mappings Imho
