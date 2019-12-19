@@ -61,8 +61,8 @@ endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
 if has('patch-7.4.775')
-Plug 'lifepillar/vim-mucomplete' "main source for completion
-Plug 'jonasw234/vim-mucomplete-minisnip'
+	Plug 'lifepillar/vim-mucomplete' "main source for completion
+	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
