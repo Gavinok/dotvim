@@ -726,3 +726,14 @@ augroup WinEnterGroup
 
 augroup end
 " 1}}} "Auto Change Status Color
+" vimtex {{{2 "
+augroup LATEX
+	autocmd!
+	autocmd VimLeave *.tex !texclear %
+	let g:vimtex_enabled = 1
+	let g:tex_flavor='latex'
+	let g:vimtex_fold_enabled = 1
+	autocmd filetype tex setlocal omnifunc=vimtex#complete#omnifunc
+augroup END
+" 2}}} "vimtex
+
