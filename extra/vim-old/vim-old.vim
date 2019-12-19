@@ -638,35 +638,35 @@ let g:makery_config = {
 " Todo
 " ----------------------------------------------------------------------------
 function! s:todo() abort
-  let entries = []
-  for cmd in ['git grep -niI -e TODO -e FIXME -e XXX 2> /dev/null',
-            \ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
-    let lines = split(system(cmd), '\n')
-    if v:shell_error != 0 | continue | endif
-    for line in lines
-      let [fname, lno, text] = matchlist(line, '^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
-      call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
-    endfor
-    break
-  endfor
+	let entries = []
+	for cmd in ['git grep -niI -e TODO -e FIXME -e XXX 2> /dev/null',
+				\ 'grep -rniI -e TODO -e FIXME -e XXX * 2> /dev/null']
+		let lines = split(system(cmd), '\n')
+		if v:shell_error != 0 | continue | endif
+		for line in lines
+			let [fname, lno, text] = matchlist(line, '^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
+			call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
+		endfor
+		break
+	endfor
 
-  if !empty(entries)
-    call setqflist(entries)
-    copen
-  endif
+	if !empty(entries)
+		call setqflist(entries)
+		copen
+	endif
 endfunction
 command! Todo call s:todo()
 " ----------------------------------------------------------------------------
 " Common
 " ----------------------------------------------------------------------------
 function! s:textobj_cancel()
-  if v:operator == 'c'
-    augroup textobj_undo_empty_change
-      autocmd InsertLeave <buffer> execute 'normal! u'
-            \| execute 'autocmd! textobj_undo_empty_change'
-            \| execute 'augroup! textobj_undo_empty_change'
-    augroup END
-  endif
+	if v:operator == 'c'
+		augroup textobj_undo_empty_change
+			autocmd InsertLeave <buffer> execute 'normal! u'
+						\| execute 'autocmd! textobj_undo_empty_change'
+						\| execute 'augroup! textobj_undo_empty_change'
+		augroup END
+	endif
 endfunction
 
 noremap         <Plug>(TOC) <nop>
@@ -675,41 +675,54 @@ inoremap <expr> <Plug>(TOC) exists('#textobj_undo_empty_change')?"\<esc>":''
 " Comment Object
 " ----------------------------------------------------------------------------
 function! s:inner_comment(vis)
-  if synIDattr(synID(line('.'), col('.'), 0), 'name') !~? 'comment'
-    call s:textobj_cancel()
-    if a:vis
-      normal! gv
-    endif
-    return
-  endif
+	if synIDattr(synID(line('.'), col('.'), 0), 'name') !~? 'comment'
+		call s:textobj_cancel()
+		if a:vis
+			normal! gv
+		endif
+		return
+	endif
 
-  let origin = line('.')
-  let lines = []
-  for dir in [-1, 1]
-    let line = origin
-    let line += dir
-    while line >= 1 && line <= line('$')
-      execute 'normal!' line.'G^'
-      if synIDattr(synID(line('.'), col('.'), 0), 'name') !~? 'comment'
-        break
-      endif
-      let line += dir
-    endwhile
-    let line -= dir
-    call add(lines, line)
-  endfor
+	let origin = line('.')
+	let lines = []
+	for dir in [-1, 1]
+		let line = origin
+		let line += dir
+		while line >= 1 && line <= line('$')
+			execute 'normal!' line.'G^'
+			if synIDattr(synID(line('.'), col('.'), 0), 'name') !~? 'comment'
+				break
+			endif
+			let line += dir
+		endwhile
+		let line -= dir
+		call add(lines, line)
+	endfor
 
-  execute 'normal!' lines[0].'GV'.lines[1].'G'
+	execute 'normal!' lines[0].'GV'.lines[1].'G'
 endfunction
 
 xmap <silent> iC :<C-U>call <SID>inner_comment(1)<CR><Plug>(TOC)
 omap <silent> iC :<C-U>call <SID>inner_comment(0)<CR><Plug>(TOC)
 
-" Zoom allow edit the same file {{{2 
+" Zoom allow edit the same file {{{1 
 augroup ZOOM
 	" this one is which you're most likely to use?
 	autocmd!
 	autocmd SwapExists * let v:swapchoice='e'
 				\| autocmd! Zoom
 augroup end
-" 2}}} "Zoom
+" 1}}} "Zoom
+
+" Auto Change Status Color {{{1 
+highlight StatusLine ctermbg=NONE ctermfg=Grey
+augroup WinEnterGroup
+	" this one is which you're most likely to use?
+	autocmd WinNew,WinEnter,BufHidden,BufDelete,BufWinLeave * if (winnr('j') > 1) || (winnr('l') > 1)
+				\| highlight StatusLine ctermbg=145 ctermfg=235 guibg=#303537 guifg=#B3B8C4 cterm=NONE gui=NONE |
+				\else
+				\| highlight StatusLine ctermbg=NONE ctermfg=Grey
+				\| endif
+
+augroup end
+" 1}}} "Auto Change Status Color
