@@ -264,6 +264,7 @@ nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h')
 nnoremap <leader>ft  :tjump<space>**<Left>
 nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
 nnoremap <leader>hh  :help<Space>
+" bookmarked directories
 nnoremap <leader>fp  :edit ~/Programming/**/**<Left>
 nnoremap <leader>fh  :edit ~/**/*
 nnoremap <leader>fv  :edit ~/.vim/**/*
@@ -367,7 +368,7 @@ map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 
 " Quick spell correction shortcut
-nnoremap <silent> <leader>S :WP<CR>
+nnoremap <silent> <leader>S :call dotvim#WordProcessor()<CR>
 nmap <silent> <Left>     mz[s1z=`z
 imap <silent> <Left>     <C-G>u<esc>mz[s1z=`za
 
@@ -627,7 +628,6 @@ vmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
 
 " Minimal Gist
 command! -range=% IX  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
-command! WP call dotvim#WordProcessor()
 " sort based on visual block
 command! -range -nargs=0 -bang VS sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
 " copy all matches with the last seach
