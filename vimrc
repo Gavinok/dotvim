@@ -519,7 +519,7 @@ if has('patch-7.4.775')
 				\ 'vim'         : ['mini', 'list', 'omni', 'path', 'cmd',   'keyp'],
 				\ 'tex'         : ['mini', 'path', 'omni', 'uspl', 'c-p'],
 				\ 'markdown'    : ['mini', 'path', 'c-p',  'uspl', 'user'],
-				\ 'dotoo'   	: ['mini', 'path', 'c-p',  'uspl', 'user'],
+				\ 'dotoo'   	: ['mini', 'path', 'c-p',  'uspl', 'dict'],
 				\ 'sh'          : ['mini', 'omni', 'file', 'dict', 'keyp'],
 				\ 'java'        : ['mini', 'tags', 'keyp', 'omni', 'c-n'],
 				\ 'c'           : ['mini', 'list', 'omni', 'c-n'],
