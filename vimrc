@@ -744,6 +744,7 @@ fun! SetupCommandAlias(from, to)
 				\ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfun
 call SetupCommandAlias('W','w')
+call SetupCommandAlias("w'",'w')
 call SetupCommandAlias('Wq','wq')
 call SetupCommandAlias('Q','q')
 call SetupCommandAlias('man','Man')
