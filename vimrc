@@ -147,7 +147,7 @@ function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
 	let fug  = "%3*%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
-	let job  = "%2*%{exists('g:job') ? 'Job Running!' : ''}%*"
+	let job  = "%2*%{exists('g:job') ? '[Job Running!]' : ''}%*"
 	let zoom = "%3*%{exists('t:maximize_hidden_save') ? '[Z]' : ''}%*"
 	let sep  = ' %= '
 	let pos  = ' %-14.(%l,%c%V%) '
