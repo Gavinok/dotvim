@@ -141,11 +141,6 @@ command! Root call s:root()
 " set termguicolors
 colorscheme spaceway
 highlight Normal ctermbg=NONE
-" highlight Normal guibg=NONE
-" highlight StatusLine ctermbg=239  ctermfg=233 guibg=#1C1F20 guifg=#7C7F88
-" highlight StatusLineNC ctermbg=235  ctermfg=233 guibg=#1C1F20 guifg=#7C7F88
-" highlight Terminal ctermbg=NONE
-" highlight Terminal guibg=NONE
 
 
 function! s:statusline_expr()
