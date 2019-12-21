@@ -115,7 +115,7 @@ Plug 'markonm/traces.vim'
 " 2}}} "etc.
 call plug#end()
 
-" Diy Rooter {{{2 
+" Diy Rooter {{{2
 function! FindRootDirectory()
 	if !filereadable('Makefile') && !filereadable('makefile')
 		let root = systemlist('git rev-parse --show-toplevel')[0]
@@ -124,7 +124,7 @@ function! FindRootDirectory()
 		endif
 		return root
 	endif
-	return expand('%:p:h') 
+	return expand('%:p:h')
 endfunction
 
 function! s:root()
@@ -224,7 +224,7 @@ nnoremap / ms/
 nnoremap <silent> <leader>/        :nohlsearch<CR>
 
 " if this is a normal buffer use <CR> to toggle folding
-nmap <expr> <CR> &buftype ==# '' ? 'za' : "\<CR>"  
+nmap <expr> <CR> &buftype ==# '' ? 'za' : "\<CR>"
 
 " Find References
 if executable('ag')
@@ -278,7 +278,7 @@ cnoremap <expr> <CR> dotvim#CCR()
 " TODO: Need to check that more then one window exists <18-12-19 Gavin Jaeger-Freeborn>
 function! ZoomToggle()
 	if exists("t:maximize_session")
-		" Zoom allow edit the same file {{{2 
+		" Zoom allow edit the same file {{{2
 		" only an issue if the file has an extra swap value
 		augroup ZOOM
 			autocmd!
@@ -375,7 +375,7 @@ xnoremap > >gv
 " 1}}} "Editing
 
 " Plugin Configuration: {{{1 "
-" Minimal Async Command {{{2 
+" Minimal Async Command {{{2
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
@@ -391,8 +391,8 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  `<TAB>    :Do<Up>
 	nnoremap  m<CR>     :Make<CR>
 	nnoremap  m<Space>  :Make<Space>
-	nnoremap  m!  		:setlocal makeprg=compiler\ %<CR>
-	nnoremap  m?  		:echo &makeprg<CR>
+	nnoremap  m!		:setlocal makeprg=compiler\ %<CR>
+	nnoremap  m?		:echo &makeprg<CR>
 	nnoremap <leader>mm :call dotvim#ToggleAutocompile()<CR>
 	"async tagging
 	nnoremap <leader>t  :call dotvim#Quicktag(0)<CR>
@@ -400,7 +400,7 @@ else
 	nnoremap  `<TAB>    :!<Up>
 	nnoremap  `<Space>  :!
 	nnoremap  m!        :make!<Space>
-	nnoremap  m<CR> 	:make!<CR>
+	nnoremap  m<CR>		:make!<CR>
 endif
 " 2}}} "Minimal Async Command
 " netrw {{{2
@@ -469,7 +469,7 @@ if exists('*job_start') || exists('*jobstart')
 					\}
 	endif
 	if executable('typescript-language-server')
-		let g:lsc_server_commands['javascript'] = { 
+		let g:lsc_server_commands['javascript'] = {
 					\ 'name': 'javascript support using typescript-language-server',
 					\ 'command': 'typescript-language-server --stdio',
 					\    'message_hooks': {
@@ -515,11 +515,11 @@ if has('patch-7.4.775')
 				\ 'vim'         : ['mini', 'list', 'omni', 'path', 'cmd',   'keyp'],
 				\ 'tex'         : ['mini', 'path', 'omni', 'uspl', 'c-p'],
 				\ 'markdown'    : ['mini', 'path', 'c-p',  'uspl', 'user'],
-				\ 'dotoo'   	: ['mini', 'path', 'c-p',  'uspl', 'dict'],
+				\ 'dotoo'		: ['mini', 'path', 'c-p',  'uspl', 'dict'],
 				\ 'sh'          : ['mini', 'omni', 'file', 'dict', 'keyp'],
 				\ 'java'        : ['mini', 'tags', 'keyp', 'omni', 'c-n'],
 				\ 'c'           : ['mini', 'list', 'omni', 'c-n'],
-				\ 'mail'   		: ['mini', 'uspl', 'list', 'c-p'],
+				\ 'mail'		: ['mini', 'uspl', 'list', 'c-p'],
 				\ }
 
 	if !exists('g:mucomplete#can_complete')
@@ -656,7 +656,7 @@ set scrolljump=-15    "Jump 15 when moving cursor bellow screen
 set belloff=all
 set undofile          "Undo function after reopening
 " set autowrite
-" set autoread  	"read/file when switching buffers
+" set autoread        "read/file when switching buffers
 set lazyredraw        "redraw only when needed faster macros
 set shortmess=aAtcT   "get rid of annoying messagesc
 set incsearch         smartcase ignorecase hlsearch "better search
@@ -751,16 +751,16 @@ cnoremap <expr> * getcmdline() =~ '.*\*\*$' ? '/*' : '*'
 " file path shortcut
 iabbr %% <C-R>=fnameescape(expand('%:p'))<CR>
 " quickly print the date
-iab <expr> dts strftime("%c")	
+iab <expr> dts strftime("%c")
 "add a comment in any language
 iab com <C-R>=&commentstring<CR><esc>F%c2w
 
-" spelling 
+" spelling
 iab pyhton python
 iab hte the
 " 1}}} "Abbreviations
 
-" Textobjects: {{{1 
+" Textobjects: {{{1
 " inside or arround ...
 " ----------------------
 " i" i' i. i_ i| i/ i\ i*
