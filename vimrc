@@ -828,3 +828,18 @@ if filereadable(expand('~/.config/vimlocal'))
 endif
 "}}} Etc "
 " vim:foldmethod=marker:foldlevel=0
+xnoremap <silent> <CR> :<C-U>call DemoCommand(1)<CR>
+
+function! DemoCommand (...)
+	" Select either the visual region, or the current paragraph...
+	if a:0
+		let @@ = join(getline("'<","'>"), "\n")
+	endif
+
+	" Remove continuations and convert shell commands, then execute...
+	let command = @@
+	let command = substitute(command, '^\s*".\{-}\n', '',     'g')
+	let command = substitute(command, '\n\s*\\',      ' ',    'g')
+	let command = substitute(command, '^\s*>\s',      ':! ',  '' )
+	execute command
+endfunction
