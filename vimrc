@@ -621,8 +621,8 @@ command! StripWhitespace :%s/\s\+$//e
 nmap <silent> gs :set opfunc=dotvim#WebSearch<CR>g@
 vmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
 
-" Minimal Gist
-command! -range=% IX  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
+" Minimal Gist this is actually IX but i always think its XI
+command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
 " sort based on visual block
 command! -range -nargs=0 -bang VS sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
 " copy all matches with the last seach
