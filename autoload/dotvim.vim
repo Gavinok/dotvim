@@ -391,4 +391,20 @@ function! dotvim#CCR()
 	endif
 endfunction
 " 1}}} "CCR
+
+" Run Vim Script {{{1 
+function! dotvim#RunVimScript(...)
+	" Select either the visual region, or the current paragraph...
+	if a:0
+		let @@ = join(getline("'<","'>"), "\n")
+	endif
+
+	" Remove continuations and convert shell commands, then execute...
+	let command = @@
+	let command = substitute(command, '^\s*".\{-}\n', '',     'g')
+	let command = substitute(command, '\n\s*\\',      ' ',    'g')
+	let command = substitute(command, '^\s*>\s',      ':! ',  '' )
+	execute command
+endfunction
+" 1}}} "Run Vim Script
 " vim:foldmethod=marker:foldlevel=0

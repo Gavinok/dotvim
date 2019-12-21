@@ -334,7 +334,7 @@ xnoremap <RightMouse> "*y
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
 " Quick format file
-nnoremap gq :call dotvim#FormatFile()<CR>
+nnoremap gq :<C-U>call dotvim#FormatFile()<CR>
 " win resize
 nnoremap <C-W>+ :call dotvim#RepeatResize('+')<CR>
 nnoremap <C-W>- :call dotvim#RepeatResize('-')<CR>
@@ -583,14 +583,6 @@ function! CustomSections(dir, regex)
 	endif
 endfunction
 " 2}}} "CustomSections
-" QuickSource {{{2 "
-function! Source(begin, end)
-	let lines = getline(a:begin, a:end)
-	for line in lines
-		execute line
-	endfor
-endfunction
-" 2}}} "QuickSource
 " White space {{{2
 " Highlight whitespace problems.
 nnoremap <Leader>ws :call ToggleShowWhitespace()<CR>
@@ -696,13 +688,12 @@ augroup end
 
 augroup VIM
 	autocmd!
+	autocmd Filetype vim setlocal foldmethod=marker
 	autocmd FileType vim nmap <buffer> `<CR> :Runtime<CR>
 	autocmd FileType vim nmap <buffer><silent> <leader>V :Messages<CR>
-	autocmd FileType vim nmap <buffer><silent> <leader>sc :call Source(line('.'), line('.'))<CR>
-	autocmd FileType vim vmap <buffer><silent> <leader>sc :call Source(line('v'), line('.'))<CR>
-	autocmd FileType vim nnoremap <buffer><silent> gd  :call lookup#lookup()<cr>
-	autocmd FileType vim nnoremap <buffer><silent> <c-t>  :call lookup#pop()<cr>
-	autocmd Filetype vim setlocal foldmethod=marker
+	autocmd FileType vim xmap <buffer><silent> <CR> :<C-U>call dotvim#RunVimScript(1)<CR>
+	autocmd FileType vim nnoremap <buffer><silent> gd  :call lookup#lookup()<CR>
+	autocmd FileType vim nnoremap <buffer><silent> <C-T>  :call lookup#pop()<CR>
 	autocmd FileType vim nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
 	autocmd FileType vim nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
 	autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
@@ -721,8 +712,8 @@ augroup WRIGHTING
 	autocmd!
 	autocmd FileType pandoc nnoremap <buffer> cic :call pandoc#after#nrrwrgn#NarrowCodeblock()<cr>
 	autocmd BufRead,BufNewFile /tmp/neomutt* call dotvim#WordProcessor()
-	autocmd FileType markdown,pandoc nnoremap <buffer> <leader>i :call dotvim#ImportScreenShot(function('dotvim#MarkdownScreenShot'))
-	autocmd FileType dotoo,org nnoremap <buffer> <leader>i :call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'))
+	autocmd FileType markdown,pandoc nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#MarkdownScreenShot'))
+	autocmd FileType dotoo,org nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'))
 	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call dotvim#WordProcessor()
 	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dict=~/.vim/extra/dict/latex_comp.txt'
 augroup END
@@ -826,18 +817,3 @@ if filereadable(expand('~/.config/vimlocal'))
 endif
 "}}} Etc "
 " vim:foldmethod=marker:foldlevel=0
-xnoremap <silent> <CR> :<C-U>call DemoCommand(1)<CR>
-
-function! DemoCommand (...)
-	" Select either the visual region, or the current paragraph...
-	if a:0
-		let @@ = join(getline("'<","'>"), "\n")
-	endif
-
-	" Remove continuations and convert shell commands, then execute...
-	let command = @@
-	let command = substitute(command, '^\s*".\{-}\n', '',     'g')
-	let command = substitute(command, '\n\s*\\',      ' ',    'g')
-	let command = substitute(command, '^\s*>\s',      ':! ',  '' )
-	execute command
-endfunction
