@@ -223,7 +223,7 @@ if executable('ag')
 	set grepprg=ag\ --vimgrep
 endif
 
-nnoremap <leader>ag :Grep <C-R><C-W>
+nnoremap <leader>G :Grep <C-R><C-W> .<CR>:copen<CR>
 
 " change variable and repeat with .
 nnoremap c*			*Ncgn
