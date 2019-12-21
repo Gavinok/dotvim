@@ -91,9 +91,6 @@ let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " Org Mode {{{2 "
 Plug 'dhruvasagar/vim-dotoo'
-" Plug 'vim-scripts/SyntaxRange', { 'for': ['markdown', 'dotoo'] }
-" Plug 'chrisbra/nrrwrgn' "narrow range
-" nmap <F3> <Plug>NrrwrgnWinIncr
 " 2}}} "Org Mode
 " My Pluggins {{{2 "
 Plug 'gavinok/spaceway.vim'
@@ -109,9 +106,6 @@ Plug 'mhinz/vim-lookup', { 'for': 'vim' }
 " etc {{{2 "
 Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 let g:colorizer_colornames_disable = 1
-"Interactive Supstitute So I Learn To Be
-"Better With It at using it
-Plug 'markonm/traces.vim'
 " 2}}} "etc.
 call plug#end()
 
