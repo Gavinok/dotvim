@@ -291,6 +291,9 @@ function! ZoomToggle()
 		let &hidden=t:maximize_hidden_save
 		unlet t:maximize_hidden_save
 	else
+		if (winnr('j') <= 1) || (winnr('l') <= 1)
+			return
+		endif
 		let t:maximize_hidden_save = &hidden
 		let t:maximize_session = tempname()
 		set hidden
