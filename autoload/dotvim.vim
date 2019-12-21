@@ -180,9 +180,9 @@ function! dotvim#OmniVim(findstart, base) abort
 endfunction
 " 1}}} "shellcompletion
 
-" CopyMatches {{{1 
+" YankMatches {{{1 
 " copy the contents of all matches from the last search
-function! dotvim#CopyMatches(reg)
+function! dotvim#YankMatches(reg)
 	let hits = []
 	%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
 	let reg = empty(a:reg) ? '+' : a:reg
