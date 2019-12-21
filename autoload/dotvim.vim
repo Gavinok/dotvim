@@ -372,7 +372,7 @@ function! dotvim#CCR()
 	elseif cmdline =~ '\v\C^(cli|lli)'
 		" like :clist or :llist but prompts for an error/location number
 		return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
-    elseif cmdline =~ '\C^old'
+	elseif cmdline =~ '\C^old'
 		" like :oldfiles but prompts for an old file to edit
 		set nomore
 		return "\<CR>:Z|e #<"
