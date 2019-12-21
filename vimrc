@@ -26,6 +26,7 @@ let g:loaded_zipPlugin = 1
 
 " Plugins: {{{1 "
 " install vim-plug if it's not already
+" TODO: consider pulling makefile  <21-12-19 Gavin Jaeger-Freeborn>
 augroup PLUGGED
 	if empty(glob('~/.vim/autoload/plug.vim'))  " vim
 		silent !curl -fo ~/.vim/autoload/plug.vim --create-dirs
@@ -265,36 +266,9 @@ cnoremap <C-P> <up>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
 cnoremap <expr> <CR> dotvim#CCR()
 
-" TODO: Need to check that more then one window exists <18-12-19 Gavin Jaeger-Freeborn>
-function! ZoomToggle()
-	if exists("t:maximize_session")
-		" Zoom allow edit the same file {{{2
-		" only an issue if the file has an extra swap value
-		augroup ZOOM
-			autocmd!
-			autocmd SwapExists * let v:swapchoice='e'
-		augroup end
-		" 2}}} "Zoom
-		exec "source " . t:maximize_session
-		call delete(t:maximize_session)
-		unlet t:maximize_session
-		let &hidden=t:maximize_hidden_save
-		unlet t:maximize_hidden_save
-	else
-		if (winnr('j') <= 1) || (winnr('l') <= 1)
-			return
-		endif
-		let t:maximize_hidden_save = &hidden
-		let t:maximize_session = tempname()
-		set hidden
-		exec "mksession! " . t:maximize_session
-		only
-	endif
-endfunction
-
 " better alternative to <C-W>_<C-W>\|
-nnoremap <C-W>f		:call ZoomToggle()<CR>
-nnoremap <C-W><C-f>	:call ZoomToggle()<CR>
+nnoremap <C-W>f		:call dotvim#ZoomToggle()<CR>
+nnoremap <C-W><C-f>	:call dotvim#ZoomToggle()<CR>
 
 
 "Better Mappings Imho

@@ -407,4 +407,31 @@ function! dotvim#RunVimScript(...)
 	execute command
 endfunction
 " 1}}} "Run Vim Script
+
+" ZoomToggle {{{1 
+function! dotvim#ZoomToggle()
+	if exists("t:maximize_session")
+		" Zoom allow edit the same file {{{2
+		" only an issue if the file has an extra swap value
+		augroup ZOOM
+			autocmd!
+			autocmd SwapExists * let v:swapchoice='e'
+		augroup end
+		" 2}}} "Zoom
+		exec "source " . t:maximize_session
+		call delete(t:maximize_session)
+		unlet t:maximize_session
+		let &hidden=t:maximize_hidden_save
+		unlet t:maximize_hidden_save
+	else
+		"check that there is more then one window
+		if (winnr('$') == 1) | return | endif
+		let t:maximize_hidden_save = &hidden
+		let t:maximize_session = tempname()
+		set hidden
+		exec "mksession! " . t:maximize_session
+		only
+	endif
+endfunction
+" 1}}} "ZoomToggle
 " vim:foldmethod=marker:foldlevel=0
