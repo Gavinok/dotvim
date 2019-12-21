@@ -142,7 +142,6 @@ command! Root call s:root()
 colorscheme spaceway
 highlight Normal ctermbg=NONE
 
-
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
