@@ -737,3 +737,30 @@ augroup LATEX
 augroup END
 " 2}}} "vimtex
 
+" peek relative number {{{1 
+nnoremap 1 :set relativenumber<CR>:call RepeatKey('1')<CR>
+nnoremap 2 :set relativenumber<CR>:call RepeatKey('2')<CR>
+nnoremap 3 :set relativenumber<CR>:call RepeatKey('3')<CR>
+nnoremap 4 :set relativenumber<CR>:call RepeatKey('4')<CR>
+nnoremap 5 :set relativenumber<CR>:call RepeatKey('5')<CR>
+nnoremap 6 :set relativenumber<CR>:call RepeatKey('6')<CR>
+nnoremap 7 :set relativenumber<CR>:call RepeatKey('7')<CR>
+nnoremap 8 :set relativenumber<CR>:call RepeatKey('8')<CR>
+nnoremap 9 :set relativenumber<CR>:call RepeatKey('9')<CR>
+nnoremap 0 :set relativenumber<CR>:call RepeatKey('0')<CR>
+
+function! RepeatKey(first) abort
+	let l:command = a:first
+	let numbers = l:command
+	while stridx('1234567890', l:command) != -1
+		execute "normal! ".l:command
+		redraw
+		let l:command = nr2char(getchar())
+		let numbers = (10 * numbers) + l:command
+	endwhile
+	let numbers = numbers/10 
+	echo numbers
+	execute "normal! ".numbers.l:command
+	set norelativenumber
+endfunction
+" 2}}} "peek relative number
