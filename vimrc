@@ -703,6 +703,7 @@ augroup VIM
 	autocmd FileType vim nmap <buffer><silent> <leader>sc :call Source(line('.'), line('.'))<CR>
 	autocmd FileType vim vmap <buffer><silent> <leader>sc :call Source(line('v'), line('.'))<CR>
 	autocmd FileType vim nnoremap <buffer><silent> gd  :call lookup#lookup()<cr>
+	autocmd FileType vim nnoremap <buffer><silent> <c-t>  :call lookup#pop()<cr>
 	autocmd Filetype vim setlocal foldmethod=marker
 	autocmd FileType vim nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
 	autocmd FileType vim nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
