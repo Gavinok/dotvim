@@ -248,10 +248,6 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprevious<CR>
 
 " Find Files {{{2 "
-" quick access to files
-set path+=~/.scripts/**/*
-set path+=~/.config/**/*
-
 nnoremap <leader>fT  :setfiletype<space>
 nnoremap <leader>ff  :Root<CR>:edit **/*
 nnoremap <leader>fs  :find<space>
