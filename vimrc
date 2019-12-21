@@ -203,7 +203,6 @@ nnoremap <leader>sudo :w !sudo tee > /dev/null %
 " POSIX Commands
 nmap <leader>cp :!cp  <C-R>% ~/
 nmap <leader>mv :!mv  <C-R>% ~/
-nmap <leader>rn :file <C-R>%
 
 " Toggle *conceallevel*
 nnoremap <Leader>cl :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>
@@ -230,6 +229,8 @@ nnoremap <leader>ag :Grep <C-R><C-W>
 nnoremap c*			*Ncgn
 nnoremap <C-N>      yiW/<C-r>0<CR>Ncgn
 xnoremap <C-N>      y/<C-r>0<CR>Ncgn
+nnoremap <leader>n  yiw:%s/<C-r>0//gc<left><left><left>
+xnoremap <leader>n  y:%s/<C-r>0//gc<left><left><left>
 
 map ]a :cnext<CR>
 map [a :cprevious<CR>
