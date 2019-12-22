@@ -616,6 +616,10 @@ if has('virtualedit')
 	set virtualedit=block " virtual block can go anywhere
 endif
 
+if has('gui_running')
+	call dotvim#LoadGui()
+endif
+
 set mouse=a           "Add mouse control not that I use them very much
 set clipboard^=unnamed,unnamedplus	"xclip support
 set tags+=.tags	  "make tagefiles hidden
