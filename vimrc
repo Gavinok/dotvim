@@ -695,7 +695,8 @@ augroup CSETTINGS
 augroup END
 augroup SHELLSCRIPTS
 	autocmd!
-	let g:sh_fold_enabled = 5 "enable if/do/for/function folding)
+	" alot faster folding
+	autocmd FileType sh setlocal foldmethod=indent
 augroup END
 augroup WRIGHTING
 	autocmd!
