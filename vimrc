@@ -271,13 +271,16 @@ nnoremap <leader>fh  :edit ~/**/*
 nnoremap <leader>fv  :edit ~/.vim/**/*
 nnoremap <leader>fw  :edit ~/Dropbox/DropsyncFiles/vimwiki/**/**
 
-command! -nargs=1 -complete=customlist,dotvim#MRUComplete ME call dotvim#MRU('edit', <f-args>)
 nnoremap <leader>fj  :ME<space>
+command! -nargs=1 -complete=customlist,dotvim#MRUComplete ME call dotvim#MRU('edit', <f-args>)
 " 2}}} "Find Files
 
 " better navigation of command history
-cnoremap <C-N> <down>
-cnoremap <C-P> <up>
+" allow next completion after / alternative 
+" is <C-E> if <C-D> makes to long of a list
+cnoremap <expr> / wildmenumode() ? "\<C-D>" : "/"
+cnoremap <C-N> <DOWN>
+cnoremap <C-P> <UP>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
 cnoremap <expr> <CR> dotvim#CCR()
 
