@@ -210,6 +210,7 @@ nnoremap <leader>sudo :w !sudo tee > /dev/null %
 " POSIX Commands
 nmap <leader>cp :!cp  <C-R>% ~/
 nmap <leader>mv :!mv  <C-R>% ~/
+nmap cd :cd <C-R>=expand('%:h')<CR>
 
 " Toggle *conceallevel*
 nnoremap <Leader>cl :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>
