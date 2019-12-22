@@ -140,6 +140,7 @@ command! Root call s:root()
 " set termguicolors
 colorscheme spaceway
 highlight Normal ctermbg=NONE
+highlight Conceal ctermbg=NONE ctermfg=111
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
@@ -789,4 +790,14 @@ if filereadable(expand('~/.config/vimlocal'))
 	source ~/.config/vimlocal
 endif
 "}}} Etc "
+
+let g:dirvish_git_indicators = {
+			\ 'Modified'  : '*',
+			\ 'Staged'    : '+',
+			\ 'Untracked' : '',
+			\ 'Renamed'   : '!',
+			\ 'Unmerged'  : '=',
+			\ 'Ignored'   : 'x',
+			\ 'Unknown'   : '?'
+			\ }
 " vim:foldmethod=marker:foldlevel=0
