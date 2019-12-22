@@ -23,7 +23,8 @@ let g:loaded_gzip= 1
 let g:loaded_tarPlugin = 1
 let g:loaded_zipPlugin = 1
 "Switched to dirvish for better unix functionality
-let g:loaded_netrw       = 1
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin= 1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -792,6 +793,11 @@ if filereadable(expand('~/.config/vimlocal'))
 	source ~/.config/vimlocal
 endif
 "}}} Etc "
+
+if exists('g:loaded_fugitive')
+	"code
+	autocmd FileType dirvish call fugitive#detect(@%)
+endif
 
 let g:dirvish_git_indicators = {
 			\ 'Modified'  : '*',
