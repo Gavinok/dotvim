@@ -695,8 +695,6 @@ augroup CSETTINGS
 augroup END
 augroup SHELLSCRIPTS
 	autocmd!
-	" make sure the file can be executed
-	autocmd FileType sh setlocal omnifunc=dotvim#OmniShell
 	let g:sh_fold_enabled = 5 "enable if/do/for/function folding)
 augroup END
 augroup WRIGHTING
