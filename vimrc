@@ -10,7 +10,7 @@
 "      ░░   ▒ ░░      ░     ░░   ░ ░
 "       ░   ░         ░      ░     ░ ░
 "      ░                           ░
-l
+
 " Quick Init: {{{1 "
 " tell neovim where runtime is
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
