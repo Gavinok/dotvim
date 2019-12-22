@@ -23,7 +23,7 @@ let g:loaded_gzip= 1
 let g:loaded_tarPlugin = 1
 let g:loaded_zipPlugin = 1
 "Switched to dirvish for better unix functionality
-let g:loaded_netrw       = 0
+let g:loaded_netrw       = 1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -140,7 +140,8 @@ command! Root call s:root()
 " set termguicolors
 colorscheme spaceway
 highlight Normal ctermbg=NONE
-highlight Conceal ctermbg=NONE ctermfg=111
+highlight Conceal ctermbg=NONE 
+highlight link DirvishPathTail Statement
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
