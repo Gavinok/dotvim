@@ -199,8 +199,10 @@ if has('nvim')
 	tnoremap <C-L>       <C-\><C-N><C-W><C-L>
 	set noshowmode
 else
-	set ttimeout
-	set ttimeoutlen=50
+	set timeout           " for mappings
+	set timeoutlen=1000   " default value
+	set ttimeout          " for key codes
+	set ttimeoutlen=10    " unnoticeable small value
 	packadd matchit
 endif
 
