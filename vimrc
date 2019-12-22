@@ -22,6 +22,7 @@ let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
 let g:loaded_gzip= 1
 let g:loaded_tarPlugin = 1
 let g:loaded_zipPlugin = 1
+let g:loaded_2html_plugin = 1
 
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper = 1
