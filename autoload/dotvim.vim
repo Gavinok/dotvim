@@ -437,33 +437,12 @@ endfunction
 
 " load gui {{{1 
 function! dotvim#LoadGui()
-	let g:fnt_types = ['SourceCode\ Pro', 'monofur' ]
-	let g:fnt_sizes = [ 10, 13 ]
-	let g:fnt_index = 0
-	let g:fnt_size  = g:fnt_sizes[g:fnt_index]
-	function! ResetFont ()
-		exe ':set guifont=' . g:fnt_types[g:fnt_index] . '\ ' . string(g:fnt_size)
-	endfunction
-
-	call ResetFont()
-
-	function! FontSizePlus ()
-		let g:fnt_size = g:fnt_size + 0.5
-		call ResetFont()
-	endfunction
-
-	function! FontSizeMinus ()
-		let g:fnt_size = g:fnt_size - 0.5
-		call ResetFont()
-	endfunction
-
+	set guifont=SourceCode\ Pro\ 13
 	set guioptions+=lrbmTLce
 	set guioptions-=lrbmTLce
 	set guioptions+=c
-	nnoremap <leader>+ :call FontSizePlus()<cr>
-	nnoremap <leader>- :call FontSizeMinus()<cr>
-	nnoremap <leader>+ :call FontSizePlus()<cr>
-	nnoremap <leader>- :call FontSizeMinus()<cr>
+	nnoremap <leader>+ :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')<CR>
+	nnoremap <leader>- :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')<CR>
 endfunction
 
 " 1}}} "load gui
