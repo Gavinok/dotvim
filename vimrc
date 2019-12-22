@@ -798,6 +798,7 @@ if exists('g:loaded_fugitive')
 	"code
 	autocmd FileType dirvish call fugitive#detect(@%)
 endif
+	autocmd FileType dirvish call system('echo '.'"'.expand('%:p').'" > ~/.rangerdir')
 
 let g:dirvish_git_indicators = {
 			\ 'Modified'  : '*',
