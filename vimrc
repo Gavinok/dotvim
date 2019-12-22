@@ -22,6 +22,8 @@ let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
 let g:loaded_gzip= 1
 let g:loaded_tarPlugin = 1
 let g:loaded_zipPlugin = 1
+"Switched to dirvish for better unix functionality
+let g:loaded_netrw       = 0
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -35,6 +37,8 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
+Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'justinmk/vim-dirvish'
 " lsc {{{2
 " using:
 " c: ccls
@@ -381,13 +385,13 @@ let g:netrw_localrmdir='rm -r'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " move up a directory and focus on the file
-nmap - :call dotvim#Opendir('edit')<CR>
+" nmap - :call dotvim#Opendir('edit')<CR>
 
-augroup netrw_mapping
-	autocmd!
-	autocmd filetype netrw call dotvim#NetrwMapping()
-	autocmd FileType netrw setl bufhidden=wipe
-augroup end
+" augroup netrw_mapping
+" 	autocmd!
+" 	autocmd filetype netrw call dotvim#NetrwMapping()
+" 	autocmd FileType netrw setl bufhidden=wipe
+" augroup end
 " 2}}} "netrw
 " Orgmode {{{2 "
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
@@ -583,7 +587,7 @@ vmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
 " Minimal Gist this is actually IX but i always think its XI
 command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
 " sort based on visual block
-command! -range -nargs=0 -bang VS sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
+command! -range -nargs=0 -bang SortVis sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
 " copy all matches with the last seach
 command! -register CopyMatch call dotvim#CopyMatches(<q-reg>)
 command! -nargs=0 MW call dotvim#MkdirWrite()
@@ -604,7 +608,7 @@ set tags+=.tags	  "make tagefiles hidden
 set title             "Update window title
 set hidden            "Allow to leave buffer without saving
 set showcmd           "Show keys pressed in normal
-set autochdir         "Auto cd
+" set autochdir         "Auto cd
 set tabstop=4         "Shorter hard tabs
 set softtabstop=0     "Spaces are for wimps
 set smarttab
