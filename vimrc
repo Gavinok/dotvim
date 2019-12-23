@@ -263,7 +263,7 @@ nnoremap <leader>fT  :setfiletype<space>
 nnoremap <leader>ff  :Root<CR>:edit **/*
 nnoremap <leader>fs  :find<space>
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
-nnoremap <leader>ft  :tjump<space>**<Left>
+nnoremap <leader>ft  :tjump<space>
 nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
 nnoremap <leader>hh  :help<Space>
 " bookmarked directories
