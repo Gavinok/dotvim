@@ -35,7 +35,6 @@ let g:loaded_netrwPlugin= 1
 
 " Plugins: {{{1 "
 " install vim-plug if it's not already
-" TODO: consider pulling makefile  <21-12-19 Gavin Jaeger-Freeborn>
 augroup PLUGGED
 	if empty(glob('~/.vim/autoload/plug.vim'))  " vim
 		silent !curl -fo ~/.vim/autoload/plug.vim --create-dirs
@@ -149,6 +148,7 @@ colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE 
 highlight link DirvishPathTail Statement
+hi Todo cterm=bold ctermfg=160 gui=bold
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
