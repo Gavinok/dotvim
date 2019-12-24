@@ -29,8 +29,8 @@ let g:loaded_rrhelper = 1
 let g:loaded_remote_plugins =1
 
 "Switched to dirvish for better unix functionality
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin= 1
+" let g:loaded_netrw = 1
+" let g:loaded_netrwPlugin= 1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -43,8 +43,8 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
-Plug 'kristijanhusak/vim-dirvish-git'
-Plug 'justinmk/vim-dirvish'
+" Plug 'kristijanhusak/vim-dirvish-git'
+" Plug 'justinmk/vim-dirvish'
 " lsc {{{2
 " using:
 " c: ccls
@@ -400,18 +400,18 @@ let g:netrw_browsex_viewer='setsid xdg-open' "force gx to use xdg-open
 let g:netrw_bufsettings = 'noswf noma nomod nowrap ro nobl'
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
-let g:netrw_fastbrowse=2
+let g:netrw_fastbrowse=0
 let g:netrw_localrmdir='rm -r'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " move up a directory and focus on the file
-" nmap - :call dotvim#Opendir('edit')<CR>
+nmap - :call dotvim#Opendir('edit')<CR>
 
-" augroup netrw_mapping
-" 	autocmd!
-" 	autocmd filetype netrw call dotvim#NetrwMapping()
-" 	autocmd FileType netrw setl bufhidden=wipe
-" augroup end
+augroup netrw_mapping
+	autocmd!
+	autocmd filetype netrw call dotvim#NetrwMapping()
+	autocmd FileType netrw setl bufhidden=wipe
+augroup end
 " 2}}} "netrw
 " Orgmode {{{2 "
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
@@ -505,7 +505,7 @@ if has('patch-7.4.775')
 				\ 'html'        : ['mini', 'omni', 'path', 'c-p',  'uspl'],
 				\ 'vim'         : ['mini', 'list', 'omni', 'path', 'cmd',   'keyp'],
 				\ 'tex'         : ['mini', 'path', 'omni', 'uspl', 'c-p'],
-				\ 'markdown'    : ['mini', 'path', 'c-p',  'uspl', 'user'],
+				\ 'markdown'    : ['mini', 'path', 'c-p',  'uspl', 'dict'],
 				\ 'dotoo'		: ['mini', 'path', 'c-p',  'uspl', 'dict'],
 				\ 'sh'          : ['mini', 'omni', 'file', 'dict', 'keyp'],
 				\ 'java'        : ['mini', 'tags', 'keyp', 'omni', 'c-n'],
@@ -632,7 +632,7 @@ set tags+=.tags	  "make tagefiles hidden
 set title             "Update window title
 set hidden            "Allow to leave buffer without saving
 set showcmd           "Show keys pressed in normal
-" set autochdir         "Auto cd
+set autochdir         "Auto cd
 set tabstop=4         "Shorter hard tabs
 set softtabstop=0     "Spaces are for wimps
 set smarttab

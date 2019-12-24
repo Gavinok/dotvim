@@ -764,3 +764,24 @@ function! RepeatKey(first) abort
 	set norelativenumber
 endfunction
 " 2}}} "peek relative number
+
+" dirvish {{{1 
+if exists('g:loaded_fugitive')
+	"code
+	autocmd FileType dirvish call fugitive#detect(@%)
+endif
+
+" Put the current dir into a file to be used when exiting vim.
+" This way i can cd to the last directory from my shell
+autocmd FileType dirvish call system('echo "'.expand('%:p').'" > ~/.rangerdir &')
+autocmd FileType dirvish nnoremap <buffer> % :e <C-R>=expand('%:p')<CR>
+let g:dirvish_git_indicators = {
+			\ 'Modified'  : '*',
+			\ 'Staged'    : '+',
+			\ 'Untracked' : '',
+			\ 'Renamed'   : '!',
+			\ 'Unmerged'  : '=',
+			\ 'Ignored'   : 'x',
+			\ 'Unknown'   : '?'
+			\ }
+" 1}}} "dirvish
