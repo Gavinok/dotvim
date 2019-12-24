@@ -284,6 +284,11 @@ cnoremap <C-N> <DOWN>
 cnoremap <C-P> <UP>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
 cnoremap <expr> <CR> dotvim#CCR()
+" if we have 3 * in a row make them into **/*
+" this is only applied on the end of a line
+cnoremap <expr> * getcmdline() =~ '.*\*\*$' ? '/*' : '*'
+" full path shortcut
+cnoreabbr <expr> %% fnameescape(expand('%:p'))
 
 " better alternative to <C-W>_<C-W>\|
 nnoremap <C-W>f		:call dotvim#ZoomToggle()<CR>
@@ -725,11 +730,6 @@ call SetupCommandAlias('Q','q')
 call SetupCommandAlias('man','Man')
 " 2}}} Command Alias
 
-" if we have 3 * in a row make them into **/*
-" this is only applied on the end of a line
-cnoremap <expr> * getcmdline() =~ '.*\*\*$' ? '/*' : '*'
-" file path shortcut
-iabbr %% <C-R>=fnameescape(expand('%:p'))<CR>
 " quickly print the date
 iab <expr> dts strftime("%c")
 "add a comment in any language
