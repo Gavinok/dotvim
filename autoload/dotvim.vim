@@ -354,7 +354,7 @@ function! dotvim#CSPACE()
 	elseif cmdline =~ '\v\C^sl$'
 		return "\<c-u>s//g\<left>\<left>"
 	endif
-	return "\<SPACE>"
+	return "\<C-]>\<SPACE>"
 endfunction
 
 " CCR {{{1 
