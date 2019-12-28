@@ -183,7 +183,6 @@ if has('nvim')
 		au TermOpen * setlocal nonumber
 		au TermOpen * setlocal norelativenumber
 	augroup end
-	map <leader>cr :w! \| Start compiler <c-r>%<CR>i
 	map <leader>ct :w! \| :split \| te cheat.sh <c-r>%
 	tnoremap <leader>esc <C-\><C-N>
 	nnoremap <leader><cr>  :split \| te<cr>i
