@@ -415,6 +415,10 @@ augroup end
 " 2}}} "netrw
 " Orgmode {{{2 "
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
+command! -nargs=1 Ngrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
+nmap <leader><leader> :Ngrep 
+command! -nargs=1 Wgrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
+nmap <leader><SPACE> :Wgrep 
 " 2}}} "Orgmode
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
