@@ -10,12 +10,12 @@
 
 " ToggleQuickfix {{{1 
 function! dotvim#ToggleQuickfix() abort
-	let nr = winnr("$")
+	let nr = winnr('$')
 	copen
 	if exists('g:autoloaded_dispatch')
 		Copen
 	endif
-	let nr2 = winnr("$")
+	let nr2 = winnr('$')
 	if nr == nr2
 		cclose
 	endif
@@ -174,7 +174,6 @@ function! dotvim#OmniVim(findstart, base) abort
 		let s:res = getcompletion(a:base, 'cmdline')
 		call extend(s:res, getcompletion(a:base, 'function'))
 		call extend(s:res, getcompletion(a:base, 'var'))
-		call extend(s:res, getcompletion('let ' . a:base, 'cmdline'))
 		return {'words': s:res, 'refresh': 'always'}
 	endif
 endfunction
@@ -193,6 +192,7 @@ endfunction
 " MkdirWrite {{{1 "
 " mkdir with same name and
 "write file to it with :MW
+" TODO: remove ! and replace with mkdir() <27-12-19 Gavin Jaeger-Freeborn>
 function! dotvim#MkdirWrite()
 	w
 	!mkdir '%:t:r'
@@ -344,18 +344,20 @@ function! dotvim#ImportScreenShot(screenshotfunc)
 endfunction
 " 1}}} "ScreenShots in Markup
 
+" CSPACE {{{1  
 function! dotvim#CSPACE()
 	let cmdline = getcmdline()
 
-	if getcmdtype() isnot# ":" | return "\<SPACE>" | endif
+	if getcmdtype() isnot# ':' | return "\<SPACE>" | endif
 
-	if cmdline =~ '\v\C^ss$'
+	if cmdline =~# '\v\C^ss$'
 		return "\<c-u>%s//g\<left>\<left>"
-	elseif cmdline =~ '\v\C^sl$'
+	elseif cmdline =~# '\v\C^sl$'
 		return "\<c-u>s//g\<left>\<left>"
 	endif
 	return "\<C-]>\<SPACE>"
 endfunction
+"  1}}} "CSPACE
 
 " CCR {{{1 
 " minor adjustments to romainl's function found here
@@ -363,26 +365,26 @@ endfunction
 function! dotvim#CCR()
 	let cmdline = getcmdline()
 
-	if getcmdtype() isnot# ":" | return "\<CR>" | endif
+	if getcmdtype() isnot# ':' | return "\<CR>" | endif
 
 	command! -bar Z silent set more|delcommand Z
-	if cmdline =~ '\v\C^(ls|files|buffers)'
+	if cmdline =~# '\v\C^(ls|files|buffers)'
 		" like :ls but prompts for a buffer command
 		return "\<CR>:b "
-	elseif cmdline =~ '\v\C^(cli|lli)'
+	elseif cmdline =~# '\v\C^(cli|lli)'
 		" like :clist or :llist but prompts for an error/location number
 		return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
-	elseif cmdline =~ '\C^old'
+	elseif cmdline =~# '\C^old'
 		" like :oldfiles but prompts for an old file to edit
 		set nomore
 		return "\<CR>:Z|e #<"
-	elseif cmdline =~ '\C^marks'
+	elseif cmdline =~# '\C^marks'
 		" like :marks but prompts for a mark to jump to
 		return "\<CR>:norm! `"
-	elseif cmdline =~ '\C^undol'
+	elseif cmdline =~# '\C^undol'
 		" like :undolist but prompts for a change to undo
 		return "\<CR>:u "
-	elseif cmdline =~ '\C^reg'
+	elseif cmdline =~# '\C^reg'
 		" like registers bug 
 		return "\<CR>:norm! \"p\<Left>"
 	else
@@ -410,7 +412,7 @@ endfunction
 
 " ZoomToggle {{{1 
 function! dotvim#ZoomToggle()
-	if exists("t:maximize_session")
+	if exists('t:maximize_session')
 		" Zoom allow edit the same file {{{2
 		" only an issue if the file has an extra swap value
 		augroup ZOOM
@@ -418,7 +420,7 @@ function! dotvim#ZoomToggle()
 			autocmd SwapExists * let v:swapchoice='e'
 		augroup end
 		" 2}}} "Zoom
-		exec "source " . t:maximize_session
+		exec 'source ' . t:maximize_session
 		call delete(t:maximize_session)
 		unlet t:maximize_session
 		let &hidden=t:maximize_hidden_save
@@ -429,7 +431,7 @@ function! dotvim#ZoomToggle()
 		let t:maximize_hidden_save = &hidden
 		let t:maximize_session = tempname()
 		set hidden
-		exec "mksession! " . t:maximize_session
+		exec 'mksession! ' . t:maximize_session
 		only
 	endif
 endfunction
