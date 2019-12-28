@@ -298,6 +298,13 @@ function! Sort(type, ...)
 endfunction
 nmap <silent> gS :set opfunc=Sort<CR>g@
 
+" copy all matches with the last seach
+nmap ym :YankMatch<CR>
+" delete matches
+nmap dm :%s/<c-r>///g<CR>
+" change matches
+nmap cm :%s/<c-r>///g<Left><Left>
+
 " Using Fugitive
 nnoremap Q  :Gstatus<CR>
 
