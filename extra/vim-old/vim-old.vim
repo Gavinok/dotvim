@@ -299,7 +299,7 @@ if executable('go')
 endif
 " 1}}} "Go
 
-" vim-lsp {{{2 "
+" vim-lsp {{{1 "
 if has('patch-8.0.0283')
 
 	"diagnostics settings
@@ -390,8 +390,7 @@ if has('patch-8.0.0283')
 
 	augroup end
 endif
-" 2}}} "vim-lsp
-
+" 1}}} "vim-lsp
 
 " asyncomplete {{{1 
 " basically just used for async omni complete
@@ -452,13 +451,13 @@ endif
 
 " emmet {{{1 
 Plug 'mattn/emmet-vim'
-
-let g:user_emmet_leader_key='<C-L>'
+let g:user_emmet_leader_key='<C-V>'
 augroup HTML
 	" this one is which you're most likely to use?
 	autocmd FileType html setlocal completefunc=emmet#completeTag
 augroup end
 " 1}}} "emmet
+
 " fzf {{{1 
 if executable('fzf')
 	Plug 'junegunn/fzf.vim'
@@ -467,6 +466,7 @@ else
 	Plug 'junegunn/fzf.vim'
 endif
 " 1}}} "fzf
+
 " pandoc {{{1 
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -475,6 +475,7 @@ let g:pandoc#modules#enabled = ['formatting', 'spell', 'hypertext']
 let g:pandoc#formatting#mode = 'sA'
 let g:pandoc#after#modules#enabled = ['nrrwrgn']
 " 1}}} "pandoc
+
 " minimal asyncdo {{{1 
 func! s:populate(file, cmd) abort
 	unlet! t:job
@@ -785,3 +786,14 @@ let g:dirvish_git_indicators = {
 			\ 'Unknown'   : '?'
 			\ }
 " 1}}} "dirvish
+
+" vimtex {{{2 "
+augroup LATEX
+	autocmd!
+	autocmd VimLeave *.tex !texclear %
+	let g:vimtex_enabled = 1
+	let g:tex_flavor='latex'
+	let g:vimtex_fold_enabled = 1
+	autocmd filetype tex setlocal omnifunc=vimtex#complete#omnifunc
+augroup END
+" 2}}} "vimtex
