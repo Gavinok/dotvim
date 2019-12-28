@@ -476,16 +476,6 @@ if exists('*job_start') || exists('*jobstart')
 	endif
 endif
 " 2}}} LSC
-" vimtex {{{2 "
-augroup LATEX
-	autocmd!
-	autocmd VimLeave *.tex !texclear %
-	let g:vimtex_enabled = 1
-	let g:tex_flavor='latex'
-	let g:vimtex_fold_enabled = 1
-	autocmd filetype tex setlocal omnifunc=vimtex#complete#omnifunc
-augroup END
-" 2}}} "vimtex
 " Mucomplete {{{2 "
 let g:mucomplete#user_mappings = {
 			\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>",
