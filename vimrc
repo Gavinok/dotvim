@@ -105,7 +105,8 @@ Plug 'tpope/vim-commentary'
 " 2}}} "Tpope
 " vimscript {{{2 "
 Plug 'tpope/vim-scriptease'
-Plug 'mhinz/vim-lookup', { 'for': 'vim' }
+Plug 'mhinz/vim-lookup'
+Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
 Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
