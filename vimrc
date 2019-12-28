@@ -678,6 +678,8 @@ augroup end
 
 augroup VIM
 	autocmd!
+	" used by 
+	autocmd Filetype vim let b:helpful = 1
 	autocmd Filetype vim setlocal foldmethod=marker
 	autocmd FileType vim nmap <buffer> `<CR> :Runtime<CR>
 	autocmd FileType vim nmap <buffer><silent> <leader>V :Messages<CR>
