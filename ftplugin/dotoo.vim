@@ -20,3 +20,5 @@ nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
 nnoremap <buffer><silent> <leader>nr :call NarrowCodeblock()<CR>
+command! -nargs=1 Ngrep vimgrep "<args>" ~/Dropbox/Documents/org/**/*.org
+nmap <buffer> <leader><leader> :Ngrep 
