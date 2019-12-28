@@ -557,7 +557,7 @@ nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
 " Dead Simple Align {{{2 "
 " Use a bunch of standard UNIX commands for quick an dirty
 function! Align()
-	exec "'<,'>!column -t|sed 's/  \\(\S\\)/ \1/g'"
+	exec "'<,'>!column -t|sed 's/  \(\S\)/ \1/g'"
 	exec 'normal! gv='
 endfunction
 " 2}}} "Dead Simple Align
