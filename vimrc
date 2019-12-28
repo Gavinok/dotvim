@@ -19,18 +19,13 @@ let &packpath = &runtimepath
 let g:python_host_prog  = '/usr/bin/python2' "speed up python2 startup
 let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
 " Disable extra plugins
-let g:loaded_gzip= 1
-let g:loaded_tarPlugin = 1
-let g:loaded_zipPlugin = 1
-let g:loaded_2html_plugin = 1
-
+let  g:loaded_gzip            =  1
+let  g:loaded_tarPlugin       =  1
+let  g:loaded_zipPlugin       =  1
+let  g:loaded_2html_plugin    =  1
 "dont use any remote plugins so no need to load them
-let g:loaded_rrhelper = 1
-let g:loaded_remote_plugins =1
-
-"Switched to dirvish for better unix functionality
-" let g:loaded_netrw = 1
-" let g:loaded_netrwPlugin= 1
+let  g:loaded_rrhelper        =  1
+let  g:loaded_remote_plugins  =  1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -63,7 +58,7 @@ if exists('*job_start') || exists('*jobstart')
 endif
 " 2}}} "lsc
 " Autocompletion {{{2 "
-Plug 'fcpg/vim-complimentary', { 'for': 'vim' }
+Plug 'fcpg/vim-complimentary'
 "better default completion used for easyier vim scripting
 if has('nvim')
 	Plug 'ncm2/float-preview.nvim'
@@ -81,8 +76,6 @@ let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
 let g:minisnip_dir = '~/.vim/extra/snip:' . join(split(glob('~/.vim/extra/snip/**/'), '\n'), ':')
 imap <Nop> <Plug>(minisnip-complete)
-" Plug 'mattn/emmet-vim', { 'on': [] }
-" let g:user_emmet_expandabbr_key = '<C-V>'
 " 2}}} "Snippets
 " Terminal {{{2 "
 Plug 'christoomey/vim-tmux-navigator'
