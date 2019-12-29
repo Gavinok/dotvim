@@ -126,21 +126,21 @@ function! FindRootDirectory()
 	return expand('%:p:h')
 endfunction
 
-function! s:root()
+function! RootMe()
 	let root = FindRootDirectory()
 	if root ==# ''
 	endif
 	execute 'lcd' . root
 	echo 'Changed directory to: '.root
 endfunction
-command! Root call s:root()
+command! Root call RootMe()
 " 2}}} "Diy Rooter
 
 " Aesthetics: {{{2 "
 " set termguicolors
 colorscheme spaceway
 highlight Normal ctermbg=NONE
-highlight Conceal ctermbg=NONE 
+highlight Conceal ctermbg=NONE
 highlight link DirvishPathTail Statement
 hi Todo cterm=bold ctermfg=160 gui=bold
 
