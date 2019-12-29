@@ -237,6 +237,15 @@ function! dotvim#FormatFile()
 endfunction
 " 1}}} "FormatFile()
 
+" minimal gofmt {{{1
+function! dotvim#Gofmt()
+	let b:PlugView=winsaveview()
+	exe 'silent %!gofmt'
+	call winrestview(b:PlugView)
+	echo 'file indented'
+endfunction
+"  1}}} "minimal gofmt
+
 " Minimal Async Command {{{1 
 " based on https://gist.github.com/hauleth/0cce9962ffc9a09b3893d53dbcd3abf9
 function! s:populate(file, cmd, done) abort

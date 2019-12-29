@@ -20,3 +20,5 @@ function! Godoc()
 endfunction
 command! -nargs=0 Godoc call Godoc()
 setl keywordprg=:Godoc
+" use gofmt for formatting
+nnoremap <buffer><silent> gq :call dotvim#Gofmt()<CR>
