@@ -19,6 +19,14 @@ function! Godoc()
 	endif
 endfunction
 command! -nargs=0 Godoc call Godoc()
+
 setl keywordprg=:Godoc
+
 " use gofmt for formatting
 nnoremap <buffer><silent> gq :call dotvim#Gofmt()<CR>
+
+" make ]] and [[ great again
+nnoremap <buffer><silent> ]] :call CustomSections('down', '{\s*$')<CR>
+nnoremap <buffer><silent> [[ :call CustomSections('up', '{\s*$')<CR>
+xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '{\s*$')<CR>
+xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '{\s*$')<CR>
