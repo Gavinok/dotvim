@@ -114,28 +114,6 @@ let g:colorizer_colornames_disable = 1
 " 2}}} "etc.
 call plug#end()
 
-" Diy Rooter {{{2
-function! FindRootDirectory()
-	if !filereadable('Makefile') && !filereadable('makefile')
-		let root = systemlist('git rev-parse --show-toplevel')[0]
-		if v:shell_error
-			return ''
-		endif
-		return root
-	endif
-	return expand('%:p:h')
-endfunction
-
-function! RootMe()
-	let root = FindRootDirectory()
-	if root ==# ''
-	endif
-	execute 'lcd' . root
-	echo 'Changed directory to: '.root
-endfunction
-command! Root call RootMe()
-" 2}}} "Diy Rooter
-
 " Aesthetics: {{{2 "
 " set termguicolors
 colorscheme spaceway
