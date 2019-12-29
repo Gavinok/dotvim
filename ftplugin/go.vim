@@ -8,6 +8,8 @@
 " Description: 
 " filetype plugin for go
 
+setlocal makeprg=go\ build
+
 function! Godoc()
 	"code
 	if exists('g:autoloaded_dispatch')
