@@ -1,1 +1,1 @@
-fmt.Print("{{+ Value is %d+}}\n"){{--}}
+fmt.Println("{{+ Value is %d+}}"){{--}}
