@@ -504,17 +504,18 @@ if has('patch-7.4.775')
 				\ 'sh'          : ['mini', 'omni', 'file', 'dict', 'keyp'],
 				\ 'java'        : ['mini', 'tags', 'keyp', 'omni', 'c-n'],
 				\ 'c'           : ['mini', 'list', 'omni', 'c-n'],
+				\ 'go'          : ['mini', 'list', 'omni', 'c-n'],
 				\ 'mail'		: ['mini', 'uspl', 'list', 'c-p'],
 				\ }
 
 	if !exists('g:mucomplete#can_complete')
-		let  s:spl_cond = { t -> &l:spelllang == 'en' && t =~# '\a\{4}$' }
-		let  s:cpp_cond = { t -> t =~# '\%(->\|::\)$' }
+		let  s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
 		let  s:latex_cond= { t -> t =~# '\%(\\\)$' }
 		let  s:html_cond= { t -> t =~# '\%(<\/\)$' }
 		let  g:mucomplete#can_complete = {}
-		let  g:mucomplete#can_complete.default   =  {  'uspl':  s:spl_cond    }
-		let  g:mucomplete#can_complete.cpp       =  {  'omni':  s:cpp_cond    }
+		let  g:mucomplete#can_complete.c         =  {  'omni':  s:c_cond    }
+		let  g:mucomplete#can_complete.python    =  {  'omni':  s:c_cond    }
+		let  g:mucomplete#can_complete.go        =  {  'omni':  s:c_cond    }
 		let  g:mucomplete#can_complete.markdown  =  {  'dict':  s:latex_cond  }
 		let  g:mucomplete#can_complete.dotoo     =  {  'dict':  s:latex_cond  }
 		let  g:mucomplete#can_complete.org       =  {  'dict':  s:latex_cond  }
