@@ -63,6 +63,9 @@ Plug 'fcpg/vim-complimentary'
 if has('nvim')
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
+else 
+	"I find this super distracting
+	set completeopt-=preview
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
@@ -275,6 +278,9 @@ function! Sort(type, ...)
 	'[,']sort
 endfunction
 nmap <silent> gS :set opfunc=Sort<CR>g@
+
+" close preview if open when hitting escape
+nnoremap <silent> <esc> :pclose<cr>
 
 " copy all matches with the last seach
 nmap ym :YankMatch<CR>
