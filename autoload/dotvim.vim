@@ -28,7 +28,7 @@ function! dotvim#Quicktag(force) abort
 		let g:rootdir = FindRootDirectory()
 	else 
 		let g:rootdir = getcwd()
-		autocmd InsertLeave <buffer> call dotvim#Quicktag(0)
+		autocmd InsertLeave <buffer> silent! call dotvim#Quicktag(0)
 	endif
 	if g:rootdir !=# '' || a:force
 		exec 'Dispatch ctags  -f ".tags" -R ' . g:rootdir
