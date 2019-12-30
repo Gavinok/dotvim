@@ -28,7 +28,7 @@ setl keywordprg=:Godoc
 nnoremap <buffer><silent> gq :call dotvim#Gofmt()<CR>
 
 " make ]] and [[ great again
-nnoremap <buffer><silent> ]] :call CustomSections('down', ')\s*\zs{\s*\ze$')<CR>
-nnoremap <buffer><silent> [[ :call CustomSections('up', ')\s*\zs{\s*\ze$')<CR>
-xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', ')\s*\zs{\s*\ze$')<CR>
-xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', ')\s*\zs{\s*\ze$')<CR>
+nnoremap <buffer><silent> ]] :call CustomSections('down', 'func.*)\s*\zs{\s*\ze$')<CR>
+nnoremap <buffer><silent> [[ :call CustomSections('up', 'func.*)\s*\zs{\s*\ze$')<CR>
+xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', 'func.*)\s*\zs{\s*\ze$')<CR>
+xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', 'func.*)\s*\zs{\s*\ze$')<CR>
