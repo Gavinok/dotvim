@@ -1,1 +1,1 @@
-{{+SliceName+}} := make([]{{+int+}}, {{+size}}){{--}}
+{{+SliceName+}} := make([]{{+int+}}, {{+size+}}){{--}}
