@@ -631,7 +631,6 @@ set backspace=2       "backspace through anything
 set foldmethod=syntax "Enable folding
 set foldlevel=99      "start with all folds open
 set path+=**/*          "Autocompletion of path
-set completeopt-=preview "I find this super distracting
 set wildmenu          "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
