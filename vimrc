@@ -299,6 +299,7 @@ inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>
 
 "For Proper Tabbing And Bracket Insertion"
 inoremap {<CR> {<CR>}<c-o><s-o>
+inoremap (<CR> (<CR>)<c-o><s-o>
 
 " commandline mappings
 cnoremap <C-A> <Home>
