@@ -589,6 +589,8 @@ vmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
 command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
 " sort based on visual block
 command! -range -nargs=0 -bang SortVis sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
+" use s to sort visual selection
+xmap s :SortVis<CR>
 command! -register YankMatch call dotvim#YankMatches(<q-reg>)
 command! -nargs=0 MW call dotvim#MkdirWrite()
 command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
