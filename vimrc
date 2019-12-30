@@ -429,6 +429,7 @@ if exists('*job_start') || exists('*jobstart')
 	if executable('ccls')
 		let g:lsc_server_commands['c'] = {
 					\ 'command': 'ccls',
+					\ 'suppress_stderr': v:true,
 					\ 'message_hooks': {
 					\    'initialize': {
 					\       'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
