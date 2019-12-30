@@ -665,26 +665,9 @@ augroup end
 augroup VIM
 	autocmd!
 	" used by 
-	autocmd Filetype vim let b:helpful = 1
-	autocmd Filetype vim setlocal foldmethod=marker
-	autocmd FileType vim nmap <buffer> `<CR> :Runtime<CR>
-	autocmd FileType vim nmap <buffer><silent> <leader>V :Messages<CR>
-	autocmd FileType vim xmap <buffer><silent> <CR> :<C-U>call dotvim#RunVimScript(1)<CR>
-	autocmd FileType vim nnoremap <buffer><silent> gd  :call lookup#lookup()<CR>
-	autocmd FileType vim nnoremap <buffer><silent> <C-T>  :call lookup#pop()<CR>
-	autocmd FileType vim nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
-	autocmd FileType vim nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
 	autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
 augroup END
-augroup CSETTINGS
-	let ch_syntax_for_h = 1
-	let g:compiler_gcc_ignore_unmatched_lines = 1
-augroup END
-augroup SHELLSCRIPTS
-	autocmd!
-	" alot faster folding
-	autocmd FileType sh setlocal foldmethod=indent
-augroup END
+
 augroup WRIGHTING
 	autocmd!
 	autocmd FileType pandoc nnoremap <buffer> cic :call pandoc#after#nrrwrgn#NarrowCodeblock()<cr>

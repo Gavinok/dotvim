@@ -8,6 +8,7 @@
 " Description: 
 " shell script filetype plugin
 " a simple omni complete for shell scripts
+setlocal foldmethod=indent
 function! OmniShell(findstart, base) abort
 	echo a:base
 	if a:findstart
