@@ -707,53 +707,6 @@ iab pyhton python
 iab hte the
 " 1}}} "Abbreviations
 
-" Textobjects: {{{1
-" inside or arround ...
-" ----------------------
-" i" i' i. i_ i| i/ i\ i*
-" a" a' a. a_ a| a/ a\ a*
-for char in [ '"', "'",'_', '.', '$', '/', '<bslash>', '*' ]
-	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
-endfor
-
-" line text-objects
-" -----------------
-xnoremap il g_o^
-onoremap il :normal vil<CR>
-xnoremap al $o0
-onoremap al :normal val<CR>
-
-" number text-objects (integer and float)
-" ---------------------------------------
-" in an
-function! VisualNumber()
-	call search('\d\([^0-9\.]\|$\)', 'cW')
-	normal! v
-	call search('\(^\|[^0-9\.]\d\)', 'becW')
-endfunction
-xnoremap in :<C-u>call VisualNumber()<CR>
-onoremap in :normal vin<CR>
-
-" square brackets text-objects
-" ----------------------------
-" ir ar
-xnoremap ir i[
-xnoremap ar a[
-onoremap ir :normal vi[<CR>
-onoremap ar :normal va[<CR>
-
-" quote text-objects
-" ----------------------------
-" iq aq
-xnoremap iq i"
-xnoremap aq a"
-onoremap iq :normal vi"<CR>
-onoremap aq :normal va"<CR>
-" 1}}} "textobjects
-
 " Etc {{{1 "
 " Diffs: {{{2 "
 if has('patch-8.0.0283')
