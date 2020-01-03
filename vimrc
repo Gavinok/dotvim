@@ -692,7 +692,6 @@ call SetupCommandAlias("w'",'w')
 call SetupCommandAlias('Wq','wq')
 call SetupCommandAlias('Q','q')
 call SetupCommandAlias('man','Man')
-call SetupCommandAlias('git','!git')
 " 2}}} Command Alias
 
 " quickly print the date
