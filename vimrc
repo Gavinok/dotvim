@@ -652,6 +652,7 @@ endif
 " FileType Specific Stuff: {{{1 "
 augroup GITCOMMITS
 	" spelling for gitcommits
+	autocmd!
 	autocmd FileType gitcommit silent call dotvim#WordProcessor()
 	autocmd FileType gitcommit startinsert
 augroup end
