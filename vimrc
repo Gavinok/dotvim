@@ -353,7 +353,7 @@ xnoremap > >gv
 " Plugin Configuration: {{{1 "
 " Minimal Async Command {{{2
 if exists('*job_start') || exists('*jobstart')
-	command! -nargs=+ Term call dotvim#TermCmd(<f-args>)
+	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 	" dispatch compatability
 	command! -bang -nargs=+ -complete=file Dispatch call dotvim#Do(<f-args>)
