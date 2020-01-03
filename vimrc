@@ -235,7 +235,7 @@ nnoremap [b :bprevious<CR>
 " Find Files {{{2 "
 nnoremap <leader>fT  :setfiletype<space>
 nnoremap <leader>ff  :Root<CR>:edit **/*
-nnoremap <leader>fs  :find<space>
+nnoremap <leader>fs  :edit ~/.config/**/*
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
 nnoremap <leader>ft  :tjump<space>
 nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
@@ -356,7 +356,7 @@ if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 	" dispatch compatability
-	command! -bang -nargs=+ -complete=file Dispatch call dotvim#Do(<f-args>)
+	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do(<f-args>)
 	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do(&grepprg,<f-args>)
 	command! -bang -nargs=0 -complete=file Make call dotvim#Do(&makeprg,<f-args>)
 	nnoremap  '<CR>     :Term<Up><CR>
@@ -401,9 +401,7 @@ augroup end
 " Orgmode {{{2 "
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
 command! -nargs=1 Ngrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
-nmap <leader><leader> :Ngrep 
 command! -nargs=1 Wgrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
-nmap <leader><SPACE> :Wgrep 
 " 2}}} "Orgmode
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
