@@ -4,22 +4,27 @@
  * @version {{++}}
  * @author  {{+~g:name+}}
  */
-{{+private+}}class {{+Class Name+}} {
-    // fields
-    private {{+type+}} {{+name+}};
+{{+private+}} class {{+~StoreElement('Class Name: ',  'Name', 'b:classname')+}} {
+	// fields
+	private {{+type+}} {{+~StoreElement('Var Name: ', 'Var', 'b:varname')+}};
 
-    // constructors
-    public {{+~\~3+}}({{++}}) {
-        {{+/* Set Args */+}};
-    }
+	// Class Constructors
+	public {{+~b:classname+}}({{++}}) {
+		{{+/* Set Args */+}};
+	}
 
-    // methods
-    public {{+~\~5+}} get{{+~\~5+}}({{++}}) {
-        return {{+~\~7+}};
-    }
+	/**
+	 * @return {{+~b:varname+}}  
+	 */
+	public {{+~\~6+}} get{{+~b:varname+}}() {
+		return {{+~b:varname+}};
+	}
 
-    public void set{{+~\~8+}}({{++}}) {
-        {{++}};
-    }
+	/**
+	 * @param {{+~b:varname+}}  
+	 */
+	public void set{{+~b:varname+}}({{++}}) {
+		{{+`~'this.'.b:varname.' = '.b:varname+}};
+	}
 
 }
