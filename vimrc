@@ -401,7 +401,9 @@ augroup end
 " Orgmode {{{2 "
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
 command! -nargs=1 Ngrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
+nmap <leader><leader> :Ngrep<space>
 command! -nargs=1 Wgrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
+nmap <leader><space> :Wgrep<space>
 " 2}}} "Orgmode
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
@@ -422,8 +424,8 @@ if exists('*job_start') || exists('*jobstart')
 				\ 'SignatureHelp': 'gm',
 				\ 'Completion': 'omnifunc',
 				\}
-	let g:lsc_server_commands={}
 
+	let g:lsc_server_commands={}
 	if executable('ccls')
 		let g:lsc_server_commands['c'] = {
 					\ 'command': 'ccls',
@@ -474,10 +476,10 @@ if has('patch-7.4.775')
 	set complete-=i
 	set complete-=t
 
-	imap <C-Space> <C-X><C-O>
 	let g:mucomplete#wordlist = {
 				\       '': ['gavinfreeborn@gmail.com', 'Gavin', 'Jaeger-Freeborn'],
 				\ }
+	
 	let g:mucomplete#chains = {
 				\ 'default'     : ['mini', 'list', 'omni', 'path', 'c-p',   'uspl'],
 				\ 'html'        : ['mini', 'omni', 'path', 'c-p',  'uspl'],
@@ -498,12 +500,12 @@ if has('patch-7.4.775')
 		let  s:html_cond= { t -> t =~# '\%(<\/\)$' }
 		let  g:mucomplete#can_complete = {}
 		let  g:mucomplete#can_complete.c         =  {  'omni':  s:c_cond    }
-		let  g:mucomplete#can_complete.python    =  {  'omni':  s:c_cond    }
-		let  g:mucomplete#can_complete.go        =  {  'omni':  s:c_cond    }
-		let  g:mucomplete#can_complete.markdown  =  {  'dict':  s:latex_cond  }
 		let  g:mucomplete#can_complete.dotoo     =  {  'dict':  s:latex_cond  }
-		let  g:mucomplete#can_complete.org       =  {  'dict':  s:latex_cond  }
+		let  g:mucomplete#can_complete.go        =  {  'omni':  s:c_cond    }
 		let  g:mucomplete#can_complete.html      =  {  'omni':  s:html_cond   }
+		let  g:mucomplete#can_complete.markdown  =  {  'dict':  s:latex_cond  }
+		let  g:mucomplete#can_complete.org       =  {  'dict':  s:latex_cond  }
+		let  g:mucomplete#can_complete.python    =  {  'omni':  s:c_cond    }
 	endif
 	let g:mucomplete#no_popup_mappings = 0
 	"spelling
@@ -579,19 +581,23 @@ highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 " remove trailing whitespaces
 command! StripWhitespace :%s/\s\+$//e
 " 2}}} "White Space
-
+" Websearch {{{2 
 nmap <silent> gs :set opfunc=dotvim#WebSearch<CR>g@
 vmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
-
-" Minimal Gist this is actually IX but i always think its XI
-command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
+" 2}}} "Websearch
+" VisualSort {{{2 
 " sort based on visual block
 command! -range -nargs=0 -bang SortVis sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
 " use s to sort visual selection
 xmap s :SortVis<CR>
+" 2}}} "VisualSort
+" Extra commands {{{2 
+" Minimal Gist this is actually IX but i always think its XI
+command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
 command! -register YankMatch call dotvim#YankMatches(<q-reg>)
 command! -nargs=0 MW call dotvim#MkdirWrite()
 command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
+" 2}}} "Extra commands
 " 1}}} "Functions and Commands
 
 " General Settings: {{{1 "
@@ -614,7 +620,7 @@ set hidden            "Allow to leave buffer without saving
 set showcmd           "Show keys pressed in normal
 set autochdir         "Auto cd
 set tabstop=4         "Shorter hard tabs
-set softtabstop=0     "Spaces are for wimps
+set softtabstop=0     "no spaces
 set smarttab
 set shiftwidth=4      "Shorter shiftwidth
 set autoindent        "Auto indent newline
@@ -659,8 +665,8 @@ augroup end
 augroup AUTOEXEC
 	autocmd!
 	autocmd BufWritePost ~/.config/bmdirs,~/.config/bmfiles !shortcuts.sh
-	" Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+	" Run xrdb whenever Xresources are updated.
+	autocmd BufWritePost *Xresources !xrdb ~/.Xresources
 augroup end
 
 augroup VIM
