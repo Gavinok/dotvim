@@ -33,3 +33,12 @@ function! FoldManage(on, ret)
 	endif
 	return a:ret
 endfunction
+
+function! StoreElement(desc, placeholder, variable)
+	exec 'cmap ' . g:minisnip_trigger . ' <CR>'
+	let sniptemp = input(a:desc, '', 'tag')
+	if sniptemp ==# '' | let sniptemp = a:placeholder | endif
+	exec 'let ' . a:variable . ' = sniptemp'
+	exec 'cunmap ' . g:minisnip_trigger
+	return sniptemp
+endfunction
