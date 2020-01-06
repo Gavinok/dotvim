@@ -8,13 +8,13 @@
 " Description: 
 " ftplugin for vimscript
 " used by 
-autocmd Filetype vim let b:helpful = 1
-autocmd Filetype vim setlocal foldmethod=marker
-autocmd FileType vim nmap <buffer> `<CR> :Runtime<CR>
-autocmd FileType vim nmap <buffer><silent> <leader>V :Messages<CR>
-autocmd FileType vim xmap <buffer><silent> <CR> :<C-U>call dotvim#RunVimScript(1)<CR>
-autocmd FileType vim nnoremap <buffer><silent> gd  :call lookup#lookup()<CR>
-autocmd FileType vim nnoremap <buffer><silent> <C-T>  :call lookup#pop()<CR>
-autocmd FileType vim nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
-autocmd FileType vim nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
+let b:helpful = 1
+setlocal foldmethod=marker
+nmap <buffer> `<CR> :Runtime<CR>
+nmap <buffer><silent> <leader>V :Messages<CR>
+xmap <buffer><silent> <CR> :<C-U>call dotvim#RunVimScript(1)<CR>
+nnoremap <buffer><silent> gd  :call lookup#lookup()<CR>
+nnoremap <buffer><silent> <C-T>  :call lookup#pop()<CR>
+nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
+nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
 autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
