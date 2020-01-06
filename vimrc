@@ -479,33 +479,33 @@ if has('patch-7.4.775')
 	let g:mucomplete#wordlist = {
 				\       '': ['gavinfreeborn@gmail.com', 'Gavin', 'Jaeger-Freeborn'],
 				\ }
-	
-	let g:mucomplete#chains = {
-				\ 'default'     : ['mini', 'list', 'omni', 'path', 'c-p',   'uspl'],
-				\ 'html'        : ['mini', 'omni', 'path', 'c-p',  'uspl'],
-				\ 'vim'         : ['mini', 'list', 'omni', 'path', 'cmd',   'keyp'],
-				\ 'tex'         : ['mini', 'path', 'omni', 'uspl', 'c-p'],
-				\ 'markdown'    : ['mini', 'path', 'c-p',  'uspl', 'dict'],
-				\ 'dotoo'		: ['mini', 'path', 'c-p',  'uspl', 'dict'],
-				\ 'sh'          : ['mini', 'omni', 'file', 'dict', 'keyp'],
-				\ 'java'        : ['mini', 'tags', 'keyp', 'omni', 'c-n'],
-				\ 'c'           : ['mini', 'list', 'omni', 'c-n'],
-				\ 'go'          : ['mini', 'list', 'omni', 'c-n'],
-				\ 'mail'		: ['mini', 'uspl', 'list', 'c-p'],
-				\ }
+
+	let g:mucomplete#chains = {}
+	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-p',   'uspl']
+	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-p',   'uspl']  
+	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'omni',  'path',  'cmd',   'keyp']
+	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-p']
+	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
+	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
+	let g:mucomplete#chains['sh']        =  ['mini',  'omni',  'file',  'dict',  'keyp']  
+	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
+	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-n']            
+	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']            
+	let g:mucomplete#chains['mail']      =  ['mini',  'uspl',  'list',  'c-p']            
 
 	if !exists('g:mucomplete#can_complete')
-		let  s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
-		let  s:latex_cond= { t -> t =~# '\%(\\\)$' }
-		let  s:html_cond= { t -> t =~# '\%(<\/\)$' }
-		let  g:mucomplete#can_complete = {}
-		let  g:mucomplete#can_complete.c         =  {  'omni':  s:c_cond    }
-		let  g:mucomplete#can_complete.dotoo     =  {  'dict':  s:latex_cond  }
-		let  g:mucomplete#can_complete.go        =  {  'omni':  s:c_cond    }
-		let  g:mucomplete#can_complete.html      =  {  'omni':  s:html_cond   }
-		let  g:mucomplete#can_complete.markdown  =  {  'dict':  s:latex_cond  }
-		let  g:mucomplete#can_complete.org       =  {  'dict':  s:latex_cond  }
-		let  g:mucomplete#can_complete.python    =  {  'omni':  s:c_cond    }
+		let s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
+		let s:latex_cond= { t -> t =~# '\%(\\\)$' }
+		let g:mucomplete#can_complete = {}
+		let  g:mucomplete#can_complete['c']         =  {  'omni':  s:c_cond              }
+		let  g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
+		let  g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
+		let  g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
+		let  g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
+		let  g:mucomplete#can_complete['latex']     =  {  'dict':  s:latex_cond          }
+		let  g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
+		let  g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
+		let  g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
 	endif
 	let g:mucomplete#no_popup_mappings = 0
 	"spelling
