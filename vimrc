@@ -474,6 +474,8 @@ if has('patch-7.4.775')
 	"----------- completion chains
 	set complete-=i
 	set complete-=t
+	" remove beeps during completion
+	set belloff=all
 
 	let g:mucomplete#wordlist = {
 				\       '': ['gavinfreeborn@gmail.com', 'Gavin', 'Jaeger-Freeborn'],
@@ -625,7 +627,6 @@ set shiftwidth=4      "Shorter shiftwidth
 set autoindent        "Auto indent newline
 set ruler             "Show line number and column
 set scrolljump=-15    "Jump 15 when moving cursor bellow screen
-set belloff=all
 set undofile          "Undo function after reopening
 " set autowrite
 " set autoread        "read/file when switching buffers
