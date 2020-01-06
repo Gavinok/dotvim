@@ -12,9 +12,6 @@
 "      ░                           ░
 
 " Quick Init: {{{1 "
-" tell neovim where runtime is
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
 " where to find python
 let g:python_host_prog  = '/usr/bin/python2' "speed up python2 startup
 let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
@@ -173,6 +170,9 @@ if has('nvim')
 	tnoremap <C-K>       <C-\><C-N><C-W><C-K>
 	tnoremap <C-L>       <C-\><C-N><C-W><C-L>
 	set noshowmode
+	" tell neovim where runtime is
+	set runtimepath^=~/.vim runtimepath+=~/.vim/after
+	let &packpath = &runtimepath
 else
 	set timeout           " for mappings
 	set timeoutlen=1000   " default value
