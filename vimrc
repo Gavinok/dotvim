@@ -393,7 +393,7 @@ nmap - :call dotvim#Opendir('edit')<CR>
 
 augroup netrw_mapping
 	autocmd!
-	autocmd filetype netrw call dotvim#NetrwMapping()
+	autocmd Filetype netrw call dotvim#NetrwMapping()
 	autocmd FileType netrw setl bufhidden=wipe
 augroup end
 " 2}}} "netrw
