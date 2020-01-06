@@ -628,6 +628,8 @@ set autoindent        "Auto indent newline
 set ruler             "Show line number and column
 set scrolljump=-15    "Jump 15 when moving cursor bellow screen
 set undofile          "Undo function after reopening
+set undodir=$HOME/.cache/vim/undo
+set backupdir=$HOME/.cache/vim/backup
 " set autowrite
 " set autoread        "read/file when switching buffers
 set lazyredraw        "redraw only when needed faster macros
