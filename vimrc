@@ -340,10 +340,9 @@ map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 
 " Quick spell correction shortcut
 nnoremap <silent> <leader>ss :call dotvim#WordProcessor()<CR>
-nmap <silent> <Left>     mz[s1z=`z
-imap <silent> <Left>     <C-G>u<esc>mz[s1z=`za
+nmap <BS>     mz[s1z=`z
 
-" Move a line of text using ALT+[jk] and shift the indentation with ALT+[hl]
+" Move a line of text 
 xnoremap J :m'>+<cr>`<my`>mzgv`yo`z
 xnoremap K :m'<-2<cr>`>my`<mzgv`yo`z
 xnoremap < <gv
