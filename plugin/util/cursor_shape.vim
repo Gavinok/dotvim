@@ -14,4 +14,7 @@ if !has('nvim')
     if exists("&t_SR")
         let &t_SR = "\<esc>[4 q"
     endif
+
+    " The number of color to use
+    set t_Co=256
 endif
