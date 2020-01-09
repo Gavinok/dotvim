@@ -106,7 +106,8 @@ endfunction
 " now - doesnt use <space> after moving up a directory
 function! dotvim#NetrwMapping() abort
 	let netrw_sid = maparg('s', 'n', 0, 1)['sid']
-	execute 'nnoremap <buffer> - :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
+	execute 'nnoremap <buffer> -  :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
+	execute 'nnoremap <buffer> zo :<C-U>call <SNR>'.netrw_sid.'_NetrwHidden(1)<CR>'
 	execute 'nnoremap <buffer> <leader>cp :!cp <C-R><C-F> ~/'
 endfunction
 " 1}}} "netrwmappings
