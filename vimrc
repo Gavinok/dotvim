@@ -488,6 +488,7 @@ if has('patch-7.4.775')
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-p']
 	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
 	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
+	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'c-p']  
 	let g:mucomplete#chains['sh']        =  ['mini',  'omni',  'file',  'dict',  'keyp']  
 	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
 	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-n']            
@@ -503,7 +504,7 @@ if has('patch-7.4.775')
 		let  g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
 		let  g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
 		let  g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
-		let  g:mucomplete#can_complete['latex']     =  {  'dict':  s:latex_cond          }
+		let  g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
 		let  g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
 		let  g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
 		let  g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
