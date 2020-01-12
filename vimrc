@@ -459,6 +459,17 @@ if exists('*job_start') || exists('*jobstart')
 					\    },
 					\}
 	endif
+	" if executable('texlab')
+	" 	let g:lsc_server_commands['tex'] = {
+	" 				\ 'name': 'texlab',
+	" 				\ 'command': 'servlog.sh',
+	" 				\    'message_hooks': {
+	" 				\        'initialize': {
+	" 				\            'initializationOptions': {'diagnostics': 'true'},
+	" 				\        },
+	" 				\    },
+	" 				\}
+	" endif
 endif
 " 2}}} LSC
 " Mucomplete {{{2 "
