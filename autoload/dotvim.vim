@@ -11,6 +11,9 @@
 " ToggleQuickfix {{{1 
 function! dotvim#ToggleQuickfix() abort
 	let nr = winnr('$')
+	" force location list to close
+	silent! lclose
+	silent! lclose
 	copen
 	if exists('g:autoloaded_dispatch')
 		Copen
@@ -18,6 +21,17 @@ function! dotvim#ToggleQuickfix() abort
 	let nr2 = winnr('$')
 	if nr == nr2
 		cclose
+	endif
+endfunction
+
+function! dotvim#ToggleLocationlist() abort
+	let nr = winnr('$')
+	silent LspDocumentDiagnostics
+	let nr2 = winnr('$')
+	if nr == nr2
+		cclose
+		silent! lclose
+		silent! lclose
 	endif
 endfunction
 " 1}}} "ToggleQuickfix
