@@ -20,7 +20,9 @@ if executable('texlab')
 				\        },
 				\    },
 				\}
-	call RegisterLanguageServer('tex', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('tex', b:lsc_config)
+	endif
 endif
 
 set iskeyword+=\\

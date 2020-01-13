@@ -13,7 +13,9 @@ if executable('gopls')
 				\ 'suppress_stderr': v:true,
 				\}
 
-	call RegisterLanguageServer('go', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('go', b:lsc_config)
+	endif
 endif
 " filetype plugin for go
 

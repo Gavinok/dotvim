@@ -17,6 +17,8 @@ if executable('typescript-language-server')
 				\        },
 				\    },
 				\}
-	call RegisterLanguageServer('javascript', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('javascript', b:lsc_config)
+	endif
 endif
 

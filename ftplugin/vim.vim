@@ -18,7 +18,9 @@ if executable('vim-language-server')
 				\        },
 				\    },
 				\ }
-	call RegisterLanguageServer('vim', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('vim', b:lsc_config)
+	endif
 endif
 setlocal foldmethod=marker
 nmap <buffer> `<CR> :Runtime<CR>

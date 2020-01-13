@@ -19,6 +19,8 @@ if executable('ccls')
 				\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
 				\ },
 				\}
-	call RegisterLanguageServer('c', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('c', b:lsc_config)
+	endif
 endif
 

@@ -15,7 +15,9 @@ if executable('efm-langserver')
 				\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
 				\ 'suppress_stderr': v:true,
 				\}
-	call RegisterLanguageServer('sh', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('sh', b:lsc_config)
+	endif
 endif
 setlocal foldmethod=indent
 function! OmniShell(findstart, base) abort

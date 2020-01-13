@@ -426,8 +426,6 @@ if exists('*job_start') || exists('*jobstart')
 				\ 'SignatureHelp': 'gm',
 				\ 'Completion': 'omnifunc',
 				\}
-
-	let g:lsc_server_commands={}
 endif
 " 2}}} LSC
 " Mucomplete {{{2 "

@@ -10,5 +10,7 @@
 
 if executable('pyls')
 	let b:lsc_config = 'pyls'
-	call RegisterLanguageServer('python', b:lsc_config)
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('python', b:lsc_config)
+	endif
 endif
