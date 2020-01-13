@@ -8,7 +8,18 @@
 " Description: 
 " ftplugin for vimscript
 " used by 
-let b:helpful = 1
+if executable('vim-language-server')
+	let b:lsc_config = {
+				\ 'name': 'vim-language-server',
+				\ 'command': 'vim-language-server --stdio',
+				\    'message_hooks': {
+				\        'initialize': {
+				\            'initializationOptions': { 'vimruntime': $VIMRUNTIME, 'runtimepath': &rtp },
+				\        },
+				\    },
+				\ }
+	call RegisterLanguageServer('vim', b:lsc_config)
+endif
 setlocal foldmethod=marker
 nmap <buffer> `<CR> :Runtime<CR>
 nmap <buffer><silent> <leader>V :Messages<CR>

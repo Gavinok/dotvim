@@ -8,6 +8,21 @@
 " Description: 
 " ftplugin for tex files
 
+if executable('texlab')
+	let b:lsc_config = {
+				\ 'name': 'texlab',
+				\ 'command': 'texlab',
+				\ 'log_level': -1,
+				\    'message_hooks': {
+				\        'initialize': {
+				\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))},
+				\            'initializationOptions': {'diagnostics': 'true'},
+				\        },
+				\    },
+				\}
+	call RegisterLanguageServer('tex', b:lsc_config)
+endif
+
 set iskeyword+=\\
 
 if executable('chktex')

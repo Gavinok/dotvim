@@ -6,6 +6,15 @@
 " See :help license
 "
 " Description: 
+if executable('gopls')
+	let g:lsc_config = {
+				\ 'command': 'gopls serve',
+				\ 'log_level': -1,
+				\ 'suppress_stderr': v:true,
+				\}
+
+	call RegisterLanguageServer('go', b:lsc_config)
+endif
 " filetype plugin for go
 
 setlocal makeprg=go\ build

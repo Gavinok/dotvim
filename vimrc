@@ -58,10 +58,8 @@ if exists('*job_start') || exists('*jobstart')
 endif
 " 2}}} "lsp
 " Autocompletion {{{2 "
-Plug 'fcpg/vim-complimentary'
-
-"better default completion used for easyier vim scripting
 if has('nvim')
+	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
 else 
@@ -362,7 +360,7 @@ if exists('*job_start') || exists('*jobstart')
 	" dispatch compatability
 	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do(<f-args>)
 	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do(&grepprg,<f-args>)
-	command! -bang -nargs=0 -complete=file Make call dotvim#Do(&makeprg,<f-args>)
+	command! -bang -nargs=* -complete=file Make call dotvim#Do(&makeprg,<f-args>)
 	nnoremap  '<CR>     :Term<Up><CR>
 	nnoremap  '<Space>  :Term<Space>
 	nnoremap  '<TAB>    :Term<Up>
@@ -430,72 +428,6 @@ if exists('*job_start') || exists('*jobstart')
 				\}
 
 	let g:lsc_server_commands={}
-	if executable('ccls')
-		let g:lsc_server_commands['c'] = {
-					\ 'command': 'ccls',
-					\ 'suppress_stderr': v:true,
-					\ 'message_hooks': {
-					\    'initialize': {
-					\       'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
-					\       'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-					\    },
-					\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
-					\ },
-					\}
-	endif
-	if executable('pyls')
-		let g:lsc_server_commands['python'] = 'pyls'
-	endif
-	if executable('gopls')
-		let g:lsc_server_commands['go'] = {
-					\ 'command': 'gopls serve',
-					\ 'log_level': -1,
-					\ 'suppress_stderr': v:true,
-					\}
-	endif
-	if executable('typescript-language-server')
-		let g:lsc_server_commands['javascript'] = {
-					\ 'name': 'javascript support using typescript-language-server',
-					\ 'command': 'typescript-language-server --stdio',
-					\    'message_hooks': {
-					\        'initialize': {
-					\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))}
-					\        },
-					\    },
-					\}
-	endif
-	if executable('texlab')
-		let g:lsc_server_commands['tex'] = {
-					\ 'name': 'texlab',
-					\ 'command': 'texlab',
-					\ 'log_level': -1,
-					\    'message_hooks': {
-					\        'initialize': {
-					\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))},
-					\            'initializationOptions': {'diagnostics': 'true'},
-					\        },
-					\    },
-					\}
-	endif
-	if executable('efm-langserver')
-		let g:lsc_server_commands['sh'] = {
-					\ 'name': 'efm-langserver',
-					\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
-					\ 'suppress_stderr': v:true,
-					\}
-		let g:lsc_server_commands['vim'] = g:lsc_server_commands['sh'] 
-	endif
-	if executable('vim-language-server')
-		let g:lsc_server_commands['vim'] = {
-					\ 'name': 'vim-language-server',
-					\ 'command': 'vim-language-server --stdio',
-					\    'message_hooks': {
-					\        'initialize': {
-					\            'initializationOptions': { 'vimruntime': $VIMRUNTIME, 'runtimepath': &rtp },
-					\        },
-					\    },
-					\ }
-	endif
 endif
 " 2}}} LSC
 " Mucomplete {{{2 "
@@ -521,7 +453,7 @@ if has('patch-7.4.775')
 	let g:mucomplete#chains = {}
 	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-p',   'uspl']
 	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-p',   'uspl']  
-	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'path',  'omni',  'cmd',   'keyp']
+	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'path',  'cmd',   'omni', 'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-p']
 	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
 	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-p',   'uspl',  'dict']  

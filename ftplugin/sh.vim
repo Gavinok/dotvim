@@ -8,13 +8,22 @@
 " Description: 
 " shell script filetype plugin
 " a simple omni complete for shell scripts
+
+if executable('efm-langserver')
+	let b:lsc_config = {
+				\ 'name': 'efm-langserver',
+				\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
+				\ 'suppress_stderr': v:true,
+				\}
+	call RegisterLanguageServer('sh', b:lsc_config)
+endif
 setlocal foldmethod=indent
 function! OmniShell(findstart, base) abort
 	echo a:base
 	if a:findstart
 		let l:line = getline('.')
 	else
-    	let s:res = getcompletion(a:base, 'shellcmd')
+		let s:res = getcompletion(a:base, 'shellcmd')
 		return {'words': s:res, 'refresh': 'always'}
 	endif
 endfunction
