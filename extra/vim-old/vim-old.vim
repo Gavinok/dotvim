@@ -136,25 +136,6 @@ if has('python3')
 endif
 " 1}}} "UltiSnips
 
-" LSC {{{1 "
-let g:lsc_auto_completeopt='menu,menuone,noinsert,noselect'
-" Use all the defaults (recommended):
-let g:lsc_auto_map = v:true
-autocmd CompleteDone * silent! pclose
-let g:lsc_hover_popup='v:true'
-let g:lsc_server_commands = {
-			\ 'c': {
-			\    'command': 'ccls',
-			\    'message_hooks': {
-			\        'initialize': {
-			\            'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
-			\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-			\        },
-			\    },
-			\  },
-			\}
-" 2}}} LSC
-
 " NCM2 {{{1 "
 set complete=.,w,b,u,t,kspell
 if has('python3')
@@ -298,6 +279,82 @@ if executable('go')
 	augroup END
 endif
 " 1}}} "Go
+
+" LSC {{{2 "
+if exists('*job_start') || exists('*jobstart')
+	nmap <leader>V :LSClientAllDiagnostics<CR>
+	let g:lsc_enable_autocomplete = v:false
+	let g:lsc_auto_map = {
+				\ 'GoToDefinition': 'gd',
+				\ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
+				\ 'FindReferences': 'gr',
+				\ 'NextReference': '<leader>*',
+				\ 'PreviousReference': '<leader>#',
+				\ 'FindImplementations': 'gI',
+				\ 'FindCodeActions': 'ga',
+				\ 'Rename': 'gR',
+				\ 'ShowHover': v:true,
+				\ 'DocumentSymbol': 'go',
+				\ 'WorkspaceSymbol': 'gz',
+				\ 'SignatureHelp': 'gm',
+				\ 'Completion': 'omnifunc',
+				\}
+
+	let g:lsc_server_commands={}
+	if executable('ccls')
+		let g:lsc_server_commands['c'] = {
+					\ 'command': 'ccls',
+					\ 'suppress_stderr': v:true,
+					\ 'message_hooks': {
+					\    'initialize': {
+					\       'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
+					\       'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
+					\    },
+					\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
+					\ },
+					\}
+	endif
+	if executable('pyls')
+		let g:lsc_server_commands['python'] = 'pyls'
+	endif
+	if executable('gopls')
+		let g:lsc_server_commands['go'] = {
+					\ 'command': 'gopls serve',
+					\ 'log_level': -1,
+					\ 'suppress_stderr': v:true,
+					\}
+	endif
+	if executable('typescript-language-server')
+		let g:lsc_server_commands['javascript'] = {
+					\ 'name': 'javascript support using typescript-language-server',
+					\ 'command': 'typescript-language-server --stdio',
+					\    'message_hooks': {
+					\        'initialize': {
+					\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))}
+					\        },
+					\    },
+					\}
+	endif
+	" if executable('texlab')
+	" 	let g:lsc_server_commands['tex'] = {
+	" 				\ 'name': 'texlab',
+	" 				\ 'command': 'servlog.sh',
+	" 				\    'message_hooks': {
+	" 				\        'initialize': {
+	" 				\            'initializationOptions': {'diagnostics': 'true'},
+	" 				\        },
+	" 				\    },
+	" 				\}
+	" endif
+	if executable('efm-langserver')
+		let g:lsc_server_commands['vim'] = {
+					\ 'name': 'efm-langserver',
+					\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
+					\}
+		let g:lsc_server_commands['sh'] = g:lsc_server_commands['vim']
+	endif
+endif
+" 2}}} LSC
 
 " vim-lsp {{{1 "
 if has('patch-8.0.0283')
