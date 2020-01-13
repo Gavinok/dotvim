@@ -481,6 +481,7 @@ if exists('*job_start') || exists('*jobstart')
 		let g:lsc_server_commands['sh'] = {
 					\ 'name': 'efm-langserver',
 					\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
+					\ 'suppress_stderr': v:true,
 					\}
 		let g:lsc_server_commands['vim'] = g:lsc_server_commands['sh'] 
 	endif
