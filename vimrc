@@ -52,12 +52,14 @@ call plug#begin('~/.vim/plugged')
 " 	python-pydocstyle
 " 	python-pyflakes :linting
 if exists('*job_start') || exists('*jobstart')
-	Plug 'prabirshrestha/async.vim'
-	Plug 'prabirshrestha/vim-lsp'
+	" Plug 'prabirshrestha/async.vim'
+	" Plug 'prabirshrestha/vim-lsp'
+	Plug 'natebosch/vim-lsc'
 endif
 " 2}}} "lsp
 " Autocompletion {{{2 "
 Plug 'fcpg/vim-complimentary'
+
 "better default completion used for easyier vim scripting
 if has('nvim')
 	Plug 'ncm2/float-preview.nvim'
@@ -65,6 +67,7 @@ if has('nvim')
 else 
 	"I find this super distracting
 	set completeopt-=preview
+	set completeopt+=popup
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
@@ -406,92 +409,92 @@ nmap <leader><leader> :Ngrep<space>
 command! -nargs=1 Wgrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
 nmap <leader><space> :Wgrep<space>
 " 2}}} "Orgmode
-" LSP {{{2 "
+" LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
-	nmap <script> <silent> <leader>V :call dotvim#ToggleLocationlist()<CR>
+	nmap <leader>V :LSClientAllDiagnostics<CR>
+	let g:lsc_enable_autocomplete = v:false
+	let g:lsc_auto_map = {
+				\ 'GoToDefinition': 'gd',
+				\ 'GoToDefinitionSplit': ['<C-W>d', '<C-W><C-D>'],
+				\ 'FindReferences': 'gr',
+				\ 'NextReference': '<leader>*',
+				\ 'PreviousReference': '<leader>#',
+				\ 'FindImplementations': 'gI',
+				\ 'FindCodeActions': 'ga',
+				\ 'Rename': 'gR',
+				\ 'ShowHover': v:true,
+				\ 'DocumentSymbol': 'go',
+				\ 'WorkspaceSymbol': 'gz',
+				\ 'SignatureHelp': 'gm',
+				\ 'Completion': 'omnifunc',
+				\}
 
-	let g:lsp_textprop_enabled = 1
-	let g:lsp_virtual_text_enabled = 1
-	let g:lsp_signs_enabled = 0
-	let g:lsp_diagnostics_echo_cursor = 1
-	if executable('pyls')
-		" pip install python-language-server
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'pyls',
-					\ 'cmd': {server_info->['pyls']},
-					\ 'whitelist': ['python'],
-					\ })
-
-	endif
+	let g:lsc_server_commands={}
 	if executable('ccls')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'ccls',
-					\ 'cmd': {server_info->['ccls']},
-					\ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
-					\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-					\ })
-
-	elseif executable('clangd')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'clangd',
-					\ 'cmd': {server_info->['clangd', '--background-index']},
-					\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-					\ })
+		let g:lsc_server_commands['c'] = {
+					\ 'command': 'ccls',
+					\ 'suppress_stderr': v:true,
+					\ 'message_hooks': {
+					\    'initialize': {
+					\       'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
+					\       'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
+					\    },
+					\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
+					\ },
+					\}
+	endif
+	if executable('pyls')
+		let g:lsc_server_commands['python'] = 'pyls'
 	endif
 	if executable('gopls')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'gopls',
-					\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-					\ 'whitelist': ['go'],
-					\ })
-		autocmd BufWritePre *.go "silent! LspDocumentFormatSync<CR>"
+		let g:lsc_server_commands['go'] = {
+					\ 'command': 'gopls serve',
+					\ 'log_level': -1,
+					\ 'suppress_stderr': v:true,
+					\}
 	endif
 	if executable('typescript-language-server')
-		au User lsp_setup call lsp#register_server({
+		let g:lsc_server_commands['javascript'] = {
 					\ 'name': 'javascript support using typescript-language-server',
-					\ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-					\ 'root_uri': { server_info->lsp#utils#path_to_uri
-					\(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-					\ 'whitelist': ['javascript', 'javascript.jsx']
-					\ })
+					\ 'command': 'typescript-language-server --stdio',
+					\    'message_hooks': {
+					\        'initialize': {
+					\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))}
+					\        },
+					\    },
+					\}
 	endif
-	if executable('bash-language-server')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'bash-language-server',
-					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-					\ 'whitelist': ['sh'],
-					\ })
-	endif
-	if executable('java') && executable('jdtls')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'jdt.ls',
-					\ 'cmd': {server_info->["jdtls"]},
-					\ 'whitelist': ['java'],
-					\ })
+	if executable('texlab')
+		let g:lsc_server_commands['tex'] = {
+					\ 'name': 'texlab',
+					\ 'command': 'texlab',
+					\ 'log_level': -1,
+					\    'message_hooks': {
+					\        'initialize': {
+					\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))},
+					\            'initializationOptions': {'diagnostics': 'true'},
+					\        },
+					\    },
+					\}
 	endif
 	if executable('efm-langserver')
-		autocmd User lsp_setup call lsp#register_server({
+		let g:lsc_server_commands['sh'] = {
 					\ 'name': 'efm-langserver',
-					\ 'cmd': {server_info->['efm-langserver', '-c=/home/gavinok/.vim/efm/config.yaml']},
-					\ 'whitelist': ['vim', 'sh'],
-					\ })
+					\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
+					\}
+		let g:lsc_server_commands['vim'] = g:lsc_server_commands['sh'] 
 	endif
-	function! s:on_lsp_buffer_enabled() abort
-		setlocal omnifunc=lsp#complete
-		setlocal signcolumn=auto
-		nmap <buffer> gd <plug>(lsp-definition)
-		nmap <buffer> gR <plug>(lsp-rename)
-		nmap <buffer> K <plug>(lsp-hover)
-		nmap ]l <plug>(lsp-next-error)
-		nmap [l <plug>(lsp-previouse-error)
-		" refer to doc to add more commands
-	endfunction
-
-	augroup lsp_install
-		au!
-		" call s:on_lsp_buffer_enabled only for languages that has the server registered.
-		autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-	augroup END
+	if executable('vim-language-server')
+		let g:lsc_server_commands['vim'] = {
+					\ 'name': 'vim-language-server',
+					\ 'command': 'vim-language-server --stdio',
+					\    'message_hooks': {
+					\        'initialize': {
+					\            'initializationOptions': { 'vimruntime': $VIMRUNTIME, 'runtimepath': &rtp },
+					\        },
+					\    },
+					\ }
+	endif
 endif
 " 2}}} LSC
 " Mucomplete {{{2 "
@@ -517,12 +520,12 @@ if has('patch-7.4.775')
 	let g:mucomplete#chains = {}
 	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-p',   'uspl']
 	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-p',   'uspl']  
-	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'path',  'cmd',   'keyp']
+	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'path',  'omni',  'cmd',   'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-p']
 	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
 	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'c-p']  
-	let g:mucomplete#chains['sh']        =  ['mini',  'omni',  'file',  'dict',  'keyp']  
+	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
 	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
 	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-n']            
 	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']            
@@ -532,15 +535,15 @@ if has('patch-7.4.775')
 		let s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
 		let s:latex_cond= { t -> t =~# '\%(\\\)$' }
 		let g:mucomplete#can_complete = {}
-		let  g:mucomplete#can_complete['c']         =  {  'omni':  s:c_cond              }
-		let  g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
-		let  g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
-		let  g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
-		let  g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
-		let  g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
-		let  g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
-		let  g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
-		let  g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
+		let g:mucomplete#can_complete['c']         =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
+		let g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
+		let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
 	endif
 	let g:mucomplete#no_popup_mappings = 0
 	"spelling
