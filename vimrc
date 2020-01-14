@@ -52,8 +52,6 @@ call plug#begin('~/.vim/plugged')
 " 	python-pydocstyle
 " 	python-pyflakes :linting
 if exists('*job_start') || exists('*jobstart')
-	" Plug 'prabirshrestha/async.vim'
-	" Plug 'prabirshrestha/vim-lsp'
 	Plug 'natebosch/vim-lsc'
 endif
 " 2}}} "lsp
