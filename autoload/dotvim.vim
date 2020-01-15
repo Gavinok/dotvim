@@ -411,6 +411,9 @@ function! dotvim#CCR()
 	elseif cmdline =~# '\C^reg'
 		" like registers bug 
 		return "\<CR>:norm! \"p\<Left>"
+	elseif cmdline =~# '\C^g/.*/#'
+		" like registers bug 
+		return "\<CR>:"
 	else
 		" <C-]> fixes abbreviation compatability
 		return "\<C-]>\<CR>"
