@@ -11,7 +11,8 @@
 if executable('texlab')
 	let b:lsc_config = {
 				\ 'name': 'texlab',
-				\ 'command': 'texlab',
+				\ 'command': 'texlab -q',
+				\ 'suppress_stderr': v:false,
 				\ 'log_level': -1,
 				\    'message_hooks': {
 				\        'initialize': {
