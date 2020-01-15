@@ -646,7 +646,6 @@ augroup END
 augroup WRIGHTING
 	autocmd!
 	autocmd FileType pandoc nnoremap <buffer> cic :call pandoc#after#nrrwrgn#NarrowCodeblock()<cr>
-	autocmd BufRead,BufNewFile /tmp/neomutt* call dotvim#WordProcessor()
 	autocmd FileType markdown,pandoc nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#MarkdownScreenShot'))
 	autocmd FileType dotoo,org nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'))
 	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call dotvim#WordProcessor()
