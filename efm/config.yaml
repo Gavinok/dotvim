@@ -13,6 +13,20 @@ tools:
     lint-formats:
       - '%f:%l:%c:%*[^:]:%m'
 
+  proselint: &proselint
+    lint-command: 'proselint ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c:%m'
+
+  writegood: &writegood
+    lint-command: 'writegood --parse ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c:%m'
+
   vint: &vint
     lint-command: 'vint -'
     lint-stdin: true
@@ -48,7 +62,10 @@ languages:
     <<: *jq
 
   text:
-    <<: *vale
+    <<: *writegood
+
+  mail:
+    <<: *writegood
 
   cpp:
     <<: *cppcheck
