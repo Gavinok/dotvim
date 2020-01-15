@@ -7,7 +7,7 @@
 "
 " Description: 
 if executable('gopls')
-	let g:lsc_config = {
+	let b:lsc_config = {
 				\ 'command': 'gopls serve',
 				\ 'log_level': -1,
 				\ 'suppress_stderr': v:true,
@@ -23,7 +23,7 @@ setlocal makeprg=go\ build
 
 function! Godoc()
 	"code
-	if exists('g:autoloaded_dispatch')
+	if exists(':Dispatch')
 		exec 'silent Dispatch go doc '. expand('<cword>')
 	else
 		exec 'new|read !go doc '. expand('<cword>')
@@ -32,6 +32,22 @@ function! Godoc()
 	endif
 endfunction
 command! -nargs=0 Godoc call Godoc()
+
+
+if executable('golint')
+	command! -buffer Lint call s:GoLint()
+
+	function! s:GoLint() abort
+		if exists(':Dispatch')
+			exec 'Dispatch golint '. shellescape(expand('%'))
+		else
+			cexpr system('golint ' . shellescape(expand('%')))
+		endif
+	endfunction
+
+	autocmd BufWritePost,FileWritePost *.go execute 'Lint'
+endif
+let b:did_ftplugin_go_lint = 1
 
 setl keywordprg=:Godoc
 
