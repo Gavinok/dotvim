@@ -7,6 +7,16 @@
 "
 " Description: 
 " markdown specific settings
+if executable('efm-langserver')
+	let b:lsc_config = {
+				\ 'name': 'efm-langserver',
+				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/efm/config.yaml',
+				\ 'suppress_stderr': v:true,
+				\}
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('markdown', b:lsc_config)
+	endif
+endif
 
 " Only do this when not yet done for this buffer
 let markdown_fenced_languages = ['c', 'python']
