@@ -22,5 +22,6 @@ if executable('ccls')
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('c', b:lsc_config)
 	endif
+	setlocal omnifunc=lsc#complete#complete
 endif
 
