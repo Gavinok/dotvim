@@ -63,7 +63,7 @@ if has('nvim')
 else 
 	"I find this super distracting
 	set completeopt-=preview
-	set completeopt+=popup
+	set completeopt-=popup
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
