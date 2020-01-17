@@ -181,6 +181,7 @@ else
 	set ttimeoutlen=10    " unnoticeable small value
 	runtime macro/matchit
 endif
+runtime vimshortcuts.vim
 
 " delete a buffer
 nnoremap <leader>bd :bdelete<CR>
