@@ -35,8 +35,6 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
-" Plug 'kristijanhusak/vim-dirvish-git'
-" Plug 'justinmk/vim-dirvish'
 " lsp {{{2
 " using:
 " vim & sh: efm-language-server
