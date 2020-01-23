@@ -70,6 +70,7 @@ endif
 if has('patch-7.4.775')
 	Plug 'lifepillar/vim-mucomplete' "main source for completion
 	Plug 'jonasw234/vim-mucomplete-minisnip'
+	Plug 'Konfekt/complete-common-words.vim'
 endif
 Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
