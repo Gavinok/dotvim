@@ -411,6 +411,8 @@ nmap <leader><space> :Wgrep<space>
 " 2}}} "Orgmode
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
+	let g:mucomplete#completion_delay = 200
+	let g:mucomplete#reopen_immediately = 0
 	nmap <leader>V :LSClientAllDiagnostics<CR>
 	let g:lsc_enable_autocomplete = v:false
 	let g:lsc_auto_map = {
@@ -451,9 +453,9 @@ if has('patch-7.4.775')
 				\ }
 
 	let g:mucomplete#chains = {}
-	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-p',   'uspl']
+	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-n',   'uspl']
 	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-p',   'uspl']  
-	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'path',  'cmd',   'omni', 'keyp']
+	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-p']
 	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
 	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
