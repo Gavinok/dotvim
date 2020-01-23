@@ -681,7 +681,7 @@ call SetupCommandAlias('man','Man')
 " quickly print the date
 iab <expr> dts strftime("%c")
 "add a comment in any language
-iab com <C-R>=&commentstring<CR><esc>F%c2w
+" iab com <C-R>=&commentstring<CR><esc>F%c2w
 
 " spelling
 iab pyhton python
