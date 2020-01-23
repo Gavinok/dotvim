@@ -35,7 +35,7 @@ command! -nargs=0 Godoc call Godoc()
 
 
 if executable('golint')
-	command! -buffer Lint call s:GoLint()
+	command! -buffer GoLint call s:GoLint()
 
 	function! s:GoLint() abort
 		if exists(':Dispatch')
@@ -45,7 +45,7 @@ if executable('golint')
 		endif
 	endfunction
 
-	autocmd BufWritePost,FileWritePost *.go execute 'Lint'
+	" autocmd BufWritePost,FileWritePost *.go execute 'Lint'
 endif
 let b:did_ftplugin_go_lint = 1
 
