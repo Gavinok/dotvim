@@ -1,0 +1,3 @@
+for {{+needle+}} in {{+heystack+}}{
+    {{+//loop here+}}
+};

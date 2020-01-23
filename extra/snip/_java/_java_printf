@@ -1,1 +1,1 @@
-System.out.printf("{{+ Value is +}}\n"{{+~Argmaker()+}});{{--}}
+System.out.printf("{{+ Value is +}}\n"{{+~Argmaker(', ', '%\l')+}});{{--}}
