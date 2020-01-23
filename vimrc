@@ -182,7 +182,9 @@ else
 	runtime macro/matchit
 endif
 runtime vimshortcuts.vim
-
+let s:dotfiles = split(&runtimepath, ',')[0]
+let g:common_words_dicts_dir = s:dotfiles . '/plugged/complete-common-words.vim/dicts'
+unlet s:dotfiles
 " delete a buffer
 nnoremap <leader>bd :bdelete<CR>
 
