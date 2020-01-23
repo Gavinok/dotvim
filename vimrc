@@ -110,6 +110,8 @@ Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
 Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
+Plug 'wellle/targets.vim'
+Plug 'othree/yajs.vim'
 let g:colorizer_colornames_disable = 1
 " 2}}} "etc.
 call plug#end()
