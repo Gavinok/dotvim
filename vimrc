@@ -152,7 +152,6 @@ vmap <space> <leader>
 
 " shortcut to files and dirs uses shortcuts.sh
 " it can be found at my scripts repo
-runtime vimshortcuts.vim
 
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
