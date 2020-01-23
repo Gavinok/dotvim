@@ -60,8 +60,9 @@ if has('nvim')
 	let g:float_preview#docked = 0
 else 
 	"I find this super distracting
-	set completeopt-=preview
-	set completeopt-=popup
+	set completeopt+=preview
+	set completeopt+=popup
+	" set completepopup=border:off
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
