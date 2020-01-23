@@ -229,6 +229,22 @@ function! dotvim#MRU(command, arg)
 endfunction
 " 1}}} "MRU
 
+" Shortcut {{{1 
+" Shortcut completion
+function! dotvim#ShortcutComplete(ArgLead, CmdLine, CursorPos)
+	let sc = []
+	for dir in g:shortcuts
+		let sc += split(glob(dir.'/**/*'), '\n')
+	endfor
+	return filter(sc, 'v:val =~ a:ArgLead')
+endfunction
+
+" open a file or directory I often use
+function! dotvim#Shortcut(command, arg)
+	execute a:command . ' ' . a:arg
+endfunction
+" 1}}} "Shortcut
+
 " Open {{{1 
 " What command to use
 function! dotvim#Open() abort
