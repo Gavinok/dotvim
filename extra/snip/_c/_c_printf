@@ -1,1 +1,1 @@
-printf("{{+ Value is %d+}}\n"{{+~Argmaker(', ','%\l')+}});{{--}}
+printf("{{+ Value is %d+}}\n"{{+~snippet_helpers#Argmaker(', ','%\l')+}});{{--}}

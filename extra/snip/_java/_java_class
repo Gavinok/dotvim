@@ -4,9 +4,9 @@
  * @version {{++}}
  * @author  {{+~g:name+}}
  */
-{{+private+}} class {{+~StoreElement('Class Name: ',  'Name', 'b:classname')+}} {
+{{+private+}} class {{+~snippet_helpers#StoreElement('Class Name: ',  'Name', 'b:classname')+}} {
 	// fields
-	private {{+type+}} {{+~StoreElement('Var Name: ', 'Var', 'b:varname')+}};
+	private {{+type+}} {{+~snippet_helpers#StoreElement('Var Name: ', 'Var', 'b:varname')+}};
 
 	// Class Constructors
 	public {{+~b:classname+}}({{++}}) {

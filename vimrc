@@ -58,11 +58,13 @@ if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
+	Plug 'norcalli/nvim-colorizer.lua'
 else 
 	"I find this super distracting
 	set completeopt+=preview
 	set completeopt+=popup
 	" set completepopup=border:off
+	Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
@@ -110,7 +112,6 @@ Plug 'mhinz/vim-lookup'
 Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
-Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 Plug 'wellle/targets.vim'
 Plug 'othree/yajs.vim'
 let g:colorizer_colornames_disable = 1
@@ -458,16 +459,16 @@ if has('patch-7.4.775')
 
 	let g:mucomplete#chains = {}
 	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-n',   'uspl']
-	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-p',   'uspl']  
+	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']  
 	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
-	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-p']
-	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
-	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-p',   'uspl',  'dict']  
+	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
+	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
+	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'c-p']  
 	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
 	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
-	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-n']            
-	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']            
+	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']            
+	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']            
 	let g:mucomplete#chains['mail']      =  ['mini',  'uspl',  'list',  'c-p']            
 
 	if !exists('g:mucomplete#can_complete')

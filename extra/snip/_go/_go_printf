@@ -1,1 +1,1 @@
-fmt.Printf("{{+ Value is %v +}}\n"{{+~Argmaker(', ','%\l')+}}){{--}}
+fmt.Printf("{{+ Value is %v +}}\n"{{+~snippet_helpers#Argmaker(', ','%\l')+}}){{--}}
