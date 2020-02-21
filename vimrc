@@ -205,9 +205,6 @@ nmap cd :cd <C-R>=expand('%:h')<CR>
 " Toggle *conceallevel*
 nnoremap <Leader>cl :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>
 
-" Alignment Text
-xnoremap <silent> gl :<C-u>silent call Align()<CR>
-
 " mark position before search
 nnoremap / ms/
 
@@ -520,13 +517,8 @@ nnoremap <leader>b] :Step<CR>
 nnoremap <leader>b} :Over<CR>
 nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
 " 2}}} "termdebug
-" Dead Simple Align {{{2 "
-" Use a bunch of standard UNIX commands for quick an dirty
-function! Align()
-	exec "'<,'>!column -t|sed 's/  \(\S\)/ \1/g'"
-	exec 'normal! gv='
-endfunction
-" 2}}} "Dead Simple Align
+
+
 " CustomSections {{{2 "
 function! CustomSections(dir, regex)
 	if a:dir ==# 'up'
