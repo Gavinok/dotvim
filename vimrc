@@ -73,6 +73,7 @@ if has('patch-7.4.775')
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 	Plug 'Konfekt/complete-common-words.vim'
 endif
+Plug 'tommcdo/vim-lion'
 Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
