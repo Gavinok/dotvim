@@ -1,27 +1,29 @@
 ######################################################################
-# @author      : Gavin Jaeger-Freeborn (gavinfreeborn@gmail.com)
+# @author      : {{+~g:name+}} ({{+~g:email+}})
 # @file        : Makefile
-# @created     : Tue 19 Nov 2019 01:25:55 AM MST
+# @created     : {{+~strftime("%c")+}}
 ######################################################################
 
-IDIR =./include
-CC=gcc
-CFLAGS=-I$(IDIR)
+TARGET ?= a.out
+SRC_DIRS ?= ./src
 
-ODIR=obj
+SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
+OBJS := $(addsuffix .o,$(basename $(SRCS)))
+DEPS := $(OBJS:.o=.d)
 
-LIBS=
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-_OBJ = main.o t.c
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
 
-$(ODIR)/%.o: %.c
-	$(CC) -c -o $@ $< $(CFLAGS)
+$(TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) $(OBJS) -o $@ $(LOADLIBES) $(LDLIBS)
 
-main: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+run:
+	./$(TARGET)
 
 .PHONY: clean
-
 clean:
-	rm -f $(ODIR)/*.o
+	$(RM) $(TARGET) $(OBJS) $(DEPS)
+
+-include $(DEPS)
