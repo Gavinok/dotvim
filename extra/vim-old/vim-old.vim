@@ -29,14 +29,13 @@ function! ToggleQuickfix()
 endfunction
 "2}}} QFixToggle "
 
-" Dead simple Align {{{1 "
+" Dead Simple Align {{{2 "
 " Use a bunch of standard UNIX commands for quick an dirty
-" whitespace-based alignment
 function! Align()
-	'<,'>!column -t|sed 's/  \(\S\)/ \1/g'
-	normal gv=
+	exec "'<,'>!column -t|sed 's/  \(\S\)/ \1/g'"
+	exec 'normal! gv='
 endfunction
-"2}}} "Dead simple Align
+" 2}}} "Dead Simple Align
 
 " Ask Abbreviations {{{1 "
 function! s:Ask(abbr,expansion,defprompt)
