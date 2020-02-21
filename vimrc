@@ -114,6 +114,8 @@ Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
 Plug 'wellle/targets.vim'
+" only seek on the same line
+let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 Plug 'othree/yajs.vim'
 let g:colorizer_colornames_disable = 1
 " 2}}} "etc.
