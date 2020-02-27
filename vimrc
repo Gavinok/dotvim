@@ -12,6 +12,11 @@
 "      ░                           ░
 
 " Quick Init: {{{1 "
+
+if has('nvim')
+	set runtimepath^=~/.vim runtimepath+=~/.vim/after
+endif
+
 " where to find python
 let g:python_host_prog  = '/usr/bin/python2' "speed up python2 startup
 let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
@@ -177,7 +182,6 @@ if has('nvim')
 	tnoremap <C-L>       <C-\><C-N><C-W><C-L>
 	set noshowmode
 	" tell neovim where runtime is
-	set runtimepath^=~/.vim runtimepath+=~/.vim/after
 	let &packpath = &runtimepath
 else
 	set timeout           " for mappings
@@ -600,6 +604,7 @@ set autoindent        "Auto indent newline
 set ruler             "Show line number and column
 set scrolljump=-15    "Jump 15 when moving cursor bellow screen
 set undofile          "Undo function after reopening
+call mkdir(vim, $HOME.'/.cache')
 set undodir=$HOME/.cache/vim/undo
 set backupdir=$HOME/.cache/vim/backup
 " set autowrite
