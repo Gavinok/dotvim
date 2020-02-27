@@ -1,3 +1,10 @@
+version: 2
+commands:
+  - command: notepad
+    arguments:
+      - ${INPUT}
+    title: メモ帳
+
 # tools setting
 tools:
   cppcheck: &cppcheck
@@ -43,7 +50,7 @@ tools:
     lint-ignore-exit-code: true
 
   shellcheck: &shellcheck
-    lint-command: 'shellcheck -s bash -f gcc -x -o all -'
+    lint-command: 'shellcheck -s sh -f gcc -x -o all -'
     lint-stdin: true
     lint-formats:
       - '%f:%l:%c: %trror: %m'
@@ -56,6 +63,7 @@ languages:
     <<: *vint
 
   markdown:
+    <<: *proselint
     <<: *writegood
 
   json:
@@ -65,6 +73,7 @@ languages:
     <<: *writegood
 
   mail:
+    <<: *proselint
     <<: *writegood
 
   cpp:

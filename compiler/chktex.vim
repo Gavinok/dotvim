@@ -21,9 +21,10 @@ endif
 let s:cpo_save = &cpo
 set cpo&vim
 
-CompilerSet makeprg=chktex\ -q\ %
-CompilerSet errorformat=%tarning\ %n\ in\ %f\ line\ %l:\ %m,
-			\
+CompilerSet makeprg=chktex\ -q\ -v3\ %
+" CompilerSet makeprg=chktex\ -q\ %
+" CompilerSet errorformat=%tarning\ %n\ in\ %f\ line\ %l:\ %m,
+			" \
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
