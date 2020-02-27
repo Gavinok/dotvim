@@ -604,8 +604,12 @@ set autoindent        "Auto indent newline
 set ruler             "Show line number and column
 set scrolljump=-15    "Jump 15 when moving cursor bellow screen
 set undofile          "Undo function after reopening
-call mkdir($HOME.'/.cache/vim/undo', 'p')
-call mkdir($HOME.'/.cache/vim/backup', 'p')
+
+" check that directories exist
+if !isdirectory(expand('~/.cache/vim'))
+	call mkdir($HOME.'/.cache/vim/undo', 'p')
+	call mkdir($HOME.'/.cache/vim/backup', 'p')
+endif
 set undodir=$HOME/.cache/vim/undo
 set backupdir=$HOME/.cache/vim/backup
 " set autowrite
