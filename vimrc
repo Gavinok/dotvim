@@ -132,7 +132,6 @@ call plug#end()
 colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
-highlight link DirvishPathTail Statement
 hi Todo cterm=bold ctermfg=160 gui=bold
 
 function! s:statusline_expr()
