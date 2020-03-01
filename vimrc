@@ -58,9 +58,9 @@ if exists('*job_start') || exists('*jobstart')
 	Plug 'natebosch/vim-lsc'
 endif
 " 2}}} "lsp
+
 " Autocompletion {{{2 "
 if has('nvim')
-
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
