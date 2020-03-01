@@ -7,4 +7,4 @@
 "
 " Description: 
 " detect orgmode files as dotoo files
-autocmd BufNewFile,BufRead *.org set filetype=dotoo
+autocmd BufNewFile,BufRead *.org setlocal filetype=dotoo
