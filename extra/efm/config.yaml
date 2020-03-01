@@ -76,6 +76,14 @@ languages:
     <<: *proselint
     <<: *writegood
 
+  nroff:
+    <<: *proselint
+    <<: *writegood
+
+  groff:
+    <<: *proselint
+    <<: *writegood
+
   cpp:
     <<: *cppcheck
 
