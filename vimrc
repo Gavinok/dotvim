@@ -578,59 +578,60 @@ command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
 " 2}}} "Extra commands
 " 1}}} "Functions and Commands
 
-" General Settings: {{{1 "
+                                                    " General Settings: {{{1 "
 filetype plugin indent on
 set encoding=utf-8                                  " allow emojis in vimrc
 scriptencoding utf-8                                " allow emojis in vimrc
 if has('virtualedit')
-	set virtualedit=block " virtual block can go anywhere
+	set virtualedit=block                           " virtual block can go anywhere
 endif
 
 if has('gui_running')
 	call dotvim#LoadGui()
 endif
 
-set mouse=a           "Add mouse control not that I use them very much
-set clipboard^=unnamed,unnamedplus	"xclip support
-set tags+=.tags	  "make tagefiles hidden
-set title             "Update window title
-set hidden            "Allow to leave buffer without saving
-set showcmd           "Show keys pressed in normal
-set autochdir         "Auto cd
-set tabstop=4         "Shorter hard tabs
-set softtabstop=0     "no spaces
+set mouse=a                                         "Add mouse control not that I use them very much
+set clipboard^=unnamed,unnamedplus	                "xclip support
+set tags+=.tags;	                                "make tagefiles hidden
+set tags+=./.tags;../.tags                          "extra directories
+set title                                           "Update window title
+set hidden                                          "Allow to leave buffer without saving
+set showcmd                                         "Show keys pressed in normal
+set autochdir                                       "Auto cd
+set tabstop=4                                       "Shorter hard tabs
+set softtabstop=0                                   "no spaces
 set smarttab
-set shiftwidth=4      "Shorter shiftwidth
-set autoindent        "Auto indent newline
-set ruler             "Show line number and column
-set scrolljump=-15    "Jump 15 when moving cursor bellow screen
-set undofile          "Undo function after reopening
+set shiftwidth=4                                    "Shorter shiftwidth
+set autoindent                                      "Auto indent newline
+set ruler                                           "Show line number and column
+set scrolljump=-15                                  "Jump 15 when moving cursor bellow screen
+set undofile                                        "Undo function after reopening
 
-" check that directories exist
+                                                    " check that directories exist
 if !isdirectory(expand('~/.cache/vim'))
 	call mkdir($HOME.'/.cache/vim/undo', 'p')
 	call mkdir($HOME.'/.cache/vim/backup', 'p')
 endif
 set undodir=$HOME/.cache/vim/undo
 set backupdir=$HOME/.cache/vim/backup
-" set autowrite
-" set autoread        "read/file when switching buffers
-set lazyredraw        "redraw only when needed faster macros
-set shortmess=aAtcT   "get rid of annoying messagesc
+                                                    " set autowrite
+                                                    " set autoread           "read/file when switching buffers
+set lazyredraw                                      "redraw only when needed faster macros
+set shortmess=aAtcT                                 "get rid of annoying messagesc
 set incsearch         smartcase ignorecase hlsearch "better search
-set backspace=2       "backspace through anything
-set foldmethod=syntax "Enable folding
-set foldlevel=99      "start with all folds open
-set path+=**/*          "Autocompletion of path
-set wildmenu          "Autocompletion of commands
+set backspace=2                                     "backspace through anything
+set foldmethod=syntax                               "Enable folding
+set foldlevel=99                                    "start with all folds open
+set path+=**/*                                      "Autocompletion of path
+set wildmenu                                        "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.tags,tags,*.o,*.class
-set laststatus=2      "hide status bar for nvim
+set laststatus=2                                    "hide status bar for nvim
 set splitbelow splitright
 
-" Do not use smart case in command line mode,
-" extracted from https://goo.gl/vCTYdK
+                                                    " Do not use smart case in command line mode,
+                                                    " extracted from https://goo.gl/vCTYdK
 if exists('##CmdLineEnter')
 	augroup dynamic_smartcase
 		autocmd!
@@ -638,7 +639,7 @@ if exists('##CmdLineEnter')
 		autocmd CmdLineLeave : set smartcase
 	augroup END
 endif
-" 1}}} "General Settings
+                                                    " 1}}}                   "General Settings
 
 " FileType Specific Stuff: {{{1 "
 augroup GITCOMMITS
