@@ -20,12 +20,3 @@ if executable('efm-langserver')
 	endif
 endif
 setlocal foldmethod=indent
-function! OmniShell(findstart, base) abort
-	echo a:base
-	if a:findstart
-		let l:line = getline('.')
-	else
-		let s:res = getcompletion(a:base, 'shellcmd')
-		return {'words': s:res, 'refresh': 'always'}
-	endif
-endfunction
