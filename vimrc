@@ -60,6 +60,7 @@ endif
 " 2}}} "lsp
 " Autocompletion {{{2 "
 if has('nvim')
+
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
@@ -384,6 +385,7 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  m?		:echo &makeprg<CR>
 	nnoremap <leader>mm :call dotvim#ToggleAutocompile()<CR>
 	"async tagging
+	nnoremap <c-]> :call FindRootDirectory()<CR>:tag <c-r><c-w><CR>
 	nnoremap <leader>t  :call dotvim#Quicktag(0)<CR>
 else
 	nnoremap  `<TAB>    :!<Up>
