@@ -415,10 +415,8 @@ augroup end
 " 2}}} "netrw
 " Orgmode {{{2 "
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
-command! -nargs=1 Ngrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
-nmap <leader><leader> :Ngrep<space>
-command! -nargs=1 Wgrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
-nmap <leader><space> :Wgrep<space>
+command! -nargs=1 NGrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
+command! -nargs=1 WikiGrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
 " 2}}} "Orgmode
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
@@ -468,14 +466,15 @@ if has('patch-7.4.775')
 	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']  
 	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
-	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
-	let g:mucomplete#chains['dotoo']     =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
-	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'c-p']  
 	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
 	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
 	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']            
 	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']            
-	let g:mucomplete#chains['mail']      =  ['mini',  'uspl',  'list',  'c-p']            
+	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
+	let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['groff']     =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['markdown']
 
 	if !exists('g:mucomplete#can_complete')
 		let s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
@@ -581,8 +580,8 @@ command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
 
 " General Settings: {{{1 "
 filetype plugin indent on
-set encoding=utf-8      " allow emojis in vimrc
-scriptencoding utf-8      " allow emojis in vimrc
+set encoding=utf-8                                  " allow emojis in vimrc
+scriptencoding utf-8                                " allow emojis in vimrc
 if has('virtualedit')
 	set virtualedit=block " virtual block can go anywhere
 endif
