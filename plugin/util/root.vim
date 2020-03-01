@@ -30,5 +30,5 @@ endfunction
 " 1}}} "Diy Rooter
 
 command! Root call RootMe()
-
-
+" set directory to root before following tags
+nnoremap <c-]> :call FindRootDirectory()<CR>:tag <c-r><c-w><CR>
