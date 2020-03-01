@@ -8,3 +8,15 @@
 " Description: 
 " ftplugin for groff files
 nnoremap <buffer> K :Man 7 groff_ms<CR>
+
+if executable('efm-langserver')
+	let b:lsc_config = {
+				\ 'name': 'efm-langserver',
+				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/extra/efm/config.yaml',
+				\ 'suppress_stderr': v:true,
+				\}
+	if exists('g:loaded_lsc')
+		call RegisterLanguageServer('groff', b:lsc_config)
+		call RegisterLanguageServer('nroff', b:lsc_config)
+	endif
+endif
