@@ -52,7 +52,12 @@ let b:did_ftplugin_go_lint = 1
 setl keywordprg=:Godoc
 
 " use gofmt for formatting
-nnoremap <buffer><silent> gq :call dotvim#Gofmt()<CR>
+nnoremap <buffer><silent> gQ :call dotvim#Gofmt()<CR>
+
+if executable('gofmt')
+	setlocal formatprg="gofmt"
+	setlocal formatexpr=
+endif
 
 " make ]] and [[ great again
 nnoremap <buffer><silent> ]] :call CustomSections('down', 'func.*)\s*\zs{\s*\ze$')<CR>
