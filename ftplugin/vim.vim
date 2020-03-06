@@ -22,6 +22,21 @@ if executable('vim-language-server')
 		call RegisterLanguageServer('vim', b:lsc_config)
 	endif
 endif
+
+" ColorDemo - preview of Vim 256 colors
+function! ColorDemo() abort
+  10 vnew
+  setlocal nonumber buftype=nofile bufhidden=hide noswapfile statusline=\ Color\ demo
+  let num = 255
+  while num >= 0
+    execute 'hi col_'.num.' ctermbg='.num.' ctermfg='.num
+    execute 'syn match col_'.num.' "='.printf("%3d", num).'" containedIn=ALL'
+    call append(0, ' '.printf("%3d", num).'  ='.printf("%3d", num))
+    let num -= 1
+  endwhile
+endfunction
+command! -nargs=0 ColorDemo call ColorDemo()
+
 setlocal foldmethod=marker
 nmap <buffer> `<CR> :Runtime<CR>
 nmap <buffer><silent> <leader>V :Messages<CR>
