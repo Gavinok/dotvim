@@ -20,3 +20,6 @@ if executable('efm-langserver')
 	endif
 endif
 setlocal foldmethod=indent
+if filereadable(expand('~/.cache/dmenu_run'))
+	 setlocal dict=~/.cache/dmenu_run
+endif
