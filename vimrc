@@ -701,15 +701,6 @@ if has('patch-8.0.0283')
 				\indent-heuristic,algorithm:patience,internal
 endif
 " 2}}} "Diffs
-" Autoclose Quickfix {{{2 "
-" auto close quickfix when quitting vim
-augroup QFClose
-	autocmd!
-	autocmd WinEnter * if winnr('$') == 1
-				\&& &buftype == "quickfix"|q|endif
-augroup END
-
-" 2}}}" Autoclose Quickfix
 if filereadable(expand('~/.config/vimlocal'))
 	source ~/.config/vimlocal
 endif
