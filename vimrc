@@ -326,7 +326,7 @@ xnoremap <RightMouse> "*y
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
 " Quick format file
-nnoremap gq :<C-U>call dotvim#FormatFile()<CR>
+nnoremap gQ :<C-U>call dotvim#FormatFile()<CR>
 " win resize
 nnoremap <C-W>+ :call dotvim#RepeatResize('+')<CR>
 nnoremap <C-W>- :call dotvim#RepeatResize('-')<CR>
