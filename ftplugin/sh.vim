@@ -12,7 +12,7 @@
 if executable('efm-langserver')
 	let b:lsc_config = {
 				\ 'name': 'efm-langserver',
-				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/extra/efm/config.yaml -log '.$HOME.'/efm-langserver.log',
+				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/extra/efm/config.yaml',
 				\ 'suppress_stderr': v:true,
 				\}
 	if exists('g:loaded_lsc')
