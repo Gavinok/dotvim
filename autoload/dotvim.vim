@@ -340,18 +340,26 @@ function! dotvim#WebSearch(type, ...)
 	let &selection = 'inclusive'
 	let reg_save = @@
 
-	if a:0  " Invoked from Visual mode, use '< and '> marks.
-		silent exe 'normal! `<' . a:type . '`>y'
-	elseif a:type ==# 'line'
+	" if a:0  " Invoked from Visual mode, use '< and '> marks.
+	" 	silent exe 'normal! `<' . a:type . '`>y'
+	" elseif a:type ==# 'line'
+	" 	silent exe "normal! '[V']y"
+	" elseif a:type ==# 'block'
+	" 	silent exe "normal! `[\<C-V>`]y"
+	" else
+	" 	silent exe 'normal! `[v`]y'
+	" endif
+
+	if a:0  " Invoked from Visual mode, use gv command.
+		silent exe "normal! gvy"
+	elseif a:type == 'line'
 		silent exe "normal! '[V']y"
-	elseif a:type ==# 'block'
-		silent exe "normal! `[\<C-V>`]y"
 	else
-		silent exe 'normal! `[v`]y'
+		silent exe "normal! `[v`]y"
 	endif
 
 	let search = substitute(trim(@@), ' \+', '+', 'g')
-	silent exe "!linkhandler 'https://duckduckgo.com/?q=" . search . "'"
+	silent exe "!$BROWSER 'https://duckduckgo.com/?q=" . search . "'"
 
 	let &selection = sel_save
 	let @@ = reg_save
