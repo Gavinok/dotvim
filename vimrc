@@ -291,7 +291,7 @@ xnoremap * "xy/<C-R>x<CR>
 function! Sort(type, ...)
 	'[,']sort
 endfunction
-nmap <silent> gS :set opfunc=Sort<CR>g@
+nmap <silent> s :set opfunc=Sort<CR>g@
 
 " close preview if open when hitting escape
 nnoremap <silent> <esc> :pclose<cr>
