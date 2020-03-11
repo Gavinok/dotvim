@@ -21,10 +21,10 @@ if executable('efm-langserver')
 endif
 setlocal foldmethod=indent
 
-if executable('shfmt')
-	setlocal formatprg="shfmt"
-	setlocal formatexpr=
-endif
+" if executable('shfmt')
+" 	setlocal formatprg="shfmt"
+" 	setlocal formatexpr=
+" endif
 
 if filereadable(expand('~/.cache/dmenu_run'))
 	 setlocal dict=~/.cache/dmenu_run
