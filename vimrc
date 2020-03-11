@@ -570,13 +570,14 @@ xmap s :SortVis<CR>
 " Extra commands {{{2 
 " Minimal Gist this is actually IX but i always think its XI
 command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
+" Yank all matches in last search
 command! -register YankMatch call dotvim#YankMatches(<q-reg>)
 command! -nargs=0 MW call dotvim#MkdirWrite()
 command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
 " 2}}} "Extra commands
 " 1}}} "Functions and Commands
 
-                                                    " General Settings: {{{1 "
+" General Settings: {{{1 "
 filetype plugin indent on
 set encoding=utf-8                                  " allow emojis in vimrc
 scriptencoding utf-8                                " allow emojis in vimrc
@@ -605,15 +606,15 @@ set ruler                                           "Show line number and column
 set scrolljump=-15                                  "Jump 15 when moving cursor bellow screen
 set undofile                                        "Undo function after reopening
 
-                                                    " check that directories exist
+" check that directories exist
 if !isdirectory(expand('~/.cache/vim'))
 	call mkdir($HOME.'/.cache/vim/undo', 'p')
 	call mkdir($HOME.'/.cache/vim/backup', 'p')
 endif
 set undodir=$HOME/.cache/vim/undo
 set backupdir=$HOME/.cache/vim/backup
-                                                    " set autowrite
-                                                    " set autoread           "read/file when switching buffers
+" set autowrite
+" set autoread           "read/file when switching buffers
 set lazyredraw                                      "redraw only when needed faster macros
 set shortmess=aAtcT                                 "get rid of annoying messagesc
 set incsearch         smartcase ignorecase hlsearch "better search
@@ -628,8 +629,8 @@ set wildignore=*.tags,tags,*.o,*.class
 set laststatus=2                                    "hide status bar for nvim
 set splitbelow splitright
 
-                                                    " Do not use smart case in command line mode,
-                                                    " extracted from https://goo.gl/vCTYdK
+" Do not use smart case in command line mode,
+" extracted from https://goo.gl/vCTYdK
 if exists('##CmdLineEnter')
 	augroup dynamic_smartcase
 		autocmd!
@@ -637,7 +638,7 @@ if exists('##CmdLineEnter')
 		autocmd CmdLineLeave : set smartcase
 	augroup END
 endif
-                                                    " 1}}}                   "General Settings
+" 1}}}                   "General Settings
 
 " FileType Specific Stuff: {{{1 "
 augroup GITCOMMITS
