@@ -559,7 +559,7 @@ command! StripWhitespace :%s/\s\+$//e
 " 2}}} "White Space
 " Websearch {{{2 
 nmap <silent> gs :set opfunc=dotvim#WebSearch<CR>g@
-vmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
+xmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
 " 2}}} "Websearch
 " VisualSort {{{2 
 " sort based on visual block
