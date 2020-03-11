@@ -120,6 +120,7 @@ Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
 Plug 'wellle/targets.vim'
+Plug 'gpanders/vim-oldfiles' " improved oldfiles
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 Plug 'othree/yajs.vim'
