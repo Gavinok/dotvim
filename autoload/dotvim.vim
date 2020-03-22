@@ -422,10 +422,10 @@ function! dotvim#CCR()
 	elseif cmdline =~# '\v\C^(cli|lli)'
 		" like :clist or :llist but prompts for an error/location number
 		return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
-	elseif cmdline =~# '\C^old'
-		" like :oldfiles but prompts for an old file to edit
-		set nomore
-		return "\<CR>:Z|e #<"
+	" elseif cmdline =~# '\C^fil.*old'
+		" like :filter \pattern\ oldfiles but prompts for an old file to edit
+		" set nomore
+		" return "\<CR>:Z|e #<"
 	elseif cmdline =~# '\C^marks'
 		" like :marks but prompts for a mark to jump to
 		return "\<CR>:norm! `"
