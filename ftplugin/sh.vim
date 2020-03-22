@@ -21,10 +21,8 @@ if executable('efm-langserver')
 endif
 setlocal foldmethod=indent
 
-" if executable('shfmt')
-" 	setlocal formatprg="shfmt"
-" 	setlocal formatexpr=
-" endif
+" force Man to be used along side lsc
+nnoremap K :Man <c-r><c-w><CR>
 
 if filereadable(expand('~/.cache/dmenu_run'))
 	 setlocal dict=~/.cache/dmenu_run

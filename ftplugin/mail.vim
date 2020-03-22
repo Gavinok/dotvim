@@ -20,4 +20,17 @@ endif
 
 compiler proselint
 
+function! Dict(word)
+	"code
+	exec 'new|read !dict '.a:word
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+	setfiletype text
+endfunction
+command! -nargs=1 Dict call Dict(<q-args>)
+
+setlocal keywordprg=Dict
+
+" force dict to be used along side lsc
+nnoremap K :Dict <c-r><c-w><CR>
+
 call dotvim#WordProcessor()
