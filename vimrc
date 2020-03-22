@@ -28,6 +28,8 @@ let g:loaded_2html_plugin    =  1
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper        =  1
 let g:loaded_remote_plugins  =  1
+"prevent fzf form being unnecessary loaded if installed on system
+let g:loaded_fzf = 1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -114,13 +116,12 @@ Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
 " 2}}} "Tpope
 " vimscript {{{2 "
-Plug 'tpope/vim-scriptease'
+" Plug 'tpope/vim-scriptease'
 Plug 'mhinz/vim-lookup'
 Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
 Plug 'wellle/targets.vim'
-Plug 'gpanders/vim-oldfiles' " improved oldfiles
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 Plug 'othree/yajs.vim'
@@ -479,12 +480,12 @@ if has('patch-7.4.775')
 		let s:latex_cond= { t -> t =~# '\%(\\\)$' }
 		let g:mucomplete#can_complete = {}
 		let g:mucomplete#can_complete['c']         =  {  'omni':  s:c_cond              }
-		let g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
 		let g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
 		let g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
 		let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
 		let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
-		let g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
 		let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
 		let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
 	endif
