@@ -45,7 +45,8 @@ function! dotvim#Quicktag(force) abort
 		autocmd InsertLeave <buffer> silent! call dotvim#Quicktag(0)
 	endif
 	if g:rootdir !=# '' || a:force
-		exec 'Dispatch ctags  -f ".tags" -R ' . g:rootdir
+		call system('ctags  -f ".tags" -R ' . shellescape(g:rootdir) .' &')
+		" 'Dispatch ctags  -f '.tags' -R ' . g:rootdir
 	else 
 		echo 'no root'
 	endif
