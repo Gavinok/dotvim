@@ -272,7 +272,6 @@ cnoremap <expr> / wildmenumode() ? "\<C-D>" : "/"
 cnoremap <C-N> <DOWN>
 cnoremap <C-P> <UP>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
-cnoremap <expr> <CR> dotvim#CCR()
 " if we have 3 * in a row make them into **/*
 " this is only applied on the end of a line
 cnoremap <expr> * getcmdline() =~ '.*\*\*$' ? '/*' : '*'
