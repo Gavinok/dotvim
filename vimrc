@@ -585,6 +585,11 @@ endif
 
 if has('gui_running')
 	call dotvim#LoadGui()
+else
+	hi Normal      guibg=NONE
+	hi ColorColumn guibg=NONE
+	hi SignColumn  guibg=NONE
+	hi Folded      guibg=NONE
 endif
 
 set mouse=a                                         "Add mouse control not that I use them very much
