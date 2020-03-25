@@ -669,7 +669,7 @@ augroup WRIGHTING
 	autocmd FileType markdown,pandoc nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#MarkdownScreenShot'))
 	autocmd FileType dotoo,org nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'))
 	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call dotvim#WordProcessor()
-	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dict=~/.vim/extra/dict/latex_comp.txt'
+	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dictionary+=~/.vim/extra/dict/latex_comp.txt'
 augroup END
 
 " 1 }}}" FileType Specific Stuff
