@@ -37,6 +37,13 @@ function! ColorDemo() abort
 endfunction
 command! -nargs=0 ColorDemo call ColorDemo()
 
+" quickly find the gui equivelent to the cterm number
+function! CtermConvert()
+	grep! <cword> ~/.vim/extra/cterm_to_hex.vim | copen
+endfunction
+
+nnoremap zT :call CtermConvert()<CR>
+
 setlocal foldmethod=marker
 nmap <buffer> `<CR> :Runtime<CR>
 nmap <buffer><silent> <leader>V :Messages<CR>
