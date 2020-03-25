@@ -125,12 +125,15 @@ Plug 'wellle/targets.vim'
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 Plug 'othree/yajs.vim'
 let g:colorizer_colornames_disable = 1
+" color support
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 " 2}}} "etc.
 call plug#end()
 
 " Aesthetics: {{{2 "
-" set termguicolors
 colorscheme spaceway
+set termguicolors
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 hi Todo cterm=bold ctermfg=160 gui=bold
@@ -189,6 +192,9 @@ else
 	set timeoutlen=1000   " default value
 	set ttimeout          " for key codes
 	set ttimeoutlen=10    " unnoticeable small value
+	" set Vim-specific sequences for RGB colors allowing for gui colors
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	runtime macro/matchit
 endif
 runtime vimshortcuts.vim
