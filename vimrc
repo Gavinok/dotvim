@@ -116,9 +116,6 @@ Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
 " 2}}} "Tpope
 " vimscript {{{2 "
-" Plug 'tpope/vim-scriptease'
-Plug 'mhinz/vim-lookup'
-Plug 'tweekmonster/helpful.vim'
 " 2}}} "vimscript
 " etc {{{2 "
 Plug 'wellle/targets.vim'
