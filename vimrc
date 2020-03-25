@@ -265,7 +265,7 @@ command! -nargs=1 -complete=customlist,dotvim#ShortcutComplete Sc call dotvim#Sh
 " better navigation of command history
 " allow next completion after / alternative 
 " is <C-E> if <C-D> makes to long of a list
-cnoremap <expr> / wildmenumode() ? "\<C-D>" : "/"
+cnoremap <expr> / wildmenumode() ? "\<C-E>" : "/"
 cnoremap <C-N> <DOWN>
 cnoremap <C-P> <UP>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
