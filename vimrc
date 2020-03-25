@@ -62,24 +62,23 @@ endif
 " 2}}} "lsp
 
 " Autocompletion {{{2 "
+Plug 'valodim/vim-zsh-completion'
 if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
-	Plug 'norcalli/nvim-colorizer.lua'
 else 
 	"I find this super distracting
 	set completeopt+=preview
 	set completeopt+=popup
 	" set completepopup=border:off
-	Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
+	" Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
 if has('patch-7.4.775')
 	Plug 'lifepillar/vim-mucomplete' "main source for completion
 	Plug 'jonasw234/vim-mucomplete-minisnip'
-	Plug 'Konfekt/complete-common-words.vim'
 endif
 Plug 'tommcdo/vim-lion'
 Plug 'joereynolds/vim-minisnip'
@@ -193,9 +192,6 @@ else
 	runtime macro/matchit
 endif
 runtime vimshortcuts.vim
-let s:dotfiles = split(&runtimepath, ',')[0]
-let g:common_words_dicts_dir = s:dotfiles . '/plugged/complete-common-words.vim/dicts'
-unlet s:dotfiles
 " delete a buffer
 nnoremap <leader>bd :bdelete<CR>
 
@@ -354,6 +350,7 @@ map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 
 " Quick spell correction shortcut
+let g:quickdict='~/.vim/extra/dict/en_common.dict'
 nnoremap <silent> <leader>ss :call dotvim#WordProcessor()<CR>
 nmap <BS>     mz[s1z=`z
 

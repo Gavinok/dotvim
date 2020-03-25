@@ -86,6 +86,7 @@ function! dotvim#WordProcessor() abort
 			silent! setlocal nospell
 			silent! setlocal nolinebreak
 			silent! let g:goyo_width=80
+			setlocal complete-=k
 		else
 			let b:prose=1
 			echo 'Prose Mode'
@@ -99,6 +100,10 @@ function! dotvim#WordProcessor() abort
 			inoremap <buffer> ? ?<C-g>u
 			inoremap <buffer> : :<C-g>u
 			setlocal spell spelllang=en_us
+			" use a preselected dictionary file
+			execute 'setlocal dictionary+=' . g:quickdict
+			setlocal dictionary+=spell
+			setlocal complete+=k
 			setlocal linebreak
 			let g:goyo_width=80
 		endif
