@@ -63,6 +63,7 @@ endif
 
 " Autocompletion {{{2 "
 Plug 'valodim/vim-zsh-completion'
+set completefunc=zsh_completion#Complete
 if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
@@ -469,6 +470,7 @@ if has('patch-7.4.775')
 	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
 	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
+	let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']  
 	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
 	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']            
 	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']            
