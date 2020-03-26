@@ -903,4 +903,10 @@ function! dotvim#WebSearch(type, ...)
 	let @@ = reg_save
 
 endfunction
-" 1}}} "WebSearch
+
+" Simple Snippets {{{ "1
+" * TODO may be a good alternative to minisnips
+iab comm <C-R>=&commentstring<CR><esc>F%c2w
+" expand snippets with <c-f>
+imap <c-f> <c-v><c-a><c-]>
+" 1}}} "Simple Snippets

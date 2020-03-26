@@ -42,6 +42,7 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
+Plug 'axvr/org.vim'
 " lsp {{{2
 " using:
 " vim & sh: efm-language-server
@@ -106,7 +107,7 @@ set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " Org Mode {{{2 "
-Plug 'dhruvasagar/vim-dotoo'
+" Plug 'dhruvasagar/vim-dotoo'
 " 2}}} "Org Mode
 " My Pluggins {{{2 "
 Plug 'gavinok/spaceway.vim'
