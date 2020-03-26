@@ -127,6 +127,7 @@ let g:colorizer_colornames_disable = 1
 " color support
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 let g:Hexokinase_highlighters = [ 'backgroundfull' ]
+" Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 " 2}}} "etc.
 call plug#end()
 
