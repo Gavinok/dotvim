@@ -880,3 +880,27 @@ augroup LATEX
 	autocmd filetype tex setlocal omnifunc=vimtex#complete#omnifunc
 augroup END
 " 2}}} "vimtex
+
+" WebSearch {{{1 
+function! dotvim#WebSearch(type, ...)
+
+	let sel_save = &selection
+	let &selection = 'inclusive'
+	let reg_save = @@
+
+	if a:0  " Invoked from Visual mode, use gv command.
+		silent exe "normal! gvy"
+	elseif a:type == 'line'
+		silent exe "normal! '[V']y"
+	else
+		silent exe "normal! `[v`]y"
+	endif
+
+	let search = substitute(trim(@@), ' \+', '+', 'g')
+	silent exe "!$BROWSER 'https://duckduckgo.com/?q=" . search . "'"
+
+	let &selection = sel_save
+	let @@ = reg_save
+
+endfunction
+" 1}}} "WebSearch
