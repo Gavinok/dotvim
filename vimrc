@@ -12,7 +12,6 @@
 "      ░                           ░
 
 " Quick Init: {{{1 "
-
 if has('nvim')
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
 endif
@@ -61,7 +60,6 @@ if exists('*job_start') || exists('*jobstart')
 	Plug 'natebosch/vim-lsc'
 endif
 " 2}}} "lsp
-
 " Autocompletion {{{2 "
 Plug 'valodim/vim-zsh-completion'
 set completefunc=zsh_completion#Complete
@@ -74,7 +72,6 @@ else
 	set completeopt+=preview
 	set completeopt+=popup
 	" set completepopup=border:off
-	" Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
