@@ -560,10 +560,6 @@ highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 " remove trailing whitespaces
 command! StripWhitespace :%s/\s\+$//e
 " 2}}} "White Space
-" Websearch {{{2 
-nmap <silent> gs :set opfunc=dotvim#WebSearch<CR>g@
-xmap <silent> gs :<C-u>call dotvim#WebSearch(visualmode(), 1)<Cr>
-" 2}}} "Websearch
 " VisualSort {{{2 
 " sort based on visual block
 command! -range -nargs=0 -bang SortVis sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
