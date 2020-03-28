@@ -41,7 +41,8 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
-Plug 'axvr/org.vim'
+" Plug 'axvr/org.vim'
+Plug 'Gavinok/org.vim'
 " lsp {{{2
 " using:
 " vim & sh: efm-language-server
@@ -590,6 +591,8 @@ else
 	hi ColorColumn guibg=NONE
 	hi SignColumn  guibg=NONE
 	hi Folded      guibg=NONE
+	hi Conceal     guibg=NONE
+	hi Terminal    guibg=NONE
 endif
 
 set mouse=a                                         "Add mouse control not that I use them very much
