@@ -21,6 +21,13 @@ if executable('efm-langserver')
 	endif
 endif
 
+
+" add comment string
+setlocal commentstring=.\\\"%s
+
+" add tmac files to path
+setlocal path+=,/usr/share/groff/1.22.4/tmac
+
 " matchit now supports ms macros
 let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
 			\. '^\.cstart:^\.cend,'. '^\.EQ:^\.EN,' . '^\.G1:^\.G2,' . '^\.GS:^\.GE,' 
