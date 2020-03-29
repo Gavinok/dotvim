@@ -253,10 +253,10 @@ nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
 nnoremap <leader>hh  :help<Space>
 
 " bookmarked directories
-nnoremap <leader>fp  :edit ~/Programming/**/**<Left>
-nnoremap <leader>fh  :edit ~/**
-nnoremap <leader>fv  :edit ~/.vim/**/*
+nnoremap <leader>fp  :edit ~/Programming/**/*
 nnoremap <leader>fw  :edit ~/Dropbox/DropsyncFiles/vimwiki/**/**
+nnoremap <leader>fv  :edit ~/.vim/**/*
+nnoremap <leader>fh  :edit ~/**
 
 nnoremap <leader>fj  :ME<space>
 command! -nargs=1 -complete=customlist,dotvim#MRUComplete ME call dotvim#MRU('edit', <f-args>)
