@@ -288,11 +288,8 @@ nnoremap <C-W><C-f>	:silent call dotvim#ZoomToggle()<CR>
 nnoremap Y  y$
 xnoremap * "xy/<C-R>x<CR>
 
-"i never use s so i may as well make it useful
-function! Sort(type, ...)
-	'[,']sort
-endfunction
-nmap <silent> s :set opfunc=Sort<CR>g@
+"i never use s so make it d wthout cutting
+nmap <silent> s "_d
 
 " close preview if open when hitting escape
 nnoremap <silent> <esc> :pclose<cr>
