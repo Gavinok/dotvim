@@ -42,6 +42,7 @@ augroup PLUGGED
 augroup end
 call plug#begin('~/.vim/plugged')
 " Plug 'axvr/org.vim'
+Plug 'tpope/vim-scriptease'
 Plug 'Gavinok/org.vim'
 " lsp {{{2
 " using:
