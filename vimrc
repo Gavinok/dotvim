@@ -42,22 +42,18 @@ augroup PLUGGED
 augroup end
 call plug#begin('~/.vim/plugged')
 " Plug 'axvr/org.vim'
-Plug 'Gavinok/org.vim'
 
 " Autocompletion {{{2 "
 if executable('node')
-	Plug 'Shougo/neco-vim'
-	"plugin/coc_settings.vim
-	Plug 'neoclide/coc-neco'
-	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
 	let g:mycoc_enabled=1
+	" Settings at ./plugin/coc_settings.vim
+	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
+	Plug 'Shougo/neco-vim'
+	Plug 'neoclide/coc-neco'
 else	
 	Plug 'skywind3000/vim-auto-popmenu'
-	" enable this plugin for filetypes, '*' for all files.
-	let g:apc_enable_ft = {'*':1}
-	" source for dictionary, current or other loaded buffers, see ':help cpt'
+	let g:apc_enable_ft = {'*':1} " enable for all filetypes
 	set complete=.,k,w,b
-	" don't select the first item.
 	set completeopt=menu,menuone,noselect
 endif
 
@@ -66,10 +62,8 @@ if has('nvim')
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
 else 
-	"I find this super distracting
 	set completeopt+=preview
 	set completeopt+=popup
-	" set completepopup=border:off
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
@@ -99,6 +93,7 @@ set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
+Plug 'gavinok/org.vim'
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
