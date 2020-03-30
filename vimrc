@@ -46,6 +46,8 @@ call plug#begin('~/.vim/plugged')
 " Autocompletion {{{2 "
 if executable('node')
 	let g:mycoc_enabled=1
+	let g:coc_data_home=$XDG_CACHE_HOME.'/coc'
+	let g:coc_config_home=globpath(&rtp, ' extra/coc-settings.json')
 	" Settings at ./plugin/coc_settings.vim
 	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
 	Plug 'Shougo/neco-vim'
