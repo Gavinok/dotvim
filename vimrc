@@ -42,11 +42,12 @@ augroup PLUGGED
 augroup end
 call plug#begin('~/.vim/plugged')
 " Plug 'axvr/org.vim'
-Plug 'tpope/vim-scriptease'
 Plug 'Gavinok/org.vim'
+
 " Autocompletion {{{2 "
 if executable('node')
 	Plug 'Shougo/neco-vim'
+	"plugin/coc_settings.vim
 	Plug 'neoclide/coc-neco'
 	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
 	let g:mycoc_enabled=1
@@ -74,7 +75,6 @@ endif
 " Snippets {{{2 "
 if has('patch-7.4.775')
 endif
-Plug 'tommcdo/vim-lion'
 Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
@@ -98,19 +98,16 @@ let g:table_mode_realign_map = '<Leader>TT'
 set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
-" Org Mode {{{2 "
-" Plug 'dhruvasagar/vim-dotoo'
-" 2}}} "Org Mode
 " My Pluggins {{{2 "
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
 Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-scriptease'
 " 2}}} "Tpope
-" vimscript {{{2 "
-" 2}}} "vimscript
 " etc {{{2 "
+Plug 'tommcdo/vim-lion'
 Plug 'wellle/targets.vim'
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
