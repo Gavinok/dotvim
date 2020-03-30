@@ -44,24 +44,6 @@ call plug#begin('~/.vim/plugged')
 " Plug 'axvr/org.vim'
 Plug 'tpope/vim-scriptease'
 Plug 'Gavinok/org.vim'
-" lsp {{{2
-" using:
-" vim & sh: efm-language-server
-" c: ccls
-" go: gopls (go-tools)
-" java: jdtls (eclips.jdt.ls)
-" javascript: typescript-language-server
-" python: python-language-server
-" 	autopep8
-" 	yapf :guidline linting
-" 	python-pylint :linting
-" 	python-rope
-" 	python-pydocstyle
-" 	python-pyflakes :linting
-if exists('*job_start') || exists('*jobstart')
-endif
-" 2}}} "lsp
-
 " Autocompletion {{{2 "
 if executable('node')
 	Plug 'Shougo/neco-vim'
