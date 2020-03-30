@@ -9,17 +9,18 @@
 " Collection of coc settings
 " COC {{{1 "
 if exists('g:mycoc_enabled')
+
+
 	augroup LazyLoadPlug
 		autocmd!
 		autocmd CursorHold,CursorHoldI * call plug#load('coc.nvim') | autocmd! LazyLoadPlug
 	augroup end
-	" TODO: setup diagnostics for vimrc "
 
-	" Define Error Symbols and colors
-	hi link CocErrorHighlight hl-Error
-	hi link CocWarningSign hl-SpllBad
-	hi link CocInfoHighlight hl-SpellCap
-	hi link CocHintHighlight hl-SpellCap
+	" Define Error colors
+	hi link CocErrorHighlight Error
+	hi link CocWarningHighlight SpellBad
+	hi link CocInfoHighlight SpellCap
+	hi link CocHintHighlight SpellCap
 
 	" Extensions. Some need configuration.
 	" coc-java needs a valid JVM filepath defined in coc-settings
