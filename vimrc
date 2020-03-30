@@ -386,7 +386,7 @@ let g:netrw_browsex_viewer='setsid xdg-open' "force gx to use xdg-open
 let g:netrw_bufsettings = 'noswf noma nomod nowrap ro nobl'
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
-let g:netrw_fastbrowse=0
+let g:netrw_fastbrowse=2
 let g:netrw_localrmdir='rm -r'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
@@ -519,6 +519,7 @@ set autoindent                                      "Auto indent newline
 set ruler                                           "Show line number and column
 set scrolljump=-15                                  "Jump 15 when moving cursor bellow screen
 set undofile                                        "Undo function after reopening
+set colorcolumn=80									"force linux kernal and BSD line limit
 
 " check that directories exist
 if !isdirectory(expand('~/.cache/vim'))
