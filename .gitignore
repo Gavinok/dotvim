@@ -1,4 +1,5 @@
 plugged/
 autoload/plug.vim
+sessions/*
 vimshortcuts.vim
 .netrwhist
