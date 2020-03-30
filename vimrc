@@ -61,7 +61,23 @@ Plug 'Gavinok/org.vim'
 if exists('*job_start') || exists('*jobstart')
 endif
 " 2}}} "lsp
+
 " Autocompletion {{{2 "
+if executable('node')
+	Plug 'Shougo/neco-vim'
+	Plug 'neoclide/coc-neco'
+	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
+	let g:mycoc_enabled=1
+else	
+	Plug 'skywind3000/vim-auto-popmenu'
+	" enable this plugin for filetypes, '*' for all files.
+	let g:apc_enable_ft = {'*':1}
+	" source for dictionary, current or other loaded buffers, see ':help cpt'
+	set complete=.,k,w,b
+	" don't select the first item.
+	set completeopt=menu,menuone,noselect
+endif
+
 if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
