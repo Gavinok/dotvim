@@ -75,8 +75,6 @@ endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
 if has('patch-7.4.775')
-	Plug 'lifepillar/vim-mucomplete' "main source for completion
-	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 Plug 'tommcdo/vim-lion'
 Plug 'joereynolds/vim-minisnip'
