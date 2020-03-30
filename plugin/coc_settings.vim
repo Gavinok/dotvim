@@ -37,6 +37,7 @@ if exists('g:mycoc_enabled')
 				\'coc-java',
 				\'coc-python',
 				\'coc-tsserver',
+				\'coc-html',
 				\'coc-vimtex',
 				\'coc-json',
 				\'coc-lists',
