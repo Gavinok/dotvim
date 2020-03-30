@@ -135,9 +135,9 @@ function! s:statusline_expr()
 	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
 endfunction
 let &statusline = s:statusline_expr()
-highlight User1 ctermbg=107  ctermfg=black
-highlight User2 ctermbg=103  ctermfg=black
-highlight User3 ctermbg=59   ctermfg=black
+highlight User1 ctermbg=107  ctermfg=black guibg=#87af5f guifg=black
+highlight User2 ctermbg=103  ctermfg=black guibg=#8787af guifg=black
+highlight User3 ctermbg=59   ctermfg=black guibg=#5f5f5f guifg=black
 " 2}}} Aesthetics "
 " 1}}} "Plugins
 
