@@ -8,6 +8,8 @@ all: sync
 sync:
 	[ -d $(PWD)/.git ] && git pull
 	[ -f ~/.vimrc ] || ln -s $(PWD)/vimrc ~/.vimrc
+	mkdir -p ~/.config/efm-langserver
+	ln -s $(PWD)/extra/efm/config.yaml ~/.config/efm-langserver/config.yaml
 	mkdir -p ~/.config/nvim
 	[ -f ~/.config/nvim/init.vim ] || ln -s $(PWD)/vimrc ~/.config/nvim/init.vim
 
