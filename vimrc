@@ -62,8 +62,6 @@ if exists('*job_start') || exists('*jobstart')
 endif
 " 2}}} "lsp
 " Autocompletion {{{2 "
-Plug 'valodim/vim-zsh-completion'
-set completefunc=zsh_completion#Complete
 if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
