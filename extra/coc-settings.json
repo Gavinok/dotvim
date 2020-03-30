@@ -1,0 +1,92 @@
+{
+	"list.insertMappings": {
+		"<C-r>": "do:refresh",
+		"<C-n>": "normal:j",
+		"<C-p>": "normal:k"
+	},
+	"python.jediEnabled": false,
+	"coc.preferences.colorSupport": true,
+	"coc.source.word.filetypes": [ "markdown", "tex", "gitcommit", "groff", "nroff", "org" ],
+	"coc.source.dictionary.filetypes": [ "org", "markdown", "tex", "sh", "groff", "nroff", "gitcommit"],
+	"diagnostic.locationlist": true,
+	"diagnostic.refreshOnInsertMode": true,
+	"diagnostic.enable": true,
+	"diagnostic.enableSign": false,
+	"diagnostic.checkCurrentLine": true,
+	"suggest.enablePreview":true,
+	"suggest.completionItemKindLabels": {
+		"function": "\uf794",
+		"method": "\uf6a6",
+		"variable": "\uf71b",
+		"constant": "\uf8ff",
+		"struct": "\ufb44",
+		"class": "\uf0e8",
+		"interface": "\ufa52",
+		"text": "\ue612",
+		"enum": "\uf435",
+		"enumMember": "\uf02b",
+		"module": "\uf668",
+		"color": "\ue22b",
+		"property": "\ufab6",
+		"field": "\uf93d",
+		"unit": "\uf475",
+		"file": "\uf471",
+		"value": "\uf8a3",
+		"event": "\ufacd",
+		"folder": "\uf115",
+		"keyword": "\uf893",
+		"snippet": "\uf64d",
+		"operator": "\uf915",
+		"reference": "\uf87a",
+		"typeParameter": "\uf278",
+		"default": "\uf29c"
+	},
+	"go.enable": true,
+	"go.goplsPath": "/usr/bin/gopls",
+
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"filetypes": [
+				"c",
+				"cpp",
+				"objc",
+				"objcpp"],
+				"rootPatterns": [
+					".ccls",
+					"compile_commands.json",
+					".vim/",
+					".git/",
+					".hg/"],
+					"initializationOptions": {
+						"cache": {
+							"directory": "/tmp/ccls"
+						}
+					}
+		},
+		"efm": {
+			"command": "efm-langserver",
+			"args": [],
+			// custom config path
+			"filetypes": [
+				"vim",
+				"sh",
+				"groff",
+				"tex",
+				"mail",
+				"eruby",
+				"markdown",
+				"yaml"]
+		}
+	},
+	"java.home": "/usr/lib/jvm/java-13-openjdk/",
+	"java.errors.incompleteClasspath.severity": "ignore",
+	"java.completion.overwrite": true,
+	"diagnostic-languageserver.filetypes": {
+		"groff"   : "languagetool",
+		"tex"     : "languagetool",
+		"mail"  : "languagetool",
+		"nroff"   : "languagetool",
+		"markdown": "languagetool"
+	}
+}
