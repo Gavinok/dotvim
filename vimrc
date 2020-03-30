@@ -297,6 +297,7 @@ nnoremap <C-W><C-f>	:silent call dotvim#ZoomToggle()<CR>
 
 
 "Better Mappings Imho
+nnoremap gf gF
 nnoremap Y  y$
 xnoremap * "xy/<C-R>x<CR>
 
