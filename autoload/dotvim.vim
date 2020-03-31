@@ -113,51 +113,21 @@ endfu
 
 " netrwmappings {{{1 
 " for - in vim
-" function! dotvim#Opendir(cmd) abort  
-" 	if expand('%') =~# '^$\|^term:[\/][\/]'  
-" 		execute a:cmd '.'  
-" 	else  
-" 		execute a:cmd '%:h'  
-" 		let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'  
-" 		call search(pattern, 'wc')  
-" 	endif  
-" endfunction
-
-" taken from vim vinegar
-let s:dotfiles = '\(^\|\s\s\)\zs\.\S\+'
-function! dotvim#Opendir(cmd) abort
-  let df = ','.s:dotfiles
-  if expand('%:t')[0] ==# '.' && g:netrw_list_hide[-strlen(df):-1] ==# df
-    let g:netrw_list_hide = g:netrw_list_hide[0 : -strlen(df)-1]
-  endif
-  if &filetype ==# 'netrw' && len(s:netrw_up)
-    let basename = fnamemodify(b:netrw_curdir, ':t')
-    execute s:netrw_up
-    call s:seek(basename)
-  elseif expand('%') =~# '^$\|^term:[\/][\/]'
-    execute a:cmd '.'
-  else
-    execute a:cmd '%:h'
-    call s:seek(expand('#:t'))
-  endif
+function! dotvim#Opendir(cmd) abort  
+	if expand('%') =~# '^$\|^term:[\/][\/]'  
+		execute a:cmd '.'  
+	else  
+		execute a:cmd '%:h'  
+		let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'  
+		call search(pattern, 'wc')  
+	endif  
 endfunction
 
-function! s:seek(file) abort
-  if get(b:, 'netrw_liststyle') == 2
-    let pattern = '\%(^\|\s\+\)\zs'.escape(a:file, '.*[]~\').'[/*|@=]\=\%($\|\s\+\)'
-  else
-    let pattern = '^\%(| \)*'.escape(a:file, '.*[]~\').'[/*|@=]\=\%($\|\t\)'
-  endif
-  call search(pattern, 'wc')
-  return pattern
-endfunction
-
-" now - doesnt use <space> after moving up a directory
+" " now - doesnt use <space> after moving up a directory
 function! dotvim#NetrwMapping() abort
 	let netrw_sid = maparg('s', 'n', 0, 1)['sid']
 	execute 'nnoremap <buffer> -  :call <SNR>'.netrw_sid.'_NetrwBrowseUpDir(1)<CR>'
 	execute 'nnoremap <buffer> zo :<C-U>call <SNR>'.netrw_sid.'_NetrwHidden(1)<CR>'
-	execute 'nnoremap <buffer> !  :!'
 endfunction
 " 1}}} "netrwmappings
 
@@ -201,33 +171,6 @@ function! dotvim#VisSort(isnmbr) range abort
 	let @a = keeprega
 endfun
 " 1}}} "VisSort
-
-" shellcompletion {{{1 
-function! dotvim#OmniShell(findstart, base) abort
-	echo a:base
-	if a:findstart
-		let l:line = getline('.')
-	else
-		let s:res = getcompletion(a:base, 'shellcmd')
-		return {'words': s:res, 'refresh': 'always'}
-	endif
-endfunction
-" 1}}} "shellcompletion
-
-" TODO: needs some work <15-12-19 Gavin Jaeger-Freeborn>
-" shellcompletion {{{1 
-function! dotvim#OmniVim(findstart, base) abort
-	if a:findstart
-		let l:line = getline('.')
-	else
-		" TODO: add type f to these <15-12-19 Gavin Jaeger-Freeborn>
-		let s:res = getcompletion(a:base, 'cmdline')
-		call extend(s:res, getcompletion(a:base, 'function'))
-		call extend(s:res, getcompletion(a:base, 'var'))
-		return {'words': s:res, 'refresh': 'always'}
-	endif
-endfunction
-" 1}}} "shellcompletion
 
 " YankMatches {{{1 
 " copy the contents of all matches from the last search
