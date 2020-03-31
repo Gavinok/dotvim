@@ -140,6 +140,18 @@ let &statusline = s:statusline_expr()
 highlight User1 ctermbg=107  ctermfg=black guibg=#87af5f guifg=black
 highlight User2 ctermbg=103  ctermfg=black guibg=#8787af guifg=black
 highlight User3 ctermbg=59   ctermfg=black guibg=#5f5f5f guifg=black
+
+if has('gui_running')
+	call dotvim#LoadGui()
+else
+	hi Normal      guibg=NONE
+	hi ColorColumn guibg=NONE
+	hi SignColumn  guibg=NONE
+	hi Folded      guibg=NONE
+	hi Conceal     guibg=NONE
+	hi Terminal    guibg=NONE
+endif
+
 " 2}}} Aesthetics "
 " 1}}} "Plugins
 
@@ -490,17 +502,6 @@ set encoding=utf-8                                  " allow emojis in vimrc
 scriptencoding utf-8                                " allow emojis in vimrc
 if has('virtualedit')
 	set virtualedit=block                           " virtual block can go anywhere
-endif
-
-if has('gui_running')
-	call dotvim#LoadGui()
-else
-	hi Normal      guibg=NONE
-	hi ColorColumn guibg=NONE
-	hi SignColumn  guibg=NONE
-	hi Folded      guibg=NONE
-	hi Conceal     guibg=NONE
-	hi Terminal    guibg=NONE
 endif
 
 set mouse=a                                         "Add mouse control not that I use them very much
