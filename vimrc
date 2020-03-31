@@ -16,19 +16,18 @@ if has('nvim')
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
 endif
 
-" where to find python
-let g:python_host_prog  = '/usr/bin/python2' "speed up python2 startup
-let g:python3_host_prog = '/usr/bin/python3' "speed up python3 startup
+" block plugins and extra dependency's
+let g:python_host_prog  = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
 " Disable extra plugins
 let g:loaded_gzip            =  1
 let g:loaded_tarPlugin       =  1
 let g:loaded_zipPlugin       =  1
 let g:loaded_2html_plugin    =  1
+let g:loaded_fzf = 1
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper        =  1
 let g:loaded_remote_plugins  =  1
-"prevent fzf form being unnecessary loaded if installed on system
-let g:loaded_fzf = 1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -44,10 +43,10 @@ call plug#begin('~/.vim/plugged')
 " Plug 'axvr/org.vim'
 
 " Autocompletion {{{2 "
-if executable('node')
+if v:false
 	let g:mycoc_enabled=1
 	let g:coc_data_home=$XDG_CACHE_HOME.'/coc'
-	let g:coc_config_home=globpath(&rtp, ' extra/coc-settings.json')
+	let g:coc_config_home=globpath(&rtp, 'extra')
 	" Settings at ./plugin/coc_settings.vim
 	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
 	Plug 'Shougo/neco-vim'
