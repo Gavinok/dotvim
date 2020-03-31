@@ -161,8 +161,6 @@ let maplocalleader = '|'
 nmap <space> <leader>
 vmap <space> <leader>
 
-" shortcut to files and dirs uses shortcuts.sh
-" it can be found at my scripts repo
 
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
@@ -195,6 +193,8 @@ else
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	runtime macro/matchit
 endif
+" shortcut to files and dirs uses shortcuts.sh
+" it can be found at my scripts repo
 runtime vimshortcuts.vim
 " delete a buffer
 nnoremap <leader>bd :bdelete<CR>
