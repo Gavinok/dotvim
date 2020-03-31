@@ -74,7 +74,8 @@ Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
-let g:minisnip_dir = '~/.vim/extra/snip:' . join(split(glob('~/.vim/extra/snip/**/'), '\n'), ':')
+let s:snipdir=globpath(&rtp, 'extra/snip')
+let g:minisnip_dir = s:snipdir . ':' . join(split(glob( s:snipdir . '**/'), '\n'), ':')
 imap <Nop> <Plug>(minisnip-complete)
 " 2}}} "Snippets
 " Terminal {{{2 "
