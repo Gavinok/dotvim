@@ -281,11 +281,16 @@ endif
 
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
+	Plug 'natebosch/vim-lsc'
+endif
+if exists('*job_start') || exists('*jobstart')
+	let g:mucomplete#completion_delay = 200
+	let g:mucomplete#reopen_immediately = 0
 	nmap <leader>V :LSClientAllDiagnostics<CR>
 	let g:lsc_enable_autocomplete = v:false
 	let g:lsc_auto_map = {
 				\ 'GoToDefinition': 'gd',
-				\ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
+				\ 'GoToDefinitionSplit': ['<C-W>d', '<C-W><C-D>'],
 				\ 'FindReferences': 'gr',
 				\ 'NextReference': '<leader>*',
 				\ 'PreviousReference': '<leader>#',
@@ -298,62 +303,67 @@ if exists('*job_start') || exists('*jobstart')
 				\ 'SignatureHelp': 'gm',
 				\ 'Completion': 'omnifunc',
 				\}
-
-	let g:lsc_server_commands={}
-	if executable('ccls')
-		let g:lsc_server_commands['c'] = {
-					\ 'command': 'ccls',
-					\ 'suppress_stderr': v:true,
-					\ 'message_hooks': {
-					\    'initialize': {
-					\       'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
-					\       'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-					\    },
-					\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
-					\ },
-					\}
-	endif
-	if executable('pyls')
-		let g:lsc_server_commands['python'] = 'pyls'
-	endif
-	if executable('gopls')
-		let g:lsc_server_commands['go'] = {
-					\ 'command': 'gopls serve',
-					\ 'log_level': -1,
-					\ 'suppress_stderr': v:true,
-					\}
-	endif
-	if executable('typescript-language-server')
-		let g:lsc_server_commands['javascript'] = {
-					\ 'name': 'javascript support using typescript-language-server',
-					\ 'command': 'typescript-language-server --stdio',
-					\    'message_hooks': {
-					\        'initialize': {
-					\            'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(finddir('.git/', expand('%:p') . ';'), ':p:h'))}
-					\        },
-					\    },
-					\}
-	endif
-	" if executable('texlab')
-	" 	let g:lsc_server_commands['tex'] = {
-	" 				\ 'name': 'texlab',
-	" 				\ 'command': 'servlog.sh',
-	" 				\    'message_hooks': {
-	" 				\        'initialize': {
-	" 				\            'initializationOptions': {'diagnostics': 'true'},
-	" 				\        },
-	" 				\    },
-	" 				\}
-	" endif
-	if executable('efm-langserver')
-		let g:lsc_server_commands['vim'] = {
-					\ 'name': 'efm-langserver',
-					\ 'command': 'efm-langserver -c=/home/gavinok/.vim/efm/config.yaml',
-					\}
-		let g:lsc_server_commands['sh'] = g:lsc_server_commands['vim']
-	endif
 endif
 " 2}}} LSC
+" Mucomplete {{{2 "
+if has('patch-7.4.775')
+Plug 'lifepillar/vim-mucomplete'
+endif
+
+let g:mucomplete#user_mappings = {
+			\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>",
+			\ }
+set completeopt+=menuone
+"-----------
+if has('patch-7.4.775')
+	" Tab complete dont accept until told to
+	set completeopt+=noselect
+	let g:mucomplete#enable_auto_at_startup = 1
+	"----------- completion chains
+	set complete-=i
+	set complete-=t
+	" remove beeps during completion
+	set belloff=all
+
+	let g:mucomplete#wordlist = {
+				\       '': ['gavinfreeborn@gmail.com', 'Gavin', 'Jaeger-Freeborn'],
+				\ }
+
+	let g:mucomplete#chains = {}
+	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-n',   'uspl']
+	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']  
+	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
+	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
+	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
+	let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']  
+	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
+	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']            
+	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']            
+	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
+	let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['groff']     =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['markdown']
+
+	if !exists('g:mucomplete#can_complete')
+		let s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
+		let s:latex_cond= { t -> t =~# '\%(\\\)$' }
+		let g:mucomplete#can_complete = {}
+		let g:mucomplete#can_complete['c']         =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
+		let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
+		let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
+	endif
+	let g:mucomplete#no_popup_mappings = 0
+	"spelling
+	let g:mucomplete#spel#good_words = 1
+endif
+" 2}}} "Mucomplete
 
 " LSP {{{1 "
 if exists('*job_start') || exists('*jobstart')
