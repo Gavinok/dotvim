@@ -395,7 +395,7 @@ endif
 " netrw {{{2
 " Poor mans Vim vinegar
 let g:netrw_browsex_viewer='setsid xdg-open' "force gx to use xdg-open
-let g:netrw_bufsettings = 'noswf noma nomod nowrap ro nobl'
+let g:netrw_bufsettings = 'noswap noma nomod nowrap ro nobl'
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
 let g:netrw_fastbrowse=2
@@ -408,7 +408,6 @@ nmap - :call dotvim#Opendir('edit')<CR>
 augroup netrw_mapping
 	autocmd!
 	autocmd Filetype netrw call dotvim#NetrwMapping()
-	autocmd FileType netrw setl bufhidden=wipe
 augroup end
 " 2}}} "netrw
 " Orgmode {{{2 "
