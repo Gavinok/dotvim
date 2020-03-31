@@ -10,7 +10,6 @@
 "      ░░   ▒ ░░      ░     ░░   ░ ░
 "       ░   ░         ░      ░     ░ ░
 "      ░                           ░
-
 " Quick Init: {{{1 "
 if has('nvim')
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -159,7 +158,7 @@ endif
 let g:mapleader="\\"
 let maplocalleader = '|'
 nmap <space> <leader>
-vmap <space> <leader>
+xmap <space> <leader>
 
 
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
@@ -601,6 +600,7 @@ call SetupCommandAlias('man','Man')
 call SetupCommandAlias('git','!git')
 call SetupCommandAlias('cp','!cp')
 call SetupCommandAlias('mv','!mv')
+call SetupCommandAlias('mkdir','!mkdir')
 " 2}}} Command Alias
 
 " quickly print the date
