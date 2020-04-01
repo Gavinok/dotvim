@@ -42,7 +42,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'axvr/org.vim'
 
 " Autocompletion {{{2 "
-if v:false
+if executable('node')
 	let g:mycoc_enabled=1
 	let g:coc_data_home=$XDG_CACHE_HOME.'/coc'
 	let g:coc_config_home=globpath(&rtp, 'extra')
@@ -69,6 +69,7 @@ endif
 " Snippets {{{2 "
 if has('patch-7.4.775')
 endif
+Plug 'lervag/vimtex'
 Plug 'joereynolds/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
