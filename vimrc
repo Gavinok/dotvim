@@ -95,6 +95,7 @@ set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
+Plug 'tpope/vim-speeddating'
 Plug 'gavinok/org.vim'
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
