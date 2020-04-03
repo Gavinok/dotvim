@@ -5,6 +5,9 @@
 		"<C-p>": "normal:k"
 	},
 	"python.jediEnabled": false,
+	"python.autoUpdateLanguageServer": true,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.enabled": true,
 	"coc.preferences.colorSupport": true,
 	"coc.source.word.filetypes": [ "markdown", "tex", "text", "mail", "gitcommit", "groff", "nroff", "org" ],
 	"coc.source.dictionary.filetypes": [ "org", "markdown", "text", "mail", "tex", "sh", "groff", "nroff", "gitcommit"],
