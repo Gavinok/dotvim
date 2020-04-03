@@ -123,7 +123,6 @@ colorscheme spaceway
 set termguicolors
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
-hi Todo ctermfg=160 guifg=#d70000 cterm=bold gui=bold
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
