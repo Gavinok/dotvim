@@ -26,4 +26,5 @@ let g:org_date_format='%Y-%m-%d %a %H:%M'
 execute '1SpeedDatingFormat ' . g:org_date_format
 iab <expr><buffer> sch printf('SCHEDULED: <%s>', strftime(g:org_date_format))
 iab <expr><buffer> cls printf('CLOSED: [%s]', strftime(g:org_date_format))
-nmap <buffer> cit V:s/TODO\\|DONE//g<space>|<space>nohlsearch<S-left><S-left>
+nmap <buffer> cit V:s/TODO\\|DONE//g<left><left>
+
