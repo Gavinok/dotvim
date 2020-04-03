@@ -135,6 +135,11 @@ call plug#end()
         autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
         autocmd FileType julia      let b:repl_config = { 'cmd': 'julia' }
     augroup END
+augroup LazyLoadFugitive
+	autocmd!
+	autocmd CursorHold,CursorHoldI * call plug#load('vim-fugitive') | autocmd! LazyLoadFugitive
+augroup end
+
 " Aesthetics: {{{2 "
 colorscheme spaceway
 set termguicolors
