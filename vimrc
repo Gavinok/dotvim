@@ -275,6 +275,8 @@ command! -nargs=1 -complete=customlist,dotvim#ShortcutComplete Sc call dotvim#Sh
 cnoremap <expr> / wildmenumode() ? "\<C-E>" : "/"
 cnoremap <C-N> <DOWN>
 cnoremap <C-P> <UP>
+"quick substitution
+xnoremap ss :s//g<left><left>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
 " if we have 3 * in a row make them into **/*
 " this is only applied on the end of a line
