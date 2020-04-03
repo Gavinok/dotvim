@@ -39,6 +39,7 @@ if exists('g:mycoc_enabled')
 				\'coc-tsserver',
 				\'coc-html',
 				\'coc-vimtex',
+				\'coc-texlab',
 				\'coc-json',
 				\'coc-lists',
 				\'coc-utils'
