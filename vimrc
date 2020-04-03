@@ -288,7 +288,6 @@ cnoreabbr <expr> %% fnameescape(expand('%:p'))
 nnoremap <C-W>z		:silent call dotvim#ZoomToggle()<CR>
 nnoremap <C-W><C-z>	:silent call dotvim#ZoomToggle()<CR>
 
-
 "Better Mappings Imho
 nnoremap gf gF
 nnoremap Y  y$
@@ -549,10 +548,10 @@ endif
 set undodir=$HOME/.cache/vim/undo
 set backupdir=$HOME/.cache/vim/backup
 " set autowrite
-" set autoread           "read/file when switching buffers
+" set autoread                                      "read/file when switching buffers
 set lazyredraw                                      "redraw only when needed faster macros
 set shortmess=aAtcT                                 "get rid of annoying messagesc
-set incsearch         smartcase ignorecase hlsearch "better search
+set incsearch smartcase ignorecase hlsearch         "better search
 set backspace=2                                     "backspace through anything
 set foldmethod=syntax                               "Enable folding
 set foldlevel=99                                    "start with all folds open
