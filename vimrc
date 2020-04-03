@@ -83,7 +83,11 @@ Plug 'christoomey/vim-tmux-navigator'
 " 2}}} "Terminal
 " Git {{{2 "
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gpush', 'Gedit', 'Ggrep'] }
-Plug 'mhinz/vim-signify'
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 " 2}}} "Git
 " Writing {{{2 "
 " Plug 'lervag/vimtex' " Latex support
