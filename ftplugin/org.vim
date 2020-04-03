@@ -18,10 +18,6 @@ nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
 nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
-" nnoremap <buffer><silent> <leader>nr :call NarrowCodeblock()<CR>
-" command! -nargs=1 Ngrep vimgrep "<args>" ~/Dropbox/Documents/org/**/*.org
-" nmap <buffer> <leader><leader> :Ngrep 
-" TODO
 let g:org_date_format='%Y-%m-%d %a %H:%M'
 execute '1SpeedDatingFormat ' . g:org_date_format
 iab <expr><buffer> sch printf('SCHEDULED: <%s>', strftime(g:org_date_format))
