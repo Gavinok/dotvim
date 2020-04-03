@@ -71,6 +71,8 @@ if has('patch-7.4.775')
 endif
 Plug 'lervag/vimtex'
 Plug 'joereynolds/vim-minisnip'
+Plug 'axvr/zepl.vim'
+
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
@@ -122,6 +124,17 @@ let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 " 2}}} "etc.
 call plug#end()
 
+    augroup zepl
+        autocmd!
+        autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
+        autocmd FileType sh         let b:repl_config = { 'cmd': 'sh' }
+        autocmd FileType r          let b:repl_config = { 'cmd': 'R' }
+        autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
+        autocmd FileType clojure    let b:repl_config = { 'cmd': 'clj' }
+        autocmd FileType scheme     let b:repl_config = { 'cmd': 'rlwrap csi' }
+        autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
+        autocmd FileType julia      let b:repl_config = { 'cmd': 'julia' }
+    augroup END
 " Aesthetics: {{{2 "
 colorscheme spaceway
 set termguicolors
