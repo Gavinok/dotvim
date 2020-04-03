@@ -256,6 +256,7 @@ nnoremap <leader>hh  :help<Space>
 
 " bookmarked directories
 nnoremap <leader>fp  :edit ~/Programming/**/*
+nnoremap <leader>fd  :edit ~/Documents/**/*
 nnoremap <leader>fw  :edit ~/Dropbox/DropsyncFiles/vimwiki/**/**
 nnoremap <leader>fv  :edit ~/.vim/**/*
 nnoremap <leader>fh  :edit ~/**
