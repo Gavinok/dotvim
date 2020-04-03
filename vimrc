@@ -416,7 +416,22 @@ augroup netrw_mapping
 augroup end
 " 2}}} "netrw
 " Orgmode {{{2 "
+" Simple implementation of org-capture using minisnip
+function! CreateCapture(window)
+	" if this file has a name
+	if expand('%:p') !=# ''
+		let b:temp_org_file=printf('file:%s:%d', expand('%:p') , line('.'))
+		exec a:window . ' ~/Documents/org/refile.org'
+		$read ~/template.org
+	else
+		exec a:window . ' ~/Documents/org/refile.org'
+		$read ~/templatenofile.org
+	endif
+	call feedkeys("i\<Plug>(minisnip)", 'i')
+endfunction
+
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
+map <silent>gC :call CreateCapture('split')<CR>
 command! -nargs=1 NGrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
 command! -nargs=1 WikiGrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
 " 2}}} "Orgmode
