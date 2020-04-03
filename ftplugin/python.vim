@@ -14,3 +14,11 @@ if executable('pyls')
 		call RegisterLanguageServer('python', b:lsc_config)
 	endif
 endif
+
+function! Pydoc()
+	"code
+	exec 'new|read !pydoc '. expand('<cword>')
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+	setfiletype man
+endfunction
+command! -nargs=0 Pydoc call Pydoc()
