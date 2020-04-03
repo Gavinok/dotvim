@@ -161,7 +161,6 @@ let maplocalleader = '|'
 nmap <space> <leader>
 xmap <space> <leader>
 
-
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
 if has('nvim')
@@ -181,6 +180,7 @@ if has('nvim')
 	tnoremap <C-K>       <C-\><C-N><C-W><C-K>
 	tnoremap <C-L>       <C-\><C-N><C-W><C-L>
 	set noshowmode
+	set inccommand=nosplit
 	" tell neovim where runtime is
 	let &packpath = &runtimepath
 else
