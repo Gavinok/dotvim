@@ -38,11 +38,3 @@
 " endif
 
 set iskeyword+=\\
-
-if executable('chktex')
-	compiler chktex
-	augroup CHKTEX
-		autocmd!
-		autocmd BufWritePost <buffer> Make
-	augroup end
-endif
