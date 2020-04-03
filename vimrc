@@ -222,8 +222,10 @@ nnoremap <silent> <leader>/        :nohlsearch<CR>
 nmap <expr> <CR> &buftype ==# '' ? 'za' : "\<CR>"
 
 " Find References
-if executable('ag')
-	set grepprg=ag\ --vimgrep
+if executable('rg')
+	set grepprg=rg\ --vimgrep
+elseif executable('ag')
+	set grepprg=ag\ --vimgrep	
 endif
 
 nnoremap <leader>G :Grep <C-R><C-W> .<CR>:copen<CR>
