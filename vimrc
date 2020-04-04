@@ -72,6 +72,7 @@ endif
 Plug 'lervag/vimtex'
 Plug 'joereynolds/vim-minisnip'
 Plug 'axvr/zepl.vim'
+Plug 'axvr/org.vim'
 
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
@@ -443,14 +444,15 @@ function! CreateCapture(window)
 	if expand('%:p') !=# ''
 		let b:temp_org_file=printf('file:%s:%d', expand('%:p') , line('.'))
 		exec a:window . ' ~/Documents/org/refile.org'
-		$read ~/template.org
+		$read ~/.vim/extra/org/template.org
 	else
 		exec a:window . ' ~/Documents/org/refile.org'
-		$read ~/templatenofile.org
+		$read ~/.vim/extra/org/templatenofile.org
 	endif
 	call feedkeys("i\<Plug>(minisnip)", 'i')
 endfunction
-
+let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
+hi def link orgHeading2 Statment
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
 command! -nargs=1 NGrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
