@@ -47,9 +47,12 @@ nnoremap zT :call CtermConvert()<CR>
 setlocal foldmethod=marker
 nmap <buffer> `<CR> :Runtime<CR>
 nmap <buffer><silent> <leader>V :Messages<CR>
-xmap <buffer><silent> <CR> :<C-U>call dotvim#RunVimScript(1)<CR>
-nnoremap <buffer><silent> gd  :call lookup#lookup()<CR>
-nnoremap <buffer><silent> <C-T>  :call lookup#pop()<CR>
 nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
 nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
 autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
+
+"use vim like a zrepl
+xnoremap <buffer><silent> gz :<C-u>call dotvim#RunVimScript(visualmode(), 1)<CR>
+nnoremap <buffer><silent> gz :<C-u>set operatorfunc=dotvim#RunVimScript<CR>g@
+nnoremap <buffer><silent> gzz gz_
+nnoremap <buffer><silent> gzZ gz&
