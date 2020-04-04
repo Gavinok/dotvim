@@ -16,6 +16,7 @@ if exists('g:mycoc_enabled')
 		autocmd CursorHold,CursorHoldI * call plug#load('coc.nvim') | autocmd! LazyLoadPlug
 	augroup end
 
+
 	" Define Error colors
 	hi link CocErrorHighlight Error
 	hi link CocWarningHighlight SpellBad
@@ -59,18 +60,11 @@ if exists('g:mycoc_enabled')
 	" Fix autofix problem of current line
 	nnoremap <Leader>V :<C-u>CocList diagnostics<cr>
 
-	function! s:show_documentation()
-		if (index(['vim','help'], &filetype) >= 0)
-			execute 'h '.expand('<cword>')
-		else
-			call CocAction('doHover')
-		endif
-	endfunction
-	" can always use Man if i need to"
-	nnoremap <silent> K :call <SID>show_documentation()<CR>
-	inoremap <silent><expr> <c-space> coc#refresh()
+	" for me this is just <space><space>
+	nmap <silent> <leader><space> :call CocAction('doHover')<CR>
 
 	command! -nargs=0 Format :call CocAction('format')
+
 	augroup FORMATEXPR
 		autocmd!
 		" Setup formatexpr specified filetype(s).
