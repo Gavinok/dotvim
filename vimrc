@@ -39,7 +39,6 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
-" Plug 'axvr/org.vim'
 
 " Autocompletion {{{2 "
 if executable('node')
@@ -103,7 +102,6 @@ let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
 Plug 'tpope/vim-speeddating'
-Plug 'gavinok/org.vim'
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
@@ -251,8 +249,6 @@ elseif executable('ag')
 	set grepprg=ag\ --vimgrep	
 endif
 
-nnoremap <leader>G :Grep <C-R><C-W> .<CR>:copen<CR>
-
 " change variable and repeat with .
 nnoremap c*			*Ncgn
 nnoremap <C-N>      yiW/<C-r>0<CR>Ncgn
@@ -260,18 +256,19 @@ xnoremap <C-N>      y/<C-r>0<CR>Ncgn
 nnoremap <leader>n  yiw:%s/<C-r>0//gc<left><left><left>
 xnoremap <leader>n  y:%s/<C-r>0//gc<left><left><left>
 
-map ]a :cnext<CR>
-map [a :cprevious<CR>
-map ]A :lnext<CR>
-map [A :lprevious<CR>
+map ]a :silent! cnext<CR>
+map [a :silent! cprevious<CR>
+map ]A :silent! lnext<CR>
+map [A :silent! lprevious<CR>
 
 "quick buffer navigation
-nnoremap ]b :bnext<CR>
-nnoremap [b :bprevious<CR>
+nnoremap ]b :silent! bnext<CR>
+nnoremap [b :silent! bprevious<CR>
 
 " Find Files {{{2 "
 nnoremap <leader>fT  :setfiletype<space>
 nnoremap <leader>ff  :Root<CR>:edit **/*
+nnoremap <leader>fb  :buffer *
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
 nnoremap <leader>ft  :tjump<space>
 nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
@@ -422,7 +419,6 @@ endif
 " netrw {{{2
 " Poor mans Vim vinegar
 let g:netrw_browsex_viewer='setsid xdg-open' "force gx to use xdg-open
-let g:netrw_bufsettings = 'noswap noma nomod nowrap ro nobl'
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
 let g:netrw_fastbrowse=2
@@ -434,6 +430,7 @@ nmap - :call dotvim#Opendir('edit')<CR>
 
 augroup netrw_mapping
 	autocmd!
+	autocmd FileType netrw setl bufhidden=delete
 	autocmd Filetype netrw call dotvim#NetrwMapping()
 augroup end
 " 2}}} "netrw
