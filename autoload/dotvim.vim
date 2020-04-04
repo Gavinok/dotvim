@@ -390,10 +390,15 @@ endfunction
 " 1}}} "CCR
 
 " Run Vim Script {{{1 
-function! dotvim#RunVimScript(...)
+function! dotvim#RunVimScript(type, ...) abort
+    let sel_save = &selection
+    let &selection = 'inclusive'
+
 	" Select either the visual region, or the current paragraph...
 	if a:0
 		let @@ = join(getline("'<","'>"), "\n")
+    else
+        let @@ = join(getline("'[", "']"), "\n")
 	endif
 
 	" Remove continuations and convert shell commands, then execute...
