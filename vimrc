@@ -120,7 +120,6 @@ let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 " Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 " 2}}} "etc.
 call plug#end()
-
     augroup zepl
         autocmd!
         autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
@@ -634,11 +633,11 @@ augroup END
 
 " Abbreviations: {{{1 "
 " Command Alias:  {{{2
-fun! SetupCommandAlias(from, to)
+function! SetupCommandAlias(from, to)
 	exec 'cnoreabbrev <expr> '.a:from
 				\ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
 				\ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfun
+endfunction
 call SetupCommandAlias('W','w')
 call SetupCommandAlias("w'",'w')
 call SetupCommandAlias('Wq','wq')
