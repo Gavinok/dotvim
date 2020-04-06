@@ -66,8 +66,6 @@ else
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
-if has('patch-7.4.775')
-endif
 Plug 'lervag/vimtex'
 Plug 'joereynolds/vim-minisnip'
 Plug 'axvr/zepl.vim'
@@ -101,7 +99,7 @@ set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
-Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating', { 'for': 'org' }
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
