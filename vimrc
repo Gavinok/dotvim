@@ -436,22 +436,31 @@ augroup end
 " Simple implementation of org-capture using minisnip
 function! CreateCapture(window)
 	" if this file has a name
+	let g:org_refile='~/Documents/org/refile.org'
 	if expand('%:p') !=# ''
-		let b:temp_org_file=printf('file:%s:%d', expand('%:p') , line('.'))
-		exec a:window . ' ~/Documents/org/refile.org'
-		$read ~/.vim/extra/org/template.org
+		let g:temp_org_file=printf('file:%s:%d', expand('%:p') , line('.'))
+		exec a:window . ' ' . g:org_refile
+		exec '$read ' . globpath(&rtp, 'extra/org/template.org')
 	else
-		exec a:window . ' ~/Documents/org/refile.org'
-		$read ~/.vim/extra/org/templatenofile.org
+		exec a:window . ' ' . g:org_refile
+		exec '$read ' . globpath(&rtp, 'extra/org/templatenofile.org')
 	endif
 	call feedkeys("i\<Plug>(minisnip)", 'i')
 endfunction
+
+function! W3m(url)
+	let newurl = substitute(a:url, 'https\?:\/\/', '', 'g')
+	call dotvim#TermCmd("w3m '" . newurl . "'")
+endfunction
+
+nmap gX :call W3m('<c-r>=expand('<cfile>')<CR>')<CR>
+
 let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
 hi def link orgHeading2 Statment
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
-command! -nargs=1 NGrep grep "<args>" ~/Dropbox/Documents/org/**/*.org
-command! -nargs=1 WikiGrep grep "<args>" ~/Dropbox/DropsyncFiles/vimwiki/**/*.md
+command! -nargs=1 NGrep grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org
+command! -nargs=1 WikiGrep grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md
 " 2}}} "Orgmode
 " TableMode {{{2 "
 function! s:isAtStartOfLine(mapping)
@@ -482,8 +491,6 @@ nnoremap <leader>b] :Step<CR>
 nnoremap <leader>b} :Over<CR>
 nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
 " 2}}} "termdebug
-
-
 " CustomSections {{{2 "
 function! CustomSections(dir, regex)
 	if a:dir ==# 'up'
