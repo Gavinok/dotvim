@@ -143,6 +143,8 @@ set termguicolors
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 
+set laststatus=2 "show statusbar
+
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
@@ -586,7 +588,6 @@ set wildmenu                                        "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.tags,tags,*.o,*.class
-set laststatus=2                                    "hide status bar for nvim
 set splitbelow splitright
 
 " Do not use smart case in command line mode,
