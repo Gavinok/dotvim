@@ -29,8 +29,6 @@ setlocal errorformat="%f",\ line\ %l:\ %m
 setlocal makeprg=compiler\ %
 setlocal foldlevel=99
 setlocal commentstring=<!--%s-->
-autocmd BufRead *.md call SyntaxRange#Include('\$[^$]', '\$', 'tex')
-" setlocal keywordprg=ducksearch
 " Spellcheck documents we're actually editing (not just viewing)
 if &modifiable && !&readonly
 	setlocal spell
