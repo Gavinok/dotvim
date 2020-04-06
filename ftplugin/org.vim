@@ -20,7 +20,16 @@ xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', 
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
 let g:org_date_format='%Y-%m-%d %a %H:%M'
 execute '1SpeedDatingFormat ' . g:org_date_format
-iab <expr><buffer> sch printf('SCHEDULED: <%s>', strftime(g:org_date_format))
-iab <expr><buffer> cls printf('CLOSED: [%s]', strftime(g:org_date_format))
-nmap <buffer> cit V:s/TODO\\|DONE//g<left><left>
+function! ChangeTodo()
+	normal! 0
+	if search('TODO\|DONE', 'W',getline('.'))
+		normal! ciw
+		call feedkeys("a\<C-X>\<C-O>", 'i')
+	else
+		call search('\* ', 'W',getline('.'))
+		exec 'normal! f '
+		call feedkeys("a\<C-X>\<C-O>", 'i')
+	endif
+endfunction
+nmap <buffer> cit :call ChangeTodo()<CR>
 
