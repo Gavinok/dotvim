@@ -282,6 +282,7 @@ endif
 " LSC {{{2 "
 if exists('*job_start') || exists('*jobstart')
 	Plug 'natebosch/vim-lsc'
+	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 if exists('*job_start') || exists('*jobstart')
 	let g:mucomplete#completion_delay = 200
