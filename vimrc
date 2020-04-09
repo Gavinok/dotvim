@@ -49,7 +49,11 @@ if executable('node')
 	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
 	Plug 'Shougo/neco-vim'
 	Plug 'neoclide/coc-neco'
-else	
+elseif exists('patch-7.4.775')
+	" Settings at ./plugin/mucomplete
+	Plug 'lifepillar/vim-mucomplete'
+	Plug 'jonasw234/vim-mucomplete-minisnip'
+else
 	Plug 'skywind3000/vim-auto-popmenu'
 	let g:apc_enable_ft = {'*':1} " enable for all filetypes
 	set complete=.,k,w,b
@@ -291,7 +295,12 @@ command! -nargs=1 -complete=customlist,dotvim#ShortcutComplete Sc call dotvim#Sh
 " better navigation of command history
 " allow next completion after / alternative 
 " is <C-E> if <C-D> makes to long of a list
-cnoremap <expr> / wildmenumode() ? "\<C-E>" : "/"
+if has('nvim-0.5.0')
+	cnoremap <expr> / wildmenumode() ? "\<C-Y>" : "/"
+else
+	cnoremap <expr> / wildmenumode() ? "\<C-E>" : "/"
+endif
+
 cnoremap <C-N> <DOWN>
 cnoremap <C-P> <UP>
 "quick substitution
