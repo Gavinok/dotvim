@@ -87,6 +87,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " 2}}} "Terminal
 " Git {{{2 "
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gpush', 'Gedit', 'Ggrep'] }
+Plug 'HiPhish/info.vim'
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
 else
@@ -490,6 +491,17 @@ nnoremap <leader>hp :SignifyHunkDiff<cr>
 nnoremap <leader>hu :SignifyHunkUndo<cr>
 command! Diff :SignifyDiff
 " 2}}} "Signify
+" info {{{2 
+function! InfoMappings()
+    nmap <buffer> <c-n> <Plug>(InfoNext)
+    nmap <buffer> <c-p> <Plug>(InfoPrev)
+	nmap <buffer> gu <Plug>(InfoUp)
+endfunction
+augroup info
+	" this one is which you're most likely to use?
+	autocmd FileType info call InfoMappings()
+augroup end
+" 2}}} "info
 " 1}}} "Plugin Configuration
 
 " Functions And Commands: {{{1 "
