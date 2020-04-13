@@ -174,6 +174,7 @@ else
 	hi Folded      guibg=NONE
 	hi Conceal     guibg=NONE
 	hi Terminal    guibg=NONE
+	hi LineNr      guibg=NONE
 endif
 
 " 2}}} Aesthetics "

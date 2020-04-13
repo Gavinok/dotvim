@@ -62,7 +62,7 @@ nmap <leader>rn <Plug>(coc-rename)
 nnoremap <Leader>V :<C-u>CocList diagnostics<cr>
 
 " for me this is just <space><space>
-nmap <silent> <leader><space> :call CocAction('doHover')<CR>
+nmap <silent> <leader>K :call CocAction('doHover')<CR>
 
 command! -nargs=0 Format :call CocAction('format')
 
