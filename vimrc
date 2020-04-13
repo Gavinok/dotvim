@@ -471,8 +471,9 @@ let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
 hi def link orgHeading2 Statment
 map <silent>gO :e ~/Documents/org/mylife.org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
-command! -nargs=1 NGrep grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org
-command! -nargs=1 WikiGrep grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md
+command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
+com! -nargs=+ -complete=file GitGrep let s:gp=&gp|set gp=git\ grep\ -n|gr <args>|let &gp=s:gp|unl s:gp
+command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 " 2}}} "Orgmode
 " TableMode {{{2 "
 function! s:isAtStartOfLine(mapping)
