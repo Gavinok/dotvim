@@ -42,7 +42,6 @@ function! dotvim#Quicktag(force) abort
 		let g:rootdir = FindRootDirectory()
 	else 
 		let g:rootdir = getcwd()
-		autocmd InsertLeave <buffer> silent! call dotvim#Quicktag(0)
 	endif
 	if g:rootdir !=# '' || a:force
 		call system('ctags  -f ".tags" -R ' . shellescape(g:rootdir) .' &')
