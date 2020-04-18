@@ -83,6 +83,7 @@ tools:
 
   sh-shellcheck: &sh-shellcheck
     lint-command: 'shellcheck -f gcc -x'
+    lint-ignore-exit-code: true
     lint-formats:
       - '%f:%l:%c: %trror: %m'
       - '%f:%l:%c: %tarning: %m'

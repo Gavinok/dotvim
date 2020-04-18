@@ -23,7 +23,7 @@ let g:loaded_gzip            =  1
 let g:loaded_tarPlugin       =  1
 let g:loaded_zipPlugin       =  1
 let g:loaded_2html_plugin    =  1
-" let g:loaded_fzf = 1
+let g:loaded_fzf = 1
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper        =  1
 let g:loaded_remote_plugins  =  1
@@ -41,17 +41,17 @@ augroup end
 call plug#begin('~/.vim/plugged')
 
 " Autocompletion {{{2 "
-if executable('node')
-	let g:mycoc_enabled=1
-	let g:coc_data_home=$XDG_CACHE_HOME.'/coc'
-	let g:coc_config_home=globpath(&rtp, 'extra')
-	" Settings at ./plugin/coc_settings.vim
-	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
-	Plug 'Shougo/neco-vim'
-	Plug 'neoclide/coc-neco'
-elseif exists('patch-7.4.775')
-	" Settings at ./plugin/mucomplete
-	Plug 'lifepillar/vim-mucomplete'
+if has('patch-7.4.775')
+	" Settings at ./plugin/mucomplete.vim
+	let g:mymu_enabled=1
+	Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+ 	" This may not be needed
+	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+	if exists('*job_start') || exists('*jobstart')
+		Plug 'natebosch/vim-lsc'
+	endif
+	" Plug 'jcarreja/vim-customcpt'
+	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 else
 	Plug 'skywind3000/vim-auto-popmenu'
@@ -63,6 +63,7 @@ endif
 if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
+	set completeopt-=preview
 	let g:float_preview#docked = 0
 else 
 	set completeopt+=preview
@@ -108,16 +109,18 @@ Plug 'tpope/vim-speeddating', { 'for': 'org' }
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
-Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat' "Surround motion
+Plug 'tpope/vim-surround' 
+Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-scriptease', {'on': []}
 " 2}}} "Tpope
 " etc {{{2 "
 Plug 'tommcdo/vim-lion'
 Plug 'wellle/targets.vim'
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
-Plug 'othree/yajs.vim'
+" Plug 'othree/yajs.vim'
+Plug 'jelera/vim-javascript-syntax'
 let g:colorizer_colornames_disable = 1
 " color support
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -125,20 +128,22 @@ let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 " Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 " 2}}} "etc.
 call plug#end()
-    augroup zepl
-        autocmd!
-        autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
-        autocmd FileType sh         let b:repl_config = { 'cmd': 'sh' }
-        autocmd FileType r          let b:repl_config = { 'cmd': 'R' }
-        autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
-        autocmd FileType clojure    let b:repl_config = { 'cmd': 'clj' }
-        autocmd FileType scheme     let b:repl_config = { 'cmd': 'rlwrap csi' }
-        autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
-        autocmd FileType julia      let b:repl_config = { 'cmd': 'julia' }
-    augroup END
+augroup zepl
+	autocmd!
+	autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
+	autocmd FileType sh         let b:repl_config = { 'cmd': 'sh' }
+	autocmd FileType r          let b:repl_config = { 'cmd': 'R' }
+	autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
+	autocmd FileType clojure    let b:repl_config = { 'cmd': 'clj' }
+	autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
+augroup END
+
+" faster updates
+set updatetime=100
+
 augroup LazyLoadFugitive
 	autocmd!
-	autocmd CursorHold,CursorHoldI * call plug#load('vim-fugitive') | autocmd! LazyLoadFugitive
+	autocmd CursorHold,CursorHoldI * call plug#load('vim-fugitive') | call plug#load('vim-scriptease') | autocmd! LazyLoadFugitive
 augroup end
 
 " Aesthetics: {{{2 "
@@ -162,9 +167,9 @@ function! s:statusline_expr()
 	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
 endfunction
 let &statusline = s:statusline_expr()
-highlight User1 ctermbg=107  ctermfg=black guibg=#87af5f guifg=black
-highlight User2 ctermbg=103  ctermfg=black guibg=#8787af guifg=black
-highlight User3 ctermbg=59   ctermfg=black guibg=#5f5f5f guifg=black
+" highlight User1 ctermbg=107  ctermfg=black guibg=#87af5f guifg=black
+" highlight User2 ctermbg=103  ctermfg=black guibg=#8787af guifg=black
+" highlight User3 ctermbg=59   ctermfg=black guibg=#5f5f5f guifg=black
 
 if has('gui_running')
 	call dotvim#LoadGui()
@@ -271,11 +276,13 @@ nnoremap ]b :silent! bnext<CR>
 nnoremap [b :silent! bprevious<CR>
 
 " Find Files {{{2 "
+nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
+nnoremap <leader>b :b <C-d>
 nnoremap <leader>fT  :setfiletype<space>
 nnoremap <leader>ff  :Root<CR>:edit **/*
-nnoremap <leader>fb  :buffer *
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
-nnoremap <leader>ft  :tjump<space>
+" nnoremap <leader>ft  :tjump<space>
+nnoremap <leader>j :tjump /
 nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
 nnoremap <leader>hh  :help<Space>
 
@@ -469,7 +476,7 @@ nmap gX :call W3m('<c-r>=expand('<cfile>')<CR>')<CR>
 
 let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
 hi def link orgHeading2 Statment
-map <silent>gO :e ~/Documents/org/mylife.org<CR>
+map <silent>gO :e ~/Documents/org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
 command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
 com! -nargs=+ -complete=file GitGrep let s:gp=&gp|set gp=git\ grep\ -n|gr <args>|let &gp=s:gp|unl s:gp
@@ -588,7 +595,6 @@ set autoindent                                      "Auto indent newline
 set ruler                                           "Show line number and column
 set scrolljump=-15                                  "Jump 15 when moving cursor bellow screen
 set undofile                                        "Undo function after reopening
-set colorcolumn=80									"force linux kernal and BSD line limit
 
 " check that directories exist
 if !isdirectory(expand('~/.cache/vim'))

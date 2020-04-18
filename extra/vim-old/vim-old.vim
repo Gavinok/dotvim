@@ -169,9 +169,15 @@ nnoremap <expr> <Leader>w wilder#toggle()
 " 2}}} "Wilder.nvim
 
 " COC {{{1 "
-Plug 'Shougo/neco-vim'
-Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
+if executable('node')
+	let g:mycoc_enabled=1
+	let g:coc_data_home=$XDG_CACHE_HOME.'/coc'
+	let g:coc_config_home=globpath(&rtp, 'extra')
+	" Settings at ./plugin/coc-settings.vim
+	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on' : []}
+	Plug 'Shougo/neco-vim'
+	Plug 'neoclide/coc-neco'
+	Plug 'ctrlpvim/ctrlp.vim'
 augroup LazyLoadPlug
 	autocmd!
 	autocmd CursorHold,CursorHoldI * call plug#load('coc.nvim') | autocmd! LazyLoadPlug

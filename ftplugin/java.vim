@@ -37,5 +37,6 @@ if executable('jdtls')
 				\}
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('java', b:lsc_config)
+		setlocal omnifunc=lsc#complete#complete
 	endif
 endif

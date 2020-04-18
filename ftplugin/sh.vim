@@ -20,6 +20,7 @@ if executable('efm-langserver')
 	endif
 endif
 setlocal foldmethod=indent
+setlocal equalprg=shfmt\ -s
 
 " force Man to be used along side lsc
 nnoremap K :Man <c-r><c-w><CR>

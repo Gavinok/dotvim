@@ -5,18 +5,24 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " plugin settings for mucomplete
-if !exists("g:loaded_mucomplete")
+if !exists("g:mymu_enabled")
 	finish
 endif
 " Mucomplete {{{2 "
-let g:mucomplete#user_mappings = {
-			\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>",
-			\ }
-set completeopt+=menuone
 "-----------
 if has('patch-7.4.775')
+	let g:mucomplete#user_mappings = {
+				\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>",
+				\ }
+	set completeopt+=menuone
+
+	augroup LazyLoadMucomplete
+		autocmd!
+		autocmd CursorHold,CursorHoldI * call plug#load('vim-mucomplete') | autocmd! LazyLoadMucomplete
+	augroup end
+
 	" Tab complete dont accept until told to
 	set completeopt+=noselect
 	let g:mucomplete#enable_auto_at_startup = 1
@@ -32,15 +38,16 @@ if has('patch-7.4.775')
 
 	let g:mucomplete#chains = {}
 	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-n',   'uspl']
-	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']  
+	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']
 	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
-	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
-	let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']  
-	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
-	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']            
-	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']            
-	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
+	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']
+	let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']
+	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyn',  'omni',  'c-n']
+	let g:mucomplete#chains['javascript']=  ['mini',  'tags',  'omni',  'c-n']
+	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-n']
+	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']
+	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 	let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
 	let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
 	let g:mucomplete#chains['groff']     =  g:mucomplete#chains['markdown']
@@ -53,9 +60,11 @@ if has('patch-7.4.775')
 		let g:mucomplete#can_complete['c']         =  {  'omni':  s:c_cond              }
 		let g:mucomplete#can_complete['go']        =  {  'omni':  s:c_cond              }
 		let g:mucomplete#can_complete['python']    =  {  'omni':  s:c_cond              }
-		let g:mucomplete#can_complete['dotoo']     =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['java']      =  {  'omni':  s:c_cond              }
+		let g:mucomplete#can_complete['javascript']=  {  'omni': {t->t=~#'\%(->\|\.\|(\))$' }}
 		let g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
-		let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond          }
+		let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond,          
+													   \ 'tag': {t->t=~#'\%(:\)$' }}
 		let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
 		let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
 		let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
@@ -65,3 +74,26 @@ if has('patch-7.4.775')
 	let g:mucomplete#spel#good_words = 1
 endif
 " 2}}} "Mucomplete
+
+" LSC {{{2 "
+if exists('*job_start') || exists('*jobstart')
+	let g:mucomplete#completion_delay = 200
+	let g:mucomplete#reopen_immediately = 0
+	nmap <leader>V :LSClientAllDiagnostics<CR>
+	let g:lsc_enable_autocomplete = v:false
+	let g:lsc_auto_map = {
+				\ 'GoToDefinition': 'gd',
+				\ 'GoToDefinitionSplit': ['<C-W>d', '<C-W><C-D>'],
+				\ 'FindReferences': 'gr',
+				\ 'NextReference': '<leader>*',
+				\ 'PreviousReference': '<leader>#',
+				\ 'FindImplementations': 'gI',
+				\ 'FindCodeActions': 'ga',
+				\ 'Rename': 'gR',
+				\ 'ShowHover': v:true,
+				\ 'DocumentSymbol': 'go',
+				\ 'WorkspaceSymbol': 'gz',
+				\ 'SignatureHelp': 'gm',
+				\}
+endif
+" 2}}} LSC

@@ -13,7 +13,7 @@ setlocal softtabstop=2
 setlocal nowrap
 setlocal errorformat="%f",\ line\ %l:\ %m
 setlocal makeprg=compiler\ %
-inoremap <buffer> <c-\> $$<c-o>i
+setlocal concealcursor=n
 nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
 nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
@@ -32,4 +32,5 @@ function! ChangeTodo()
 	endif
 endfunction
 nmap <buffer> cit :call ChangeTodo()<CR>
-
+inoreabbrev todo TODO
+inoreabbrev done DONE

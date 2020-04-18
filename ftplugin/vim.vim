@@ -14,12 +14,30 @@ if executable('vim-language-server')
 				\ 'command': 'vim-language-server --stdio',
 				\    'message_hooks': {
 				\        'initialize': {
-				\            'initializationOptions': { 'vimruntime': $VIMRUNTIME, 'runtimepath': &rtp },
+				\            'initializationOptions': { 
+				\               "iskeyword": "@,48-57,_,192-255,-#",
+				\               'vimruntime': $VIMRUNTIME, 
+				\               'runtimepath': &rtp,
+				\               "diagnostic": {
+				\                 "enable": "true"
+				\               },
+				\               "indexes": {
+				\                 "runtimepath": "true",      
+				\                 "gap": 100,              
+				\                 "count": 3,             
+				\                 "projectRootPatterns" : ["strange-root-pattern", ".git", "autoload", "plugin"] 
+				\               },
+				\               "suggest": {
+				\                 "fromVimruntime": "true",
+				\                 "fromRuntimepath": "false"
+				\               }
+				\            },
 				\        },
 				\    },
 				\ }
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('vim', b:lsc_config)
+		setlocal omnifunc=lsc#complete#complete
 	endif
 endif
 

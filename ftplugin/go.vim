@@ -15,6 +15,7 @@ if executable('gopls')
 
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('go', b:lsc_config)
+		setlocal omnifunc=lsc#complete#complete
 	endif
 endif
 " filetype plugin for go

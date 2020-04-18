@@ -20,6 +20,5 @@ if executable('typescript-language-server')
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('javascript', b:lsc_config)
 	endif
-	set omnifunc=lsc#complete#complete
+	setlocal omnifunc=tern#Complete
 endif
-

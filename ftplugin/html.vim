@@ -22,8 +22,3 @@ if &completeopt =~# '.*noselect.*'
 else
 	iabbrev </ </<C-X><C-O>
 endif
-
-augroup HTML
-	autocmd!
-	autocmd BufRead,BufWritePre *.html silent call dotvim#FormatFile()
-augroup end

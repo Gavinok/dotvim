@@ -17,5 +17,6 @@ if executable('rls')
 
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('rust', b:lsc_config)
+		setlocal omnifunc=lsc#complete#complete
 	endif
 endif

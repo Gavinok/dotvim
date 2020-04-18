@@ -8,10 +8,13 @@
 " Description: 
 " ftplugin for python
 
+let python_space_errors = 1
+
 if executable('pyls')
 	let b:lsc_config = 'pyls'
 	if exists('g:loaded_lsc')
 		call RegisterLanguageServer('python', b:lsc_config)
+		setlocal omnifunc=lsc#complete#complete
 	endif
 endif
 
