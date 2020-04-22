@@ -59,7 +59,6 @@ else
 	set complete=.,k,w,b
 	set completeopt=menu,menuone,noselect
 endif
-
 if has('nvim')
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
@@ -228,7 +227,7 @@ endif
 " it can be found at my scripts repo
 runtime vimshortcuts.vim
 " delete a buffer
-nnoremap <leader>bd :bdelete<CR>
+" nnoremap <leader>bd :bdelete<CR>
 
 " Open or compile file
 map <silent><leader>co :!opout <c-r>%<CR><CR>
@@ -395,7 +394,8 @@ map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 " Quick spell correction shortcut
 let g:quickdict='~/.vim/extra/dict/en_common.dict'
 nnoremap <silent> <leader>ss :call dotvim#WordProcessor()<CR>
-nmap <BS>     mz[s1z=`z
+nmap <BS>         mz[s1z=`z
+nmap <leader><BS> 1z=
 
 " Move a line of text 
 xnoremap J :m'>+<cr>`<my`>mzgv`yo`z
@@ -514,13 +514,13 @@ augroup end
 
 " Functions And Commands: {{{1 "
 " termdebug {{{2
-nmap gD <Plug>DumpDebugStringVar
-nmap gL <Plug>DumpDebugStringVar
-command! -nargs=0 Debug :packadd termdebug<CR>:Termdebug
-nnoremap <leader>bb :Break<CR>
-nnoremap <leader>b] :Step<CR>
-nnoremap <leader>b} :Over<CR>
-nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
+" nmap gD <Plug>DumpDebugStringVar
+" nmap gL <Plug>DumpDebugStringVar
+" command! -nargs=0 Debug :packadd termdebug<CR>:Termdebug
+" nnoremap <leader>bb :Break<CR>
+" nnoremap <leader>b] :Step<CR>
+" nnoremap <leader>b} :Over<CR>
+" nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
 " 2}}} "termdebug
 " CustomSections {{{2 "
 function! CustomSections(dir, regex)
