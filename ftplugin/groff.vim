@@ -7,7 +7,24 @@
 "
 " Description: 
 " ftplugin for groff files
-nnoremap <buffer> K :Man 7 groff_ms<CR>
+nnoremap <buffer> K :call GroffMan()<cr>
+
+function! GroffMan()
+	let [line, col] = [line('.'), col('.')]
+	" get the syntax type at the cursor
+	let syntype = reverse(map(synstack(line, col), 'synIDattr(v:val,"name")'))
+	if syntype == ['nroffEquation']
+		Man eqn
+		return
+	elseif syntype == ['nroffTable']
+		Man tbl
+		return
+	elseif syntype == ['nroffPicture']
+		Man pic
+		return
+	endif
+	Man 7 groff
+endfunction
 
 if executable('efm-langserver')
 	let b:lsc_config = {
@@ -31,4 +48,4 @@ setlocal path+=,/usr/share/groff/1.22.4/tmac
 " matchit now supports ms macros
 let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
 			\. '^\.cstart:^\.cend,'. '^\.EQ:^\.EN,' . '^\.G1:^\.G2,' . '^\.GS:^\.GE,' 
-			\. '^\.IS:^\.IE,' . '^\.PS:^\.PE,' . '^\.R1:^\.R2,' . '^\.TS:^\.TE,'
+			\. '^\.IS:^\.IE,' . '^\.PS:^\.PE,' . '^\.R1:^\.R2,' . '^\.TS:^\.TE,. ^\.JS:^\.JE,'
