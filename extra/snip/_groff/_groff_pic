@@ -1,0 +1,3 @@
+.PS
+{{+box "this is" "a box"+}}
+.PE
