@@ -23,12 +23,12 @@ let g:loaded_gzip            =  1
 let g:loaded_tarPlugin       =  1
 let g:loaded_zipPlugin       =  1
 let g:loaded_2html_plugin    =  1
-let g:loaded_fzf = 1
+let g:loaded_fzf             =  1
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper        =  1
 let g:loaded_remote_plugins  =  1
 " 1}}} "Quick Init
-
+      
 " Plugins: {{{1 "
 " install vim-plug if it's not already
 augroup PLUGGED
@@ -66,12 +66,13 @@ if has('nvim')
 	let g:float_preview#docked = 0
 else 
 	set completeopt+=preview
-	set completeopt+=popup
+	" set completeopt+=popup
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
 Plug 'lervag/vimtex'
-Plug 'joereynolds/vim-minisnip'
+" Plug 'joereynolds/vim-minisnip'
+Plug 'eemed/vim-minisnip'
 Plug 'axvr/zepl.vim'
 Plug 'axvr/org.vim'
 
@@ -402,6 +403,8 @@ xnoremap J :m'>+<cr>`<my`>mzgv`yo`z
 xnoremap K :m'<-2<cr>`>my`<mzgv`yo`z
 xnoremap < <gv
 xnoremap > >gv
+
+snoremap <BS> <BS>i
 " 1}}} "Editing
 
 " Plugin Configuration: {{{1 "
@@ -675,6 +678,7 @@ call SetupCommandAlias('man','Man')
 call SetupCommandAlias('git','!git')
 call SetupCommandAlias('cp','!cp')
 call SetupCommandAlias('mv','!mv')
+call SetupCommandAlias('rm','!rm')
 call SetupCommandAlias('mkdir','!mkdir')
 " 2}}} Command Alias
 
