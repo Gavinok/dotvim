@@ -35,7 +35,7 @@ if executable('jdtls')
 				\  	'java.clean.workspace': 'on'
 				\  }
 				\}
-	if exists('g:loaded_lsc')
+	if exists('g:mymu_enabled')
 		call RegisterLanguageServer('java', b:lsc_config)
 		setlocal omnifunc=lsc#complete#complete
 	endif

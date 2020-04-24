@@ -13,7 +13,7 @@ if executable('gopls')
 				\ 'suppress_stderr': v:true,
 				\}
 
-	if exists('g:loaded_lsc')
+	if exists('g:mymu_enabled')
 		call RegisterLanguageServer('go', b:lsc_config)
 		setlocal omnifunc=lsc#complete#complete
 	endif

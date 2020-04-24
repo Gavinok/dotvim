@@ -19,7 +19,7 @@ if executable('ccls')
 				\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
 				\ },
 				\}
-	if exists('g:loaded_lsc')
+	if exists('g:mymu_enabled')
 		call RegisterLanguageServer('c', b:lsc_config)
 		setlocal omnifunc=lsc#complete#complete
 	endif
