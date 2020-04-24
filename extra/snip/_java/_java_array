@@ -2,4 +2,4 @@
 {{+int[]+}} = {{+anArray+}};
 
 // allocate memory for {{+?number?+}} items
-{{+anArray+}} = new {{+int[{{+?number?+}}]+}};
+{{+<anArray+}} = new {{+int[{{+<?number?+}}]+}};
