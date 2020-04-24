@@ -164,3 +164,9 @@ setlocal path+=,/usr/share/groff/1.22.4/tmac
 let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
 			\. '^\.cstart:^\.cend,'. '^\.EQ:^\.EN,' . '^\.G1:^\.G2,' . '^\.GS:^\.GE,' 
 			\. '^\.IS:^\.IE,' . '^\.PS:^\.PE,' . '^\.R1:^\.R2,' . '^\.TS:^\.TE,. ^\.JS:^\.JE,'
+" add comment string
+setlocal commentstring=.\\\"%s
+let nroff_space_errors = 1
+" let b:preprocs_as_sections = 1
+let b:nroff_is_groff = 1
+imap <buffer> <c-x><c-o> <c-r>=Groffcomplete()<CR>
