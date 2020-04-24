@@ -301,10 +301,10 @@ endfunction
 
 " Simple Todo using grep {{{1 
 function! dotvim#Todo(dir)
-	if exists(':Grep') == 2
-		execute 'Grep TODO . ' . a:dir 
-	else	
+	if getcwd() != $HOME
 		execute 'grep TODO . ' . a:dir
+	else
+		execute 'grep TODO ' . a:dir
 	endif
 	copen
 endfunction
