@@ -123,8 +123,10 @@ let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 Plug 'jelera/vim-javascript-syntax'
 let g:colorizer_colornames_disable = 1
 " color support
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-let g:Hexokinase_highlighters = [ 'backgroundfull' ]
+if executable('go')
+	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+	let g:Hexokinase_highlighters = [ 'backgroundfull' ]
+endif
 " Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 " 2}}} "etc.
 call plug#end()
