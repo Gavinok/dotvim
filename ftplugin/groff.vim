@@ -13,16 +13,18 @@ function! GroffMan()
 	let [line, col] = [line('.'), col('.')]
 	" get the syntax type at the cursor
 	let syntype = reverse(map(synstack(line, col), 'synIDattr(v:val,"name")'))
-	if syntype == ['nroffEquation']
-		Man eqn
-		return
-	elseif syntype == ['nroffTable']
-		Man tbl
-		return
-	elseif syntype == ['nroffPicture']
-		Man pic
-		return
-	endif
+	for synt in syntype
+		if synt == 'nroffEquation'
+			Man eqn
+			return
+		elseif synt == 'nroffTable'
+			Man tbl
+			return
+		elseif synt == 'nroffPicture'
+			Man pic
+			return
+		endif
+	endfor
 	Man 7 groff
 endfunction
 
