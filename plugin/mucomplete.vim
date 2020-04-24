@@ -15,6 +15,7 @@ endif
 if has('patch-7.4.775')
 	let g:mucomplete#user_mappings = {
 				\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>",
+				\'groff': "\<C-r>=Groffcomplete()\<CR>",
 				\ }
 	set completeopt+=menuone
 
@@ -50,7 +51,7 @@ if has('patch-7.4.775')
 	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 	let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
 	let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
-	let g:mucomplete#chains['groff']     =  g:mucomplete#chains['markdown']
+	let g:mucomplete#chains['groff']     =  ['mini',  'path',  'groff', 'c-n',   'uspl',  'dict']
 	let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['markdown']
 
 	if !exists('g:mucomplete#can_complete')
@@ -66,6 +67,7 @@ if has('patch-7.4.775')
 		let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond,          
 													   \ 'tag': {t->t=~#'\%(:\)$' }}
 		let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
+		let g:mucomplete#can_complete['groff']     =  {  'groff': { t -> t =~# '\%(\\\[\)$' }}
 		let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
 		let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
 	endif
