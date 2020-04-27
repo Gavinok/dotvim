@@ -28,7 +28,7 @@ let g:loaded_fzf             =  1
 let g:loaded_rrhelper        =  1
 let g:loaded_remote_plugins  =  1
 " 1}}} "Quick Init
-      
+
 " Plugins: {{{1 "
 " install vim-plug if it's not already
 augroup PLUGGED
@@ -64,18 +64,15 @@ if has('nvim')
 	Plug 'ncm2/float-preview.nvim'
 	set completeopt-=preview
 	let g:float_preview#docked = 0
-else 
+else
 	set completeopt+=preview
 	" set completeopt+=popup
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
-Plug 'lervag/vimtex'
-" Plug 'joereynolds/vim-minisnip'
-Plug 'eemed/vim-minisnip'
-Plug 'axvr/zepl.vim'
-Plug 'axvr/org.vim'
+Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 
+Plug 'eemed/vim-minisnip'
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
@@ -478,7 +475,7 @@ endfunction
 nmap gX :call W3m('<c-r>=expand('<cfile>')<CR>')<CR>
 
 let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
-hi def link orgHeading2 Statment
+hi link orgHeading2 Normal
 map <silent>gO :e ~/Documents/org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
 command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
@@ -502,7 +499,7 @@ nnoremap <leader>hp :SignifyHunkDiff<cr>
 nnoremap <leader>hu :SignifyHunkUndo<cr>
 command! Diff :SignifyDiff
 " 2}}} "Signify
-" info {{{2 
+" info {{{2
 function! InfoMappings()
     nmap <buffer> <c-n> <Plug>(InfoNext)
     nmap <buffer> <c-p> <Plug>(InfoPrev)
@@ -558,13 +555,13 @@ highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 " remove trailing whitespaces
 command! StripWhitespace :%s/\s\+$//e
 " 2}}} "White Space
-" VisualSort {{{2 
+" VisualSort {{{2
 " sort based on visual block
 command! -range -nargs=0 -bang SortVis sil! keepj <line1>,<line2>call dotvim#VisSort(<bang>0)
 " use s to sort visual selection
 xmap s :SortVis<CR>
 " 2}}} "VisualSort
-" Extra commands {{{2 
+" Extra commands {{{2
 " Minimal Gist this is actually IX but i always think its XI
 command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
 " Yank all matches in last search
@@ -648,7 +645,7 @@ augroup end
 
 augroup VIM
 	autocmd!
-	" used by 
+	" used by
 	autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
 augroup END
 
