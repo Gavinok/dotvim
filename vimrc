@@ -44,9 +44,9 @@ call plug#begin('~/.vim/plugged')
 if has('patch-7.4.775')
 	" Settings at ./plugin/mucomplete.vim
 	let g:mymu_enabled=1
-	Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+	Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
  	" This may not be needed
-	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
 	if exists('*job_start') || exists('*jobstart')
 		Plug 'natebosch/vim-lsc'
 	endif
@@ -112,17 +112,20 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-scriptease', {'on': []}
 " 2}}} "Tpope
 " etc {{{2 "
-Plug 'tommcdo/vim-lion'
+Plug 'tommcdo/vim-lion' " aligning text 
 Plug 'wellle/targets.vim'
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
-" Plug 'othree/yajs.vim'
+
 Plug 'jelera/vim-javascript-syntax'
 " color support
 if executable('go')
 	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 	let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 endif
+
+Plug 'axvr/zepl.vim'
+Plug 'axvr/org.vim'
 " 2}}} "etc.
 call plug#end()
 augroup zepl
@@ -253,7 +256,7 @@ nmap <expr> <CR> &buftype ==# '' ? 'za' : "\<CR>"
 if executable('rg')
 	set grepprg=rg\ --vimgrep
 elseif executable('ag')
-	set grepprg=ag\ --vimgrep	
+	set grepprg=ag\ --vimgrep
 endif
 
 " change variable and repeat with .
@@ -299,7 +302,7 @@ command! -nargs=1 -complete=customlist,dotvim#ShortcutComplete Sc call dotvim#Sh
 " 2}}} "Find Files
 
 " better navigation of command history
-" allow next completion after / alternative 
+" allow next completion after / alternative
 " is <C-E> if <C-D> makes to long of a list
 if has('nvim-0.5.0')
 	cnoremap <expr> / wildmenumode() ? "\<C-Y>" : "/"
@@ -395,7 +398,7 @@ nnoremap <silent> <leader>ss :call dotvim#WordProcessor()<CR>
 nmap <BS>         mz[s1z=`z
 nmap <leader><BS> 1z=
 
-" Move a line of text 
+" Move a line of text
 xnoremap J :m'>+<cr>`<my`>mzgv`yo`z
 xnoremap K :m'<-2<cr>`>my`<mzgv`yo`z
 xnoremap < <gv
@@ -419,7 +422,7 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  `<CR>     :Do<Up><CR>
 	nnoremap  `<Space>  :Do<Space>
 	nnoremap  `<TAB>    :Do<Up>
-	nnoremap  m<CR>     :Make<CR>
+	nnoremap  m<CR>     :w\|Make<CR>
 	nnoremap  m<Space>  :Make<Space>
 	nnoremap  m!		:setlocal makeprg=compiler\ %<CR>
 	nnoremap  m?		:echo &makeprg<CR>
