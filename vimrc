@@ -109,7 +109,7 @@ Plug 'tpope/vim-speeddating', { 'for': 'org' }
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
-Plug 'tpope/vim-surround' 
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-scriptease', {'on': []}
@@ -121,13 +121,11 @@ Plug 'wellle/targets.vim'
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 " Plug 'othree/yajs.vim'
 Plug 'jelera/vim-javascript-syntax'
-let g:colorizer_colornames_disable = 1
 " color support
 if executable('go')
 	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 	let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 endif
-" Plug 'chrisbra/colorizer', { 'on': 'ColorToggle' }
 " 2}}} "etc.
 call plug#end()
 augroup zepl

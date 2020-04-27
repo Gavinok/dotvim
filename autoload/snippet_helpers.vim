@@ -42,3 +42,17 @@ function! snippet_helpers#StoreElement(desc, placeholder, variable)
 	exec 'cunmap ' . g:minisnip_trigger
 	return sniptemp
 endfunction
+
+" Simple Way To Make Inserting Images With Inkscape
+function! snippet_helpers#Inkscaper()
+	let filename = input('filename: ' )
+	if filename ==? ""
+		return
+	elseif filename !~ ".*\.eps"
+		let filename = filename .'.eps'
+	endif
+	" TODO: add auto append .eps  <27-04-20 Gavin Jaeger-Freeborn>
+	exec '!touch ' . filename
+	exec '!inkscape ' . filename
+	return filename
+endfunction
