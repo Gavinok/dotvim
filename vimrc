@@ -195,6 +195,7 @@ xmap <space> <leader>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
 if has('nvim')
+set mouse=a                                         "Add mouse control not that I use them very much
 	augroup TERMINAL
 		autocmd!
 		" autocmd BufWinEnter,WinEnter term://* startinsert
@@ -361,7 +362,9 @@ cnoremap <C-B> <Left>
 cnoremap <C-E> <End>
 
 " when rightclicking highlight copy it
-xnoremap <RightMouse> "*y
+vmap <LeftRelease> "*ygv
+nmap <RightMouse> gv
+xmap <RightMouse> gx
 
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
@@ -438,7 +441,9 @@ endif
 " 2}}} "Minimal Async Command
 " netrw {{{2
 " Poor mans Vim vinegar
-let g:netrw_browsex_viewer='setsid xdg-open' "force gx to use xdg-open
+if executable('cabl')
+let g:netrw_browsex_viewer='cabl' "force gx to use cabl if available
+endif
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
 let g:netrw_fastbrowse=2
@@ -582,7 +587,6 @@ if has('virtualedit')
 	set virtualedit=block                           " virtual block can go anywhere
 endif
 
-set mouse=a                                         "Add mouse control not that I use them very much
 set clipboard^=unnamed,unnamedplus	                "xclip support
 set tags+=.tags;	                                "make tagefiles hidden
 set tags+=./.tags;../.tags                          "extra directories
