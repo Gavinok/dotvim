@@ -11,7 +11,7 @@ highlight! StatusLineNC guibg=#eaffff guifg=#000000 gui=NONE ctermbg=194 ctermfg
 highlight! WildMenu guibg=#000000 guifg=#eaffff gui=NONE ctermbg=black ctermfg=159 cterm=NONE
 highlight! VertSplit guibg=#ffffea guifg=#000000 gui=NONE ctermbg=159 ctermfg=232 cterm=NONE
 highlight! Folded guibg=#ffffea guifg=fg gui=italic ctermbg=230 ctermfg=130 cterm=italic
-highlight! FoldColumn guibg=#fcfcce guifg=fg ctermbg=NONE ctermfg=fg
+highlight! FoldColumn guibg=NONE guifg=fg ctermbg=NONE ctermfg=fg
 highlight! Conceal guibg=bg guifg=fg gui=NONE ctermbg=NONE ctermfg=fg cterm=NONE
 highlight! LineNr guibg=bg guifg=#505050 gui=italic ctermbg=NONE ctermfg=239 cterm=italic
 highlight! Visual          ctermbg=15	ctermfg=NONE   guibg=#404040  guifg=NONE     cterm=NONE      gui=NONE
@@ -33,6 +33,7 @@ highlight! link Question Comment
 highlight! Pmenu         guibg=#000000 guifg=#eaffff gui=NONE ctermbg=Lightgrey ctermfg=black cterm=NONE
 highlight! PmenuSel      guifg=#000000 guibg=#eaffff gui=NONE ctermfg=Lightgrey ctermbg=black cterm=NONE
 " vim
+highlight! SignColumn guibg=#ffffea
 highlight! link vimFunction Identifier
 
 let g:colors_name = "acme"
