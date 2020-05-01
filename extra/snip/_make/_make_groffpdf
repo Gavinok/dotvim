@@ -1,0 +1,12 @@
+#.SUFFIXES:
+.SUFFIXES: .ms .pdf
+
+all: {{+FILE+}}.pdf
+
+%.pdf: %.ms
+	groff -b -wall -mspdf -pte -T pdf $< > $@
+
+clean:
+	rm *.pdf
+
+.PHONY: clean all

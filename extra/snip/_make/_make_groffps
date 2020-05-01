@@ -1,0 +1,15 @@
+#.SUFFIXES:
+.SUFFIXES: .ms .pdf
+
+all: {{+FILE+}}.pdf
+
+%.pdf: %.ps
+	ps2pdf $< $@
+
+%.ps: %.ms
+	groff -ms -mpdfmark -b -wall -pte -T ps $< > $@
+
+clean:
+	rm *.pdf
+
+.PHONY: clean all
