@@ -15,12 +15,21 @@ setlocal shiftwidth=2
 setlocal softtabstop=2
 setlocal smartindent
 
-set completeopt+=noselect
-" auto complete tags
 let g:html_indent_script1 = "auto"
 let g:html_indent_style1 = "auto"
+
 if &completeopt =~# '.*noselect.*'
 	iabbrev </ </<C-X><C-O><C-N>
+	imap </<CR> </<C-X><C-O><C-N><CR>
+	imap ><CR> ><CR></<c-x><c-o><c-n><c-o><s-o>
 else
 	iabbrev </ </<C-X><C-O>
 endif
+
+" enable emmet 
+imap <C-e> <plug>(emmet-expand-abbr)
+
+" enable tern inside html 
+call tern#Enable()
+nnoremap <buffer> K :TernDoc<CR>
+setlocal completefunc=tern#Complete
