@@ -67,7 +67,6 @@ nmap <buffer> `<CR> :Runtime<CR>
 nmap <buffer><silent> <leader>V :Messages<CR>
 nnoremap <buffer><silent> <leader>cc :PlugInstall<CR>
 nnoremap <buffer><silent> <leader>cl :PlugClean<CR>
-autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
 
 "use vim like a zrepl
 xnoremap <buffer><silent> gz :<C-u>call dotvim#RunVimScript(visualmode(), 1)<CR>
