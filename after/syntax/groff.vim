@@ -12,7 +12,7 @@ fun! s:GroffConceal(group,pat,cchar)
 	exe 'syn match '.a:group." '".a:pat."' contained conceal cchar=".a:cchar
 endfun
  
-if exists('groff_greek')
+if exists('g:groff_greek')
 	call s:GroffConceal('roffGreek'  ,'\<alpha\>'		      ,'α')
 	call s:GroffConceal('roffGreek'  ,'\<beta\>'		      ,'β')
 	call s:GroffConceal('roffGreek'  ,'\<gamma\>'		      ,'γ')
@@ -56,7 +56,7 @@ if exists('groff_greek')
 	call s:GroffConceal('roffGreek'  ,'\<OMEGA\>'		      ,'Ω')
 endif 
 
-if exists('groff_math')
+if exists('g:groff_math')
 	call s:GroffConceal('roffMath'   , '>= '		          , '≥')
 	call s:GroffConceal('roffMath'   , '<= '		          , '≤')
 	call s:GroffConceal('roffMath'   , '== '		          , '≡')
@@ -78,7 +78,7 @@ if exists('groff_math')
 	call s:GroffConceal('roffMath'   , '\<over\>' 		      , '/')
 endif
 
-if exists('groff_supsub')
+if exists('g:groff_supsub')
 	fun! s:SuperSub(group,leader,pat,cchar)
 		"     call Decho("SuperSub: group<".a:group."> leader<".a:leader."> pat<".a:pat."> cchar<".a:cchar.">")
 		exe 'syn match '.a:group." '".a:leader.a:pat."' contained conceal cchar=".a:cchar

@@ -170,3 +170,6 @@ let nroff_space_errors = 1
 " let b:preprocs_as_sections = 1
 let b:nroff_is_groff = 1
 imap <buffer> <c-x><c-o> <c-r>=Groffcomplete()<CR>
+
+" for tracebacks 
+setlocal errorformat+=%o:%s:%l:%m
