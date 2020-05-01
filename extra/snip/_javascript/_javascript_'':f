@@ -1,3 +1,0 @@
-'{{+#thing+}}:{{+click+}}': function(element) {
-	{{-/* body */-}}
-}{{+,+}}

@@ -1,3 +1,0 @@
-{{+method_name+}}: function({{+attribute+}}) {
-	{{-/* body */-}}
-}{{+,+}}
