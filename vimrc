@@ -545,9 +545,11 @@ xmap s :SortVis<CR>
 " Extra commands {{{2
 " Minimal Gist this is actually IX but i always think its XI
 command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
+" Hub
+command! -range=% Gist  silent execute <line1> . "," . <line2> . "w !hub gist create -c -"
+command! -nargs=0 Gissue :!hub issue
 " Yank all matches in last search
 command! -register YankMatch call dotvim#YankMatches(<q-reg>)
-command! -nargs=0 MW call dotvim#MkdirWrite()
 command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
 " 2}}} "Extra commands
 " 1}}} "Functions and Commands
