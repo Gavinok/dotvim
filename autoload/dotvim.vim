@@ -181,19 +181,6 @@ function! dotvim#YankMatches(reg)
 endfunction
 " 1}}} "CopyMatches
 
-" MkdirWrite {{{1 "
-" mkdir with same name and
-"write file to it with :MW
-" TODO: remove ! and replace with mkdir() <27-12-19 Gavin Jaeger-Freeborn>
-function! dotvim#MkdirWrite()
-	w
-	!mkdir '%:t:r'
-	!mv % '%:t:r'/
-	e %:t:r/%
-	" redraw!
-endfunction
-" 1}}} "MkdirWrite
-
 " MRU {{{1 
 " MRU command-line completion
 function! dotvim#MRUComplete(ArgLead, CmdLine, CursorPos)
