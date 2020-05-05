@@ -71,7 +71,8 @@ endif
 " Snippets {{{2 "
 Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 
-Plug 'eemed/vim-minisnip'
+Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
+let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
