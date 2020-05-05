@@ -1,7 +1,10 @@
-#.SUFFIXES:
 .SUFFIXES: .ms .pdf
+#.SUFFIXES:
 
-all: {{+FILE+}}.pdf
+SRCS=$(shell find -type f -name '*.ms' )
+TARGET := $(addsuffix .pdf,$(basename $(SRCS)))
+
+all: clean ${TARGET}
 
 %.pdf: %.ps
 	ps2pdf $< $@
