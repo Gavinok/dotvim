@@ -223,7 +223,11 @@ else
 	" set Vim-specific sequences for RGB colors allowing for gui colors
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	runtime macro/matchit
+	try
+		packadd! matchit
+	catch /.*/
+		runtime macro/matchit
+	endtry
 endif
 " shortcut to files and dirs uses shortcuts.sh
 " it can be found at my scripts repo
