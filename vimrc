@@ -14,10 +14,6 @@
 if has('nvim')
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
 endif
-let g:groff_greek =1
-let g:groff_math =1
-let g:groff_supsub =1
-
 " block plugins and extra dependency's
 let g:python_host_prog  = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python3'
