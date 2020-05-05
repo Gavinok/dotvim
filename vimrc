@@ -576,17 +576,6 @@ set shiftwidth=4                                    "Shorter shiftwidth
 set autoindent                                      "Auto indent newline
 set ruler                                           "Show line number and column
 set scrolljump=-15                                  "Jump 15 when moving cursor bellow screen
-set undofile                                        "Undo function after reopening
-
-" check that directories exist
-if !isdirectory(expand('~/.cache/vim'))
-	call mkdir($HOME.'/.cache/vim/undo', 'p')
-	call mkdir($HOME.'/.cache/vim/backup', 'p')
-endif
-set undodir=$HOME/.cache/vim/undo
-set backupdir=$HOME/.cache/vim/backup
-" set autowrite
-" set autoread                                      "read/file when switching buffers
 set lazyredraw                                      "redraw only when needed faster macros
 set shortmess=aAtcT                                 "get rid of annoying messagesc
 set incsearch smartcase ignorecase hlsearch         "better search
@@ -599,6 +588,34 @@ set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.tags,tags,*.o,*.class
 set splitbelow splitright
+
+" XDG Environment For VIM
+" =======================
+if empty($XDG_CACHE_HOME)
+  let $XDG_CACHE_HOME = '~/.cache'
+endif
+" see :help persistent-undo
+if !isdirectory($XDG_CACHE_HOME . "/vim/undo")
+  call mkdir($XDG_CACHE_HOME . "/vim/undo", "p")
+endif
+set undodir=$XDG_CACHE_HOME/vim/undo//,/var/tmp//,/tmp//
+set undofile
+
+" check that directories exist
+set backupdir=$XDG_CACHE_HOME/vim/backup//,/var/tmp//,/tmp//
+if !isdirectory($XDG_CACHE_HOME . "/vim/backup")
+  call mkdir($XDG_CACHE_HOME . "/vim/backup", "p")
+endif
+" Double slash does not actually work for backupdir, here's a fix
+au BufWritePre * let &backupext='@'.substitute(substitute(substitute(expand('%:p:h'), '/', '%', 'g'), '\', '%', 'g'), ':', '', 'g')
+
+
+if !isdirectory($XDG_CACHE_HOME . "/vim/swap")
+  call mkdir($XDG_CACHE_HOME . "/vim/swap", "p")
+endif
+set directory=$XDG_CACHE_HOME/vim/swap//,/var/tmp//,/tmp//
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
 
 " Do not use smart case in command line mode,
 " extracted from https://goo.gl/vCTYdK
