@@ -22,3 +22,21 @@ if executable('typescript-language-server')
 	endif
 	setlocal omnifunc=tern#Complete
 endif
+
+" matchit
+let b:match_words = '\<function\>:\<return\>,'
+				\ . '\<do\>:\<while\>,'
+				\ . '\<switch\>:\<case\>:\<default\>,'
+				\ . '\<if\>:\<else\>,'
+				\ . '\<try\>:\<catch\>:\<finally\>'
+
+setlocal include=^\\s*[^\/]\\+\\(from\\\|require(\\)\\s*['\"\.]
+
+let &l:define  = '^\s*\('
+             \ . '\(export\s\)*\(default\s\)*\(var\|const\|let\|function\|class\|interface\)\s'
+             \ . '\|\(public\|private\|protected\|readonly\|static\)\s'
+             \ . '\|\(get\s\|set\s\)'
+             \ . '\|\(export\sdefault\s\|abstract\sclass\s\)'
+             \ . '\|\(async\s\)'
+             \ . '\|\(\ze\i\+([^)]*).*{$\)'
+             \ . '\)'
