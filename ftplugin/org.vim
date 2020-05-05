@@ -18,7 +18,10 @@ nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
 nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
-let g:org_date_format='%Y-%m-%d %a %H:%M'
+let g:org_time='%H:%M'
+let g:org_date='%Y-%m-%d %a'
+let g:org_date_format=g:org_date.' '.g:org_time
+execute '1SpeedDatingFormat ' . g:org_date
 execute '1SpeedDatingFormat ' . g:org_date_format
 function! ChangeTodo()
 	normal! 0
