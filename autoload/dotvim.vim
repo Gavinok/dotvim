@@ -288,7 +288,7 @@ endfunction
 
 " Simple Todo using grep {{{1 
 function! dotvim#Todo(dir)
-	if getcwd() != $HOME
+	if (getcwd() != $HOME) && (getcwd() != a:dir)
 		execute 'grep TODO . ' . a:dir
 	else
 		execute 'grep TODO ' . a:dir
