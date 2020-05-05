@@ -9,6 +9,14 @@
 " ftplugin for groff files
 nnoremap <buffer> K :call GroffMan()<cr>
 
+let g:groff_greek =1
+let g:groff_math =1
+let g:groff_supsub =1
+
+setlocal include=^\\.m\\?so
+let &l:define = '^\.\(de\|nr\|ds\)\s*'
+setlocal suffixesadd+=.ms,.mom,.tmac,.macros,.mac,.mm
+
 function! GroffMan()
 	let [line, col] = [line('.'), col('.')]
 	" get the syntax type at the cursor
