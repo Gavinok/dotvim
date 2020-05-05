@@ -446,7 +446,7 @@ endif
 " netrw {{{2
 " Poor mans Vim vinegar
 if executable('cabl')
-let g:netrw_browsex_viewer='cabl' "force gx to use cabl if available
+let g:netrw_browsex_viewer='setsid cabl' "force gx to use cabl if available
 endif
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
