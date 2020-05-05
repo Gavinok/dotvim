@@ -195,7 +195,7 @@ xmap <space> <leader>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
 if has('nvim')
-set mouse=a                                         "Add mouse control not that I use them very much
+	set mouse=a                                         "Add mouse control not that I use them very much
 	augroup TERMINAL
 		autocmd!
 		" autocmd BufWinEnter,WinEnter term://* startinsert
