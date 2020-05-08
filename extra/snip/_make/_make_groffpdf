@@ -10,6 +10,6 @@ all: clean ${TARGET}
 	groff -b -wall -mspdf -pte -T pdf $< > $@
 
 clean:
-	rm *.pdf
+	rm -f *.pdf
 
 .PHONY: clean all

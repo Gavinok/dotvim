@@ -13,6 +13,6 @@ all: clean ${TARGET}
 	groff -ms -mpdfmark -b -wall -pte -T ps $< > $@
 
 clean:
-	rm *.pdf
+	rm -f *.pdf
 
 .PHONY: clean all
