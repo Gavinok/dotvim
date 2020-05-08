@@ -546,7 +546,7 @@ xmap s :SortVis<CR>
 command! -range=% XI  silent execute <line1> . "," . <line2> . "w !curl -F 'f:1=<-' ix.io | tr -d '\\n' | xsel -i"
 " Hub
 command! -range=% Gist  silent execute <line1> . "," . <line2> . "w !hub gist create -c -"
-command! -nargs=0 Gissue :!hub issue
+command! -nargs=0 Gissue :Term hub issue
 " Yank all matches in last search
 command! -register YankMatch call dotvim#YankMatches(<q-reg>)
 command! -nargs=0 Todo call dotvim#Todo('~/Documents/org')
