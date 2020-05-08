@@ -76,7 +76,7 @@ let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
-let s:snipdir=globpath(&rtp, 'extra/snip')
+let s:snipdir=globpath(&runtimepath, 'extra/snip')
 let g:minisnip_dir = s:snipdir . ':' . join(split(glob( s:snipdir . '**/'), '\n'), ':')
 imap <Nop> <Plug>(minisnip-complete)
 " 2}}} "Snippets
@@ -173,7 +173,7 @@ let &statusline = s:statusline_expr()
 
 if has('gui_running')
 	call dotvim#LoadGui()
-elseif g:colors_name !=# "acme"
+elseif g:colors_name !=# 'acme'
 	hi Normal      guibg=NONE
 	hi ColorColumn guibg=NONE
 	hi SignColumn  guibg=NONE
@@ -284,10 +284,9 @@ nnoremap [b :silent! bprevious<CR>
 nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 nnoremap <leader>b :b <C-d>
 nnoremap <leader>fT  :setfiletype<space>
-nnoremap <leader>ff  :Root<CR>:edit **/*
+nnoremap <leader>ff  :edit <c-r>=FindRootDirectory()<CR>/**/*
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
-" nnoremap <leader>ft  :tjump<space>
-nnoremap <leader>j :tjump /
+nnoremap <leader>j   :tjump /
 nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
 nnoremap <leader>hh  :help<Space>
 
@@ -445,8 +444,8 @@ endif
 " 2}}} "Minimal Async Command
 " netrw {{{2
 " Poor mans Vim vinegar
-if executable('cabl')
-let g:netrw_browsex_viewer='setsid cabl' "force gx to use cabl if available
+if !empty($PLUMBER)
+	let g:netrw_browsex_viewer='setsid ' . $PLUMBER "force gx to use cabl if available
 endif
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
@@ -595,23 +594,25 @@ if empty($XDG_CACHE_HOME)
   let $XDG_CACHE_HOME = '~/.cache'
 endif
 " see :help persistent-undo
-if !isdirectory($XDG_CACHE_HOME . "/vim/undo")
-  call mkdir($XDG_CACHE_HOME . "/vim/undo", "p")
+if !isdirectory($XDG_CACHE_HOME . '/vim/undo')
+  call mkdir($XDG_CACHE_HOME . '/vim/undo', 'p')
 endif
 set undodir=$XDG_CACHE_HOME/vim/undo//,/var/tmp//,/tmp//
 set undofile
 
 " check that directories exist
 set backupdir=$XDG_CACHE_HOME/vim/backup//,/var/tmp//,/tmp//
-if !isdirectory($XDG_CACHE_HOME . "/vim/backup")
-  call mkdir($XDG_CACHE_HOME . "/vim/backup", "p")
+if !isdirectory($XDG_CACHE_HOME . '/vim/backup')
+  call mkdir($XDG_CACHE_HOME . '/vim/backup', 'p')
 endif
+
 " Double slash does not actually work for backupdir, here's a fix
-au BufWritePre * let &backupext='@'.substitute(substitute(substitute(expand('%:p:h'), '/', '%', 'g'), '\', '%', 'g'), ':', '', 'g')
+augroup XDGSUPPORT
+	autocmd BufWritePre * let &backupext='@'.substitute(substitute(substitute(expand('%:p:h'), '/', '%', 'g'), '\', '%', 'g'), ':', '', 'g')
+augroup end
 
-
-if !isdirectory($XDG_CACHE_HOME . "/vim/swap")
-  call mkdir($XDG_CACHE_HOME . "/vim/swap", "p")
+if !isdirectory($XDG_CACHE_HOME . '/vim/swap')
+  call mkdir($XDG_CACHE_HOME . '/vim/swap', 'p')
 endif
 set directory=$XDG_CACHE_HOME/vim/swap//,/var/tmp//,/tmp//
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
