@@ -1,0 +1,1 @@
+DEADLINE: <{{+~strftime(g:org_date_format)+}}>{{--}}
