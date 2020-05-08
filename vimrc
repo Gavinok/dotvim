@@ -415,8 +415,10 @@ snoremap <BS> <BS>i
 
 " Plugin Configuration: {{{1 "
 " Minimal Async Command {{{2
+" TODO: make fallbacks for ` and m if jobs dont exist <05-05-20 Gavin Jaeger-Freeborn>
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
+	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 	" dispatch compatability
 	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do(<f-args>)
@@ -425,6 +427,7 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  '<CR>     :Term<Up><CR>
 	nnoremap  '<Space>  :Term<Space>
 	nnoremap  '<TAB>    :Term<Up>
+	nnoremap  mt        :silent w\|TMake<CR>
 	nnoremap  `<CR>     :Do<Up><CR>
 	nnoremap  `<Space>  :Do<Space>
 	nnoremap  `<TAB>    :Do<Up>
