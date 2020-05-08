@@ -212,10 +212,11 @@ endfunction
 " Open {{{1 
 " What command to use
 function! dotvim#Open() abort
-	if executable('xdg-open')
+	if !empty($PLUMBER)
+		return $PLUMBER
+	elseif executable('xdg-open')
 		return 'xdg-open'
-	endif
-	if executable('open')
+	elseif executable('open')
 		return 'open'
 	endif
 	return 'explorer'
