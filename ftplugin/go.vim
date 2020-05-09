@@ -65,3 +65,8 @@ nnoremap <buffer><silent> ]] :call CustomSections('down', 'func.*)\s*\zs{\s*\ze$
 nnoremap <buffer><silent> [[ :call CustomSections('up', 'func.*)\s*\zs{\s*\ze$')<CR>
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', 'func.*)\s*\zs{\s*\ze$')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', 'func.*)\s*\zs{\s*\ze$')<CR>
+
+exec 'setlocal path+=' . substitute($GOPATH, ':', ',', '')
+let &l:define  = '^\s*\('
+             \ . '\(func\)\s'
+             \ . '\)'
