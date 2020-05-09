@@ -223,11 +223,11 @@ else
 	" set Vim-specific sequences for RGB colors allowing for gui colors
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	try
+	if has('patch-7.4.1649') " Enable % to go to matching keyword/tag
 		packadd! matchit
-	catch /.*/
-		runtime macro/matchit
-	endtry
+	else
+		runtime! macros/matchit.vim 
+	endif
 endif
 " shortcut to files and dirs uses shortcuts.sh
 " it can be found at my scripts repo
