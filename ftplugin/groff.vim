@@ -17,24 +17,22 @@ setlocal include=^\\.m\\?so
 let &l:define = '^\.\(de\|nr\|ds\)\s*'
 setlocal suffixesadd+=.ms,.mom,.tmac,.macros,.mac,.mm
 
-function! GroffMan()
-	let [line, col] = [line('.'), col('.')]
-	" get the syntax type at the cursor
-	let syntype = reverse(map(synstack(line, col), 'synIDattr(v:val,"name")'))
-	for synt in syntype
-		if synt == 'nroffEquation'
-			Man eqn
-			return
-		elseif synt == 'nroffTable'
-			Man tbl
-			return
-		elseif synt == 'nroffPicture'
-			Man pic
-			return
-		endif
-	endfor
-	Man 7 groff
-endfunction
+" for tracebacks 
+setlocal errorformat=%o: %f:%l:%m
+" add comment string
+setlocal commentstring=.\\\"%s
+let nroff_space_errors = 1
+" let b:preprocs_as_sections = 1
+let b:nroff_is_groff = 1
+imap <buffer> <c-x><c-o> <c-r>=Groffcomplete()<CR>
+
+" add tmac files to path
+setlocal path+=,/usr/share/groff/1.22.4/tmac
+
+" matchit now supports ms macros
+let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
+			\. '^\.cstart:^\.cend,'. '^\.EQ:^\.EN,' . '^\.G1:^\.G2,' . '^\.GS:^\.GE,' 
+			\. '^\.IS:^\.IE,' . '^\.PS:^\.PE,' . '^\.R1:^\.R2,' . '^\.TS:^\.TE,. ^\.JS:^\.JE,'
 
 if executable('efm-langserver')
 	let b:lsc_config = {
@@ -151,33 +149,16 @@ function! GroffMan()
 	" get the syntax type at the cursor
 	let syntype = reverse(map(synstack(line, col), 'synIDattr(v:val,"name")'))
 	for synt in syntype
-		if synt == 'nroffEquation'
+		if synt ==# 'nroffEquation'
 			Man eqn
 			return
-		elseif synt == 'nroffTable'
+		elseif synt ==# 'nroffTable'
 			Man tbl
 			return
-		elseif synt == 'nroffPicture'
+		elseif synt ==# 'nroffPicture'
 			Man pic
 			return
 		endif
 	endfor
 	Man 7 groff
 endfunction
-
-" add tmac files to path
-setlocal path+=,/usr/share/groff/1.22.4/tmac
-
-" matchit now supports ms macros
-let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
-			\. '^\.cstart:^\.cend,'. '^\.EQ:^\.EN,' . '^\.G1:^\.G2,' . '^\.GS:^\.GE,' 
-			\. '^\.IS:^\.IE,' . '^\.PS:^\.PE,' . '^\.R1:^\.R2,' . '^\.TS:^\.TE,. ^\.JS:^\.JE,'
-" add comment string
-setlocal commentstring=.\\\"%s
-let nroff_space_errors = 1
-" let b:preprocs_as_sections = 1
-let b:nroff_is_groff = 1
-imap <buffer> <c-x><c-o> <c-r>=Groffcomplete()<CR>
-
-" for tracebacks 
-setlocal errorformat+=%o:%s:%l:%m
