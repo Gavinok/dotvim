@@ -196,6 +196,14 @@ nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
 if has('nvim')
 	set mouse=a                                         "Add mouse control not that I use them very much
+	" when rightclicking highlight copy it
+	xmap <LeftRelease> "*ygv
+	nmap <RightMouse> gv
+	xmap <RightMouse> gx
+	nmap <MiddleDrag> :Term <c-r><c-w>
+	nmap <MiddleMouse> :Term <c-r><c-w>
+	xmap <MiddleMouse> y:Term <c-r>0
+
 	augroup TERMINAL
 		autocmd!
 		" autocmd BufWinEnter,WinEnter term://* startinsert
@@ -363,12 +371,6 @@ inoremap (<CR> (<CR>)<c-o><s-o>
 cnoremap <C-A> <Home>
 cnoremap <C-B> <Left>
 cnoremap <C-E> <End>
-
-" when rightclicking highlight copy it
-vmap <LeftRelease> "*ygv
-nmap <RightMouse> gv
-xmap <RightMouse> gx
-
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
 " Quick format file
