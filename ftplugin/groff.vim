@@ -34,17 +34,17 @@ let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\
 			\. '^\.cstart:^\.cend,'. '^\.EQ:^\.EN,' . '^\.G1:^\.G2,' . '^\.GS:^\.GE,' 
 			\. '^\.IS:^\.IE,' . '^\.PS:^\.PE,' . '^\.R1:^\.R2,' . '^\.TS:^\.TE,. ^\.JS:^\.JE,'
 
-if executable('efm-langserver')
-	let b:lsc_config = {
-				\ 'name': 'efm-langserver',
-				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/extra/efm/config.yaml',
-				\ 'suppress_stderr': v:true,
-				\}
-	if exists('g:mymu_enabled')
-		call RegisterLanguageServer('groff', b:lsc_config)
-		call RegisterLanguageServer('nroff', b:lsc_config)
-	endif
-endif
+" if executable('efm-langserver')
+" 	let b:lsc_config = {
+" 				\ 'name': 'efm-langserver',
+" 				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/extra/efm/config.yaml',
+" 				\ 'suppress_stderr': v:true,
+" 				\}
+" 	if exists('g:mymu_enabled')
+" 		call RegisterLanguageServer('groff', b:lsc_config)
+" 		call RegisterLanguageServer('nroff', b:lsc_config)
+" 	endif
+" endif
 
 function! GroffcompleteCandidates()
 	let glyph = [
