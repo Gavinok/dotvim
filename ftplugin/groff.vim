@@ -18,7 +18,7 @@ let &l:define = '^\.\(de\|nr\|ds\)\s*'
 setlocal suffixesadd+=.ms,.mom,.tmac,.macros,.mac,.mm
 
 " for tracebacks 
-setlocal errorformat=%o: %f:%l:%m
+setlocal errorformat=%o:%f:%l:%m
 " add comment string
 setlocal commentstring=.\\\"%s
 let nroff_space_errors = 1
