@@ -147,7 +147,7 @@ augroup LazyLoadFugitive
 augroup end
 
 " Aesthetics: {{{2 "
-colorscheme spaceway
+colorscheme acme
 set termguicolors
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
