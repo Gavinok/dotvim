@@ -21,8 +21,7 @@ if executable('ccls')
 				\}
 	if exists('g:mymu_enabled')
 		call RegisterLanguageServer('c', b:lsc_config)
-		setlocal omnifunc=lsc#complete#complete
 	endif
 endif
-
+setlocal omnifunc=lsc#complete#complete
 setlocal path+=/usr/include/**
