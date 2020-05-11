@@ -66,7 +66,10 @@ nnoremap <buffer><silent> [[ :call CustomSections('up', 'func.*)\s*\zs{\s*\ze$')
 xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', 'func.*)\s*\zs{\s*\ze$')<CR>
 xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', 'func.*)\s*\zs{\s*\ze$')<CR>
 
-exec 'setlocal path+=' . substitute($GOPATH, ':', ',', '')
+exec 'setlocal path+=' . substitute($GOPATH, ':', '/src,', '')
+
+setlocal include=^#\s*import
+setlocal suffixesadd=.go
 let &l:define  = '^\s*\('
              \ . '\(func\)\s'
              \ . '\)'
