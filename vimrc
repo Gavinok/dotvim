@@ -52,11 +52,6 @@ if has('patch-7.4.775')
 	" Plug 'jcarreja/vim-customcpt'
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
-else
-	Plug 'skywind3000/vim-auto-popmenu'
-	let g:apc_enable_ft = {'*':1} " enable for all filetypes
-	set complete=.,k,w,b
-	set completeopt=menu,menuone,noselect
 endif
 if has('nvim')
 	" floating preview window for neovim
@@ -148,7 +143,6 @@ augroup end
 
 " Aesthetics: {{{2 "
 colorscheme spaceway
-set termguicolors
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 
@@ -195,6 +189,7 @@ xmap <space> <leader>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 
 if has('nvim')
+	set termguicolors
 	set mouse=a                                         "Add mouse control not that I use them very much
 	" when rightclicking highlight copy it
 	xmap <LeftRelease> "*ygv
@@ -229,8 +224,8 @@ else
 	set ttimeout          " for key codes
 	set ttimeoutlen=10    " unnoticeable small value
 	" set Vim-specific sequences for RGB colors allowing for gui colors
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	if has('patch-7.4.1649') " Enable % to go to matching keyword/tag
 		packadd! matchit
 	else
