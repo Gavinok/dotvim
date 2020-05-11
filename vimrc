@@ -585,7 +585,7 @@ set path=**/*                                      "Autocompletion of path
 set wildmenu                                        "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
-set wildignore=*.tags,tags,*.o,*.class
+set wildignore=*.git.*.tags,tags,*.o,*.class
 set splitbelow splitright
 
 " XDG Environment For VIM
