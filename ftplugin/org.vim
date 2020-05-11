@@ -25,7 +25,7 @@ execute '1SpeedDatingFormat ' . g:org_date
 execute '1SpeedDatingFormat ' . g:org_date_format
 function! ChangeTodo()
 	normal! 0
-	if search('TODO\|DONE', 'W',getline('.'))
+	if search(join(g:org_state_keywords, '\|'), 'W',getline('.'))
 		normal! ciw
 		call feedkeys("a\<C-X>\<C-O>", 'i')
 	else
