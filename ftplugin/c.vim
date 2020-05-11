@@ -25,3 +25,4 @@ if executable('ccls')
 	endif
 endif
 
+setlocal path+=/usr/include/**
