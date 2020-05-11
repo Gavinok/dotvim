@@ -596,7 +596,7 @@ set splitbelow splitright
 " XDG Environment For VIM
 " =======================
 if empty($XDG_CACHE_HOME)
-  let $XDG_CACHE_HOME = '~/.cache'
+  let $XDG_CACHE_HOME = $HOME . '/.cache'
 endif
 " see :help persistent-undo
 if !isdirectory($XDG_CACHE_HOME . '/vim/undo')
