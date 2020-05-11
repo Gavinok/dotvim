@@ -40,3 +40,6 @@ if executable('jdtls')
 		setlocal omnifunc=lsc#complete#complete
 	endif
 endif
+setlocal include=^#\s*import
+setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+setlocal suffixesadd=.java
