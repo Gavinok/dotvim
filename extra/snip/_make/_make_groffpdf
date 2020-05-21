@@ -7,7 +7,7 @@ TARGET := $(addsuffix .pdf,$(basename $(SRCS)))
 all: clean ${TARGET}
 
 %.pdf: %.ms
-	groff -b -wall -mspdf -pte -T pdf $< > $@
+	groff -b -wall -mspdf -kpte -T pdf $< > $@
 
 clean:
 	rm -f *.pdf

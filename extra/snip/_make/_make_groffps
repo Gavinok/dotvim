@@ -10,7 +10,7 @@ all: clean ${TARGET}
 	ps2pdf $< $@
 
 %.ps: %.ms
-	groff -ms -mpdfmark -b -wall -pte -T ps $< > $@
+	groff -ms -mspdf -b -wall -pkte -T ps $< > $@
 
 clean:
 	rm -f *.pdf

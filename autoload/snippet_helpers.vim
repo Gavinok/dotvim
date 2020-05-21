@@ -27,9 +27,9 @@ function! snippet_helpers#FoldManage(on, ret)
 	endif
 	if a:on == 0
 		setlocal foldmethod=manual
-		let w:oldfold = &foldmethod
+		let b:oldfold = &foldmethod
 	else
-		let &foldmethod=w:oldfold
+		let &foldmethod=b:oldfold
 	endif
 	return a:ret
 endfunction

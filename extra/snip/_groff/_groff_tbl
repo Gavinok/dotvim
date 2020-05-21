@@ -1,5 +1,5 @@
 .TS
-{{+options+}}{{+allbox+}} {{+tab(|)+}};
+{{+allbox+}} {{+tab(|)+}};
 {{+ccc+}}.
 {{+table+}}
 .TE
