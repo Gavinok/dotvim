@@ -26,6 +26,7 @@ let g:loaded_fzf                =  1
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper           =  1
 let g:loaded_remote_plugins     =  1
+let g:loaded_netrw              =  1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
@@ -47,7 +48,11 @@ if has('patch-7.4.775')
  	" This may not be needed
 	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
 	if exists('*job_start') || exists('*jobstart')
+		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
+		" Settings at ./plugin/lsp.vim
+		" Plug 'prabirshrestha/async.vim'
+		" Plug 'prabirshrestha/vim-lsp'
 	endif
 	" Plug 'jcarreja/vim-customcpt'
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
@@ -121,6 +126,7 @@ endif
 
 Plug 'axvr/zepl.vim'
 Plug 'axvr/org.vim'
+Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 call plug#end()
 augroup zepl
@@ -387,9 +393,13 @@ augroup SyntaxComplete
 				\	endif
 augroup end
 " Capital Quick first letter of a word or a regain
-nnoremap + m[viwb<esc>gUl`[
-nnoremap <leader>+ V:s/\<./\u&/g <BAR> nohlsearch<CR>
-xnoremap + :s/\<./\u&/g <BAR> nohlsearch<CR>
+xnoremap <silent> <Plug>Titlecase :<C-U> call dotvim#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+nnoremap <silent> <Plug>Titlecase :<C-U>set opfunc=dotvim#titlecase<CR>g@
+nnoremap <silent> <Plug>TitlecaseLine :<C-U>set opfunc=dotvim#titlecase<Bar>exe 'norm! 'v:count1.'g@_'<CR>
+
+nmap zt <Plug>Titlecase
+xmap zt <Plug>Titlecase
+nmap zT <Plug>TitlecaseLine
 
 "Insert Empty Line Above And Below
 map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
@@ -416,11 +426,16 @@ snoremap <BS> <BS>i
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)
-	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
+	command! -nargs=+ -complete=shellcmd Do call dotvim#Do('cgetfile',<f-args>)
+
+	" asyncronus manpages
+	" let g:loaded_man 				=  1
+	" command! -nargs=+ -complete=shellcmd Man call dotvim#Do('split', 'man ', <f-args>)
+
 	" dispatch compatability
-	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do(<f-args>)
-	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do(&grepprg,<f-args>)
-	command! -bang -nargs=* -complete=file Make call dotvim#Do(&makeprg,<f-args>)
+	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do('cgetfile',<f-args>)
+	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do('cgetfile',&grepprg,<f-args>)
+	command! -bang -nargs=* -complete=file Make call dotvim#Do('cgetfile',&makeprg,<f-args>)
 	nnoremap  '<CR>     :Term<Up><CR>
 	nnoremap  '<Space>  :Term<Space>
 	nnoremap  '<TAB>    :Term<Up>
@@ -442,10 +457,20 @@ else
 	nnoremap  m<CR>		:make!<CR>
 endif
 " 2}}} "Minimal Async Command
+" dirvish {{{2 
+set noautochdir
+augroup auto_ch_dir
+    autocmd!
+    autocmd BufEnter * silent! lcd %:p:h
+augroup END
+nmap gx :silent !$PLUMBER -s neovim -- <c-r><c-f><cr>
+vmap gx :silent !$PLUMBER -s neovim -- <c-r><c-f><cr>
+" }}} dirvish "2
 " netrw {{{2
 " Poor mans Vim vinegar
+" set autochdir                                       "Auto cd
 if !empty($PLUMBER)
-	let g:netrw_browsex_viewer='setsid ' . $PLUMBER . ' --' "force gx to use cabl if available
+	let g:netrw_browsex_viewer='setsid ' . $PLUMBER . ' -s neovim --' "force gx to use cabl if available
 endif
 let g:netrw_sort_options = 'i'
 let g:netrw_banner=0 "disable banner
@@ -567,7 +592,6 @@ set tags+=./.tags;../.tags                          "extra directories
 set title                                           "Update window title
 set hidden                                          "Allow to leave buffer without saving
 set showcmd                                         "Show keys pressed in normal
-set autochdir                                       "Auto cd
 set tabstop=4                                       "Shorter hard tabs
 set softtabstop=0                                   "no spaces
 set smarttab
