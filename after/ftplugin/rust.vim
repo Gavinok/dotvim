@@ -7,16 +7,6 @@
 "
 " Description: 
 " ftplugin for rust
-if executable('rls')
-	let b:lsc_config = {
-				\  'command': 'rls',
-				\  'workspace_config': {
-				\      'clippy_preference': 'on',
-				\  },
-				\}
-
-	if exists('g:loaded_lsc')
-		call RegisterLanguageServer('rust', b:lsc_config)
-		setlocal omnifunc=lsc#complete#complete
-	endif
+if exists('g:loaded_lsc')
+	setlocal omnifunc=lsc#complete#complete
 endif

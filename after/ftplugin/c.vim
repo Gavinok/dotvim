@@ -7,21 +7,6 @@
 "
 " Description: 
 " ftplugin for c
-if executable('ccls')
-	let b:lsc_config = {
-				\ 'command': 'ccls',
-				\ 'suppress_stderr': v:true,
-				\ 'message_hooks': {
-				\    'initialize': {
-				\       'initializationOptions': {'cache': {'directory': '/tmp/ccls/cache'}},
-				\       'rootUri': {m, p -> lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json', expand('%:p') . ';'), ':p:h'))}
-				\    },
-				\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
-				\ },
-				\}
-	if exists('g:mymu_enabled')
-		call RegisterLanguageServer('c', b:lsc_config)
-	endif
+if exists('g:mymu_enabled')
+	setlocal omnifunc=lsc#complete#complete
 endif
-setlocal omnifunc=lsc#complete#complete
-setlocal path+=/usr/include/**
