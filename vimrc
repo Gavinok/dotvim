@@ -76,8 +76,8 @@ Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
-" let g:minisnip_trigger = '<C-f>'
-let g:aergia_key = '<c-f>'
+let g:minisnip_trigger = '<C-f>'
+" let g:aergia_key = '<c-f>'
 let g:aergia_snippets = '/home/gavinok/.vim/extra/snip'
 let s:snipdir=globpath(&runtimepath, 'extra/snip')
 let g:minisnip_dir = s:snipdir . ':' . join(split(glob( s:snipdir . '**/'), '\n'), ':')
