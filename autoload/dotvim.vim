@@ -467,10 +467,9 @@ function! dotvim#LoadGui()
 	set guioptions+=lrbmTLce
 	set guioptions-=lrbmTLce
 	set guioptions+=c
-	nnoremap <leader>+ :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')<CR>
-	nnoremap <leader>- :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')<CR>
+	nnoremap ë :silent! let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')<CR>
+	nnoremap ê :silent! let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')<CR>
 endfunction
-
 " 1}}} "load gui
 
 " Titlecase {{{1 "
