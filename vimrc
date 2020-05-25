@@ -42,7 +42,6 @@ call plug#begin('~/.vim/plugged')
 
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
-	" Settings at ./plugin/mucomplete.vim
 	let g:mymu_enabled=1
 	Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
  	" This may not be needed
@@ -55,6 +54,7 @@ if has('patch-7.4.775')
 		" Plug 'prabirshrestha/vim-lsp'
 	endif
 	" Plug 'jcarreja/vim-customcpt'
+	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
