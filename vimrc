@@ -261,7 +261,7 @@ nnoremap <Leader>cl :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' .
 " mark position before search
 nnoremap / ms/
 
-nnoremap <silent> <leader>/        :nohlsearch<CR>
+nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " if this is a normal buffer use <CR> to toggle folding
 nmap <expr> <CR> &buftype ==# '' ? 'za' : "\<CR>"
@@ -290,8 +290,8 @@ nnoremap ]b :silent! bnext<CR>
 nnoremap [b :silent! bprevious<CR>
 
 " Find Files {{{2 "
-nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
-nnoremap <leader>b :b <C-d>
+nnoremap <leader>a   :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
+nnoremap <leader>b   :b <C-d>
 nnoremap <leader>fT  :setfiletype<space>
 nnoremap <leader>ff  :edit <c-r>=FindRootDirectory()<CR>/**/*
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
