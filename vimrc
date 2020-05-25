@@ -260,10 +260,17 @@ nmap <expr> <CR> &buftype ==# '' ? 'za' : "\<CR>"
 
 " Find References
 if executable('rg')
-	set grepprg=rg\ --vimgrep
+	set grepprg=rg\ --vimgrep\ --hidden\ -glob\ ‘!.git’
+	set grepformat^=%f:%l:%c:%m
 elseif executable('ag')
 	set grepprg=ag\ --vimgrep
+else
+	set grepprg=grep\ -r\ -n\ --exclude-dir=.git,.cache
+	" set grepprg=find\ -iname
+	" set grepformat=%f
 endif
+" nmap gW :grep <C-R><C-W>
+command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 
 " change variable and repeat with .
 nnoremap c*			*Ncgn
