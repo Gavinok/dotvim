@@ -449,7 +449,7 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  m?		:echo &makeprg<CR>
 	nnoremap <leader>mm :call dotvim#ToggleAutocompile()<CR>
 	"async tagging
-	nnoremap <leader>t  :call dotvim#Quicktag(0)<CR>
+	nnoremap <leader>T  :call dotvim#Quicktag(0)<CR>
 	" asyncronus manpages
 	let g:loaded_man 				=  1
 	command! -nargs=+ -complete=shellcmd Man call dotvim#Man(<f-args>)
