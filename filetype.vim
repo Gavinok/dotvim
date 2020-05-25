@@ -13,7 +13,7 @@ if exists("did_load_filetypes")
 endif
 
 augroup filetypedetect
-	" autocmd! BufNewFile,BufRead *.org    setlocal filetype=dotoo
+	autocmd! BufNewFile,BufRead *.org    setlocal filetype=dotoo
 	autocmd! BufRead,BufNewFile *.h        setlocal filetype=c
 	autocmd! Bufread,Bufnewfile */snip/*   setlocal      filetype=minisnip
 	autocmd! BufRead,BufNewFile *.ms,*.jot setlocal  filetype=groff
