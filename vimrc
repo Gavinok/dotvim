@@ -428,14 +428,11 @@ if exists('*job_start') || exists('*jobstart')
 	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do('cgetfile',<f-args>)
 
-	" asyncronus manpages
-	" let g:loaded_man 				=  1
-	" command! -nargs=+ -complete=shellcmd Man call dotvim#Do('split', 'man ', <f-args>)
 
 	" dispatch compatability
-	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do('cgetfile',<f-args>)
-	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do('cgetfile',&grepprg,<f-args>)
-	command! -bang -nargs=* -complete=file Make call dotvim#Do('cgetfile',&makeprg,<f-args>)
+	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do(<f-args>)
+	command! -bang -nargs=+ -complete=file_in_path Grep call dotvim#Do(&grepprg,<f-args>)
+	command! -bang -nargs=* -complete=file Make call dotvim#Do(&makeprg,<f-args>)
 	nnoremap  '<CR>     :Term<Up><CR>
 	nnoremap  '<Space>  :Term<Space>
 	nnoremap  '<TAB>    :Term<Up>
