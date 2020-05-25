@@ -110,6 +110,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-scriptease', {'on': []}
+Plug 'tweekmonster/helpful.vim'
+" let g:helpful = 1
 " 2}}} "Tpope
 " etc {{{2 "
 Plug 'tommcdo/vim-lion' " aligning text 
