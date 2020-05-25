@@ -392,14 +392,11 @@ augroup SyntaxComplete
 				\		setlocal omnifunc=syntaxcomplete#Complete |
 				\	endif
 augroup end
-" Capital Quick first letter of a word or a regain
-xnoremap <silent> <Plug>Titlecase :<C-U> call dotvim#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
-nnoremap <silent> <Plug>Titlecase :<C-U>set opfunc=dotvim#titlecase<CR>g@
-nnoremap <silent> <Plug>TitlecaseLine :<C-U>set opfunc=dotvim#titlecase<Bar>exe 'norm! 'v:count1.'g@_'<CR>
 
-nmap zt <Plug>Titlecase
-xmap zt <Plug>Titlecase
-nmap zT <Plug>TitlecaseLine
+" Capital Quick first letter of a word or a regain
+nmap <leader>t :<C-U>set opfunc=dotvim#titlecase<CR>g@
+xmap <leader>t :<C-U> call dotvim#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+nmap <leader>T :<C-U>set opfunc=dotvim#titlecase<Bar>exe 'norm! 'v:count1.'g@_'<CR>
 
 "Insert Empty Line Above And Below
 map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
