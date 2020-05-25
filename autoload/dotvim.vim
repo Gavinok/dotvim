@@ -26,7 +26,7 @@ endfunction
 
 function! dotvim#ToggleLocationlist() abort
 	let nr = winnr('$')
-	silent LspDocumentDiagnostics
+	silent LSClientAllDiagnostics
 	let nr2 = winnr('$')
 	if nr == nr2
 		cclose
