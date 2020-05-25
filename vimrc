@@ -57,7 +57,6 @@ if has('patch-7.4.775')
 	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
-	" Plug 'henricattoire/aergia'
 endif
 if has('nvim')
 	" floating preview window for neovim
@@ -72,7 +71,8 @@ endif
 " Snippets {{{2 "
 Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 
-" Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
+Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
+" Plug 'henricattoire/aergia'
 let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
