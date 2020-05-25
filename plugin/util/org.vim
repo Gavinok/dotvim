@@ -28,14 +28,36 @@ function! W3m(url)
 	let newurl = substitute(a:url, 'https\?:\/\/', '', 'g')
 	call dotvim#TermCmd("w3m '" . newurl . "'")
 endfunction
-
 nmap gX :call W3m('<c-r>=expand('<cfile>')<CR>')<CR>
+
+let g:dotoo#agenda#files = ['~/Documents/org/*.org']
+
+let g:dotoo#parser#todo_keywords = [
+			\ 'TODO',
+			\ 'NEXT',
+			\ 'SOMEDAY',
+			\ 'WAITING',
+			\ 'HOLD',
+			\ '|',
+			\ 'CANCELLED',
+			\ 'DONE',
+			\]
+
+let g:dotoo_headline_highlight_colors = [
+			\ 'Title',
+			\ 'Identifier',
+			\ 'Statement',
+			\ 'PreProc',
+			\ 'Type',
+			\ 'Special',
+			\ 'Constant']
 
 let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
 hi link orgHeading2 Normal
+let g:org_time='%H:%M'
+let g:org_date='%Y-%m-%d %a'
+let g:org_date_format=g:org_date.' '.g:org_time
 map <silent>gO :e ~/Documents/org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
 command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
-com! -nargs=+ -complete=file GitGrep let s:gp=&gp|set gp=git\ grep\ -n|gr <args>|let &gp=s:gp|unl s:gp
-command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 " 2}}} "Orgmode
