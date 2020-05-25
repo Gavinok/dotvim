@@ -56,8 +56,8 @@ if has('patch-7.4.775')
 	" Plug 'jcarreja/vim-customcpt'
 	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
-	" Plug 'jonasw234/vim-mucomplete-minisnip'
-	Plug 'henricattoire/aergia'
+	Plug 'jonasw234/vim-mucomplete-minisnip'
+	" Plug 'henricattoire/aergia'
 endif
 if has('nvim')
 	" floating preview window for neovim
