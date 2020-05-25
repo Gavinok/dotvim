@@ -464,7 +464,7 @@ endif
 set noautochdir
 augroup auto_ch_dir
     autocmd!
-    autocmd BufEnter * silent! lcd %:p:h
+	autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 augroup END
 nmap gx :silent !$PLUMBER -s neovim -- <c-r><c-f><cr>
 vmap gx :silent !$PLUMBER -s neovim -- <c-r><c-f><cr>
