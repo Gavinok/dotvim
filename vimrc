@@ -102,7 +102,7 @@ set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
-Plug 'tpope/vim-speeddating', { 'for': 'org' }
+Plug 'tpope/vim-speeddating', { 'for': [ 'org', 'dotoo' ] }
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
@@ -125,7 +125,9 @@ if executable('go')
 endif
 
 Plug 'axvr/zepl.vim'
-Plug 'axvr/org.vim'
+" Plug 'axvr/org.vim'
+Plug 'dhruvasagar/vim-dotoo'
+nmap <Nop> <Plug>(dotoo-capture)
 Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 call plug#end()
