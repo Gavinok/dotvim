@@ -124,22 +124,12 @@ if executable('go')
 	let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 endif
 
-Plug 'axvr/zepl.vim'
 " Plug 'axvr/org.vim'
 Plug 'dhruvasagar/vim-dotoo'
 nmap <Nop> <Plug>(dotoo-capture)
 Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 call plug#end()
-augroup zepl
-	autocmd!
-	autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
-	autocmd FileType sh         let b:repl_config = { 'cmd': 'sh' }
-	autocmd FileType r          let b:repl_config = { 'cmd': 'R' }
-	autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
-	autocmd FileType clojure    let b:repl_config = { 'cmd': 'clj' }
-	autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
-augroup END
 
 " faster updates
 set updatetime=100
