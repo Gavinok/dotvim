@@ -39,7 +39,11 @@ if has('patch-7.4.775')
 					\ }
 
 		let g:mucomplete#chains = {}
-		let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-n',   'uspl']
+		let g:mucomplete#chains['default']   =  { 
+					\              'default': ['mini',  'list',  'omni',  'path',  'c-n',   'uspl'], 
+					\              '.*string.*': ['uspl'], 
+					\              '.*comment.*': ['uspl']
+					\            }
 		let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']
 		let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
 		let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
@@ -49,11 +53,11 @@ if has('patch-7.4.775')
 		let g:mucomplete#chains['javascript']=  ['mini',  'tags',  'omni',  'c-n']
 		let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'omni', 'c-n']
 		let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']
+		let g:mucomplete#chains['groff']     =  ['mini',  'path', 'incl', 'groff', 'c-n',   'uspl',  'dict']
+		let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['groff']
 		let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 		let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
 		let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
-		let g:mucomplete#chains['groff']     =  ['mini',  'path', 'incl', 'groff', 'c-n',   'uspl',  'dict']
-		let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['markdown']
 
 		if !exists('g:mucomplete#can_complete')
 			let s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
