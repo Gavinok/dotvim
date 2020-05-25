@@ -1,2 +1,2 @@
 * TODO {{++}}
-SCHEDULED : <{{+~strftime(g:org_date_format)+}}>
+SCHEDULED: <{{+~strftime(g:org_date_format)+}}>
