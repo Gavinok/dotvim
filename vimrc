@@ -85,7 +85,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " 2}}} "Terminal
 " Git {{{2 "
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gpush', 'Gedit', 'Ggrep'] }
-Plug 'HiPhish/info.vim'
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
 else
