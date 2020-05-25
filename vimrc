@@ -56,7 +56,8 @@ if has('patch-7.4.775')
 	" Plug 'jcarreja/vim-customcpt'
 	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
-	Plug 'jonasw234/vim-mucomplete-minisnip'
+	" Plug 'jonasw234/vim-mucomplete-minisnip'
+	Plug 'henricattoire/aergia'
 endif
 if has('nvim')
 	" floating preview window for neovim
@@ -71,11 +72,13 @@ endif
 " Snippets {{{2 "
 Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 
-Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
+" Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
 let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
-let g:minisnip_trigger = '<C-f>'
+" let g:minisnip_trigger = '<C-f>'
+let g:aergia_key = '<c-f>'
+let g:aergia_snippets = '/home/gavinok/.vim/extra/snip'
 let s:snipdir=globpath(&runtimepath, 'extra/snip')
 let g:minisnip_dir = s:snipdir . ':' . join(split(glob( s:snipdir . '**/'), '\n'), ':')
 imap <Nop> <Plug>(minisnip-complete)
