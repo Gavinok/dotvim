@@ -27,4 +27,4 @@ if executable('ccls')
 	endif
 endif
 setlocal omnifunc=lsc#complete#complete
-setlocal path+=/usr/include/**
+" setlocal path+=/usr/include/
