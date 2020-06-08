@@ -248,7 +248,7 @@ function! s:populate(file, cmd, done) abort
 	echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
 	unlet! g:job
 	try
-		exe 'cgetfile '.a:file
+		exe 'cgetfile '. a:file
 	finally
 		call setqflist([], 'a', {'title': a:cmd}) "update list
 	endtry
