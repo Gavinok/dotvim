@@ -164,3 +164,6 @@ function! GroffMan()
 	endfor
 	Man 7 groff
 endfunction
+inoreabbrev <buffer> linup lineup
+
+let b:surround_92 = "\\f[\1environment: \1]\r\\f[P]"
