@@ -28,6 +28,8 @@ imap <buffer> <c-x><c-o> <c-r>=Groffcomplete()<CR>
 
 " add tmac files to path
 setlocal path+=,/usr/share/groff/1.22.4/tmac
+" TODO: Check that file exists and if it doesnt create it <04-06-20 Gavin Jaeger-Freeborn>
+setlocal tags+=/usr/share/groff/1.22.4/tmac/.tags
 
 " matchit now supports ms macros
 let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
