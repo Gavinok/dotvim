@@ -437,7 +437,7 @@ snoremap <BS> <BS>i
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)
-	command! -nargs=+ -complete=shellcmd Do call dotvim#Do('cgetfile',<f-args>)
+	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 
 
 	" dispatch compatability
@@ -471,11 +471,11 @@ endif
 " dirvish {{{2 
 set noautochdir
 augroup auto_ch_dir
-    autocmd!
+	autocmd!
 	autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 augroup END
-nmap gx :silent !$PLUMBER -s neovim -- <c-r><c-f><cr>
-vmap gx :silent !$PLUMBER -s neovim -- <c-r><c-f><cr>
+nmap gx :silent !$PLUMBER -s neovim -- "<c-r><c-f>"<cr>
+vmap gx :silent !$PLUMBER -s neovim -- "<c-r><c-f>"<cr>
 " }}} dirvish "2
 " netrw {{{2
 " Poor mans Vim vinegar
@@ -517,8 +517,8 @@ command! Diff :SignifyDiff
 " 2}}} "Signify
 " info {{{2
 function! InfoMappings()
-    nmap <buffer> <c-n> <Plug>(InfoNext)
-    nmap <buffer> <c-p> <Plug>(InfoPrev)
+	nmap <buffer> <c-n> <Plug>(InfoNext)
+	nmap <buffer> <c-p> <Plug>(InfoPrev)
 	nmap <buffer> gu <Plug>(InfoUp)
 endfunction
 augroup info
@@ -626,11 +626,11 @@ set splitbelow splitright
 " XDG Environment For VIM
 " =======================
 if empty($XDG_CACHE_HOME)
-  let $XDG_CACHE_HOME = $HOME . '/.cache'
+	let $XDG_CACHE_HOME = $HOME . '/.cache'
 endif
 " see :help persistent-undo
 if !isdirectory($XDG_CACHE_HOME . '/vim/undo')
-  call mkdir($XDG_CACHE_HOME . '/vim/undo', 'p')
+	call mkdir($XDG_CACHE_HOME . '/vim/undo', 'p')
 endif
 set undodir=$XDG_CACHE_HOME/vim/undo//,/var/tmp//,/tmp//
 set undofile
@@ -638,7 +638,7 @@ set undofile
 " check that directories exist
 set backupdir=$XDG_CACHE_HOME/vim/backup//,/var/tmp//,/tmp//
 if !isdirectory($XDG_CACHE_HOME . '/vim/backup')
-  call mkdir($XDG_CACHE_HOME . '/vim/backup', 'p')
+	call mkdir($XDG_CACHE_HOME . '/vim/backup', 'p')
 endif
 
 " Double slash does not actually work for backupdir, here's a fix
@@ -647,7 +647,7 @@ augroup XDGSUPPORT
 augroup end
 
 if !isdirectory($XDG_CACHE_HOME . '/vim/swap')
-  call mkdir($XDG_CACHE_HOME . '/vim/swap', 'p')
+	call mkdir($XDG_CACHE_HOME . '/vim/swap', 'p')
 endif
 set directory=$XDG_CACHE_HOME/vim/swap//,/var/tmp//,/tmp//
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
