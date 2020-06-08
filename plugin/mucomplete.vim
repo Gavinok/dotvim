@@ -7,9 +7,9 @@
 "
 " Description:
 " plugin settings for mucomplete
-" if !exists("g:mymu_enabled")
-" 	finish
-" endif
+if !exists("g:mymu_enabled")
+	finish
+endif
 " Mucomplete {{{2 "
 "-----------
 if has('patch-7.4.775')
