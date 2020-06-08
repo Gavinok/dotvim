@@ -249,3 +249,47 @@ endif
 hi def link roffMath Special
 
 syn region nroffEquation start=/^\.\s*EQ\>/ end=/^\.\s*EN\>/ contains=roffGreek,roffMath,roffSuperscript,roffSubscript
+
+
+" Enable spell check for non syntax highlighted text
+set spell
+syntax spell toplevel
+syn match nroffEscChar /\\[CN]/ nextgroup=nroffEscCharArg contains=@NoSpell
+syn match nroffEscape /\\[*fgmnYV]/ nextgroup=nroffEscRegPar,nroffEscRegArg contains=@NoSpell
+syn match nroffEscape /\\s[+-]\=/ nextgroup=nroffSize contains=@NoSpell
+syn match nroffEscape /\\[$AbDhlLRvxXZ]/ nextgroup=nroffEscPar,nroffEscArg  contains=@NoSpell
+syn match nroffEscRegArg /./ contained contains=@NoSpell
+syn match nroffEscRegArg2 /../ contained contains=@NoSpell
+syn match nroffEscRegPar /(/ contained nextgroup=nroffEscRegArg2 contains=@NoSpell
+syn match nroffEscArg /./ contained contains=@NoSpell
+syn match nroffEscArg2 /../ contained contains=@NoSpell
+syn match nroffEscPar /(/ contained nextgroup=nroffEscArg2 contains=@NoSpell
+syn match nroffSize /\((\d\)\=\d/ contained contains=@NoSpell
+syn region nroffEscCharArg start=/'/ end=/'/ contained contains=@NoSpell
+syn match nroffEscape /\\[adprtu{}]/ contains=@NoSpell
+syn match nroffEscape /\\$/ contains=@NoSpell
+syn match nroffEscape /\\\$[@*]/ contains=@NoSpell
+syn match nroffSpecialChar /\\[\\eE?!-]/ contains=@NoSpell
+syn match nroffSpace "\\[&%~|^0)/,]" contains=@NoSpell
+syn match nroffSpecialChar /\\(../ contains=@NoSpell
+syn match nroffBadChar /./ contained contains=@NoSpell
+syn match nroffUnit /[icpPszmnvMu]/ contained contains=@NoSpell
+    syn match nroffReqName /[^\t \\\[?]\+/ contained nextgroup=nroffReqArg contains=@NoSpell
+    syn match nroffReqName /[^\t \\\[?]\{1,2}/ contained nextgroup=nroffReqArg contains=@NoSpell
+syn match nroffReqName /\(if\|ie\)/ contained nextgroup=nroffCond skipwhite contains=@NoSpell
+syn match nroffReqName /el/ contained nextgroup=nroffReqLeader skipwhite contains=@NoSpell
+syn match nroffCond /\S\+/ contained nextgroup=nroffReqLeader skipwhite contains=@NoSpell
+syn match nroffReqname /[da]s/ contained nextgroup=nroffDefIdent skipwhite contains=@NoSpell
+syn match nroffDefIdent /\S\+/ contained nextgroup=nroffDefinition skipwhite contains=@NoSpell
+syn region nroffDefinition matchgroup=nroffSpecialChar start=/"/ matchgroup=NONE end=/\\"/me=e-2 skip=/\\$/ start=/\S/ end=/$/ contained contains=nroffDefSpecial,@NoSpell
+syn match nroffDefSpecial /\\$/ contained contains=@NoSpell
+syn match nroffDefSpecial /\\\((.\)\=./ contained contains=@NoSpell
+    syn match nroffDefSpecial /\\\[[^]]*]/ contained contains=@NoSpell
+if exists("b:nroff_is_groff")
+"
+" GNU troff allows long request names
+"
+	syn match nroffReqName /[^\t \\\[?]\+/ contained nextgroup=nroffReqArg contains=@NoSpell
+else
+	syn match nroffReqName /[^\t \\\[?]\{1,2}/ contained nextgroup=nroffReqArg contains=@NoSpell
+endif
