@@ -44,7 +44,7 @@ call plug#begin('~/.vim/plugged')
 if has('patch-7.4.775')
 	let g:mymu_enabled=1
 	Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
- 	" This may not be needed
+	" This may not be needed
 	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
@@ -59,6 +59,7 @@ if has('patch-7.4.775')
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 if has('nvim')
+	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	set completeopt-=preview
@@ -89,9 +90,9 @@ Plug 'christoomey/vim-tmux-navigator'
 " Git {{{2 "
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gpush', 'Gedit', 'Ggrep'] }
 if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
+	Plug 'mhinz/vim-signify'
 else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+	Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 " 2}}} "Git
 " Writing {{{2 "
@@ -117,7 +118,7 @@ Plug 'tweekmonster/helpful.vim'
 " 2}}} "Tpope
 " etc {{{2 "
 Plug 'tommcdo/vim-lion' " aligning text 
-Plug 'wellle/targets.vim'
+" Plug 'wellle/targets.vim'
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 
@@ -148,7 +149,12 @@ colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 
-set laststatus=2 "show statusbar
+
+if exists('g:started_by_firenvim')
+	set laststatus=0
+else
+	set laststatus=2 "show statusbar
+endif
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
@@ -326,8 +332,7 @@ else
 	cnoremap <expr> / wildmenumode() ? "\<C-E>" : "/"
 endif
 
-cnoremap <C-N> <DOWN>
-cnoremap <C-P> <UP>
+
 "quick substitution
 xnoremap ss :s//g<left><left>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
@@ -366,6 +371,7 @@ nnoremap Q  :Gstatus<CR>
 inoremap <C-A> <C-O>^<C-g>u
 inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>
 			\strlen(getline('.'))?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
+inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
 
 "For Proper Tabbing And Bracket Insertion"
 inoremap {<CR> {<CR>}<c-o><s-o>
@@ -375,6 +381,11 @@ inoremap (<CR> (<CR>)<c-o><s-o>
 cnoremap <C-A> <Home>
 cnoremap <C-B> <Left>
 cnoremap <C-E> <End>
+cnoremap <C-N> <DOWN>
+cnoremap <C-P> <UP>
+" inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
+cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
+
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
 " Quick format file
