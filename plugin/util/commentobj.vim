@@ -56,3 +56,30 @@ endfunction
 
 xmap <silent> ic :<C-U>call <SID>inner_comment(1)<CR>
 omap <silent> ic :<C-U>call <SID>inner_comment(0)<CR>
+
+" line text objects
+" -----------------
+" il al
+xnoremap il g_o^
+onoremap il :<C-u>normal vil<CR>
+xnoremap al $o0
+onoremap al :<C-u>normal val<CR>
+
+" number text object (integer and float)
+" --------------------------------------
+" in
+function! VisualNumber()
+	call search('\d\([^0-9\.]\|$\)', 'cW')
+	normal v
+	call search('\(^\|[^0-9\.]\d\)', 'becW')
+endfunction
+xnoremap in :<C-u>call VisualNumber()<CR>
+onoremap in :<C-u>normal vin<CR>
+
+" buffer text objects
+" -------------------
+" i% a%
+xnoremap i% :<C-u>let z = @/\|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z
+onoremap i% :<C-u>normal vi%<CR>
+xnoremap a% GoggV
+onoremap a% :<C-u>normal va%<CR>
