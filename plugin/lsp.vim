@@ -7,7 +7,9 @@
 "
 " Description: 
 " vim-lsp settings
-
+" if !exists("g:mymu_enabled")
+	finish
+" endif
 " LSP {{{1 "
 if exists('*job_start') || exists('*jobstart')
 	nmap <script> <silent> <leader>V :call dotvim#ToggleLocationlist()<CR>
