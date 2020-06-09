@@ -9,4 +9,6 @@
 " ftplugin for java files
 if exists('g:mymu_enabled')
 	setlocal omnifunc=lsc#complete#complete
+elseif exists('g:JavaComplete_PluginLoaded')
+    setlocal omnifunc=javacomplete#Complete
 endif
