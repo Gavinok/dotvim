@@ -27,6 +27,7 @@ let g:loaded_fzf                =  1
 let g:loaded_rrhelper           =  1
 let g:loaded_remote_plugins     =  1
 let g:loaded_netrw              =  1
+let g:loaded_netrwPlugin        =  1
 " 1}}} "Quick Init
 
 " Plugins: {{{1 "
