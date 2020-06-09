@@ -60,7 +60,7 @@ function! CtermConvert()
 	grep! <cword> ~/.vim/extra/cterm_to_hex.vim | copen
 endfunction
 
-nnoremap zT :call CtermConvert()<CR>
+nnoremap <buffer> zT :call CtermConvert()<CR>
 
 setlocal foldmethod=marker
 nmap <buffer> `<CR> :Runtime<CR>
