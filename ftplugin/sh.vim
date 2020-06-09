@@ -20,13 +20,31 @@ if executable('efm-langserver')
 	endif
 endif
 setlocal foldmethod=indent
+
+" formatting
 if executable('shfmt')
   let &l:formatprg='shfmt -i ' . &l:shiftwidth . ' -ln posix -sr -ci -s'
 endif
 
 " force Man to be used along side lsc
-nnoremap K :Man <c-r><c-w><CR>
+nnoremap <buffer> K :Man <c-r><c-w><CR>
 
-if filereadable(expand('~/.cache/dmenu_run'))
-	 setlocal dict=~/.cache/dmenu_run
+" allow for commands with - in the name
+set iskeyword+=-
+
+" use bash to create completion
+if executable('/bin/bash')
+	let ogshell=&shell
+	set shell=/bin/bash
+
+	let s:dict_compl = expand("$XDG_CACHE_HOME/vim/dict_compl/sh")
+	call mkdir(s:dict_compl, "p")
+
+	call system("compgen -c > ".s:dict_compl."/commands")
+	call system("env | cut -f 1 -d= > ".s:dict_compl."/env_variables")
+
+	exec 'setlocal dict+=' . s:dict_compl."/commands"
+	exec 'setlocal dict+=' . s:dict_compl."/env_variables"
+
+	execute 'set shell=' . ogshell
 endif
