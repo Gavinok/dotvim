@@ -31,6 +31,6 @@ command! -nargs=1 Dict call Dict(<q-args>)
 setlocal keywordprg=Dict
 
 " force dict to be used along side lsc
-nnoremap K :Dict <c-r><c-w><CR>
+nnoremap <buffer> K :Dict <c-r><c-w><CR>
 
 call dotvim#WordProcessor()
