@@ -47,6 +47,8 @@ if has('patch-7.4.775')
 	Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
 	" This may not be needed
 	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
+	" java completion is slow with lsp
+	Plug 'artur-shaik/vim-javacomplete2'
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
