@@ -282,7 +282,7 @@ else
 	" set grepprg=find\ -iname
 	" set grepformat=%f
 endif
-" nmap gW :grep <C-R><C-W>
+nmap gr :grep! <C-R><C-W>
 command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 
 " change variable and repeat with .
