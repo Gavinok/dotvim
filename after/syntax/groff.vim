@@ -293,3 +293,11 @@ if exists("b:nroff_is_groff")
 else
 	syn match nroffReqName /[^\t \\\[?]\{1,2}/ contained nextgroup=nroffReqArg contains=@NoSpell
 endif
+
+syn region nroffBold matchgroup=Delimiter start="\\fB\|\\f\[B\]" end="\\fP\|\\f\[P\]" keepend contains=@NoSpell concealends
+syn region nroffItalic matchgroup=Delimiter start="\\fI\|\\f\[I\]" end="\\fP\|\\f\[P\]" keepend contains=@NoSpell concealends
+
+hi def nroffBold   term=bold                 cterm=bold        gui=bold
+hi def nroffItalic term=italic               cterm=italic      gui=italic
+" hi def link        Delimiter         
+" hi def link        nroffBoldDelimiter           Special
