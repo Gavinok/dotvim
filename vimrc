@@ -297,6 +297,9 @@ map [a :silent! cprevious<CR>
 map ]A :silent! lnext<CR>
 map [A :silent! lprevious<CR>
 
+map ]t :silent! tnext<CR>
+map [t :silent! tprevious<CR>
+
 "quick buffer navigation
 nnoremap ]b :silent! bnext<CR>
 nnoremap [b :silent! bprevious<CR>
