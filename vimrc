@@ -44,19 +44,27 @@ call plug#begin('~/.vim/plugged')
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
 	let g:mymu_enabled=1
-	Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
-	" This may not be needed
-	Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
+	if executable('node')
+		Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
+		" This may not be needed
+		Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
+	else
+		Plug '1995eaton/vim-better-javascript-completion', { 'for': ['javascript', 'html', 'javascript.jsx'] }
+		let g:vimjs#casesensistive = 1
+		" Enabled by default. flip the value to make completion matches case insensitive
+
+		let g:vimjs#smartcomplete = 0
+		" Disabled by default. Enabling this will let vim complete matches at any location
+		" e.g. typing 'ocument' will suggest 'document' if enabled.
+	endif
+
 	" java completion is slow with lsp
-	Plug 'artur-shaik/vim-javacomplete2'
+	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
-		" Settings at ./plugin/lsp.vim
-		" Plug 'prabirshrestha/async.vim'
-		" Plug 'prabirshrestha/vim-lsp'
 	endif
-	" Plug 'jcarreja/vim-customcpt'
+	Plug 'jcarreja/vim-customcpt'
 	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
@@ -64,9 +72,9 @@ endif
 if has('nvim')
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 	" floating preview window for neovim
-	Plug 'ncm2/float-preview.nvim'
+	" Plug 'ncm2/float-preview.nvim'
 	set completeopt-=preview
-	let g:float_preview#docked = 0
+	" let g:float_preview#docked = 0
 else
 	set completeopt+=preview
 	" set completeopt+=popup
@@ -279,10 +287,23 @@ elseif executable('ag')
 	set grepprg=ag\ --vimgrep
 else
 	set grepprg=grep\ -r\ -n\ --exclude-dir=.git,.cache
-	" set grepprg=find\ -iname
-	" set grepformat=%f
 endif
-nmap gr :grep! <C-R><C-W>
+
+function! Find(file)
+	let og_gprg = &grepprg
+	let og_gfmt = &grepformat
+
+	set grepprg=find\ .\ -iname
+	set grepformat=%f
+	exec "grep '*". a:file ."*'"
+	let &grepprg=og_gprg
+	let &grepformat=og_gfmt
+endfunction
+
+command! -nargs=* Find call Find(<q-args>)
+
+nmap gr :grep! <C-R><C-W> **/*
+
 command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 
 " change variable and repeat with .
@@ -389,11 +410,17 @@ cnoremap <C-B> <Left>
 cnoremap <C-E> <End>
 cnoremap <C-N> <DOWN>
 cnoremap <C-P> <UP>
-" inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
+cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
+noremap!        <M-b> <S-Left>
+noremap!        <M-f> <S-Right>
+cnoremap        <M-d> <S-Right><C-W>
 
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
+
+
+
 " Quick format file
 nnoremap gQ :<C-U>call dotvim#FormatFile()<CR>
 " win resize
@@ -465,8 +492,8 @@ if exists('*job_start') || exists('*jobstart')
 	"async tagging
 	nnoremap <leader>T  :call dotvim#Quicktag(0)<CR>
 	" asyncronus manpages
-	let g:loaded_man 				=  1
-	command! -nargs=+ -complete=shellcmd Man call dotvim#Man(<f-args>)
+	" let g:loaded_man 				=  1
+	" command! -nargs=+ -complete=shellcmd Man call dotvim#Man(<f-args>)
 else
 	nnoremap  `<TAB>    :!<Up>
 	nnoremap  `<Space>  :!
@@ -627,7 +654,7 @@ set wildmenu                                        "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.git/*,*.tags,tags,*.o,*.class
-set splitbelow splitright
+set splitbelow
 
 " XDG Environment For VIM
 " =======================
