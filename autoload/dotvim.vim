@@ -138,7 +138,12 @@ function! dotvim#ToggleAutocompile() abort
 	if !b:autocompile
 		augroup AUTOCOMP
 			autocmd!
-			autocmd BufWrite <buffer> :silent! Make!
+try
+	
+	autocmd BufWrite <buffer> :silent! Make!
+catch /.*/
+	echo 'busy'
+endtry
 		augroup END
 		let b:autocompile = 1
 	else
@@ -256,7 +261,7 @@ endfunction
 
 function! dotvim#Do(...) abort
 	if exists('g:job')
-		echohl ErrorMsg | echom 'There is currently running job, just wait' | echohl None
+		echohl ErrorMsg | echo 'There is currently running job, just wait' | echohl None
 		return
 	endif
 	call setqflist([], 'r') " clear list
