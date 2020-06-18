@@ -238,10 +238,10 @@ if has('nvim')
 	" tell neovim where runtime is
 	let &packpath = &runtimepath
 else
-	set timeout           " for mappings
-	set timeoutlen=1000   " default value
-	set ttimeout          " for key codes
-	set ttimeoutlen=10    " unnoticeable small value
+	" set timeout           " for mappings
+	" set timeoutlen=1000   " default value
+	" set ttimeout          " for key codes
+	" set ttimeoutlen=10    " unnoticeable small value
 	" set Vim-specific sequences for RGB colors allowing for gui colors
 	" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -403,18 +403,6 @@ inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>
 "For Proper Tabbing And Bracket Insertion"
 inoremap {<CR> {<CR>}<c-o><s-o>
 inoremap (<CR> (<CR>)<c-o><s-o>
-
-" commandline mappings
-cnoremap <C-A> <Home>
-cnoremap <C-B> <Left>
-cnoremap <C-E> <End>
-cnoremap <C-N> <DOWN>
-cnoremap <C-P> <UP>
-cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
-cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
-noremap!        <M-b> <S-Left>
-noremap!        <M-f> <S-Right>
-cnoremap        <M-d> <S-Right><C-W>
 
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
