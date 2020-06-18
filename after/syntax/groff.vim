@@ -252,7 +252,6 @@ syn region nroffEquation start=/^\.\s*EQ\>/ end=/^\.\s*EN\>/ contains=roffGreek,
 
 
 " Enable spell check for non syntax highlighted text
-set spell
 syntax spell toplevel
 syn match nroffEscChar /\\[CN]/ nextgroup=nroffEscCharArg contains=@NoSpell
 syn match nroffEscape /\\[*fgmnYV]/ nextgroup=nroffEscRegPar,nroffEscRegArg contains=@NoSpell
@@ -272,6 +271,7 @@ syn match nroffEscape /\\\$[@*]/ contains=@NoSpell
 syn match nroffSpecialChar /\\[\\eE?!-]/ contains=@NoSpell
 syn match nroffSpace "\\[&%~|^0)/,]" contains=@NoSpell
 syn match nroffSpecialChar /\\(../ contains=@NoSpell
+syn match nroffSpecialChar /\\\[[^]]*]/ contains=@NoSpell
 syn match nroffBadChar /./ contained contains=@NoSpell
 syn match nroffUnit /[icpPszmnvMu]/ contained contains=@NoSpell
     syn match nroffReqName /[^\t \\\[?]\+/ contained nextgroup=nroffReqArg contains=@NoSpell

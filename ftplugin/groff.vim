@@ -19,6 +19,14 @@ setlocal suffixesadd+=.ms,.mom,.tmac,.macros,.mac,.mm
 
 " for tracebacks 
 setlocal errorformat=%o:%f:%l:%m
+" invalid symbol
+setlocal errorformat+=refer:%f:%l:%m
+" macro errors
+setlocal errorformat+=%f:%l:\ macro\ %trror:%m
+" general errors
+setlocal errorformat+=%f:%l:%m
+" warnings
+setlocal errorformat+=%W%tarning:\ file\ '%f'\\,\ around\ line\ %l:,%Z%m
 " add comment string
 setlocal commentstring=.\\\"%s
 let nroff_space_errors = 1
@@ -165,5 +173,8 @@ function! GroffMan()
 	Man 7 groff
 endfunction
 inoreabbrev <buffer> linup lineup
+inoreabbrev <buffer> abvoe above
+
+inoremap T{<CR> T{<CR>T}<c-o><s-o>
 
 let b:surround_92 = "\\f[\1environment: \1]\r\\f[P]"
