@@ -77,7 +77,7 @@ if has('patch-7.4.775')
 			let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
 			let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
 		endif
-		let g:mucomplete#no_popup_mappings = 0
+		let g:mucomplete#no_popup_mappings = 1
 		"spelling
 		let g:mucomplete#spel#good_words = 1
 	endfunction
