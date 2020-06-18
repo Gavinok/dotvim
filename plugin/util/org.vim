@@ -51,13 +51,14 @@ let g:dotoo_headline_highlight_colors = [
 			\ 'Type',
 			\ 'Special',
 			\ 'Constant']
-
 let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
+hi dotoo_shade_stars ctermfg=NONE guifg='#000000'
 hi link orgHeading2 Normal
 let g:org_time='%H:%M'
 let g:org_date='%Y-%m-%d %a'
 let g:org_date_format=g:org_date.' '.g:org_time
 map <silent>gO :e ~/Documents/org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
-command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
+command! -nargs=0 NGrep grep! ".*" ~/.local/Dropbox/Documents/org/**/*.org
+" command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
 " 2}}} "Orgmode
