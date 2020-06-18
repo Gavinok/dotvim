@@ -83,4 +83,19 @@ xnoremap i% :<C-u>let z = @/\|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z
 onoremap i% :<C-u>normal vi%<CR>
 xnoremap a% GoggV
 onoremap a% :<C-u>normal va%<CR>
+
+
+" Inside And Arround {{{1
+" inside or arround ...
+" ----------------------
+" i" i' i. i_ i| i/ i\ i*
+" a" a' a. a_ a| a/ a\ a*
+for char in [ '"', "'",'_', '.', '$', '@', '/', '<bslash>', '*' ]
+	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
+" 1}}} "Inside And Arround
+" TODO: Find a better location for this <17-06-20 Gavin Jaeger-Freeborn>
 let g:surround_insert_tail = "{{++}}"
