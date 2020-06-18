@@ -453,6 +453,9 @@ snoremap <BS> <BS>i
 " 1}}} "Editing
 
 " Plugin Configuration: {{{1 "
+" Surround {{{2 
+imap <C-SPACE> <Plug>Isurround
+" 2}}} "Surround
 " Minimal Async Command {{{2
 " TODO: make fallbacks for ` and m if jobs dont exist <05-05-20 Gavin Jaeger-Freeborn>
 if exists('*job_start') || exists('*jobstart')
