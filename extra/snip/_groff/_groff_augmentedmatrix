@@ -1,0 +1,19 @@
+left [ 
+matrix { 
+ccol{
+{{+x+}} 
+above 
+{{+y+}} 
+}
+{{++}}
+
+} right | left "" matrix {
+
+ccol{
+{{++}}
+above
+{{++}}
+}
+
+} right ]
+
