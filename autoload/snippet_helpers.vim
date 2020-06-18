@@ -8,8 +8,6 @@
 " Description: 
 " helper funcitons used in my minisnips
 " snippet support for surround
-let g:surround_insert_tail = "{{++}}"
-
 function! snippet_helpers#Argmaker(prearg, value_indicator)
 	"code
 	let placeholder = a:prearg . g:minisnip_startdelim . g:minisnip_enddelim

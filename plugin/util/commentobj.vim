@@ -83,3 +83,4 @@ xnoremap i% :<C-u>let z = @/\|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z
 onoremap i% :<C-u>normal vi%<CR>
 xnoremap a% GoggV
 onoremap a% :<C-u>normal va%<CR>
+let g:surround_insert_tail = "{{++}}"
