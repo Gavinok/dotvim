@@ -72,9 +72,9 @@ endif
 if has('nvim')
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 	" floating preview window for neovim
-	" Plug 'ncm2/float-preview.nvim'
-	set completeopt-=preview
-	" let g:float_preview#docked = 0
+	Plug 'ncm2/float-preview.nvim'
+	" set completeopt-=preview
+	let g:float_preview#docked = 0
 else
 	set completeopt+=preview
 	" set completeopt+=popup
