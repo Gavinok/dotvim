@@ -90,7 +90,7 @@ onoremap a% :<C-u>normal va%<CR>
 " ----------------------
 " i" i' i. i_ i| i/ i\ i*
 " a" a' a. a_ a| a/ a\ a*
-for char in [ '"', "'",'_', '.', '$', '@', '/', '<bslash>', '*' ]
+for char in [ '_', '.', '\|', ';','$', '@', '/', '<bslash>', '*' ]
 	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
 	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
 	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
