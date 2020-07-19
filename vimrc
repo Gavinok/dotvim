@@ -498,7 +498,7 @@ augroup auto_ch_dir
 	autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 augroup END
 nmap gx :silent !$PLUMBER -s neovim -- "<c-r><c-f>"<cr>
-vmap gx :silent !$PLUMBER -s neovim -- "<c-r><c-f>"<cr>
+vmap gx y:!$PLUMBER -c -- &<CR>
 " }}} dirvish "2
 " netrw {{{2
 " Poor mans Vim vinegar
