@@ -248,7 +248,13 @@ if exists('g:groff_supsub')
 endif
 hi def link roffMath Special
 
-syn region nroffEquation start=/^\.\s*EQ\>/ end=/^\.\s*EN\>/ contains=roffGreek,roffMath,roffSuperscript,roffSubscript
+syn region nroffEquation start=/^\.\s*EQ\>/ end=/^\.\s*EN\>/ contains=roffGreek,roffMath,roffSuperscript,roffSubscript fold
+syn region nroffTable start=/^\.\s*TS\>/ end=/^\.\s*TE\>/ fold
+syn region nroffPicture start=/^\.\s*PS\>/ end=/^\.\s*PE\>/ fold
+syn region nroffRefer start=/^\.\s*\[\>/ end=/^\.\s*\]\>/ fold
+syn region nroffGrap start=/^\.\s*G1\>/ end=/^\.\s*G2\>/ fold
+syn region nroffGremlin start=/^\.\s*GS\>/ end=/^\.\s*GE|GF\>/ fold
+
 
 
 " Enable spell check for non syntax highlighted text
@@ -294,8 +300,10 @@ else
 	syn match nroffReqName /[^\t \\\[?]\{1,2}/ contained nextgroup=nroffReqArg contains=@NoSpell
 endif
 
-syn region nroffBold matchgroup=Delimiter start="\\fB\|\\f\[B\]" end="\\fP\|\\f\[P\]" keepend contains=@NoSpell concealends
-syn region nroffItalic matchgroup=Delimiter start="\\fI\|\\f\[I\]" end="\\fP\|\\f\[P\]" keepend contains=@NoSpell concealends
+syn region nroffBold matchgroup=Delimiter start="\\fB\|\\f\[B\]" end="\\fP\|\\f\[P\?\]" keepend contains=@NoSpell concealends
+syn region nroffItalic matchgroup=Delimiter start="\\fI\|\\f\[I\]" end="\\fP\|\\f\[P\?\]" keepend contains=@NoSpell concealends
+
+syn region  nroffMacro  transparent start="\.\s*de\s*\a*\>" end="\.\.$" fold
 
 hi def nroffBold   term=bold                 cterm=bold        gui=bold
 hi def nroffItalic term=italic               cterm=italic      gui=italic
