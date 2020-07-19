@@ -9,7 +9,11 @@ all: clean ${TARGET}
 %.pdf: %.ms
 	groff -b -wall -mspdf -kpte -T pdf $< > $@
 
+lint: ${SRCS}
+	writegood --parse $<
+	proselint $<
+
 clean:
 	rm -f *.pdf
 
-.PHONY: clean all
+.PHONY: clean all lint

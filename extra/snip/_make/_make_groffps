@@ -4,7 +4,7 @@
 SRCS=$(shell find -type f -name '*.ms' )
 TARGET := $(addsuffix .pdf,$(basename $(SRCS)))
 
-all: clean ${TARGET}
+all: ${TARGET}
 
 %.pdf: %.ps
 	ps2pdf $< $@
@@ -12,7 +12,11 @@ all: clean ${TARGET}
 %.ps: %.ms
 	groff -ms -mspdf -b -wall -pkte -T ps $< > $@
 
+lint: ${SRCS}
+	writegood --parse $<
+	proselint $<
+
 clean:
 	rm -f *.pdf
 
-.PHONY: clean all
+.PHONY: clean all lint
