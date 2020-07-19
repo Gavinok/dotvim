@@ -10,7 +10,13 @@
 
 function! s:load_skeleton(type, name)
 	" do nothing if no filetype
-	if empty(a:type) | return | endif
+	if empty(a:type) 
+		return
+	elseif a:name =~ "[0-9].sh" 
+		"prevent errors with dirvish
+		return
+	endif
+
 	if !(line('$') == 1 && getline('$') == '') || filereadable(expand('%:p'))
 		return
 	endif
