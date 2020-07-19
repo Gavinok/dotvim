@@ -21,7 +21,6 @@ if has('patch-7.4.775')
 	function! LoadMucomplete()
 		let g:mucomplete#user_mappings = {
 					\'mini': "\<C-r>=MUcompleteMinisnip#complete()\<CR>",
-					\'groff': "\<C-r>=Groffcomplete()\<CR>",
 					\ }
 		set completeopt+=menuone
 
@@ -34,6 +33,7 @@ if has('patch-7.4.775')
 		" remove beeps during completion
 		set belloff=all
 
+		" let g:mucomplete#minimum_prefix_length = 1
 		let g:mucomplete#wordlist = {
 					\       '': ['gavinfreeborn@gmail.com', 'Gavin', 'Jaeger-Freeborn'],
 					\ }
@@ -53,7 +53,7 @@ if has('patch-7.4.775')
 		let g:mucomplete#chains['javascript']=  ['mini',  'tags',  'omni',  'c-n']
 		let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'omni', 'c-n']
 		let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']
-		let g:mucomplete#chains['groff']     =  ['mini',  'path', 'incl', 'groff', 'c-n',   'uspl',  'dict']
+		let g:mucomplete#chains['groff']     =  ['mini',  'path', 'omni', 'c-n',   'uspl',  'dict']
 		let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['groff']
 		let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 		let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
@@ -73,7 +73,8 @@ if has('patch-7.4.775')
 			let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond,          
 						\ 'tag': {t->t=~#'\%(:\)$' }}
 			let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
-			let g:mucomplete#can_complete['groff']     =  {  'groff': { t -> t =~# '\%(\\\[\)$' }}
+			let g:mucomplete#can_complete['groff']     =  {  'omni': { t -> t =~# '\%(\\\[\)$' }}
+			let g:mucomplete#can_complete['groff']     =  {  'omni': { t -> t =~# '^.' }}
 			let g:mucomplete#can_complete['html']      =  {  'omni':  {t->t=~#'\%(<\/\)$'}  }
 			let g:mucomplete#can_complete['vim']       =  {  'cmd':   {t->t=~#'\S$'}        }
 		endif
