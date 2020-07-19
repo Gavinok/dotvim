@@ -70,11 +70,10 @@ if has('patch-7.4.775')
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 if has('nvim')
-	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
-	" set completeopt-=preview
 	let g:float_preview#docked = 0
+	set completeopt-=preview
 else
 	set completeopt+=preview
 	" set completeopt+=popup
