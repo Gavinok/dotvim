@@ -53,7 +53,7 @@ if has('patch-7.4.775')
 		let g:mucomplete#chains['javascript']=  ['mini',  'tags',  'omni',  'c-n']
 		let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'omni', 'c-n']
 		let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']
-		let g:mucomplete#chains['groff']     =  ['mini',  'path', 'omni', 'c-n',   'uspl',  'dict']
+		let g:mucomplete#chains['groff']     =  ['mini',  'omni',  'user', 'c-n',   'uspl',  'dict']
 		let g:mucomplete#chains['nroff']     =  g:mucomplete#chains['groff']
 		let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 		let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
