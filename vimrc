@@ -673,7 +673,12 @@ if !isdirectory($XDG_CACHE_HOME . '/vim/swap')
 	call mkdir($XDG_CACHE_HOME . '/vim/swap', 'p')
 endif
 set directory=$XDG_CACHE_HOME/vim/swap//,/var/tmp//,/tmp//
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
+if has('nvim')
+	set viminfo+=n$XDG_CACHE_HOME/vim/nviminfo
+else
+	set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+endif
 
 
 " Do not use smart case in command line mode,
