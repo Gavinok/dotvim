@@ -127,6 +127,7 @@ Plug 'tweekmonster/helpful.vim'
 " let g:helpful = 1
 " 2}}} "Tpope
 " etc {{{2 "
+Plug 'cwfoo/vim-text-omnicomplete'
 Plug 'tommcdo/vim-lion' " aligning text 
 " Plug 'wellle/targets.vim'
 " only seek on the same line
