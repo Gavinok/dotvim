@@ -642,6 +642,22 @@ let s:base_macros = [
 			\{ 'word': 'writem'    
 			\, 'abbr': 'writem [stream] [xx] '                                                                         , 'info': 'Write contents of macro or string xx to the stream named stream.' }                                                                                        ,
 			\]
+function! GroffDoc(word)
+	for req in s:base_macros 
+		" echoerr req
+		if a:word ==# req.word
+			if has_key(req, 'info')
+				echo req.info
+				return
+			endif
+		endif
+	endfor
+	call GroffMan()
+endfunction
+
+command! -nargs=1 GroffDoc call GroffDoc(<f-args>)
+
+setlocal keywordprg=:GroffDoc
 
 let s:general_macros = [
 			\{ 'word': 'EQ', 'icase': 1 },
