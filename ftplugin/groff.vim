@@ -39,9 +39,9 @@ let b:nroff_is_groff = 1
 " imap <buffer> <c-x><c-o> <c-r>=Groffcomplete()<CR>
 
 " add tmac files to path
-setlocal path+=,/usr/share/groff/1.22.4/tmac
+setlocal path+=,/usr/share/groff/current/tmac
 " TODO: Check that file exists and if it doesnt create it <04-06-20 Gavin Jaeger-Freeborn>
-setlocal tags+=/usr/share/groff/1.22.4/tmac/.tags
+setlocal tags+=/usr/share/groff/current/tmac/.tags
 
 set complete+=t
 set complete+=i
