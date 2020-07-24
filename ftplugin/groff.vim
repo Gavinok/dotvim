@@ -7,7 +7,6 @@
 "
 " Description:
 " ftplugin for groff files
-nnoremap <buffer> K :call GroffMan()<cr>
 
 let g:groff_greek =1
 let g:groff_math =1
