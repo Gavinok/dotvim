@@ -12,6 +12,7 @@
 set nobuflisted
 
 nmap <buffer> <TAB> za
+nmap <buffer> p 0:pedit <C-R><C-F><CR>
 
 setlocal foldmethod=expr
 setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
