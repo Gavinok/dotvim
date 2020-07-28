@@ -23,6 +23,7 @@ compiler proselint
 function! Dict(word)
 	"code
 	exec 'new|read !dict '.a:word
+	exec 'read !dict -dmoby-thesaurus '.a:word
 	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
 	setfiletype text
 endfunction
