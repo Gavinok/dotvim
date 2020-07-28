@@ -647,6 +647,7 @@ set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.git/*,*.tags,tags,*.o,*.class
 set splitbelow
+set splitright
 
 " XDG Environment For VIM
 " =======================
