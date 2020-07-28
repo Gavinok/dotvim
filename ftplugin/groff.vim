@@ -1205,8 +1205,8 @@ endfunction
 inoreabbrev <buffer> linup lineup
 inoreabbrev <buffer> abvoe above
 
-inoremap T{<CR> T{<CR>T}<c-o><s-o>
-
+inoremap <buffer> T{<CR> T{<CR>T}<c-o><s-o>
+nmap <buffer> <leader><space> :vimgrep! /\C\(\.XN\\|HEADING\)\zs.*\ze/ %<CR>copen<CR>
 
 setlocal completefunc=text_omnicomplete#OmniComplete
 
