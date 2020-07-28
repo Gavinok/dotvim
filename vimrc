@@ -104,6 +104,7 @@ if has('nvim') || has('patch-8.0.902')
 else
 	Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
+Plug 'rhysd/github-complete.vim'
 " 2}}} "Git
 " Writing {{{2 "
 " Plug 'lervag/vimtex' " Latex support
