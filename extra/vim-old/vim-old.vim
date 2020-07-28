@@ -183,8 +183,6 @@ augroup LazyLoadPlug
 	autocmd CursorHold,CursorHoldI * call plug#load('coc.nvim') | autocmd! LazyLoadPlug
 augroup end
 if has('patch-8.0.0283')
-	" TODO: setup diagnostics for vimrc "
-
 	" Define Error Symbols and colors
 	let g:coc_status_warning_sign = ''
 	let g:coc_status_error_sign = ''
@@ -922,7 +920,6 @@ function! dotvim#WebSearch(type, ...)
 endfunction
 
 " Simple Snippets {{{ "1
-" * TODO may be a good alternative to minisnips
 iab comm <C-R>=&commentstring<CR><esc>F%c2w
 " expand snippets with <c-f>
 imap <c-f> <c-v><c-a><c-]>

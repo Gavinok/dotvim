@@ -669,7 +669,6 @@ let s:general_macros = [
 			\, 'abbr': 'PSPIC [image.eps]', 'icase': 1 }
 			\]
 
-" TODO: add support for more macros <13-07-20 Gavin Jaeger-Freeborn>
 let s:mom_prestart_macros = [ 
 			\{ 'word': 'TITLE "', 'icase': 1 },
 			\{ 'word': 'SUBTITLE "', 'icase': 1 },
@@ -989,7 +988,6 @@ let s:eqn_words = [
 			\,'info': 'Move up n 1/100’s of an em.'},
 			\]
 
-" TODO: add pic commands and arguments <13-07-20 Gavin Jaeger-Freeborn>
 " you can find more of them at /home/gavinok/groff/doc/pic.pdf
 let s:pic_closed_objects = [ 'box', 'circle', 'ellipse' ]
 let s:pic_open_objects = [ 'arc', 'line', 'arrow', 'spline' ]

@@ -97,5 +97,4 @@ for char in [ '_', '.', '\|', ';','$', '@', '/', '<bslash>', '*' ]
 	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
 " 1}}} "Inside And Arround
-" TODO: Find a better location for this <17-06-20 Gavin Jaeger-Freeborn>
 let g:surround_insert_tail = "{{++}}"

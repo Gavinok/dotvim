@@ -457,7 +457,6 @@ snoremap <BS> <BS>i
 imap <C-SPACE> <Plug>Isurround
 " 2}}} "Surround
 " Minimal Async Command {{{2
-" TODO: make fallbacks for ` and m if jobs dont exist <05-05-20 Gavin Jaeger-Freeborn>
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)

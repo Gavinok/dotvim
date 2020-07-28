@@ -478,7 +478,6 @@ endfunction
 " 1}}} "load gui
 
 " Titlecase {{{1 "
-" TODO: add vim-repeat <19-05-20 Gavin Jaeger-Freeborn>
 function! dotvim#titlecase(type, ...) abort
   let g:type = a:type
   let g:it =  a:0
