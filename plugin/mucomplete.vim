@@ -58,6 +58,7 @@ if has('patch-7.4.775')
 		let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 		let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
 		let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
+		let g:mucomplete#chains['gitcommit'] =  g:mucomplete#chains['markdown']
 
 		if !exists('g:mucomplete#can_complete')
 			let s:c_cond = { t -> t =~# '\%(->\|\.\)$' }
