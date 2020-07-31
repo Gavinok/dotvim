@@ -39,7 +39,6 @@ let b:nroff_is_groff = 1
 
 " add tmac files to path
 setlocal path+=,/usr/share/groff/current/tmac
-" TODO: Check that file exists and if it doesnt create it <04-06-20 Gavin Jaeger-Freeborn>
 setlocal tags+=/usr/share/groff/current/tmac/.tags
 
 set complete+=t
@@ -670,8 +669,8 @@ let s:general_macros = [
 			\]
 
 let s:mom_prestart_macros = [ 
-			\{ 'word': 'TITLE "', 'icase': 1 },
-			\{ 'word': 'SUBTITLE "', 'icase': 1 },
+			\{ 'word': 'TITLE "', 'info': 'TITLE [COVER | DOC_COVER] "<title string>" ["<2nd line>" ["<3rd line>" ... ] ]', 'icase': 1 },
+			\{ 'word': 'SUBTITLE "', 'info': 'SUBTITLE [COVER | DOC_COVER] "<subtitle>" ["<2nd line>" ["<3rd line>" ... ] ]', 'icase': 1 },
 			\{ 'word': 'AUTHOR "', 'icase': 1 },
 			\{ 'word': 'PRINTSTYLE', 'icase': 1 },
 			\{ 'word': 'COPYRIGHT', 'icase': 1 },
@@ -705,11 +704,34 @@ let s:mom_style_options = [
 			\{ 'word': 'SPACE_BENEATH',  'icase': 1 }
 			\]
 let s:mom_poststart_macros = [
-			\{ 'word': 'HEADING', 'icase': 1 },
+			\{ 'word': 'IL', 'abbr': 'IL [ <measure> ]', 'info': 'set and turn on a left indent' },
+			\{ 'word': 'IR', 'abbr': 'IR [ <measure> ]',	'info': 'set and turn on a right indent'},
+			\{ 'word': 'IB', 'abbr': 'IB [ <measure> ]',	'info': 'set and turn on indents both left and right'},
+			\{ 'word': 'TI', 'abbr': 'TI [ <measure> ]',	'info': 'set and turn on a temporary (one line) indent'},
+			\{ 'word': 'HI', 'abbr': 'HI [ <measure> ]',	'info': 'set and turn on a hanging indent (TREATED LITERALY) '},
+			\{ 'word': 'IQ', 'info': 'quit (exit) all indents'},
+			\{ 'word': 'ILX',	'info': 'left indents off'},
+			\{ 'word': 'IRX',	'info': 'right indents off'},
+			\{ 'word': 'IBX',	'info': 'both left and right indents off'},
+			\ 
+			\{ 'word': 'HEADING', 'abbr': 'HEADING <level> "<heading text>"', 'info': 'Macro: HEADING <level> [ PARAHEAD ] [ NAMED <pdf-id> ] "<heading text>"', 'icase': 1 },
+			\
+			\{ 'word': 'LEFT',   'info': 'set line-by-line quad left', 'icase': 1 },
+			\{ 'word': 'RIGHT',  'info': 'set line-by-line quad right','icase': 1 },
+			\{ 'word': 'CENTER', 'info': 'set line-by-line quad centre','icase': 1 },
+			\{ 'word': 'QUAD',   'abbr': 'QUAD L | LEFT | R | RIGHT | C | CENTER | J | JUSTIFY', 'info': ' "justify" text left, centre, or right' },
+			\{ 'word': 'JUSTIFY', 'info': 'justify text to both margins' },
+			\{ 'word': 'BR', 'info': 'break a justified line'},
+			\{ 'word': 'SPREAD', 'info': 'force justify a line'},
+			\{ 'word': 'EL', 'info': ' break a line without advancing on the page'},
+			\
+			\{ 'word': 'UNDERSCORE', 'abbr': 'UNDERSCORE [ <distance below baseline> ] "<string>"', 'info': 'underscore' },
+			\{ 'word': 'UNDERSCORE2', 'abbr': 'UNDERSCORE2 [ <distance below baseline> [ <distance between rules> ] ] "<string>"', 'info': ' double underscore' },
+			\
 			\{ 'word': 'PP', 'icase': 1 },
 			\{ 'word': 'LINEBREAK', 'icase': 1 },
 			\{ 'word': 'SECTION', 'icase': 1 },
-			\{ 'word': 'LIST', 'icase': 1 },
+			\{ 'word': 'LIST', 'abbr': 'LIST [ BULLET | DASH | ... ] [ <separator> ] [ <prefix> ] [ <anything> ]', 'info': 'Invoked by itself (ie with no argument), LIST initializes a list with bullets as the default enumerator. Afterward,s each block of input text preceded by .ITEM, on a line by itself, is treated as a list item. LIST [ BULLET | DASH | DIGIT | ALPHA | alpha | ROMAN<n> | roman<n> | USER <user-defined enumerator> | PLAIN | VARIABLE <character>] [ <separator> ] [ <prefix> ] [ <anything> ]}', 'icase': 1 },
 			\{ 'word': 'ITEM', 'icase': 1 },
 			\{ 'word': 'PP_FONT', 'icase': 1 },
 			\{ 'word': 'PARA_INDENT', 'icase': 1 },
