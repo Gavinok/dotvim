@@ -6,7 +6,13 @@ TARGET := $(addsuffix .pdf,$(basename $(SRCS)))
 
 all: clean ${TARGET}
 
-%.pdf: %.ms
+%.pdf: %.ps
+	ps2pdf $< $@
+
+%.ps: %.ms
+	groff -Tps -ept -b -wall -mspdf $< > $@
+
+test: %.ms
 	pdfroff -b -wall -mspdf -kpte -T pdf $< > $@
 
 lint: ${SRCS}
@@ -16,4 +22,4 @@ lint: ${SRCS}
 clean:
 	rm -f *.pdf
 
-.PHONY: clean all lint
+.PHONY: clean all lint test
