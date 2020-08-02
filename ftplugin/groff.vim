@@ -1242,9 +1242,8 @@ inoreabbrev <buffer> linup lineup
 inoreabbrev <buffer> abvoe above
 
 inoremap <buffer> T{<CR> T{<CR>T}<c-o><s-o>
+imap <buffer> \{\<CR> \{\<CR>.\}<c-o><s-o>
 nmap <buffer> <leader><space> :vimgrep! /\C\(\.XN\\|HEADING\)\zs.*\ze/ %<CR>copen<CR>
-
-setlocal completefunc=text_omnicomplete#OmniComplete
 
 " prevent indenting anything
 let b:surround_indent = 1
