@@ -97,4 +97,19 @@ for char in [ '_', '.', '\|', ';','$', '@', '/', '<bslash>', '*' ]
 	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
 " 1}}} "Inside And Arround
+" TODO: Find a better location for this <17-06-20 Gavin Jaeger-Freeborn>
 let g:surround_insert_tail = "{{++}}"
+
+" groff escape sequences
+" --------------------------------------
+" in
+
+
+" wip starter \\\([fn\*]\)\(.\|(..\|\[\{-}\]\)
+" function! VisualNumber()
+" 	call search('\\\([fnm\*]\)\(.\|(..\|\[\{-}\]\)', 'cW')
+" 	normal v
+" 	call search('\(^\|[^0-9\.]\d\)', 'becW')
+" endfunction
+" xnoremap in :<C-u>call VisualNumber()<CR>
+" onoremap in :<C-u>normal vin<CR>

@@ -1257,7 +1257,6 @@ let b:surround_75 = ".KS\r.KE"
 augroup AUTOCOMP
 	autocmd!
 	try
-
 		autocmd BufWrite <buffer> :silent! Make!
 	catch /.*/
 		echo 'busy'
