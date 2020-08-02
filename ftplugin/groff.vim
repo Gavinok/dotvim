@@ -1011,11 +1011,27 @@ let s:eqn_words = [
 			\]
 
 " you can find more of them at /home/gavinok/groff/doc/pic.pdf
-let s:pic_closed_objects = [ 'box', 'circle', 'ellipse' ]
-let s:pic_open_objects = [ 'arc', 'line', 'arrow', 'spline' ]
+let s:pic_closed_primitives = [ 'box', 'circle', 'ellipse' ]
+let s:pic_open_primitives = [ 'arc', 'line', 'arrow', 'spline' ]
+let s:pic_closed_attributes = [
+			\'ht',
+			\'height',
+			\'wid',
+			\'width',
+			\'solid',
+			\]
+let s:pic_closed_curve_attributes = [
+			\'rad',
+			\'radius',
+			\'diam',
+			\'diameter',
+			\]
+let s:pic_open_attributes = [
+			\'from',
+			\'to',
+			\'at',
+			\]
 let s:pic_circle_attribute = [ 'diam', 'rad']
-let s:pic_closed_objects_attribute = [ 'ht', 'wid', 'solid']
-let s:pic_open_objects_attribute = [ 'from', 'to']
 let s:pic_objects_attribute = [ 'colored', 'shaded', 'outlined', 'invis', 'dotted', 'dashed']
 let s:pic_directions = ['down', 'up', 'right', 'left']
 let s:pic_options = [ 'dashed', 'inves', 'at (' ]
@@ -1034,7 +1050,7 @@ let s:pic_expressions = [
 			\{ 'word': 'min(', 'info': 'min(e1, e2)' },
 			\]
 
-let s:pic = s:pic_closed_objects + s:pic_open_objects
+let s:pic = s:pic_closed_primitives + s:pic_open_primitives 
 let s:tbl = ['allbox', 'box', 'center', 'delim(', 'doublebox', 'expand', 'frame', 'linesize(', ]
 let s:gnu_tbl = [ 'decimapoint(', 'nokeep', 'nospaces', 'nowarn', 'tab(' ]
 
@@ -1057,10 +1073,10 @@ function! PicComplete(context)
 	if object =~ '\(box\|circle\|ellipse\)'
 		return s:pic_closed_objects_attribute + s:pic_objects_attribute + s:pic_options
 	elseif object =~ '\(arc\|line\|arrow\|spline\)'
-		return s:pic_open_objects_attribute + s:pic_objects_attribute + s:pic_options
+		return s:pic_open_attributes + s:pic_options
 	endif
 	" if a:context =~? '\(^\|^.*;\)$'
-	return s:pic_open_objects + s:pic_closed_objects + s:pic_directions
+	return s:pic_open_primitives + s:pic_closed_primitives + s:pic_directions
 	" endif
 	return [] 
 endfunction
