@@ -34,6 +34,4 @@ setlocal keywordprg=Dict
 " force dict to be used along side lsc
 nnoremap <buffer> K :Dict <c-r><c-w><CR>
 
-set omnifunc=text_omnicomplete#OmniComplete
-
 call dotvim#WordProcessor()
