@@ -31,7 +31,7 @@ setlocal errorformat+=%f:%l:%m
 " warnings
 setlocal errorformat+=%W%tarning:\ file\ '%f'\\,\ around\ line\ %l:,%Z%m
 " add comment string
-setlocal commentstring=.\\\"%s
+setlocal commentstring=\\\"%s
 let nroff_space_errors = 1
 " let b:preprocs_as_sections = 1
 let b:nroff_is_groff = 1
@@ -43,6 +43,7 @@ setlocal tags+=/usr/share/groff/current/tmac/.tags
 
 set complete+=t
 set complete+=i
+set foldmethod=marker
 
 " matchit now supports ms macros
 let b:match_words = '^\.QS:^\.QE,' . '^\.RS:^\.RE,' . '^\.AB:^\.AE,' . '^\.KS:^\.KE,' . '^\.B1:^\.B2,'
