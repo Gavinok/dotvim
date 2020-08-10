@@ -64,7 +64,7 @@ if has('patch-7.4.775')
 		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
 	endif
-	Plug 'jcarreja/vim-customcpt'
+	" Plug 'jcarreja/vim-customcpt'
 	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
@@ -478,7 +478,7 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  m<Space>  :Make<Space>
 	nnoremap  m!		:setlocal makeprg=compiler\ %<CR>
 	nnoremap  m?		:echo &makeprg<CR>
-	nnoremap <leader>mm :call dotvim#ToggleAutocompile()<CR>
+	nnoremap  mm :call dotvim#ToggleAutocompile()<CR>
 	"async tagging
 	nnoremap <leader>T  :call dotvim#Quicktag(0)<CR>
 	" asyncronus manpages
