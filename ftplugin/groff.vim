@@ -782,6 +782,19 @@ let s:font = [
 			\{ 'word': 'R', 'icase': 1 },
 			\{ 'word': 'P', 'icase': 1 }
 			\]
+" TODO: add more escape sequences <10-08-20 Gavin Jaeger-Freeborn>
+let s:escapes = [
+			\{ 'word': 'f', 'abbr': '\f', 'info': 'Change to font with one-character name or one-digit number F.', 'icase': 1 },
+			\{ 'word': 'l', 'abbr': '\l’Nc’', 'info': 'Horizontal line drawing function (optionally using character c).', 'icase': 1 },
+			\{ 'word': 'L', 'abbr': '\L’Nc’', 'info': 'Vertical line drawing function (optionally using character c).', 'icase': 1 },
+			\{ 'word': 'D', 'abbr': '\D’charseq’', 'info': 'Draw a graphical element defined by the characters in charseq; see the groff Texinfo manual for details.', 'icase': 1 },
+			\{ 'word': '"', 'abbr': '\"', 'info': 'Start of a comment.  Everything up to the end of the line is ignored.', 'icase': 1 },
+			\{ 'word': 'Z', 'abbr': '\Z’anything’', 'info': 'Print anything and then restore the horizontal  and  vertical  position; anything may not contain tabs or leaders.', 'icase': 1 },
+			\{ 'word': '$*', 'abbr': '\$*', 'info': 'In a macro or string, the concatenation of all the arguments separated by spaces.', 'icase': 1 },
+			\{ 'word': '$@', 'abbr': '\$@', 'info': 'In a macro or string, the concatenation of all the arguments with each surrounded by double quotes, and separated by spaces.', 'icase': 1 },
+			\{ 'word': '$^', 'abbr': '\$^', 'info': 'In a macro, the representation of all parameters as if they were an argument to the ds request.', 'icase': 1 },
+			\{ 'word': '&', 'abbr': '\&', 'info': 'Non-printable, zero-width glyph. (used for escaping)', 'icase': 1 }
+			\]
 let s:registers = [
 			\{ 'word': 'PS', 'icase': 1 },
 			\{ 'word': 'VS', 'icase': 1 },
@@ -1180,6 +1193,8 @@ fun! GroffOmnifunc(findstart, base)
 					endif
 					let values = s:macros
 				endif
+			elseif shortcontext =~# '\\$'
+				let values = s:escapes
 			elseif shortcontext =~# '\\f$'
 				let values = s:font
 			elseif shortcontext =~# '\\f\([\|(\)$'
