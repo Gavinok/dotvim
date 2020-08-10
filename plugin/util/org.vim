@@ -10,13 +10,16 @@
 
 " Orgmode {{{2 "
 " Simple implementation of org-capture using minisnip
-function! CreateCapture(window)
+function! CreateCapture(window, ...)
 	" if this file has a name
 	let g:org_refile='~/Documents/org/refile.org'
 	if expand('%:p') !=# ''
 		let g:temp_org_file=printf('file:%s:%d', expand('%:p') , line('.'))
 		exec a:window . ' ' . g:org_refile
 		exec '$read ' . globpath(&rtp, 'extra/org/template.org')
+	elseif a:1 == 'qutebrowser'
+		exec a:window . ' ' . g:org_refile
+		exec '$read ' . globpath(&rtp, 'extra/org/templateQUTE.org')
 	else
 		exec a:window . ' ' . g:org_refile
 		exec '$read ' . globpath(&rtp, 'extra/org/templatenofile.org')
