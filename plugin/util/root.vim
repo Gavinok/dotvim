@@ -13,7 +13,7 @@ function! FindRootDirectory()
 	if !filereadable('Makefile') && !filereadable('makefile')
 		let root = systemlist('git rev-parse --show-toplevel')[0]
 		if v:shell_error
-			return ''
+			return '.'
 		endif
 		return root
 	endif
