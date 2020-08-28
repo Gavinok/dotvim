@@ -429,13 +429,13 @@ augroup SyntaxComplete
 augroup end
 
 " Capital Quick first letter of a word or a regain
-nmap <leader>t :<C-U>set opfunc=dotvim#titlecase<CR>g@
-xmap <leader>t :<C-U> call dotvim#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
-nmap <leader>T :<C-U>set opfunc=dotvim#titlecase<Bar>exe 'norm! 'v:count1.'g@_'<CR>
+nmap <leader>t :set opfunc=dotvim#titlecase<CR>g@
+xmap <leader>t :<C-U>call dotvim#titlecase(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+nmap <leader>T :set opfunc=dotvim#titlecase<Bar>exe 'norm! 'v:count1.'g@_'<CR>
 
 "Insert Empty Line Above And Below
-map <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
-map <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
+nmap <silent><leader>o  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+nmap <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 
 " Quick spell correction shortcut
 let g:quickdict='~/.vim/extra/dict/en_common.dict'
@@ -461,7 +461,6 @@ if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
 	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
-
 
 	" dispatch compatability
 	command! -bang -nargs=+ -complete=shellcmd Dispatch call dotvim#Do(<f-args>)
@@ -647,6 +646,7 @@ set wildignorecase
 set wildignore=*.git/*,*.tags,tags,*.o,*.class
 set splitbelow
 set splitright
+let b:preprocs_as_sections = 1
 
 " XDG Environment For VIM
 " =======================
