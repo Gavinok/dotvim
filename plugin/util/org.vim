@@ -17,7 +17,7 @@ function! CreateCapture(window, ...)
 		let g:temp_org_file=printf('file:%s:%d', expand('%:p') , line('.'))
 		exec a:window . ' ' . g:org_refile
 		exec '$read ' . globpath(&rtp, 'extra/org/template.org')
-	elseif a:1 == 'qutebrowser'
+	elseif a:0 == 1 && a:1 == 'qutebrowser'
 		exec a:window . ' ' . g:org_refile
 		exec '$read ' . globpath(&rtp, 'extra/org/templateQUTE.org')
 	else
