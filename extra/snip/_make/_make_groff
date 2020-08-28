@@ -17,7 +17,7 @@ ERRORFILE=log.error
 
 all: ${TARGET}
 
-.SUFFIXES: .tr .ms .ps .pdf .PDF
+.SUFFIXES: .tr .ms .ps .pdf .PDF .html
 
 .ps.pdf:
 	ps2pdf $< $@
@@ -31,11 +31,20 @@ endif
 	$(MAKE) checkerrors
 	
 
-$(ROFFEXT).PDF:
-ifeq ($(PDFROFF), pdfroff)
+.$(ROFFEXT).PDF:
+ifeq ($(ROFF), pdfroff)
 	$(PDFROFF) $(GROFFOPTS) $(MACROS) 2>$(ERRORFILE) $< > $@
 else
 	cat $< | $(PRE) | $(PDFROFF) $(ROFFOPTS) $(MACROS) | $(PDFPOST) > $@
+endif
+	$(MAKE) checkerrors
+
+.$(ROFFEXT).html:
+ifeq ($(ROFF), groff)
+	# the sed is here to remove .XN if it exists
+	cat $< |  sed -e 's/^\.XN//' | $(ROFF) $(GROFFOPTS) $(MACROS) -Thtml 2>$(ERRORFILE) > $@
+else
+	@echo "error only groff is supported for html output"
 endif
 	$(MAKE) checkerrors
 
