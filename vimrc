@@ -757,7 +757,7 @@ iab hte the
 
 " Etc {{{1 "
 " Diffs: {{{2 "
-if has('patch-8.0.0283')
+if has('patch-8.1.0283')
 	set diffopt=vertical,filler,context:3,
 				\indent-heuristic,algorithm:patience,internal
 endif
