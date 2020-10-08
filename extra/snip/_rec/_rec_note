@@ -1,0 +1,5 @@
+Name: {{++}}
+Class: {{++}}
+Deadline: {{+~strftime(g:org_date_format)+}}
+State: TODO
+Added: {{+~strftime(g:org_date_format)+}}
