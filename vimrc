@@ -620,6 +620,9 @@ if has('virtualedit')
 	set virtualedit=block                           " virtual block can go anywhere
 endif
 
+
+set listchars=tab:→\ ,trail:·,nbsp:·
+set list
 set clipboard^=unnamed,unnamedplus	                "xclip support
 set tags+=.tags;	                                "make tagefiles hidden
 set tags+=./.tags;../.tags                          "extra directories
