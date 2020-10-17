@@ -6,7 +6,7 @@
 
 public class {{+CLASS+}}
 {
-    public {{{+~\~1+}}}()
+    public {{+<CLASS+}}()
     {
         {{+CURSOR+}}
     }
