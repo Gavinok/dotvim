@@ -59,6 +59,7 @@ if has('patch-7.4.775')
 
 	" java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
+    let g:JavaComplete_UsePython3 = 1
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
