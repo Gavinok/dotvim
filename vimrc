@@ -187,7 +187,7 @@ let &statusline = s:statusline_expr()
 
 if has('gui_running')
 	call dotvim#LoadGui()
-elseif g:colors_name !=# 'acme'
+elseif exists('g:colors_name') && g:colors_name !=# 'acme'
 	hi Normal      guibg=NONE
 	hi ColorColumn guibg=NONE
 	hi SignColumn  guibg=NONE
