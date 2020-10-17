@@ -22,7 +22,6 @@ let g:loaded_gzip               =  1
 let g:loaded_tarPlugin          =  1
 let g:loaded_zipPlugin          =  1
 let g:loaded_2html_plugin       =  1
-let g:loaded_fzf                =  1
 "dont use any remote plugins so no need to load them
 let g:loaded_rrhelper           =  1
 let g:loaded_remote_plugins     =  1
