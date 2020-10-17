@@ -1,5 +1,5 @@
 ROFF = {{+groff+}}
-GROFFOPTS = {{+-kept -b -wall+}}
+GROFFOPTS = {{+-kepts -b -wall+}}
 ROFFOPTS = {{+-b -wall+}}
 MACROS = {{+-mspdf+}}
 ROFFEXT = {{+ms+}}
@@ -59,6 +59,7 @@ lint: ${SRCS}.clean
 	-grep -Hn "[−’]" $<  | $(CLEANLINTERCMD)
 	writegood --parse $< | $(CLEANLINTERCMD)
 	proselint $<         | $(CLEANLINTERCMD)
+	diction --suggest --beginner $< | $(CLEANLINTERCMD)
 	rm $<
 
 clean:
