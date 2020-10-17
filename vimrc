@@ -145,6 +145,7 @@ Plug 'dhruvasagar/vim-dotoo'
 nmap <Nop> <Plug>(dotoo-capture)
 Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
+Plug 'Gavinok/vim-troff'
 call plug#end()
 
 " faster updates
