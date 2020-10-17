@@ -4,5 +4,5 @@
 " Description: 
 " simply use fzf if the command exists instead of e **/*
 if exists(':FZF') == 2
-	nnoremap <leader>ff  :Root<CR>:FZF<CR>
+	nnoremap <leader>ff  :silent! Root<CR>:FZF<CR>
 endif
