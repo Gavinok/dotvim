@@ -40,3 +40,4 @@ endif
 setlocal include=^#\s*import
 setlocal includeexpr=substitute(v:fname,'\\.','/','g')
 setlocal suffixesadd=.java
+set suffixes+=.class
