@@ -8,6 +8,9 @@
 " Description: 
 " vim-lsc settings
 " LSC {{{2 "
+if !exists("g:mylsc_enabled")
+	finish
+endif
 if exists('*job_start') || exists('*jobstart')
 	let g:mucomplete#completion_delay = 200
 	let g:mucomplete#reopen_immediately = 0
