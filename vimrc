@@ -114,7 +114,6 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeEnable' }
 let g:table_mode_map_prefix = '<Leader>T'
 let g:table_mode_realign_map = '<Leader>TT'
-set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
@@ -636,6 +635,7 @@ set showcmd                                         "Show keys pressed in normal
 set tabstop=4                                       "Shorter hard tabs
 set softtabstop=0                                   "no spaces
 set smarttab
+set conceallevel=2
 set shiftwidth=4                                    "Shorter shiftwidth
 set autoindent                                      "Auto indent newline
 set ruler                                           "Show line number and column
