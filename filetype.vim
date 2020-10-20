@@ -18,4 +18,5 @@ augroup filetypedetect
 	autocmd! Bufread,Bufnewfile */snip/*             setlocal filetype=minisnip
 	" autocmd! BufRead,BufNewFile *.ms,*.mom,*.me,*.mm setlocal filetype=groff
 	autocmd! BufRead,BufNewFile tuir*                setlocal filetype=markdown
+    autocmd! BufRead,BufNewFile *.rkt,*.rktl         setlocal filetype=scheme
 augroup END
