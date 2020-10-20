@@ -46,6 +46,8 @@ let g:dotoo#parser#todo_keywords = [
 			\ 'DONE',
 			\]
 
+let g:org_state_keywords = [ 'TODO', 'NEXT', 'SOMEDAY', 'DONE', 'CANCELLED' ]
+
 let g:dotoo_headline_highlight_colors = [
 			\ 'Title',
 			\ 'Identifier',
@@ -54,7 +56,8 @@ let g:dotoo_headline_highlight_colors = [
 			\ 'Type',
 			\ 'Special',
 			\ 'Constant']
-let g:org_state_keywords = [ 'TODO', 'NEXT', 'DONE', 'SOMEDAY', 'CANCELLED' ]
+
+let g:dotoo#agenda#warning_days = '30d'
 hi dotoo_shade_stars ctermfg=NONE guifg='#000000'
 hi link orgHeading2 Normal
 let g:org_time='%H:%M'
