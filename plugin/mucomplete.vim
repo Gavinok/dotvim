@@ -49,7 +49,7 @@ if has('patch-7.4.775')
 		let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
 		let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']
 		let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']
-		let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyn',  'omni',  'c-n']
+		let g:mucomplete#chains['java']      =  ['mini',  'keyn',  'c-n',   'omni']
 		let g:mucomplete#chains['javascript']=  ['mini',  'tags',  'omni',  'c-n']
 		let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'omni', 'c-n']
 		let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-n']
