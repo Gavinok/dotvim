@@ -44,8 +44,8 @@ function! dotvim#Quicktag(force) abort
 		let g:rootdir = getcwd()
 	endif
 	if g:rootdir !=# '' || a:force
-		call system('ctags  -f ".tags" -R ' . shellescape(g:rootdir) .' &')
-		" 'Dispatch ctags  -f '.tags' -R ' . g:rootdir
+		" call system('ctags  -f ".tags" -R ' . shellescape(g:rootdir) .' &')
+		execute 'Dispatch ctags  -f ' . &tags . ' -R ' . g:rootdir ' --languages=' . &filetype
 	else 
 		echo 'no root'
 	endif
