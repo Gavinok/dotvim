@@ -1,0 +1,14 @@
+while getopts :{{+cs+}}: opt; do
+	case $opt in
+		{{+c+}})
+			{{+echo $OPTARG+}}
+			;;
+		{{+s+}})
+			{{+echo $OPTARG+}}
+			;;
+		{{+*+}})
+			{{+help+}}
+			;;
+	esac
+done
+shift $((OPTIND - 1))
