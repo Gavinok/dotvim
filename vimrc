@@ -40,9 +40,12 @@ augroup PLUGGED
 augroup end
 call plug#begin('~/.vim/plugged')
 
+Plug 'dhruvasagar/vim-testify'
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
+	Plug 'zaid/vim-rec'
 	let g:mymu_enabled=1
+	let g:mylsc_enabled=1
 	if executable('node')
 		Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
 		" This may not be needed
@@ -83,14 +86,13 @@ endif
 Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 
 Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
-" Plug 'henricattoire/aergia'
 let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
 " let g:aergia_key = '<c-f>'
 let g:aergia_snippets = '/home/gavinok/.vim/extra/snip'
-let s:snipdir=globpath(&runtimepath, 'extra/snip')
+let s:snipdir=globpath(&runtimepath, '**/*extra/snip')
 let g:minisnip_dir = s:snipdir . ':' . join(split(glob( s:snipdir . '**/'), '\n'), ':')
 imap <Nop> <Plug>(minisnip-complete)
 " 2}}} "Snippets
