@@ -31,9 +31,6 @@ if executable('jdtls')
 				\ 'response_hooks': {
 				\ 	'textDocument/codeAction': function('<SID>fixEdits'),
 				\  },
-				\ 'workspace_config': {
-				\  	'java.clean.workspace': 'on'
-				\  }
 				\}
 	if exists('g:mymu_enabled')
 		call RegisterLanguageServer('java', b:lsc_config)
