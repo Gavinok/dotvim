@@ -22,6 +22,7 @@ if executable('ccls')
 	if exists('g:mymu_enabled')
 		if !exists('s:initialized')
 			call RegisterLanguageServer('c', b:lsc_config)
+			call RegisterLanguageServer('cpp', b:lsc_config)
 			let s:initialized = v:true
 		endif
 	endif
