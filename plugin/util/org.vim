@@ -66,5 +66,4 @@ let g:org_date_format=g:org_date.' '.g:org_time
 map <silent>gO :e ~/Documents/org<CR>
 map <silent>gC :call CreateCapture('split')<CR>
 command! -nargs=0 NGrep grep! ".*" ~/.local/Dropbox/Documents/org/**/*.org
-" command! -nargs=+ NGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/Documents/org/**/*.org       |let &gp=s:gp|unl s:gp
 " 2}}} "Orgmode
