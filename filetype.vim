@@ -16,6 +16,6 @@ augroup filetypedetect
 	autocmd! BufRead,BufNewFile *.org                setlocal filetype=dotoo
 	autocmd! BufRead,BufNewFile *.h                  setlocal filetype=c
 	autocmd! Bufread,Bufnewfile */snip/*             setlocal filetype=minisnip
-	autocmd! BufRead,BufNewFile *.ms,*.mom,*.me,*.mm setlocal filetype=groff
+	" autocmd! BufRead,BufNewFile *.ms,*.mom,*.me,*.mm setlocal filetype=groff
 	autocmd! BufRead,BufNewFile tuir*                setlocal filetype=markdown
 augroup END
