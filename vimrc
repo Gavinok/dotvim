@@ -118,7 +118,7 @@ set conceallevel=2
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
-Plug 'tpope/vim-speeddating', { 'for': [ 'org', 'dotoo' ] }
+Plug 'tpope/vim-speeddating', { 'for': [ 'org', 'dotoo', 'rec' ] }
 Plug 'gavinok/spaceway.vim'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
