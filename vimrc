@@ -582,6 +582,27 @@ augroup end
 " 1}}} "Plugin Configuration
 
 " Functions And Commands: {{{1 "
+" grep operator {{{ "2
+nnoremap gr :set operatorfunc=<SID>GrepOperator<cr>g@
+vnoremap gr :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+function! s:GrepOperator(type)
+    let saved_unnamed_register = @@
+
+    if a:type ==# 'v'
+        normal! `<v`>y
+    elseif a:type ==# 'char'
+        normal! `[v`]y
+    else
+        return
+    endif
+
+    silent execute "grep! " . shellescape(@@) . " ."
+    copen
+
+    let @@ = saved_unnamed_register
+endfunction
+" 2}}} "grep operator
 " dict {{{2
 function! Dict(word)
 	"code
