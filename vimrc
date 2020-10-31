@@ -317,7 +317,7 @@ if executable('rg')
 elseif executable('ag')
 	set grepprg=ag\ --vimgrep
 else
-	set grepprg=grep\ -r\ -n\ --exclude-dir=.git,.cache
+	set grepprg=grep\ -R\ -n\ --exclude-dir=.git,.cache
 endif
 
 function! Find(file)
