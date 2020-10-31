@@ -39,7 +39,7 @@ function! VisualNumber()
 	call search('\(^\|[^0-9\.]\d\)', 'becW')
 endfunction
 xnoremap in :<C-u>call VisualNumber()<CR>
-onoremap in :normal vin<CR>
+onoremap in :normal! vin<CR>
 " 1}}} "Number
 
 " Square Brackets {{{1 

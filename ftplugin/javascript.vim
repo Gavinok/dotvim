@@ -17,7 +17,7 @@ if executable('typescript-language-server')
 				\        },
 				\    },
 				\}
-	if exists('g:mymu_enabled')
+	if exists('g:mylsc_enabled')
 		call RegisterLanguageServer('javascript', b:lsc_config)
 	endif
 	setlocal omnifunc=tern#Complete
