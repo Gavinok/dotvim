@@ -40,3 +40,17 @@ augroup AUTOCOMP
 	endtry
 augroup END
 let b:autocompile = 1
+
+function! MyTroffMacroslevel(maxlevel)
+	for headingnum in range(1,a:maxlevel)
+		let headingregex = '^\.\(#\{' . headingnum .'} ' . '.*$\|NH' . headingnum . '\)'
+		if getline(v:lnum) =~ headingregex
+			return '>' . headingnum
+		endif
+	endfor
+    return "="
+endfunction
+
+setlocal foldexpr=MyTroffMacroslevel(2)
+setlocal foldmethod=expr
+setlocal autoindent
