@@ -582,6 +582,16 @@ augroup end
 " 1}}} "Plugin Configuration
 
 " Functions And Commands: {{{1 "
+" dict {{{2
+function! Dict(word)
+	"code
+	exec 'new|read !dict '.a:word
+	exec 'read !dict -dmoby-thesaurus '.a:word
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+	setfiletype text
+endfunction
+command! -nargs=1 Dict call Dict(<q-args>)
+" 2}}} "dict
 " termdebug {{{2
 " nmap gD <Plug>DumpDebugStringVar
 " nmap gL <Plug>DumpDebugStringVar
