@@ -65,7 +65,7 @@ if has('patch-7.4.775')
     let g:JavaComplete_UsePython3 = 1
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
-		Plug 'natebosch/vim-lsc'
+		" Plug 'natebosch/vim-lsc'
 	endif
 	" Plug 'jcarreja/vim-customcpt'
 	" Settings at ./plugin/mucomplete.vim
@@ -73,13 +73,17 @@ if has('patch-7.4.775')
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 if has('nvim')
+
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
 	set completeopt-=preview
 else
 	set completeopt+=preview
-	" set completeopt+=popup
+endif
+if has("nvim-0.5")
+	Plug 'nvim-treesitter/nvim-treesitter'
+	Plug 'neovim/nvim-lspconfig'
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
@@ -148,6 +152,31 @@ Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 Plug 'Gavinok/vim-troff'
 call plug#end()
+
+if has("nvim-0.5")
+lua <<EOF
+require'nvim_lsp'.gopls.setup{}
+require'nvim_lsp'.ccls.setup{}
+require'nvim_lsp'.vimls.setup{}
+require'nvim_lsp'.jdtls.setup{}
+EOF
+
+function! NvimLspSetting()
+" nnoremap <buffer><silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <buffer><silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <buffer><silent> gs   <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <buffer><silent> gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <buffer><silent> gR    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <buffer><silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <buffer><silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <buffer><silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+highlight LspDiagnosticsError ctermbg=NONE    ctermfg=103    guibg=NONE       guifg=#BCBCBC  cterm=italic            gui=NONE
+setlocal omnifunc=v:lua.vim.lsp.omnifunc
+endfunction
+
+" Use LSP omni-completion in Python files.
+autocmd Filetype c,vim,go,java call NvimLspSetting()
+endif
 
 " faster updates
 set updatetime=100
