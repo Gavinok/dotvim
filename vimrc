@@ -676,7 +676,7 @@ set foldlevel=99                                    "start with all folds open
 set wildmenu                                        "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
-set wildignore=*.git/*,*.tags,tags,*.o,*.class
+set wildignore=*.git/*,*.tags,tags,*.o,*.class,*.ccls-cache
 set splitbelow
 set splitright
 let b:preprocs_as_sections = 1
