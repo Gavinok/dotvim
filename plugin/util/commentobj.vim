@@ -70,7 +70,7 @@ onoremap al :<C-u>normal val<CR>
 " in
 function! VisualNumber()
 	call search('\d\([^0-9\.]\|$\)', 'cW')
-	normal v
+	normal! v
 	call search('\(^\|[^0-9\.]\d\)', 'becW')
 endfunction
 xnoremap in :<C-u>call VisualNumber()<CR>
@@ -98,7 +98,7 @@ for char in [ '_', '.', '\|', ';','$', '@', '/', '<bslash>', '*' ]
 endfor
 " 1}}} "Inside And Arround
 " TODO: Find a better location for this <17-06-20 Gavin Jaeger-Freeborn>
-let g:surround_insert_tail = "{{++}}"
+let g:surround_insert_tail = '{{++}}'
 
 " groff escape sequences
 " --------------------------------------
