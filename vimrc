@@ -335,7 +335,6 @@ endfunction
 
 command! -nargs=* Find call Find(<q-args>)
 
-nmap gr :grep! <C-R><C-W> **/*
 
 command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 
