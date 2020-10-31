@@ -35,7 +35,7 @@ if executable('vim-language-server')
 				\        },
 				\    },
 				\ }
-	if exists('g:mymu_enabled')
+	if exists('g:mylsc_enabled')
 		call RegisterLanguageServer('vim', b:lsc_config)
 		setlocal omnifunc=lsc#complete#complete
 	endif

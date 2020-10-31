@@ -45,7 +45,7 @@ Plug 'dhruvasagar/vim-testify'
 if has('patch-7.4.775')
 	Plug 'zaid/vim-rec'
 	let g:mymu_enabled=1
-	let g:mylsc_enabled=1
+	" let g:mylsc_enabled=1
 	if executable('node')
 		Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
 		" This may not be needed

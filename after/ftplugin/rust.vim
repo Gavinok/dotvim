@@ -7,6 +7,6 @@
 "
 " Description: 
 " ftplugin for rust
-if exists('g:loaded_lsc')
+if exists('g:mylsc_enabled')
 	setlocal omnifunc=lsc#complete#complete
 endif

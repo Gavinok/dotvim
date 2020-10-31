@@ -358,7 +358,7 @@ function! dotvim#ImportScreenShot(screenshotfunc, extension)
 		call mkdir(dir)
 	endif
 	call a:screenshotfunc(desc, dir, filename)
-	call system('killall unclutter && import "'.dir.'/'.filename.'" && setsid unclutter &')
+	call system('import "'.dir.'/'.filename.'"')
 	if v:shell_error
 		call setline('.', desc)
 	endif

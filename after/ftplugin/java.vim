@@ -9,6 +9,10 @@
 " ftplugin for java files
 if exists('g:JavaComplete_PluginLoaded')
     setlocal omnifunc=javacomplete#Complete
-elseif exists('g:mymu_enabled')
+elseif exists('g:mylsc_enabled')
 	setlocal omnifunc=lsc#complete#complete
+endif
+
+if has("nvim-0.5")
+	TSEnableAll highlight java
 endif

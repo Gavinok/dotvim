@@ -32,7 +32,7 @@ if executable('jdtls')
 				\ 	'textDocument/codeAction': function('<SID>fixEdits'),
 				\  },
 				\}
-	if exists('g:mymu_enabled')
+	if exists('g:mylsc_enabled')
 		call RegisterLanguageServer('java', b:lsc_config)
 		setlocal omnifunc=lsc#complete#complete
 	endif

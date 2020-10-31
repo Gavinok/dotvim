@@ -12,7 +12,7 @@ let python_space_errors = 1
 
 if executable('pyls')
 	let b:lsc_config = 'pyls'
-	if exists('g:mymu_enabled')
+	if exists('g:mylsc_enabled')
 		call RegisterLanguageServer('python', b:lsc_config)
 		setlocal omnifunc=lsc#complete#complete
 	endif

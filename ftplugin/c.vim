@@ -19,13 +19,13 @@ if executable('ccls')
 				\   'textDocument/didOpen': {'metadata': {'extraFlags': ['-Wall']}},
 				\ },
 				\}
-	if exists('g:mymu_enabled')
+	if exists('g:mylsc_enabled')
 		if !exists('s:initialized')
 			call RegisterLanguageServer('c', b:lsc_config)
 			call RegisterLanguageServer('cpp', b:lsc_config)
 			let s:initialized = v:true
+			setlocal omnifunc=lsc#complete#complete
 		endif
 	endif
 endif
-setlocal omnifunc=lsc#complete#complete
 " setlocal path+=/usr/include/

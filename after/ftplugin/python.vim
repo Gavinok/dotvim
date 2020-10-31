@@ -7,6 +7,6 @@
 "
 " Description: 
 " ftplugin for python
-if exists('g:mymu_enabled')
+if exists('g:mylsc_enabled')
 	setlocal omnifunc=lsc#complete#complete
 endif

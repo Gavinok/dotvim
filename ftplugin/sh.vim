@@ -15,7 +15,7 @@ if executable('efm-langserver')
 				\ 'command': 'efm-langserver -c='.$HOME.'/.vim/extra/efm/config.yaml',
 				\ 'suppress_stderr': v:true,
 				\}
-	if exists('g:mymu_enabled')
+	if exists('g:mylsc_enabled')
 		call RegisterLanguageServer('sh', b:lsc_config)
 	endif
 endif

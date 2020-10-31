@@ -8,6 +8,6 @@
 " Description: 
 " ftplugin for vimscript
 " used by 
-if exists('g:mymu_enabled')
+if exists('g:loaded_lsc')
 	setlocal omnifunc=lsc#complete#complete
 endif
