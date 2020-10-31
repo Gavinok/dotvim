@@ -62,7 +62,7 @@ if has('patch-7.4.775')
 
 	" java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
-    let g:JavaComplete_UsePython3 = 1
+    " let g:JavaComplete_UsePython3 = 1
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
 		" Plug 'natebosch/vim-lsc'
@@ -133,7 +133,7 @@ Plug 'tweekmonster/helpful.vim'
 " let g:helpful = 1
 " 2}}} "Tpope
 " etc {{{2 "
-Plug 'tommcdo/vim-lion' " aligning text 
+Plug 'tommcdo/vim-lion' " aligning text
 " Plug 'wellle/targets.vim'
 " only seek on the same line
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
@@ -279,7 +279,7 @@ else
 	if has('patch-7.4.1649') " Enable % to go to matching keyword/tag
 		packadd! matchit
 	else
-		runtime! macros/matchit.vim 
+		runtime! macros/matchit.vim
 	endif
 endif
 " shortcut to files and dirs uses shortcuts.sh
@@ -484,7 +484,7 @@ snoremap <BS> <BS>i
 " 1}}} "Editing
 
 " Plugin Configuration: {{{1 "
-" Surround {{{2 
+" Surround {{{2
 imap <C-SPACE> <Plug>Isurround
 " 2}}} "Surround
 " Minimal Async Command {{{2
@@ -521,7 +521,7 @@ else
 	nnoremap  m<CR>		:make!<CR>
 endif
 " 2}}} "Minimal Async Command
-" dirvish {{{2 
+" dirvish {{{2
 set noautochdir
 augroup auto_ch_dir
 	autocmd!
