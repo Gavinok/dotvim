@@ -786,6 +786,13 @@ iab <expr> dts strftime("%c")
 " spelling
 iab pyhton python
 iab hte the
+iab cuz because
+iab tf,  Therefore,
+iab sin, Sincerly,<CR>Gavin<SPACE>Jaeger-Freeborn
+iab elect electron
+
+" lorem ipsum
+iabbrev <expr> lorem system('curl -s http://metaphorpsum.com/paragraphs/1')
 " 1}}} "Abbreviations
 
 " Etc {{{1 "
