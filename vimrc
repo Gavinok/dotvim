@@ -39,10 +39,12 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
-
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'dhruvasagar/vim-testify'
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
+Plug 'machakann/vim-vimhelplint'
 	Plug 'zaid/vim-rec'
 	let g:mymu_enabled=1
 	" let g:mylsc_enabled=1
