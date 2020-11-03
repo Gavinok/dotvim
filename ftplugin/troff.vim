@@ -15,6 +15,8 @@ let b:preprocs_as_sections = 1
 let b:nroff_is_groff = 1
 let nroff_space_errors = 1
 
+let g:troff_eqndelim = '@@'
+
 let b:surround_67 = ".CD\r.DE"
 let b:surround_75 = ".KS\r.KE"
 
@@ -51,6 +53,31 @@ function! MyTroffMacroslevel(maxlevel)
     return "="
 endfunction
 
-setlocal foldexpr=MyTroffMacroslevel(2)
+function! TroffMacroslevel(maxlevel)
+	let ms = 'NH ' . headingnum . ' .*$'
+	let ms = 'SH ' . headingnum . ' .*$'
+	let me = 'sh ' . headingnum . ' .*$'
+	"
+	" no heading level
+	let me = 'uh .*$'
+	let mm = 'HU .*$'
+	
+	" mandatory heading level
+	let mm = 'H ' . headingnum . ' .*$'
+	let mom = 'HEADING ' . headingnum . ' .*$'
+
+	for headingnum in range(1,a:maxlevel)
+		if headingnum = 1
+			let headingnum = ''
+		endif
+		let headingregex = '^\.\(#\{' . headingnum .'} ' . '.*$\|\)'
+		if getline(v:lnum) =~ headingregex
+			return '>' . headingnum
+		endif
+	endfor
+    return "="
+endfunction
+
+setlocal foldexpr=TroffMacroslevel(2)
 setlocal foldmethod=expr
 setlocal autoindent
