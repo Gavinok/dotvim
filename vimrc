@@ -614,15 +614,6 @@ function! Dict(word)
 endfunction
 command! -nargs=1 Dict call Dict(<q-args>)
 " 2}}} "dict
-" termdebug {{{2
-" nmap gD <Plug>DumpDebugStringVar
-" nmap gL <Plug>DumpDebugStringVar
-" command! -nargs=0 Debug :packadd termdebug<CR>:Termdebug
-" nnoremap <leader>bb :Break<CR>
-" nnoremap <leader>b] :Step<CR>
-" nnoremap <leader>b} :Over<CR>
-" nnoremap <leader>bp :call TermDebugSendCommand('print' . expand(<cword>) )<CR>
-" 2}}} "termdebug
 " CustomSections {{{2 "
 function! CustomSections(dir, regex)
 	if a:dir ==# 'up'
