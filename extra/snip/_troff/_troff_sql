@@ -1,0 +1,3 @@
+.sqlbeg
+{{+select+}} {{+*+}} {{+from+}} {{+relation+}}
+.sqlend

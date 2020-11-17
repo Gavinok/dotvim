@@ -1,0 +1,8 @@
+.TS
+center allbox tab(|);
+{{+ccc+}}.
+{{+headings+}}
+.sqltbl |
+select * from R;
+.sqlend
+.TE
