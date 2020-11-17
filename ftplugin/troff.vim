@@ -78,6 +78,6 @@ function! TroffMacroslevel(maxlevel)
     return "="
 endfunction
 
-setlocal foldexpr=TroffMacroslevel(2)
+setlocal foldexpr=MyTroffMacroslevel(5)
 setlocal foldmethod=expr
 setlocal autoindent
