@@ -81,3 +81,9 @@ endfunction
 setlocal foldexpr=MyTroffMacroslevel(5)
 setlocal foldmethod=expr
 setlocal autoindent
+
+" if isdirectory( g:groff_install_prefix . '/groff/current/tmac' )
+" execute 'setlocal tags+=' . g:groff_install_prefix . '/groff/current/tmac/.tags'
+" execute 'setlocal tags+=' . g:groff_install_prefix . '/usr/local/lib/groff/site-tmac/.tags'
+" execute 'setlocal tags+=' . g:groff_install_prefix . '/usr/local/share/groff/site-tmac/.tags'
+" endif
