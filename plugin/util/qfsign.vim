@@ -6,7 +6,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " allows sign colom for quickfix errors
 if exists('g:loaded_qfsign')
   finish

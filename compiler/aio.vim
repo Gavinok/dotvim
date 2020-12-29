@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " all in one compiler I wrote for my self to simplify vim's make system using
 " my comiler shell script
 if exists("current_compiler")
@@ -27,7 +27,7 @@ if (filereadable('Makefile') || filereadable('makefile'))
 " c {{{"
 elseif &filetype == 'c'
 	CompilerSet makeprg=compiler\ %
-	
+
 	set errorformat=%f\|%l\|%c,%f\|%l\|,%f\|\| " This describes estream's output format to Vim
 	" CompilerSet errorformat=
 	" 			\%*[^\"]\"%f\"%*\\D%l:%c:\ %m,
@@ -55,7 +55,7 @@ elseif &filetype == 'vim'
 	CompilerSet makeprg=vint\ -s\ %
 	CompilerSet errorformat=%f:%l:%c:\ %m
 " }}} "vim
-" sh {{{ 
+" sh {{{
 elseif &filetype == 'sh'
 	CompilerSet makeprg=compiler\ %
 	CompilerSet errorformat=%f:\ %l:\ %m
@@ -84,10 +84,10 @@ elseif &filetype ==# 'go'
 		\%C%*\\s%m,
 		\%-G%.%#
 " }}} "go
-" markup {{{ 
+" markup {{{
 elseif &filetype ==# 'dotoo'
-			\|| &filetype ==# 'org' 
-			\|| &filetype ==# 'markdown' 
+			\|| &filetype ==# 'org'
+			\|| &filetype ==# 'markdown'
 			\|| &filetype ==# 'pandoc'
 CompilerSet makeprg=compiler\ %
 CompilerSet errorformat="%f",\ line\ %l:\ %m

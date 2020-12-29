@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " Collection of coc settings
 " COC {{{1 "
 if !exists('g:mycoc_enabled')

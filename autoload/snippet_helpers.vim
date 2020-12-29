@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " helper funcitons used in my minisnips
 " snippet support for surround
 function! snippet_helpers#Argmaker(prearg, value_indicator)

@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " markdown specific settings
 if executable('efm-langserver')
 	let b:lsc_config = {
@@ -141,7 +141,7 @@ function! MDNarrowCodeblock()
 		let b:nrrw_aucmd_create = 'set ft='.MDLang()
 		let range = MDBodyRange()
 		exe range[0].','.range[1].'NR'
-		if exists("old_hook") 
+		if exists("old_hook")
 			let b:nrrw_aucmd_create = old_hook
 		endif
 	endif

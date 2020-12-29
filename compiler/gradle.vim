@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " compiler for gradle
 " FROM: https://raw.githubusercontent.com/tfnico/vim-gradle/master/compiler/gradle.vim
 

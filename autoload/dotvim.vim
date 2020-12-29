@@ -5,10 +5,10 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " Functions I want to autoload in my config
 
-" ToggleQuickfix {{{1 
+" ToggleQuickfix {{{1
 function! dotvim#ToggleQuickfix() abort
 	let nr = winnr('$')
 	" force location list to close
@@ -36,17 +36,17 @@ function! dotvim#ToggleLocationlist() abort
 endfunction
 " 1}}} "ToggleQuickfix
 
-" Quicktag {{{1 
+" Quicktag {{{1
 function! dotvim#Quicktag(force) abort
 	if !filereadable('tags') && !filereadable('.tags')
 		let g:rootdir = FindRootDirectory()
-	else 
+	else
 		let g:rootdir = getcwd()
 	endif
 	if g:rootdir !=# '' || a:force
 		" call system('ctags  -f ".tags" -R ' . shellescape(g:rootdir) .' &')
-		execute 'Dispatch ctags  -f ' . &tags . ' -R ' . g:rootdir ' --languages=' . &filetype
-	else 
+		execute 'Dispatch ctags  -f ' . &tags . ' -R ' . g:rootdir
+	else
 		echo 'no root'
 	endif
 endfunction
@@ -110,16 +110,16 @@ function! dotvim#WordProcessor() abort
 endfu
 " 1}}} "Toggle Prose Mode
 
-" netrwmappings {{{1 
+" netrwmappings {{{1
 " for - in vim
-function! dotvim#Opendir(cmd) abort  
-	if expand('%') =~# '^$\|^term:[\/][\/]'  
-		execute a:cmd '.'  
-	else  
-		execute a:cmd '%:h'  
-		let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'  
-		call search(pattern, 'wc')  
-	endif  
+function! dotvim#Opendir(cmd) abort
+	if expand('%') =~# '^$\|^term:[\/][\/]'
+		execute a:cmd '.'
+	else
+		execute a:cmd '%:h'
+		let pattern = '^\%(| \)*'.escape(expand('#:t'), '.*[]~\').'[/*|@=]\=\%($\|\t\)'
+		call search(pattern, 'wc')
+	endif
 endfunction
 
 " " now - doesnt use <space> after moving up a directory
@@ -130,7 +130,7 @@ function! dotvim#NetrwMapping() abort
 endfunction
 " 1}}} "netrwmappings
 
-" ToggleAutocompile {{{1 
+" ToggleAutocompile {{{1
 function! dotvim#ToggleAutocompile() abort
 	if !exists('b:autocompile')
 		let b:autocompile = 0
@@ -139,7 +139,7 @@ function! dotvim#ToggleAutocompile() abort
 		augroup AUTOCOMP
 			autocmd!
 try
-	
+
 	autocmd BufWrite <buffer> :silent! Make!
 catch /.*/
 	echo 'busy'
@@ -152,7 +152,7 @@ endtry
 		augroup END
 		let b:autocompile = 0
 	endif
-endfunction 
+endfunction
 " 1}}} "ToggleAutocompile
 
 " VisSort {{{1
@@ -176,7 +176,7 @@ function! dotvim#VisSort(isnmbr) range abort
 endfun
 " 1}}} "VisSort
 
-" YankMatches {{{1 
+" YankMatches {{{1
 " copy the contents of all matches from the last search
 function! dotvim#YankMatches(reg)
 	let hits = []
@@ -186,7 +186,7 @@ function! dotvim#YankMatches(reg)
 endfunction
 " 1}}} "CopyMatches
 
-" MRU {{{1 
+" MRU {{{1
 " MRU command-line completion
 function! dotvim#MRUComplete(ArgLead, CmdLine, CursorPos)
 	return filter(v:oldfiles, 'v:val =~ a:ArgLead')
@@ -198,7 +198,7 @@ function! dotvim#MRU(command, arg)
 endfunction
 " 1}}} "MRU
 
-" Shortcut {{{1 
+" Shortcut {{{1
 " Shortcut completion
 function! dotvim#ShortcutComplete(ArgLead, CmdLine, CursorPos)
 	let sc = []
@@ -214,7 +214,7 @@ function! dotvim#Shortcut(command, arg)
 endfunction
 " 1}}} "Shortcut
 
-" Open {{{1 
+" Open {{{1
 " What command to use
 function! dotvim#Open() abort
 	if !empty($PLUMBER)
@@ -247,7 +247,7 @@ function! dotvim#Gofmt()
 endfunction
 "  1}}} "minimal gofmt
 
-" Minimal Async Command {{{1 
+" Minimal Async Command {{{1
 " based on https://gist.github.com/hauleth/0cce9962ffc9a09b3893d53dbcd3abf9
 function! s:populate(file, cmd, done) abort
 	echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
@@ -266,7 +266,7 @@ function! dotvim#Do(...) abort
 	endif
 	call setqflist([], 'r') " clear list
 	let tmp = tempname()
-	let cmd = substitute(join(a:000), '%', expand('%'), '') 
+	let cmd = substitute(join(a:000), '%', expand('%'), '')
 	if has('nvim')
 		let g:job = jobstart([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
 					\ 'on_exit': {id, data, event -> s:populate(tmp, cmd, 1)}
@@ -280,7 +280,7 @@ function! dotvim#Do(...) abort
 endfunction
 " 1}}} "Minimal Async Command
 
-" Async Manpages {{{1 
+" Async Manpages {{{1
 function! s:openmanpage(file, cmd, done) abort
 	echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
 	unlet! g:manjob
@@ -299,7 +299,7 @@ function! dotvim#Man(...) abort
 	endif
 	call setqflist([], 'r') " clear list
 	let tmp = tempname()
-	let cmd = 'man ' .substitute(join(a:000), '%', expand('%'), '') 
+	let cmd = 'man ' .substitute(join(a:000), '%', expand('%'), '')
 	if has('nvim')
 		let g:manjob = jobstart([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
 					\ 'on_exit': {id, data, event -> s:openmanpage(tmp, cmd, 1)}
@@ -313,11 +313,11 @@ function! dotvim#Man(...) abort
 endfunction
 " 1}}} "Async Manpages
 
-" Run command in Terminal {{{1 
+" Run command in Terminal {{{1
 function! dotvim#TermCmd(...)
-	let cmd = substitute(join(a:000), '%', expand('%'), '') 
+	let cmd = substitute(join(a:000), '%', expand('%'), '')
 	if has('nvim')
-		exec 'split term://' . cmd 
+		exec 'split term://' . cmd
 		exec 'normal! i'
 	else
 		exec 'term ' . cmd
@@ -325,7 +325,7 @@ function! dotvim#TermCmd(...)
 endfunction
 " 1}}} "Run command in Terminal
 
-" Simple Todo using grep {{{1 
+" Simple Todo using grep {{{1
 function! dotvim#Todo(dir)
 	if (getcwd() != $HOME) && (getcwd() != a:dir)
 		execute 'grep "\**\sTODO" . ' . a:dir
@@ -336,7 +336,7 @@ function! dotvim#Todo(dir)
 endfunction
 " 1}}} "Simple Todo using grep
 
-" ScreenShots in Markup {{{1 
+" ScreenShots in Markup {{{1
 function! dotvim#OrgScreenShot(desc, dir, filename)
 	call setline('.', printf('[[file:%s/%s]]', a:dir, a:filename))
 endfunction
@@ -365,7 +365,7 @@ function! dotvim#ImportScreenShot(screenshotfunc, extension)
 endfunction
 " 1}}} "ScreenShots in Markup
 
-" CSPACE {{{1  
+" CSPACE {{{1
 function! dotvim#CSPACE()
 	let cmdline = getcmdline()
 
@@ -380,7 +380,7 @@ function! dotvim#CSPACE()
 endfunction
 "  1}}} "CSPACE
 
-" CCR {{{1 
+" CCR {{{1
 " minor adjustments to romainl's function found here
 " https://gist.github.com/romainl/5b2cfb2b81f02d44e1d90b74ef555e31
 function! dotvim#CCR()
@@ -406,10 +406,10 @@ function! dotvim#CCR()
 		" like :undolist but prompts for a change to undo
 		return "\<CR>:u "
 	elseif cmdline =~# '\C^reg'
-		" like registers bug 
+		" like registers bug
 		return "\<CR>:norm! \"p\<Left>"
 	elseif cmdline =~# '\C^g/.*/#'
-		" like registers bug 
+		" like registers bug
 		return "\<CR>:"
 	else
 		" <C-]> fixes abbreviation compatability
@@ -418,7 +418,7 @@ function! dotvim#CCR()
 endfunction
 " 1}}} "CCR
 
-" Run Vim Script {{{1 
+" Run Vim Script {{{1
 function! dotvim#RunVimScript(type, ...) abort
     let sel_save = &selection
     let &selection = 'inclusive'
@@ -439,7 +439,7 @@ function! dotvim#RunVimScript(type, ...) abort
 endfunction
 " 1}}} "Run Vim Script
 
-" ZoomToggle {{{1 
+" ZoomToggle {{{1
 function! dotvim#ZoomToggle()
 	if exists('t:maximize_session')
 		" Zoom allow edit the same file {{{2
@@ -466,7 +466,7 @@ function! dotvim#ZoomToggle()
 endfunction
 " 1}}} "ZoomToggle
 
-" load gui {{{1 
+" load gui {{{1
 function! dotvim#LoadGui()
 	set guifont=SourceCode\ Pro\ 13
 	set guioptions+=lrbmTLce

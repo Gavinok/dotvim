@@ -32,9 +32,9 @@ function! s:Snipmaker()
 		" move to complete start position.
 		call cursor([l:start.line + 1, l:start.character + 1])
 		" part of snipp
-		let rep = substitute(l:completed_item.word, '\${[1-9]\(:\w.\{-}\)\?}', g:minisnip_startdelim.g:minisnip_enddelim, 'g') 
+		let rep = substitute(l:completed_item.word, '\${[1-9]\(:\w.\{-}\)\?}', g:minisnip_startdelim.g:minisnip_enddelim, 'g')
 		" end of snippet
-		let rep = substitute(rep, '\${\?0\(:\w.\{-}\)\?}\?', g:minisnip_finalstartdelim.g:minisnip_finalenddelim, 'g') 
+		let rep = substitute(rep, '\${\?0\(:\w.\{-}\)\?}\?', g:minisnip_finalstartdelim.g:minisnip_finalenddelim, 'g')
 		" new lines
 		let line = substitute(getline('.'), '\M'.l:completed_item.word,rep, 'g')
 

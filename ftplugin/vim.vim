@@ -5,27 +5,27 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " ftplugin for vimscript
-" used by 
+" used by
 if executable('vim-language-server')
 	let b:lsc_config = {
 				\ 'name': 'vim-language-server',
 				\ 'command': 'vim-language-server --stdio',
 				\    'message_hooks': {
 				\        'initialize': {
-				\            'initializationOptions': { 
+				\            'initializationOptions': {
 				\               "iskeyword": "@,48-57,_,192-255,-#",
-				\               'vimruntime': $VIMRUNTIME, 
+				\               'vimruntime': $VIMRUNTIME,
 				\               'runtimepath': &rtp,
 				\               "diagnostic": {
 				\                 "enable": "true"
 				\               },
 				\               "indexes": {
-				\                 "runtimepath": "true",      
-				\                 "gap": 100,              
-				\                 "count": 3,             
-				\                 "projectRootPatterns" : ["strange-root-pattern", ".git", "autoload", "plugin"] 
+				\                 "runtimepath": "true",
+				\                 "gap": 100,
+				\                 "count": 3,
+				\                 "projectRootPatterns" : ["strange-root-pattern", ".git", "autoload", "plugin"]
 				\               },
 				\               "suggest": {
 				\                 "fromVimruntime": "true",

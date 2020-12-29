@@ -18,7 +18,7 @@ elseif s:line =~# '\<.*bash\d*\>'
   let b:is_bash = 1
   setfiletype sh
 
-" treat all other shells ash posix shell 
+" treat all other shells ash posix shell
 " cuz its best shell.
 elseif s:line =~# '\<.*sh\>'
   let b:is_posix = 1

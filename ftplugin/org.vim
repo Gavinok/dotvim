@@ -4,7 +4,7 @@
 " License:
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
-" Description: 
+" Description:
 " settings for making dotoo act like orgmode
 
 runtime! ftplugin/dotoo.vim

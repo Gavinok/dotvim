@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " ftplugin for java files
 if exists('g:JavaComplete_PluginLoaded')
     setlocal omnifunc=javacomplete#Complete

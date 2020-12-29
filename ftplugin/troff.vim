@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " personal troff settings
 
 setlocal tw=72
@@ -61,7 +61,7 @@ function! TroffMacroslevel(maxlevel)
 	" no heading level
 	let me = 'uh .*$'
 	let mm = 'HU .*$'
-	
+
 	" mandatory heading level
 	let mm = 'H ' . headingnum . ' .*$'
 	let mom = 'HEADING ' . headingnum . ' .*$'

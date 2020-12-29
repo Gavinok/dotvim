@@ -29,7 +29,7 @@ else
 	cat $< | $(PRE) | $(ROFF) $(ROFFOPTS)  $(MACROS) | $(POST) $(POSTOPTS) >$@
 endif
 	$(MAKE) checkerrors
-	
+
 
 .$(ROFFEXT).PDF:
 ifeq ($(ROFF), pdfroff)
@@ -48,8 +48,8 @@ else
 endif
 	$(MAKE) checkerrors
 
-checkerrors: $(ERRORFILE) 
-	@sed "s/<standard input>/$</g" $(ERRORFILE) 
+checkerrors: $(ERRORFILE)
+	@sed "s/<standard input>/$</g" $(ERRORFILE)
 	rm -f $(ERRORFILE)
 
 %.clean: ${SRCS}

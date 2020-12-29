@@ -5,8 +5,8 @@
 "  Copyright              (c)         Gavin           Jaeger-Freeborn.  Distributed under    the same terms as Vim itself.
 "  See                    :help       license
 "
-"  Description:           
-"  
+"  Description:
+"
 hi x016_Grey0             ctermfg=16  guifg=#000000   "rgb=0,0,0
 hi x017_NavyBlue          ctermfg=17  guifg=#00005f   "rgb=0,0,95
 hi x018_DarkBlue          ctermfg=18  guifg=#000087   "rgb=0,0,135

@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " filetype settings for html
 " dont forget to use surround when couraounding tags
 
@@ -26,10 +26,10 @@ else
 	iabbrev </ </<C-X><C-O>
 endif
 
-" enable emmet 
+" enable emmet
 imap <C-e> <plug>(emmet-expand-abbr)
 
-" enable tern inside html 
+" enable tern inside html
 call tern#Enable()
 nnoremap <buffer> K :TernDoc<CR>
 setlocal completefunc=tern#Complete

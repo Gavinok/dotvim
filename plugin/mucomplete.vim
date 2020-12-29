@@ -39,9 +39,9 @@ if has('patch-7.4.775')
 					\ }
 
 		let g:mucomplete#chains = {}
-		let g:mucomplete#chains['default']   =  { 
-					\              'default': ['mini',  'list',  'omni',  'path',  'c-n',   'uspl'], 
-					\              '.*string.*': ['uspl'], 
+		let g:mucomplete#chains['default']   =  {
+					\              'default': ['mini',  'list',  'omni',  'path',  'c-n',   'uspl'],
+					\              '.*string.*': ['uspl'],
 					\              '.*comment.*': ['uspl']
 					\            }
 		let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']
@@ -71,7 +71,7 @@ if has('patch-7.4.775')
 			" let g:mucomplete#can_complete['javascript']=  {  'omni': {t->t=~#'\%(->\|\.\|(\))$' }}
 			let g:mucomplete#can_complete['javascript']=  {  'omni':  s:c_cond }
 			let g:mucomplete#can_complete['markdown']  =  {  'dict':  s:latex_cond          }
-			let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond,          
+			let g:mucomplete#can_complete['org']       =  {  'dict':  s:latex_cond,
 						\ 'tag': {t->t=~#'\%(:\)$' }}
 			let g:mucomplete#can_complete['tex']       =  {  'omni':  s:latex_cond          }
 			let g:mucomplete#can_complete['troff']     =  {  'omni': { t -> t =~# '\%(\\\[\)$' }}

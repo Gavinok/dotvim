@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " compiler plugin for vim utilizing vint [https://github.com/Kuniwak/vint]
 if exists('current_compiler') || &compatible || !has('patch-7.4.191')
   finish

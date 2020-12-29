@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " old vim conigurations that I nolonger use
 
 "++++++++++++++++++++++++++GENERAL++++++++++++++++++++++++++++++++++++++++++
@@ -336,15 +336,15 @@ if has('patch-7.4.775')
 
 	let g:mucomplete#chains = {}
 	let g:mucomplete#chains['default']   =  ['mini',  'list',  'omni',  'path',  'c-n',   'uspl']
-	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']  
+	let g:mucomplete#chains['html']      =  ['mini',  'omni',  'path',  'c-n',   'uspl']
 	let g:mucomplete#chains['vim']       =  ['mini',  'list',  'cmd',   'path',  'keyp']
 	let g:mucomplete#chains['tex']       =  ['mini',  'path',  'omni',  'uspl',  'dict',  'c-n']
-	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']  
-	let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']  
-	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']   
-	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']            
-	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']            
-	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']  
+	let g:mucomplete#chains['sh']        =  ['mini',  'file',  'dict',  'keyp']
+	let g:mucomplete#chains['zsh']       =  ['mini',  'file',  'dict',  'keyp']
+	let g:mucomplete#chains['java']      =  ['mini',  'tags',  'keyp',  'omni',  'c-n']
+	let g:mucomplete#chains['c']         =  ['mini',  'list',  'omni',  'c-p']
+	let g:mucomplete#chains['go']        =  ['mini',  'list',  'omni',  'c-p']
+	let g:mucomplete#chains['markdown']  =  ['mini',  'path',  'c-n',   'uspl',  'dict']
 	let g:mucomplete#chains['dotoo']     =  g:mucomplete#chains['markdown']
 	let g:mucomplete#chains['mail']      =  g:mucomplete#chains['markdown']
 	let g:mucomplete#chains['groff']     =  g:mucomplete#chains['markdown']
@@ -443,13 +443,13 @@ if exists('*job_start') || exists('*jobstart')
 					\ })
 	endif
 	if executable('texlab')
-		au User lsp_setup call lsp#register_server({ 
+		au User lsp_setup call lsp#register_server({
 					\ 'name': 'texlab',
 					\ 'cmd': {server_info->['texlab']},
 					\ 'root_uri': { server_info->lsp#utils#path_to_uri
 					\ (lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-					\ 'initialization_options': {"diagnostics": "true"}, 
-					\ 'whitelist': ['plaintex', 'tex'], 
+					\ 'initialization_options': {"diagnostics": "true"},
+					\ 'whitelist': ['plaintex', 'tex'],
 					\ })
 	endif
 	function! s:on_lsp_buffer_enabled() abort
@@ -490,11 +490,11 @@ if has('patch-8.0.0283')
 endif
 " 1}}} "vim-lsp
 
-" asyncomplete {{{1 
+" asyncomplete {{{1
 " basically just used for async omni complete
 Plug 'prabirshrestha/asyncomplete.vim' | Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-if exists('*job_start') || exists('*jobstart') 
+if exists('*job_start') || exists('*jobstart')
 	let g:asyncomplete_auto_popup = 0
 	let g:asyncomplete_auto_completeopt = 0
 	let g:asyncomplete_popup_delay = 0
@@ -509,7 +509,7 @@ if exists('*job_start') || exists('*jobstart')
 endif
 " 1}}} "asyncomplete
 
-" gutentags {{{1 
+" gutentags {{{1
 if has('patch-8.0.0283')
 	" Tags {{{2 "
 	if executable('ctags')
@@ -547,7 +547,7 @@ if has('patch-8.0.0283')
 endif
 " 1}}} "gutentags
 
-" emmet {{{1 
+" emmet {{{1
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-V>'
 augroup HTML
@@ -556,7 +556,7 @@ augroup HTML
 augroup end
 " 1}}} "emmet
 
-" fzf {{{1 
+" fzf {{{1
 if executable('fzf')
 	Plug 'junegunn/fzf.vim'
 else
@@ -565,7 +565,7 @@ else
 endif
 " 1}}} "fzf
 
-" pandoc {{{1 
+" pandoc {{{1
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-pandoc-after' " work on replacing
@@ -574,7 +574,7 @@ let g:pandoc#formatting#mode = 'sA'
 let g:pandoc#after#modules#enabled = ['nrrwrgn']
 " 1}}} "pandoc
 
-" minimal asyncdo {{{1 
+" minimal asyncdo {{{1
 func! s:populate(file, cmd) abort
 	unlet! t:job
 	try
@@ -610,7 +610,7 @@ endfunc
 com! -nargs=+ AsyncDo call AsyncDo(<f-args>)
 " 1}}} "minimal asyncdo
 
-" textobjects {{{1 
+" textobjects {{{1
 " 24 simple text-objects
 " ----------------------
 " i_ i. i: i, i; i| i/ i\ i* i+ i- i#
@@ -804,7 +804,7 @@ endfunction
 xmap <silent> iC :<C-U>call <SID>inner_comment(1)<CR><Plug>(TOC)
 omap <silent> iC :<C-U>call <SID>inner_comment(0)<CR><Plug>(TOC)
 
-" Zoom allow edit the same file {{{1 
+" Zoom allow edit the same file {{{1
 augroup ZOOM
 	" this one is which you're most likely to use?
 	autocmd!
@@ -813,7 +813,7 @@ augroup ZOOM
 augroup end
 " 1}}} "Zoom
 
-" Auto Change Status Color {{{1 
+" Auto Change Status Color {{{1
 highlight StatusLine ctermbg=NONE ctermfg=Grey
 augroup WinEnterGroup
 	" this one is which you're most likely to use?
@@ -836,7 +836,7 @@ augroup LATEX
 augroup END
 " 2}}} "vimtex
 
-" peek relative number {{{1 
+" peek relative number {{{1
 nnoremap 1 :set relativenumber<CR>:call RepeatKey('1')<CR>
 nnoremap 2 :set relativenumber<CR>:call RepeatKey('2')<CR>
 nnoremap 3 :set relativenumber<CR>:call RepeatKey('3')<CR>
@@ -857,14 +857,14 @@ function! RepeatKey(first) abort
 		let l:command = nr2char(getchar())
 		let numbers = (10 * numbers) + l:command
 	endwhile
-	let numbers = numbers/10 
+	let numbers = numbers/10
 	echo numbers
 	execute "normal! ".numbers.l:command
 	set norelativenumber
 endfunction
 " 2}}} "peek relative number
 
-" dirvish {{{1 
+" dirvish {{{1
 if exists('g:loaded_fugitive')
 	"code
 	autocmd FileType dirvish call fugitive#detect(@%)
@@ -896,7 +896,7 @@ augroup LATEX
 augroup END
 " 2}}} "vimtex
 
-" WebSearch {{{1 
+" WebSearch {{{1
 function! dotvim#WebSearch(type, ...)
 
 	let sel_save = &selection

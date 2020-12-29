@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " A collection of diy text objects
 " Inside And Arround {{{1
 " inside or arround ...
@@ -20,7 +20,7 @@ for char in [ '"', "'",'_', '.', '$', '/', '<bslash>', '*' ]
 endfor
 " 1}}} "Inside And Arround
 
-" Line {{{1 
+" Line {{{1
 " line text-objects
 " -----------------
 xnoremap il g_o^
@@ -29,7 +29,7 @@ xnoremap al $o0
 onoremap al :normal val<CR>
 " 1}}} "Line
 
-" Number {{{1 
+" Number {{{1
 " number text-objects (integer and float)
 " ---------------------------------------
 " in an
@@ -42,7 +42,7 @@ xnoremap in :<C-u>call VisualNumber()<CR>
 onoremap in :normal! vin<CR>
 " 1}}} "Number
 
-" Square Brackets {{{1 
+" Square Brackets {{{1
 " square brackets text-objects
 " ----------------------------
 " ir ar
@@ -52,7 +52,7 @@ onoremap ir :normal vi[<CR>
 onoremap ar :normal va[<CR>
 " 1}}} "Square Brackets
 
-" Quotes {{{1 
+" Quotes {{{1
 " quote text-objects
 " ----------------------------
 " iq aq

@@ -14,5 +14,5 @@ sync:
 	[ -f ~/.config/nvim/init.vim ] || ln -s $(PWD)/vimrc ~/.config/nvim/init.vim
 
 clean:
-	rm -f ~/.vimrc 
+	rm -f ~/.vimrc
 	rm -f ~/.config/nvim/init.vim

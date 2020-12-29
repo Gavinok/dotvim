@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " ftplugin for json files
 if executable('python')
 	nmap <buffer> gq :%!python -m json.tool<CR>

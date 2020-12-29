@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " ftplugin for python
 if exists('g:mylsc_enabled')
 	setlocal omnifunc=lsc#complete#complete

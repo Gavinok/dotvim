@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " vim-lsc settings
 " LSC {{{2 "
 if !exists("g:mylsc_enabled")

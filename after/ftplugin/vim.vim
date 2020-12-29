@@ -5,9 +5,9 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " ftplugin for vimscript
-" used by 
+" used by
 if exists('g:loaded_lsc')
 	setlocal omnifunc=lsc#complete#complete
 endif

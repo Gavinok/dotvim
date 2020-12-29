@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " an even more minimul completion method
 
 " Add this to your vimrc to get a minimalist autocomplete pop

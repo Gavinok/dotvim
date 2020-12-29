@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " vim-lsp settings
 " if !exists("g:mymu_enabled")
 	finish
@@ -83,13 +83,13 @@ if exists('*job_start') || exists('*jobstart')
 					\ })
 	endif
 	if executable('texlab')
-		au User lsp_setup call lsp#register_server({ 
+		au User lsp_setup call lsp#register_server({
 					\ 'name': 'texlab',
 					\ 'cmd': {server_info->['texlab']},
 					\ 'root_uri': { server_info->lsp#utils#path_to_uri
 					\ (lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-					\ 'initialization_options': {"diagnostics": "true"}, 
-					\ 'whitelist': ['plaintex', 'tex'], 
+					\ 'initialization_options': {"diagnostics": "true"},
+					\ 'whitelist': ['plaintex', 'tex'],
 					\ })
 	endif
 	function! s:on_lsp_buffer_enabled() abort

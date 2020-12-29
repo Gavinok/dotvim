@@ -26,7 +26,7 @@ endfunction
 function! Openrc()
 	let l:buf = CreateCenteredFloatingWindow()
 	call nvim_set_current_buf(l:buf)
-	execute 'e $MYVIMRC'		
+	execute 'e $MYVIMRC'
 endfunction
 
 function! Open_popup() abort

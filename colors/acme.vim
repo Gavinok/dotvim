@@ -1,10 +1,10 @@
-highlight clear 
+highlight clear
 
 " for cterm, 'black' might get overwritten by the terminal emulator, so we use
 " 232 (#080808), which is close enough.
 
-highlight! Normal       guibg=#ffffea       guifg=#000000   ctermbg=NONE    ctermfg=232    
-highlight! Terminal     guibg=#ffffea       guifg=#000000   ctermbg=NONE    ctermfg=232    
+highlight! Normal       guibg=#ffffea       guifg=#000000   ctermbg=NONE    ctermfg=232
+highlight! Terminal     guibg=#ffffea       guifg=#000000   ctermbg=NONE    ctermfg=232
 "          highlight!   NonText             guibg=bg        guifg=#ffffea   ctermbg=NONE   ctermfg=230
 highlight! StatusLine   guibg=#aeeeee       guifg=#000000   gui=NONE        ctermbg=159    ctermfg=232    cterm=NONE
 highlight! StatusLineNC guibg=#eaffff       guifg=#000000   gui=NONE        ctermbg=194    ctermfg=232    cterm=NONE
@@ -14,7 +14,7 @@ highlight! Folded       guibg=#ffffea       guifg=fg        gui=italic      cter
 highlight! FoldColumn   guibg=NONE          guifg=fg        ctermbg=NONE    ctermfg=fg
 highlight! Conceal      guibg=bg            guifg=fg        gui=NONE        ctermbg=NONE   ctermfg=fg     cterm=NONE
 highlight! LineNr       guibg=bg            guifg=#505050   gui=italic      ctermbg=NONE   ctermfg=239    cterm=italic
-highlight! Visual       guibg=#ffffca   guifg=NONE       gui=NONE ctermbg=15	ctermfg=NONE      cterm=NONE      
+highlight! Visual       guibg=#ffffca   guifg=NONE       gui=NONE ctermbg=15	ctermfg=NONE      cterm=NONE
 highlight! VisualNOS    ctermbg=15       ctermfg=NONE   guibg=NONE        guifg=NONE     cterm=bold      gui=bold
 highlight! CursorLine   guibg=#ffffca       guifg=fg        ctermbg=230     ctermfg=fg
 

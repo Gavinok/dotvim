@@ -5,14 +5,14 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " Simple Template functionality using read and a file
 
 function! s:load_skeleton(type, name)
 	" do nothing if no filetype
-	if empty(a:type) 
+	if empty(a:type)
 		return
-	elseif a:name =~ "[0-9].sh" 
+	elseif a:name =~ "[0-9].sh"
 		"prevent errors with dirvish
 		return
 	endif
@@ -24,10 +24,10 @@ function! s:load_skeleton(type, name)
 	let skeletons = globpath(&rtp, 'skeleton/' . a:name , 0, 1)
 	" let skeletons = globpath(&rtp, 'skeleton/' . a:type , 0, 1)
 	" echoerr 'skeletons is ' . skeletons
-	if empty(skeletons) 
+	if empty(skeletons)
 		let skeletons = globpath(&rtp, 'skeleton/' . a:type , 0, 1)
 		if empty(skeletons)
-			return 
+			return
 		endif
 	endif
 	" read last skeleton into 1st line.

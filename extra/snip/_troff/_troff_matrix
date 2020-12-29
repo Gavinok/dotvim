@@ -1,9 +1,9 @@
-left [ 
-matrix { 
+left [
+matrix {
 ccol{
-{{+x+}} 
-above 
-{{+y+}} 
+{{+x+}}
+above
+{{+y+}}
 }
 {{++}}
-} right ] 
+} right ]

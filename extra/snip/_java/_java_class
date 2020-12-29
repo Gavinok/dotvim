@@ -14,14 +14,14 @@
 	}
 
 	/**
-	 * @return {{+<varname+}}  
+	 * @return {{+<varname+}}
 	 */
 	public {{+<type+}} get{{+<varname+}}() {
 		return {{+<varname+}};
 	}
 
 	/**
-	 * @param {{+<varname+}}  
+	 * @param {{+<varname+}}
 	 */
 	public void set{{+<varname+}}({{++}}) {
 		{{+`'this.'.<varname.' = '.<varname+}};

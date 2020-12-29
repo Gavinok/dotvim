@@ -5,7 +5,7 @@
 " Copyright (c) Gavin Jaeger-Freeborn.  Distributed under the same terms as Vim itself.
 " See :help license
 "
-" Description: 
+" Description:
 " my own versin of tpope's vim-rsi [https://github.com/tpope/vim-rsi]
 
 if exists("g:loaded_myrsi") || v:version < 700 || &cp
