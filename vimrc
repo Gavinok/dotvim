@@ -10,6 +10,8 @@
 "      ░░   ▒ ░░      ░     ░░   ░ ░
 "       ░   ░         ░      ░     ░ ░
 "      ░                           ░
+" TODO:
+" automate remove trailing whitespace
 " Quick Init: {{{1 "
 if has('nvim')
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
