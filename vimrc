@@ -44,7 +44,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'dhruvasagar/vim-testify'
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
-Plug 'machakann/vim-vimhelplint'
+	Plug 'machakann/vim-vimhelplint'
 	Plug 'zaid/vim-rec'
 	let g:mymu_enabled=1
 	let g:mylsc_enabled=1
@@ -64,7 +64,7 @@ Plug 'machakann/vim-vimhelplint'
 
 	" java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
-    " let g:JavaComplete_UsePython3 = 1
+	" let g:JavaComplete_UsePython3 = 1
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
@@ -112,21 +112,20 @@ if has('nvim') || has('patch-8.0.902')
 else
 	Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
-Plug 'rhysd/github-complete.vim'
 " 2}}} "Git
 " Writing {{{2 "
 " Plug 'lervag/vimtex' " Latex support
-Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeEnable' }
 let g:table_mode_map_prefix = '<Leader>T'
 let g:table_mode_realign_map = '<Leader>TT'
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
 " My Pluggins {{{2 "
-Plug 'tpope/vim-speeddating', { 'for': [ 'org', 'dotoo', 'rec' ] }
-Plug 'gavinok/spaceway.vim'
+Plug 'Gavinok/spaceway.vim'
+Plug 'Gavinok/vim-troff'
 " 2}}} " My Plugins
 " Tpope god bless the man {{{2 "
+Plug 'tpope/vim-speeddating', { 'for': [ 'org', 'dotoo', 'rec' ] }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
@@ -152,7 +151,6 @@ Plug 'dhruvasagar/vim-dotoo'
 nmap <Nop> <Plug>(dotoo-capture)
 Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
-Plug 'Gavinok/vim-troff'
 call plug#end()
 
 " if has("nvim-0.5")
