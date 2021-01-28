@@ -24,7 +24,7 @@ let g:loaded_gzip               =  1
 let g:loaded_tarPlugin          =  1
 let g:loaded_zipPlugin          =  1
 let g:loaded_2html_plugin       =  1
-"dont use any remote plugins so no need to load them
+"don't use any remote plugins so no need to load them
 let g:loaded_rrhelper           =  1
 let g:loaded_remote_plugins     =  1
 let g:loaded_netrw              =  1
@@ -91,7 +91,7 @@ if has("nvim-0.5")
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
-Plug 'mattn/emmet-vim', { 'for' : ['html'] }
+" Plug 'mattn/emmet-vim', { 'for' : ['html'] }
 
 Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
 let g:minisnip_autoindent = 0
@@ -155,31 +155,7 @@ Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 call plug#end()
 
-" if has("nvim-0.5")
-" lua <<EOF
-" require'nvim_lsp'.pyls.setup{}
-" require'nvim_lsp'.gopls.setup{}
-" require'nvim_lsp'.ccls.setup{}
-" require'nvim_lsp'.vimls.setup{}
-" require'nvim_lsp'.jdtls.setup{}
-" EOF
-
-" function! NvimLspSetting()
-" " nnoremap <buffer><silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <buffer><silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <buffer><silent> gs   <cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <buffer><silent> gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-" nnoremap <buffer><silent> gR    <cmd>lua vim.lsp.buf.references()<CR>
-" nnoremap <buffer><silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-" nnoremap <buffer><silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-" nnoremap <buffer><silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-" highlight LspDiagnosticsError ctermbg=NONE    ctermfg=103    guibg=NONE       guifg=#BCBCBC  cterm=italic            gui=NONE
-" setlocal omnifunc=v:lua.vim.lsp.omnifunc
-" endfunction
-
-" Use LSP omni-completion in Python files.
-" autocmd Filetype c,vim,go,java,python call NvimLspSetting()
-" endif
+autocmd FileType scheme let b:repl_config = { 'cmd': 'racket' }
 
 " faster updates
 set updatetime=100
@@ -293,13 +269,10 @@ runtime vimshortcuts.vim
 
 " Open or compile file
 map <silent><leader>co :!opout <c-r>%<CR><CR>
-map <leader>cc :w! \| !compiler <c-r>%<CR>
 " Write To File As Sudo
 nnoremap <leader>sudo :w !sudo tee > /dev/null %
 
 " POSIX Commands
-nmap <leader>cp :!cp  <C-R>% ~/
-nmap <leader>mv :!mv  <C-R>% ~/
 nmap cd :cd <C-R>=expand('%:h')<CR>
 
 " Toggle *conceallevel*
@@ -343,8 +316,6 @@ command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dro
 nnoremap c*			*Ncgn
 nnoremap <C-N>      yiW/<C-r>0<CR>Ncgn
 xnoremap <C-N>      y/<C-r>0<CR>Ncgn
-nnoremap <leader>n  yiw:%s/<C-r>0//gc<left><left><left>
-xnoremap <leader>n  y:%s/<C-r>0//gc<left><left><left>
 
 map ]a :silent! cnext<CR>
 map [a :silent! cprevious<CR>
@@ -627,7 +598,7 @@ endfunction
 " White space {{{2
 " Highlight whitespace problems.
 nnoremap <Leader>ws :call ToggleShowWhitespace()<CR>
-function! ToggleShowWhitespace()
+function! ToggleShowWhitespace()    
 	if !exists('b:showws')
 		let b:showws = 1
 	endif
@@ -812,7 +783,7 @@ iab pyhton python
 iab hte the
 iab cuz because
 iab tf,  Therefore,
-iab sin, Sincerly,<CR>Gavin<SPACE>Jaeger-Freeborn
+iab sin, Sincerely ,<CR>Gavin<SPACE>Jaeger-Freeborn
 iab elect electron
 
 " lorem ipsum
