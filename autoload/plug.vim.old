@@ -2662,3 +2662,31 @@ endif
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
+
+
+"nvim lsp
+if has("nvim-0.5")
+lua <<EOF
+require'nvim_lsp'.pyls.setup{}
+require'nvim_lsp'.gopls.setup{}
+require'nvim_lsp'.ccls.setup{}
+require'nvim_lsp'.vimls.setup{}
+require'nvim_lsp'.jdtls.setup{}
+EOF
+
+function! NvimLspSetting()
+" nnoremap <buffer><silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <buffer><silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <buffer><silent> gs   <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <buffer><silent> gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <buffer><silent> gR    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <buffer><silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <buffer><silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <buffer><silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+highlight LspDiagnosticsError ctermbg=NONE    ctermfg=103    guibg=NONE       guifg=#BCBCBC  cterm=italic            gui=NONE
+setlocal omnifunc=v:lua.vim.lsp.omnifunc
+endfunction
+
+" Use LSP omni-completion in Python files.
+ endif
+ autocmd Filetype c,vim,go,java,python call NvimLspSetting()
