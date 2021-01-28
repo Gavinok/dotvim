@@ -1,0 +1,41 @@
+
+ROFFEXT = {{+ms+}}
+TARGETFORMAT = {{+pdf+}}
+TARGET := $(addsuffix .$(TARGETFORMAT),$(basename $(SRCS)))
+CLEANLINTERCMD = sed -e 's/\.clean//'
+LAST=$(shell ls -t *.$(ROFFEXT) | head -1 | sed -e "s/\.$(ROFFEXT)//")
+ERRORFILE=log.error
+
+all: ${TARGET}
+.SUFFIXES: .tr .ms .ps .pdf .PDF .html
+
+lastpdf: $(LAST).pdf
+
+last:
+	@echo $(LAST).ms
+
+.ps.pdf:
+	ps2pdf $< $@
+
+.$(ROFFEXT).ps:
+	cat $< | $(PRE) | $(ROFF) $(ROFFOPTS) $(MACROS) 2>$(ERRORFILE) | $(POST) $(POSTOPTS) >$@
+	$(MAKE) checkerrors
+
+checkerrors: $(ERRORFILE)
+	@sed "s/<standard input>/$</g" $(ERRORFILE)
+	rm -f $(ERRORFILE)
+
+%.clean: ${SRCS}
+	deroff $< > $@
+
+lint: ${SRCS}.clean
+	-grep -Hn "[−’]" $<  | $(CLEANLINTERCMD)
+	writegood --parse $< | $(CLEANLINTERCMD)
+	proselint $<         | $(CLEANLINTERCMD)
+	diction --suggest --beginner $< | $(CLEANLINTERCMD)
+	rm $<
+
+clean:
+	rm -f $(LAST).ps $(LAST).pdf
+
+.PHONY: clean all lint test

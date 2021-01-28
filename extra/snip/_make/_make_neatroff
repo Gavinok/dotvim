@@ -1,0 +1,18 @@
+# Neatroff settings
+BASE = {{+$(HOME)/.local/share/neat/+}}
+ROFF = $(BASE)/neatroff/roff
+POST = $(BASE)/neatpost/post
+PPDF = $(BASE)/neatpost/pdf
+EQN = $(BASE)/neateqn/eqn
+REFR = $(BASE)/neatrefer/refer
+PIC = $(BASE)/troff/pic/pic
+TBL = $(BASE)/troff/tbl/tbl
+SOIN = $(BASE)/soin/soin
+
+ROFFOPTS = -F$(BASE) -M$(BASE)/tmac
+MACROS = {{+-mpost -mtbl -mkeep -men -msrefs -mgr+}}
+POSTOPTS = -F$(BASE) -pa4
+REFROPTS = -m -e -o ct -p {{+ref.bib+}}
+
+PRE = cat $< | $(SOIN) | \
+		$(REFR) $(REFROPTS) | $(PIC) | $(TBL) | $(EQN)
