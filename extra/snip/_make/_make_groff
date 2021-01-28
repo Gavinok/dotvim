@@ -1,68 +1,10 @@
+# Groff settings
 ROFF = {{+groff+}}
-GROFFOPTS = {{+-kepts -b -wall+}}
-ROFFOPTS = {{+-b -wall+}}
-MACROS = {{+-mspdf+}}
-ROFFEXT = {{+ms+}}
-PRE = {{+preconv | pic | tbl | eqn +}}
 POST = {{+grops+}}
+
+MACROS = {{+-mspdf+}}
 POSTOPTS = {{++}}
-PDFROFF = {{+pdfroff+}}
-PDFROPTS = {{+$(ROFFOPTS)+}}
+ROFFOPTS = {{+-Z -b -wall+}}
 PDFPOST = {{++}}
-TARGETFORMAT = {{+pdf+}}
-CLEANLINTERCMD = sed -e 's/\.clean//'
-SRCS = $(shell find -type f -name '*.$(ROFFEXT)' )
-TARGET := $(addsuffix .$(TARGETFORMAT),$(basename $(SRCS)))
-ERRORFILE=log.error
 
-all: ${TARGET}
-
-.SUFFIXES: .tr .ms .ps .pdf .PDF .html
-
-.ps.pdf:
-	ps2pdf $< $@
-
-.$(ROFFEXT).ps:
-ifeq ($(ROFF), groff)
-	$(ROFF) $(GROFFOPTS) -Z $(MACROS) 2>$(ERRORFILE) $< | $(POST) $(POSTOPTS) >$@
-else
-	cat $< | $(PRE) | $(ROFF) $(ROFFOPTS)  $(MACROS) | $(POST) $(POSTOPTS) >$@
-endif
-	$(MAKE) checkerrors
-
-
-.$(ROFFEXT).PDF:
-ifeq ($(ROFF), pdfroff)
-	$(PDFROFF) $(GROFFOPTS) $(MACROS) 2>$(ERRORFILE) $< > $@
-else
-	cat $< | $(PRE) | $(PDFROFF) $(ROFFOPTS) $(MACROS) | $(PDFPOST) > $@
-endif
-	$(MAKE) checkerrors
-
-.$(ROFFEXT).html:
-ifeq ($(ROFF), groff)
-	# the sed is here to remove .XN if it exists
-	cat $< |  sed -e 's/^\.XN//' | $(ROFF) $(GROFFOPTS) $(MACROS) -Thtml 2>$(ERRORFILE) > $@
-else
-	@echo "error only groff is supported for html output"
-endif
-	$(MAKE) checkerrors
-
-checkerrors: $(ERRORFILE)
-	@sed "s/<standard input>/$</g" $(ERRORFILE)
-	rm -f $(ERRORFILE)
-
-%.clean: ${SRCS}
-	deroff $< > $@
-
-lint: ${SRCS}.clean
-	-grep -Hn "[−’]" $<  | $(CLEANLINTERCMD)
-	writegood --parse $< | $(CLEANLINTERCMD)
-	proselint $<         | $(CLEANLINTERCMD)
-	diction --suggest --beginner $< | $(CLEANLINTERCMD)
-	rm $<
-
-clean:
-	rm -f *.pdf *.PDF
-
-.PHONY: clean all lint test
+PRE = {{+ preconv | pic | tbl | eqn +}}

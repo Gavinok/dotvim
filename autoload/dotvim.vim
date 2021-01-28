@@ -98,7 +98,7 @@ function! dotvim#WordProcessor() abort
 			inoremap <buffer> ! !<C-g>u
 			inoremap <buffer> ? ?<C-g>u
 			inoremap <buffer> : :<C-g>u
-			setlocal spell spelllang=en_us
+			setlocal spell spelllang=en_ca
 			" use a preselected dictionary file
 			execute 'setlocal dictionary+=' . g:quickdict
 			setlocal dictionary+=spell
@@ -280,39 +280,6 @@ function! dotvim#Do(...) abort
 endfunction
 " 1}}} "Minimal Async Command
 
-" Async Manpages {{{1
-function! s:openmanpage(file, cmd, done) abort
-	echohl WarningMsg | echom printf('[Completed] %s', a:cmd) | echohl None
-	unlet! g:manjob
-	try
-		exe 'silent! split '.a:file
-	finally
-		call setqflist([], 'a', {'title': a:cmd}) "update list
-	endtry
-	setfiletype man
-endfunction
-
-function! dotvim#Man(...) abort
-	if exists('g:manjob')
-		echohl ErrorMsg | echom 'There is currently running manjob, just wait' | echohl None
-		return
-	endif
-	call setqflist([], 'r') " clear list
-	let tmp = tempname()
-	let cmd = 'man ' .substitute(join(a:000), '%', expand('%'), '')
-	if has('nvim')
-		let g:manjob = jobstart([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
-					\ 'on_exit': {id, data, event -> s:openmanpage(tmp, cmd, 1)}
-					\ })
-	else
-		let g:manjob = job_start([&shell, &shellcmdflag, printf(cmd.&shellredir, tmp)], {
-					\ 'in_io': 'null','out_io': 'null','err_io': 'null',
-					\ 'exit_cb': {manjob, result -> s:openmanpage(tmp, cmd, 1)}
-					\ })
-	endif
-endfunction
-" 1}}} "Async Manpages
-
 " Run command in Terminal {{{1
 function! dotvim#TermCmd(...)
 	let cmd = substitute(join(a:000), '%', expand('%'), '')
@@ -324,17 +291,6 @@ function! dotvim#TermCmd(...)
 	endif
 endfunction
 " 1}}} "Run command in Terminal
-
-" Simple Todo using grep {{{1
-function! dotvim#Todo(dir)
-	if (getcwd() != $HOME) && (getcwd() != a:dir)
-		execute 'grep "\**\sTODO" . ' . a:dir
-	else
-		execute 'grep "\**\sTODO" ' . a:dir
-	endif
-	copen
-endfunction
-" 1}}} "Simple Todo using grep
 
 " ScreenShots in Markup {{{1
 function! dotvim#OrgScreenShot(desc, dir, filename)
