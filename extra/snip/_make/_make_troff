@@ -17,15 +17,15 @@ last:
 	@echo $(LAST).ms
 
 .ps.pdf:
-	ps2pdf $< $@
+	@ps2pdf $(GSOPTS) $< $@
 
 .$(ROFFEXT).ps:
 	cat $< | $(PRE) | $(ROFF) $(ROFFOPTS) $(MACROS) 2>$(ERRORFILE) | $(POST) $(POSTOPTS) >$@
-	$(MAKE) checkerrors
+	@$(MAKE) -s checkerrors
 
 checkerrors: $(ERRORFILE)
 	@sed "s/<standard input>/$</g" $(ERRORFILE)
-	rm -f $(ERRORFILE)
+	@rm -f $(ERRORFILE)
 
 %.clean: ${SRCS}
 	deroff $< > $@

@@ -1,5 +1,5 @@
 # Neatroff settings
-BASE = {{+$(HOME)/.local/share/neat/+}}
+BASE = {{+$(HOME)/.local/share/neat+}}
 ROFF = $(BASE)/neatroff/roff
 POST = $(BASE)/neatpost/post
 PPDF = $(BASE)/neatpost/pdf
@@ -13,6 +13,8 @@ ROFFOPTS = -F$(BASE) -M$(BASE)/tmac
 MACROS = {{+-mpost -mtbl -mkeep -men -msrefs -mgr+}}
 POSTOPTS = -F$(BASE) -pa4
 REFROPTS = -m -e -o ct -p {{+ref.bib+}}
+GSOPTS = -dPDFSETTINGS=/prepress -dEmbedAllFonts=true \
+		-sFONTPATH=$(BASE)/fonts/ -sFONTMAP=$(BASE)/fonts/Fontmap 
 
 PRE = cat $< | $(SOIN) | \
 		$(REFR) $(REFROPTS) | $(PIC) | $(TBL) | $(EQN)

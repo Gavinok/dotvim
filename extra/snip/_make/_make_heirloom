@@ -1,0 +1,20 @@
+# Heirloom settings
+# https://github.com/n-t-roff/heirloom-doctools
+export TROFFONTS={{+/usr/share/fonts/+}}
+BASE = {{+/usr/local/ucb+}}
+ROFF = $(BASE)/troff
+POST = $(BASE)/dpost
+EQN = $(BASE)/eqn
+REFR = $(BASE)/refer
+PIC = $(BASE)/pic
+TBL = $(BASE)/tbl
+SOELIM = $(BASE)/soelim
+
+ROFFOPTS = {{+-x+}}
+MACROS = {{+-ms+}}
+POSTOPTS = 
+REFROPTS = -p {{+ref.bib+}}
+GSOPTS = -dPDFSETTINGS=/prepress
+
+PRE = cat $< | $(SOELIM) | \
+		$(REFR) $(REFROPTS) | $(PIC) | $(TBL) | $(EQN)
