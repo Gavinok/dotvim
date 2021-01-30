@@ -53,24 +53,29 @@ function! MyTroffMacroslevel(maxlevel)
     return "="
 endfunction
 
-function! TroffMacroslevel(maxlevel)
-	let ms = 'NH ' . headingnum . ' .*$'
-	let ms = 'SH ' . headingnum . ' .*$'
-	let me = 'sh ' . headingnum . ' .*$'
-	"
-	" no heading level
-	let me = 'uh .*$'
-	let mm = 'HU .*$'
+function! TroffFoldByMacro()
+		let def = '^\.\s*de\s\+.\+'
+		let endef = '^\.\s*\..*'
+		if getline(v:lnum) =~ def
+			return '>1'
+		elseif getline(v:lnum) =~ endef
+			return '<1'
+		else
+			return "="
+		endif
+endfunction
 
-	" mandatory heading level
-	let mm = 'H ' . headingnum . ' .*$'
-	let mom = 'HEADING ' . headingnum . ' .*$'
-
+" heading formats
+let ms = 'NH\|SH'
+let me = 'sh\|uh'
+let mm = 'HU\|H'
+let mom = 'HEADING'
+function! TroffMacroslevel(macroset, maxlevel)
 	for headingnum in range(1,a:maxlevel)
 		if headingnum = 1
 			let headingnum = ''
 		endif
-		let headingregex = '^\.\(#\{' . headingnum .'} ' . '.*$\|\)'
+		let headingregex = '^\.\s*\(' . a:macroset . '\)\s*\(' . headingnum . '\)\?.*$'
 		if getline(v:lnum) =~ headingregex
 			return '>' . headingnum
 		endif
@@ -78,12 +83,9 @@ function! TroffMacroslevel(maxlevel)
     return "="
 endfunction
 
+
+" setlocal foldexpr=TroffFoldByMacro()
+" setlocal foldexpr=TroffMacroslevel(ms,5)
 setlocal foldexpr=MyTroffMacroslevel(5)
 setlocal foldmethod=expr
 setlocal autoindent
-
-" if isdirectory( g:groff_install_prefix . '/groff/current/tmac' )
-" execute 'setlocal tags+=' . g:groff_install_prefix . '/groff/current/tmac/.tags'
-" execute 'setlocal tags+=' . g:groff_install_prefix . '/usr/local/lib/groff/site-tmac/.tags'
-" execute 'setlocal tags+=' . g:groff_install_prefix . '/usr/local/share/groff/site-tmac/.tags'
-" endif
