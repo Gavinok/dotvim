@@ -9,12 +9,12 @@ CLEANLINTERCMD = sed -e 's/\.clean//'
 ERRORFILE=log.error
 
 all: ${TARGET}
-.SUFFIXES: .tr .ms .ps .pdf .PDF .html
+.SUFFIXES: .$(ROFFEXT) .tr .ps .pdf .PDF .html
 
 lastpdf: $(LAST).pdf
 
 last:
-	@echo $(LAST).ms
+	@echo $(LAST).$(ROFFEXT)
 
 .ps.pdf:
 	@ps2pdf $(GSOPTS) $< $@
@@ -23,12 +23,17 @@ last:
 	cat $< | $(PRE) | $(ROFF) $(ROFFOPTS) $(MACROS) 2>$(ERRORFILE) | $(POST) $(POSTOPTS) >$@
 	@$(MAKE) -s checkerrors
 
+tar:
+	base=$(basename $PWD)
+	tar -czf $(LAST).tar.gz .
+
 checkerrors: $(ERRORFILE)
 	@sed "s/<standard input>/$</g" $(ERRORFILE)
 	@rm -f $(ERRORFILE)
 
 %.clean: ${SRCS}
 	deroff $< > $@
+
 
 lint: ${SRCS}.clean
 	-grep -Hn "[−’]" $<  | $(CLEANLINTERCMD)

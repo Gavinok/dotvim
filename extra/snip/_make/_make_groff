@@ -1,10 +1,10 @@
 # Groff settings
-ROFF = {{+groff+}}
+ROFF = {{+groff -Z+}}
 POST = {{+grops+}}
 
 MACROS = {{+-mspdf+}}
 POSTOPTS = {{++}}
-ROFFOPTS = {{+-Z -b -wall+}}
+ROFFOPTS = {{+-b -wall+}}
 PDFPOST = {{++}}
 
-PRE = {{+ preconv | pic | tbl | eqn +}}
+PRE = {{+ preconv | soelim | pic | tbl | eqn +}}

@@ -1,0 +1,14 @@
+# Plan 9 Troff
+ROFF = 9 troff
+POST = 9 tr2post | 9 psfonts
+EQN = 9 eqn
+TBL = 9 tbl
+PIC = 9 pic
+SOELIM = 9 soelim
+
+ROFFOPTS =
+MACROS = {{+-ms+}}
+POSTOPTS =
+
+PRE = $(SOELIM) | \
+		$(PIC) | $(TBL) | $(EQN)
