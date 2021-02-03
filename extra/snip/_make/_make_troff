@@ -8,7 +8,7 @@ TARGET := $(addsuffix .$(TARGETFORMAT),$(basename $(LAST)))
 CLEANLINTERCMD = sed -e 's/\.clean//'
 ERRORFILE=log.error
 
-all: ${TARGET}
+all: $(TARGET)
 .SUFFIXES: .$(ROFFEXT) .tr .ps .pdf .PDF .html
 
 lastpdf: $(LAST).pdf
@@ -31,11 +31,11 @@ checkerrors: $(ERRORFILE)
 	@sed "s/<standard input>/$</g" $(ERRORFILE)
 	@rm -f $(ERRORFILE)
 
-%.clean: ${SRCS}
+%.clean: $(SRCS)
 	deroff $< > $@
 
 
-lint: ${SRCS}.clean
+lint: $(SRCS).clean
 	-grep -Hn "[−’]" $<  | $(CLEANLINTERCMD)
 	writegood --parse $< | $(CLEANLINTERCMD)
 	proselint $<         | $(CLEANLINTERCMD)

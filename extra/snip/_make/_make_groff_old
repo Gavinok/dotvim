@@ -16,7 +16,7 @@ TARGET := $(addsuffix .$(TARGETFORMAT),$(basename $(SRCS)))
 ERRORFILE=log.error
 LAST=$(shell ls -t *.$(ROFFEXT) | head -1 | sed -e "s/\.$(ROFFEXT)//")
 
-all: ${TARGET}
+all: $(TARGET)
 
 .SUFFIXES: .tr .ms .ps .pdf .PDF .html
 
@@ -53,10 +53,10 @@ checkerrors: $(ERRORFILE)
 	@sed "s/<standard input>/$</g" $(ERRORFILE)
 	rm -f $(ERRORFILE)
 
-%.clean: ${SRCS}
+%.clean: $(SRCS)
 	deroff $< > $@
 
-lint: ${SRCS}.clean
+lint: $(SRCS).clean
 	-grep -Hn "[−’]" $<  | $(CLEANLINTERCMD)
 	writegood --parse $< | $(CLEANLINTERCMD)
 	proselint $<         | $(CLEANLINTERCMD)
