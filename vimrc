@@ -42,10 +42,8 @@ augroup end
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'dhruvasagar/vim-testify'
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
-	Plug 'machakann/vim-vimhelplint'
 	Plug 'zaid/vim-rec'
 	let g:mymu_enabled=1
 	let g:mylsc_enabled=1
@@ -86,12 +84,9 @@ else
 endif
 if has("nvim-0.5")
 	Plug 'nvim-treesitter/nvim-treesitter'
-	" Plug 'neovim/nvim-lspconfig'
 endif
 " 2}}} "Autocompletion
 " Snippets {{{2 "
-" Plug 'mattn/emmet-vim', { 'for' : ['html'] }
-
 Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
 let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
@@ -136,9 +131,7 @@ Plug 'tweekmonster/helpful.vim'
 " 2}}} "Tpope
 " etc {{{2 "
 Plug 'tommcdo/vim-lion' " aligning text
-" Plug 'wellle/targets.vim'
 " only seek on the same line
-let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 
 Plug 'jelera/vim-javascript-syntax'
 " color support
