@@ -60,7 +60,6 @@ if has('patch-7.4.775')
 		" Disabled by default. Enabling this will let vim complete matches at any location
 		" e.g. typing 'ocument' will suggest 'document' if enabled.
 	endif
-
 	" java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 	" let g:JavaComplete_UsePython3 = 1
@@ -74,7 +73,6 @@ if has('patch-7.4.775')
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 if has('nvim')
-
 	" floating preview window for neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
@@ -139,7 +137,6 @@ if executable('go')
 	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 	let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 endif
-
 " Plug 'axvr/org.vim'
 Plug 'dhruvasagar/vim-dotoo'
 nmap <Nop> <Plug>(dotoo-capture)
@@ -148,9 +145,6 @@ Plug 'justinmk/vim-dirvish'
 call plug#end()
 
 autocmd FileType scheme let b:repl_config = { 'cmd': 'racket' }
-
-" faster updates
-set updatetime=100
 
 augroup LazyLoadFugitive
 	autocmd!
@@ -161,7 +155,6 @@ augroup end
 colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
-
 
 if exists('g:started_by_firenvim')
 	set laststatus=0
@@ -208,14 +201,6 @@ nnoremap <leader>y :let @+ = expand("%:p")<cr>
 if has('nvim')
 	set termguicolors
 	set mouse=a                                         "Add mouse control not that I use them very much
-	" when rightclicking highlight copy it
-	xmap <LeftRelease> "*ygv
-	nmap <RightMouse> gv
-	xmap <RightMouse> gx
-	nmap <MiddleDrag> :Term <c-r><c-w>
-	nmap <MiddleMouse> :Term <c-r><c-w>
-	xmap <MiddleMouse> y:Term <c-r>0
-
 	augroup TERMINAL
 		autocmd!
 		" autocmd BufWinEnter,WinEnter term://* startinsert
@@ -274,7 +259,6 @@ elseif executable('ag')
 else
 	set grepprg=grep\ -R\ -n\ --exclude-dir=.git,.cache
 endif
-
 
 " change variable and repeat with .
 nnoremap c*			*Ncgn
