@@ -924,3 +924,160 @@ iab comm <C-R>=&commentstring<CR><esc>F%c2w
 " expand snippets with <c-f>
 imap <c-f> <c-v><c-a><c-]>
 " 1}}} "Simple Snippets
+
+
+" nvim lsp {{{ "1
+if has("nvim-0.5")
+lua <<EOF
+require'nvim_lsp'.pyls.setup{}
+require'nvim_lsp'.gopls.setup{}
+require'nvim_lsp'.ccls.setup{}
+require'nvim_lsp'.vimls.setup{}
+require'nvim_lsp'.jdtls.setup{}
+EOF
+
+function! NvimLspSetting()
+" nnoremap <buffer><silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <buffer><silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <buffer><silent> gs   <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <buffer><silent> gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <buffer><silent> gR    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <buffer><silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <buffer><silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <buffer><silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+highlight LspDiagnosticsError ctermbg=NONE    ctermfg=103    guibg=NONE       guifg=#BCBCBC  cterm=italic            gui=NONE
+setlocal omnifunc=v:lua.vim.lsp.omnifunc
+endfunction
+
+" Use LSP omni-completion in Python files.
+ endif
+ autocmd Filetype c,vim,go,java,python call NvimLspSetting()
+" 1}}} "nvim-lsp
+
+" RepeatResize {{{1 "
+function! dotvim#RepeatResize(first) abort
+	let l:command = a:first
+	while stridx('+-><', l:command) != -1
+		execute "normal! \<C-w>" . l:command
+		redraw
+		let l:command = nr2char(getchar())
+	endwhile
+endfunction
+" 1}}} "RepeatResize
+
+" CCR {{{1
+" minor adjustments to romainl's function found here
+" https://gist.github.com/romainl/5b2cfb2b81f02d44e1d90b74ef555e31
+function! dotvim#CCR()
+	let cmdline = getcmdline()
+
+	if getcmdtype() isnot# ':' | return "\<CR>" | endif
+
+	command! -bar Z silent set more|delcommand Z
+	if cmdline =~# '\v\C^(ls|files|buffers)'
+		" like :ls but prompts for a buffer command
+		return "\<CR>:b "
+	elseif cmdline =~# '\v\C^(cli|lli)'
+		" like :clist or :llist but prompts for an error/location number
+		return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
+	" elseif cmdline =~# '\C^fil.*old'
+		" like :filter \pattern\ oldfiles but prompts for an old file to edit
+		" set nomore
+		" return "\<CR>:Z|e #<"
+	elseif cmdline =~# '\C^marks'
+		" like :marks but prompts for a mark to jump to
+		return "\<CR>:norm! `"
+	elseif cmdline =~# '\C^undol'
+		" like :undolist but prompts for a change to undo
+		return "\<CR>:u "
+	elseif cmdline =~# '\C^reg'
+		" like registers bug
+		return "\<CR>:norm! \"p\<Left>"
+	elseif cmdline =~# '\C^g/.*/#'
+		" like registers bug
+		return "\<CR>:"
+	else
+		" <C-]> fixes abbreviation compatability
+		return "\<C-]>\<CR>"
+	endif
+endfunction
+" 1}}} "CCR
+
+" netrw {{{2
+" Poor mans Vim vinegar
+" set autochdir                                       "Auto cd
+if !empty($PLUMBER)
+	let g:netrw_browsex_viewer='setsid ' . $PLUMBER . ' -s neovim --' "force gx to use cabl if available
+endif
+let g:netrw_sort_options = 'i'
+let g:netrw_banner=0 "disable banner
+let g:netrw_fastbrowse=2
+let g:netrw_localrmdir='rm -r'
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+" move up a directory and focus on the file
+nmap - :call dotvim#Opendir('edit')<CR>
+
+augroup netrw_mapping
+	autocmd!
+	autocmd FileType netrw setl bufhidden=delete
+	autocmd Filetype netrw call dotvim#NetrwMapping()
+augroup end
+" 2}}} "netrw
+
+" info {{{2
+function! InfoMappings()
+	nmap <buffer> <c-n> <Plug>(InfoNext)
+	nmap <buffer> <c-p> <Plug>(InfoPrev)
+	nmap <buffer> gu <Plug>(InfoUp)
+endfunction
+augroup info
+	" this one is which you're most likely to use?
+	autocmd FileType info call InfoMappings()
+augroup end
+" 2}}} "info
+
+" grep operator {{{ "2
+nnoremap gr :set operatorfunc=<SID>GrepOperator<cr>g@
+vnoremap gr :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+function! s:GrepOperator(type)
+	let saved_unnamed_register = @@
+
+	if a:type ==# 'v'
+		normal! `<v`>y
+	elseif a:type ==# 'char'
+		normal! `[v`]y
+	else
+		return
+	endif
+
+	silent execute "grep! " . shellescape(@@) . " ."
+	copen
+
+	let @@ = saved_unnamed_register
+endfunction
+" 2}}} "grep operator
+
+" White space {{{2
+" Highlight whitespace problems.
+nnoremap <Leader>ws :call ToggleShowWhitespace()<CR>
+function! ToggleShowWhitespace()    
+	if !exists('b:showws')
+		let b:showws = 1
+	endif
+	let pat = '^\t*\zs \+\|\s\+$\| \+\ze\t\|[^\t]\zs\t\+'
+	if !b:showws
+		syntax clear ExtraWhitespace
+		let b:showws = 1
+	else
+		exec 'syntax match ExtraWhitespace "'.pat.'" containedin=ALL'
+		exec 'normal! /' . pat
+		let b:showws = 0
+	endif
+endfunction
+
+" Highlight trailing whitespace characters
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+" 2}}} "White Space
+

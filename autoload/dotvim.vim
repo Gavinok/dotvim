@@ -52,17 +52,6 @@ function! dotvim#Quicktag(force) abort
 endfunction
 " 1}}} "Quicktag
 
-" RepeatResize {{{1 "
-function! dotvim#RepeatResize(first) abort
-	let l:command = a:first
-	while stridx('+-><', l:command) != -1
-		execute "normal! \<C-w>" . l:command
-		redraw
-		let l:command = nr2char(getchar())
-	endwhile
-endfunction
-" 1}}} "RepeatResize
-
 " Toggle Prose Mode {{{1 "
 "toggle prose and code mode
 function! dotvim#WordProcessor() abort
@@ -335,44 +324,6 @@ function! dotvim#CSPACE()
 	return "\<C-]>\<SPACE>"
 endfunction
 "  1}}} "CSPACE
-
-" CCR {{{1
-" minor adjustments to romainl's function found here
-" https://gist.github.com/romainl/5b2cfb2b81f02d44e1d90b74ef555e31
-function! dotvim#CCR()
-	let cmdline = getcmdline()
-
-	if getcmdtype() isnot# ':' | return "\<CR>" | endif
-
-	command! -bar Z silent set more|delcommand Z
-	if cmdline =~# '\v\C^(ls|files|buffers)'
-		" like :ls but prompts for a buffer command
-		return "\<CR>:b "
-	elseif cmdline =~# '\v\C^(cli|lli)'
-		" like :clist or :llist but prompts for an error/location number
-		return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
-	" elseif cmdline =~# '\C^fil.*old'
-		" like :filter \pattern\ oldfiles but prompts for an old file to edit
-		" set nomore
-		" return "\<CR>:Z|e #<"
-	elseif cmdline =~# '\C^marks'
-		" like :marks but prompts for a mark to jump to
-		return "\<CR>:norm! `"
-	elseif cmdline =~# '\C^undol'
-		" like :undolist but prompts for a change to undo
-		return "\<CR>:u "
-	elseif cmdline =~# '\C^reg'
-		" like registers bug
-		return "\<CR>:norm! \"p\<Left>"
-	elseif cmdline =~# '\C^g/.*/#'
-		" like registers bug
-		return "\<CR>:"
-	else
-		" <C-]> fixes abbreviation compatability
-		return "\<C-]>\<CR>"
-	endif
-endfunction
-" 1}}} "CCR
 
 " Run Vim Script {{{1
 function! dotvim#RunVimScript(type, ...) abort

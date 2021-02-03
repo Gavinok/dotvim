@@ -82,7 +82,11 @@ function! TroffMacroslevel(macroset, maxlevel)
 	endfor
     return "="
 endfunction
-
+" augroup removefold
+" 	" this one is which you're most likely to use?
+" 	autocmd InsertEnter *.ms :set nofoldenable
+" 	autocmd InsertLeave *.ms :set foldenable
+" augroup end InsertEnter
 
 " setlocal foldexpr=TroffFoldByMacro()
 " setlocal foldexpr=TroffMacroslevel(ms,5)

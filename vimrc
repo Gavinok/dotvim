@@ -10,7 +10,6 @@
 "      ░░   ▒ ░░      ░     ░░   ░ ░
 "       ░   ░         ░      ░     ░ ░
 "      ░                           ░
-" TODO:
 " automate remove trailing whitespace
 " Quick Init: {{{1 "
 if has('nvim')
@@ -190,9 +189,6 @@ function! s:statusline_expr()
 	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
 endfunction
 let &statusline = s:statusline_expr()
-" highlight User1 ctermbg=107  ctermfg=black guibg=#87af5f guifg=black
-" highlight User2 ctermbg=103  ctermfg=black guibg=#8787af guifg=black
-" highlight User3 ctermbg=59   ctermfg=black guibg=#5f5f5f guifg=black
 
 if has('gui_running')
 	call dotvim#LoadGui()
@@ -205,7 +201,6 @@ elseif exists('g:colors_name') && g:colors_name !=# 'acme'
 	hi Terminal    guibg=NONE
 	hi LineNr      guibg=NONE
 endif
-
 " 2}}} Aesthetics "
 " 1}}} "Plugins
 
@@ -248,13 +243,6 @@ if has('nvim')
 	" tell neovim where runtime is
 	let &packpath = &runtimepath
 else
-	" set timeout           " for mappings
-	" set timeoutlen=1000   " default value
-	" set ttimeout          " for key codes
-	" set ttimeoutlen=10    " unnoticeable small value
-	" set Vim-specific sequences for RGB colors allowing for gui colors
-	" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	if has('patch-7.4.1649') " Enable % to go to matching keyword/tag
 		packadd! matchit
 	else
@@ -264,8 +252,6 @@ endif
 " shortcut to files and dirs uses shortcuts.sh
 " it can be found at my scripts repo
 runtime vimshortcuts.vim
-" delete a buffer
-" nnoremap <leader>bd :bdelete<CR>
 
 " Open or compile file
 map <silent><leader>co :!opout <c-r>%<CR><CR>
@@ -296,21 +282,6 @@ else
 	set grepprg=grep\ -R\ -n\ --exclude-dir=.git,.cache
 endif
 
-function! Find(file)
-	let og_gprg = &grepprg
-	let og_gfmt = &grepformat
-
-	set grepprg=find\ .\ -iname
-	set grepformat=%f
-	exec "grep '*". a:file ."*'"
-	let &grepprg=og_gprg
-	let &grepformat=og_gfmt
-endfunction
-
-command! -nargs=* Find call Find(<q-args>)
-
-
-command! -nargs=+ WikiGrep let s:gp=&gp|set gp+=\ -i| grep "<args>" ~/.local/Dropbox/DropsyncFiles/vimwiki/**/*.md|let &gp=s:gp|unl s:gp
 
 " change variable and repeat with .
 nnoremap c*			*Ncgn
@@ -330,13 +301,11 @@ nnoremap ]b :silent! bnext<CR>
 nnoremap [b :silent! bprevious<CR>
 
 " Find Files {{{2 "
-nnoremap <leader>a   :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 nnoremap <leader>b   :b <C-d>
-nnoremap <leader>fT  :setfiletype<space>
+nnoremap <leader>ft  :setfiletype<space>
 nnoremap <leader>ff  :edit <c-r>=FindRootDirectory()<CR>/**/*
 nnoremap <leader>fo  :!<C-R>=dotvim#Open()<CR> <C-R>=fnameescape(expand('%:p:h'))<cr>/*<C-d>*&<Left><Left>
 nnoremap <leader>j   :tjump /
-nnoremap <leader>hg  :helpgrep .*.*<Left><Left>
 nnoremap <leader>hh  :help<Space>
 
 " bookmarked directories
@@ -365,7 +334,6 @@ endif
 
 
 "quick substitution
-xnoremap ss :s//g<left><left>
 cnoremap <expr> <SPACE> dotvim#CSPACE()
 " if we have 3 * in a row make them into **/*
 " this is only applied on the end of a line
@@ -381,9 +349,6 @@ nnoremap <C-W><C-z>	:silent call dotvim#ZoomToggle()<CR>
 nnoremap gf gF
 nnoremap Y  y$
 xnoremap * "xy/<C-R>x<CR>
-
-"i never use s so make it d wthout cutting
-nmap <silent> s "_d
 
 " close preview if open when hitting escape
 nnoremap <silent> <esc> :pclose<cr>
@@ -410,8 +375,6 @@ inoremap (<CR> (<CR>)<c-o><s-o>
 
 " Toggle Quickfix
 nnoremap <script> <silent> <leader>v :call dotvim#ToggleQuickfix()<CR>
-
-
 
 " Quick format file
 nnoremap gQ :<C-U>call dotvim#FormatFile()<CR>
@@ -463,7 +426,6 @@ imap <C-SPACE> <Plug>Isurround
 " Minimal Async Command {{{2
 if exists('*job_start') || exists('*jobstart')
 	command! -nargs=+ -complete=shellcmd Term call dotvim#TermCmd(<f-args>)
-	command! -nargs=* -complete=file TMake call dotvim#TermCmd(&makeprg,<f-args>)
 	command! -nargs=+ -complete=shellcmd Do call dotvim#Do(<f-args>)
 
 	" dispatch compatability
@@ -473,7 +435,6 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  '<CR>     :Term<Up><CR>
 	nnoremap  '<Space>  :Term<Space>
 	nnoremap  '<TAB>    :Term<Up>
-	nnoremap  mt        :silent w\|TMake<CR>
 	nnoremap  `<CR>     :Do<Up><CR>
 	nnoremap  `<Space>  :Do<Space>
 	nnoremap  `<TAB>    :Do<Up>
@@ -484,9 +445,6 @@ if exists('*job_start') || exists('*jobstart')
 	nnoremap  mm :call dotvim#ToggleAutocompile()<CR>
 	"async tagging
 	nnoremap <leader>T  :call dotvim#Quicktag(0)<CR>
-	" asyncronus manpages
-	" let g:loaded_man 				=  1
-	" command! -nargs=+ -complete=shellcmd Man call dotvim#Man(<f-args>)
 else
 	nnoremap  `<TAB>    :!<Up>
 	nnoremap  `<Space>  :!
@@ -503,27 +461,6 @@ augroup END
 nmap gx :silent !$PLUMBER -s neovim -- "<c-r><c-f>"<cr>
 vmap gx y:!$PLUMBER -c -- &<CR>
 " }}} dirvish "2
-" netrw {{{2
-" Poor mans Vim vinegar
-" set autochdir                                       "Auto cd
-if !empty($PLUMBER)
-	let g:netrw_browsex_viewer='setsid ' . $PLUMBER . ' -s neovim --' "force gx to use cabl if available
-endif
-let g:netrw_sort_options = 'i'
-let g:netrw_banner=0 "disable banner
-let g:netrw_fastbrowse=2
-let g:netrw_localrmdir='rm -r'
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-
-" move up a directory and focus on the file
-nmap - :call dotvim#Opendir('edit')<CR>
-
-augroup netrw_mapping
-	autocmd!
-	autocmd FileType netrw setl bufhidden=delete
-	autocmd Filetype netrw call dotvim#NetrwMapping()
-augroup end
-" 2}}} "netrw
 " TableMode {{{2 "
 function! s:isAtStartOfLine(mapping)
 	let text_before_cursor = getline('.')[0 : col('.')-1]
@@ -541,41 +478,9 @@ nnoremap <leader>hp :SignifyHunkDiff<cr>
 nnoremap <leader>hu :SignifyHunkUndo<cr>
 command! Diff :SignifyDiff
 " 2}}} "Signify
-" info {{{2
-function! InfoMappings()
-	nmap <buffer> <c-n> <Plug>(InfoNext)
-	nmap <buffer> <c-p> <Plug>(InfoPrev)
-	nmap <buffer> gu <Plug>(InfoUp)
-endfunction
-augroup info
-	" this one is which you're most likely to use?
-	autocmd FileType info call InfoMappings()
-augroup end
-" 2}}} "info
 " 1}}} "Plugin Configuration
 
 " Functions And Commands: {{{1 "
-" grep operator {{{ "2
-nnoremap gr :set operatorfunc=<SID>GrepOperator<cr>g@
-vnoremap gr :<c-u>call <SID>GrepOperator(visualmode())<cr>
-
-function! s:GrepOperator(type)
-	let saved_unnamed_register = @@
-
-	if a:type ==# 'v'
-		normal! `<v`>y
-	elseif a:type ==# 'char'
-		normal! `[v`]y
-	else
-		return
-	endif
-
-	silent execute "grep! " . shellescape(@@) . " ."
-	copen
-
-	let @@ = saved_unnamed_register
-endfunction
-" 2}}} "grep operator
 " dict {{{2
 function! Dict(word)
 	"code
@@ -596,26 +501,6 @@ function! CustomSections(dir, regex)
 endfunction
 " 2}}} "CustomSections
 " White space {{{2
-" Highlight whitespace problems.
-nnoremap <Leader>ws :call ToggleShowWhitespace()<CR>
-function! ToggleShowWhitespace()    
-	if !exists('b:showws')
-		let b:showws = 1
-	endif
-	let pat = '^\t*\zs \+\|\s\+$\| \+\ze\t\|[^\t]\zs\t\+'
-	if !b:showws
-		syntax clear ExtraWhitespace
-		let b:showws = 1
-	else
-		exec 'syntax match ExtraWhitespace "'.pat.'" containedin=ALL'
-		exec 'normal! /' . pat
-		let b:showws = 0
-	endif
-endfunction
-
-" Highlight trailing whitespace characters
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-
 " remove trailing whitespaces
 command! StripWhitespace :%s/\s\+$//e
 " 2}}} "White Space
@@ -744,7 +629,6 @@ augroup END
 
 augroup WRIGHTING
 	autocmd!
-	autocmd FileType pandoc nnoremap <buffer> cic :call pandoc#after#nrrwrgn#NarrowCodeblock()<cr>
 	autocmd FileType markdown,pandoc nnoremap <buffer> <leader>i :<C-U>call dotvim#ImportScreenShot(function('dotvim#MarkdownScreenShot'),'.eps')
 	autocmd FileType dotoo,org nnoremap <buffer> <leader>i       :<C-U>call dotvim#ImportScreenShot(function('dotvim#OrgScreenShot'),'.eps')
 	autocmd FileType groff,troff,nroff nnoremap <buffer> <leader>i     :<C-U>call dotvim#ImportScreenShot(function('dotvim#GroffScreenShot'),'.eps')
