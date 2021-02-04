@@ -42,7 +42,7 @@ augroup end
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Autocompletion {{{2 "
+" Auto completion {{{2 "
 if has('patch-7.4.775')
 	let g:mymu_enabled=1
 	let g:mylsc_enabled=1
@@ -74,7 +74,7 @@ endif
 if has("nvim-0.5")
 	Plug 'nvim-treesitter/nvim-treesitter'
 endif
-" 2}}} "Autocompletion
+" 2}}} "Auto completion
 " Snippets {{{2 "
 Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
 let g:minisnip_autoindent = 0
@@ -105,7 +105,7 @@ let g:table_mode_map_prefix = '<Leader>T'
 let g:table_mode_realign_map = '<Leader>TT'
 let g:tex_conceal='abdgm'
 " 2}}} "Writing
-" My Pluggins {{{2 "
+" My Plugins {{{2 "
 Plug 'Gavinok/spaceway.vim'
 Plug 'Gavinok/vim-troff'
 " 2}}} " My Plugins
@@ -138,8 +138,9 @@ augroup LazyLoadFugitive
 	autocmd!
 	autocmd CursorHold,CursorHoldI * call plug#load('vim-fugitive') | call plug#load('vim-scriptease') | autocmd! LazyLoadFugitive
 augroup end
+" 1}}} "Plugins
 
-" Aesthetics: {{{2 "
+" Aesthetics: {{{1 "
 colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
@@ -175,8 +176,7 @@ elseif exists('g:colors_name') && g:colors_name !=# 'acme'
 	hi Terminal    guibg=NONE
 	hi LineNr      guibg=NONE
 endif
-" 2}}} Aesthetics "
-" 1}}} "Plugins
+" 1}}} Aesthetics "
 
 " General Mappings: {{{1
 let g:mapleader="\\"
@@ -495,7 +495,6 @@ if has('virtualedit')
 	set virtualedit=block                           " virtual block can go anywhere
 endif
 
-
 set listchars=tab:→\ ,trail:·,nbsp:·
 set list
 set clipboard^=unnamed,unnamedplus	                "xclip support
@@ -564,7 +563,6 @@ augroup WRIGHTING
 	autocmd BufRead,BufNewFile *.md,*.tex,*.wiki call dotvim#WordProcessor()
 	autocmd FileType markdown,pandoc,dotoo,org execute 'setlocal dictionary+='. &runtimepath . '/extra/dict/latex_comp.txt'
 augroup END
-
 " 1 }}}" FileType Specific Stuff
 
 " Abbreviations: {{{1 "
