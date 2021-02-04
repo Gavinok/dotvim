@@ -33,7 +33,7 @@ let g:loaded_netrwPlugin        =  1
 " Plugins: {{{1 "
 " install vim-plug if it's not already
 augroup PLUGGED
-	if empty(glob('~/.vim/autoload/plug.vim'))  " vim
+	if empty(glob('~/.vim/autoload/plug.vim'))  " Vim
 		silent !curl -fo ~/.vim/autoload/plug.vim --create-dirs
 					\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -51,27 +51,26 @@ if has('patch-7.4.775')
 		" This may not be needed
 		Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
 	endif
-	" java completion is slow with lsp
+	" Java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 	" let g:JavaComplete_UsePython3 = 1
 	if exists('*job_start') || exists('*jobstart')
 		" Settings at ./plugin/lsc.vim
 		Plug 'natebosch/vim-lsc'
 	endif
-	" Plug 'jcarreja/vim-customcpt'
 	" Settings at ./plugin/mucomplete.vim
 	Plug 'lifepillar/vim-mucomplete', {'on' : []}
 	Plug 'jonasw234/vim-mucomplete-minisnip'
 endif
 if has('nvim')
-	" floating preview window for neovim
+	" floating preview window for Neovim
 	Plug 'ncm2/float-preview.nvim'
 	let g:float_preview#docked = 0
 	set completeopt-=preview
 else
 	set completeopt+=preview
 endif
-if has("nvim-0.5")
+if has('nvim-0.5')
 	Plug 'nvim-treesitter/nvim-treesitter'
 endif
 " 2}}} "Auto completion
@@ -81,7 +80,6 @@ let g:minisnip_autoindent = 0
 let g:name = 'Gavin Jaeger-Freeborn'
 let g:email = 'gavinfreeborn@gmail.com'
 let g:minisnip_trigger = '<C-f>'
-" let g:aergia_key = '<c-f>'
 let g:aergia_snippets = '/home/gavinok/.vim/extra/snip'
 let s:snipdir=globpath(&runtimepath, '**/*extra/snip')
 let g:minisnip_dir = s:snipdir . ':' . join(split(glob( s:snipdir . '**/'), '\n'), ':')
@@ -99,7 +97,6 @@ else
 endif
 " 2}}} "Git
 " Writing {{{2 "
-" Plug 'lervag/vimtex' " Latex support
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeEnable' }
 let g:table_mode_map_prefix = '<Leader>T'
 let g:table_mode_realign_map = '<Leader>TT'
@@ -115,10 +112,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat' "Surround motion
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-scriptease', {'on': []}
-Plug 'tweekmonster/helpful.vim'
 " let g:helpful = 1
 " 2}}} "Tpope
 " etc {{{2 "
+Plug 'tweekmonster/helpful.vim'
 Plug 'tommcdo/vim-lion' " aligning text
 " only seek on the same line
 
@@ -580,8 +577,6 @@ call SetupCommandAlias('rm','!rm')
 call SetupCommandAlias('mkdir','!mkdir')
 " 2}}} Command Alias
 
-" quickly print the date
-iab <expr> dts strftime("%c")
 "add a comment in any language
 " iab com <C-R>=&commentstring<CR><esc>F%c2w
 
