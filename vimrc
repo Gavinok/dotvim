@@ -282,10 +282,6 @@ nnoremap <leader>fh  :edit ~/**
 
 nnoremap <leader>fj  :ME<space>
 command! -nargs=1 -complete=customlist,dotvim#MRUComplete ME call dotvim#MRU('edit', <f-args>)
-
-let g:shortcuts = ['~/.scripts', '~/.config']
-nnoremap <leader>fs  :Sc<space>
-command! -nargs=1 -complete=customlist,dotvim#ShortcutComplete Sc call dotvim#Shortcut('edit', <f-args>)
 " 2}}} "Find Files
 
 " better navigation of command history
