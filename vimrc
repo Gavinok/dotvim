@@ -44,7 +44,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Autocompletion {{{2 "
 if has('patch-7.4.775')
-	Plug 'zaid/vim-rec'
 	let g:mymu_enabled=1
 	let g:mylsc_enabled=1
 	if executable('node')
