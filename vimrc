@@ -524,9 +524,6 @@ set wildignorecase
 set wildignore=*.git/*,*.tags,tags,*.o,*.class,*.ccls-cache
 set splitbelow
 set splitright
-let b:preprocs_as_sections = 1
-
-
 
 " Do not use smart case in command line mode,
 " extracted from https://goo.gl/vCTYdK
