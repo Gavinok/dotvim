@@ -353,22 +353,22 @@ function! dotvim#titlecase(type, ...) abort
   try
     if a:0  " Invoked from Visual mode, use '< and '> marks.
       " Back up unnamed register to avoid clobbering its contents
-      if a:type == ''
-        silent exe "normal! `<" . a:type . "`>y"
+      if a:type ==# ''
+        silent exe 'normal! `<' . a:type . '`>y'
         let titlecased = substitute(@@, WORD_PATTERN, UPCASE_REPLACEMENT, 'g')
         call setreg('@', titlecased, 'b')
         silent execute 'normal! ' . a:type . '`>p'
       else
-        silent exe "normal! `<" . a:type . "`>y"
+        silent exe 'normal! `<' . a:type . '`>y'
         let @i = substitute(@@, WORD_PATTERN, UPCASE_REPLACEMENT, 'g')
         silent execute 'normal! ' . a:type . '`>"ip'
       endif
-    elseif a:type == 'line'
+    elseif a:type ==# 'line'
       execute '''[,'']s/'.WORD_PATTERN.'/'.UPCASE_REPLACEMENT.'/ge'
     else
-      silent exe "normal! `[v`]y"
+      silent exe 'normal! `[v`]y'
       let titlecased = substitute(@@, WORD_PATTERN, UPCASE_REPLACEMENT, 'g')
-      silent exe "normal! v`]c" . titlecased
+      silent exe 'normal! v`]c' . titlecased
     endif
   finally
     " Restore unnamed register to its original state
