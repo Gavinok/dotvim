@@ -303,8 +303,8 @@ cnoremap <expr> * getcmdline() =~ '.*\*\*$' ? '/*' : '*'
 cnoreabbr <expr> %% fnameescape(expand('%:p'))
 
 " better alternative to <C-W>_<C-W>\|
-nnoremap <C-W>z		:silent call dotvim#ZoomToggle()<CR>
-nnoremap <C-W><C-z>	:silent call dotvim#ZoomToggle()<CR>
+nnoremap <C-W>z		<C-W>_<C-W>\|
+nnoremap <C-W><C-z>	<C-W>_<C-W>\|
 
 "Better Mappings Imho
 nnoremap gf gF
