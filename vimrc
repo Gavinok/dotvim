@@ -600,7 +600,7 @@ iab sin, Sincerely ,<CR>Gavin<SPACE>Jaeger-Freeborn
 iab elect electron
 
 " lorem ipsum
-iabbrev <expr> lorem system('curl -s http://metaphorpsum.com/paragraphs/1')
+iab <expr> lorem system('curl -s http://metaphorpsum.com/paragraphs/1')
 " 1}}} "Abbreviations
 
 " Etc {{{1 "
