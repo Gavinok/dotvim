@@ -122,7 +122,6 @@ Plug 'tweekmonster/helpful.vim'
 Plug 'tommcdo/vim-lion' " aligning text
 " only seek on the same line
 
-Plug 'jelera/vim-javascript-syntax'
 " color support
 if executable('go')
 	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
