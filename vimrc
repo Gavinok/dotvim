@@ -50,14 +50,6 @@ if has('patch-7.4.775')
 		Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
 		" This may not be needed
 		Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
-	else
-		Plug '1995eaton/vim-better-javascript-completion', { 'for': ['javascript', 'html', 'javascript.jsx'] }
-		let g:vimjs#casesensistive = 1
-		" Enabled by default. flip the value to make completion matches case insensitive
-
-		let g:vimjs#smartcomplete = 0
-		" Disabled by default. Enabling this will let vim complete matches at any location
-		" e.g. typing 'ocument' will suggest 'document' if enabled.
 	endif
 	" java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
