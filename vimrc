@@ -610,8 +610,10 @@ if has('patch-8.1.0283')
 				\indent-heuristic,algorithm:patience,internal
 endif
 " 2}}} "Diffs
+" Local Settings {{{ "2
 if filereadable(expand('~/.config/vimlocal'))
 	source ~/.config/vimlocal
 endif
+" 2}}} "Local Settings
 "}}} Etc "
 " vim:foldmethod=marker:foldlevel=0
