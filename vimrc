@@ -134,8 +134,6 @@ Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 call plug#end()
 
-autocmd FileType scheme let b:repl_config = { 'cmd': 'racket' }
-
 augroup LazyLoadFugitive
 	autocmd!
 	autocmd CursorHold,CursorHoldI * call plug#load('vim-fugitive') | call plug#load('vim-scriptease') | autocmd! LazyLoadFugitive
