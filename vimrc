@@ -455,7 +455,7 @@ set listchars=tab:→\ ,trail:·,nbsp:·                " Show white space
 set list
 set clipboard^=unnamed,unnamedplus                  "xclip support
 set tags=.tags                                      "make tagefiles hidden
-" set tagcase=match                                   "match case when searching for tags
+set tagcase=match                                   "match case when searching for tags
 set title                                           "Update window title
 set hidden                                          "Allow to leave buffer without saving
 set showcmd                                         "Show keys pressed in normal
