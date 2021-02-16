@@ -109,7 +109,6 @@ Plug 'tpope/vim-scriptease', {'on': []}
 " let g:helpful = 1
 " 2}}} "Tpope
 " etc {{{2 "
-Plug 'tweekmonster/helpful.vim'
 Plug 'tommcdo/vim-lion' " aligning text
 " only seek on the same line
 
