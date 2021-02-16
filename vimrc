@@ -451,9 +451,9 @@ if has('virtualedit')
 	set virtualedit=block                           " virtual block can go anywhere
 endif
 
-set listchars=tab:→\ ,trail:·,nbsp:·
+set listchars=tab:→\ ,trail:·,nbsp:·                " Show white space
 set list
-set clipboard^=unnamed,unnamedplus	                "xclip support
+set clipboard^=unnamed,unnamedplus                  "xclip support
 set tags=.tags                                      "make tagefiles hidden
 " set tagcase=match                                   "match case when searching for tags
 set title                                           "Update window title
