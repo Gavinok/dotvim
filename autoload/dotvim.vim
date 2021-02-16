@@ -296,21 +296,6 @@ function! dotvim#ImportScreenShot(screenshotfunc, extension)
 endfunction
 " 1}}} "ScreenShots in Markup
 
-" CSPACE {{{1
-function! dotvim#CSPACE()
-	let cmdline = getcmdline()
-
-	if getcmdtype() isnot# ':' | return "\<SPACE>" | endif
-
-	if cmdline =~# '\v\C^ss$'
-		return "\<c-u>%s//g\<left>\<left>"
-	elseif cmdline =~# '\v\C^sl$'
-		return "\<c-u>s//g\<left>\<left>"
-	endif
-	return "\<C-]>\<SPACE>"
-endfunction
-"  1}}} "CSPACE
-
 " Run Vim Script {{{1
 function! dotvim#RunVimScript(type, ...) abort
     let sel_save = &selection
