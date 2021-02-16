@@ -477,6 +477,7 @@ set wildmenu                                        "Autocompletion of commands
 set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.git/*,*.tags,tags,*.o,*.class,*.ccls-cache
+set path+=**10
 set splitbelow
 set splitright
 
