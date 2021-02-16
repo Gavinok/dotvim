@@ -573,6 +573,7 @@ call SetupCommandAlias('cp','!cp')
 call SetupCommandAlias('mv','!mv')
 call SetupCommandAlias('rm','!rm')
 call SetupCommandAlias('mkdir','!mkdir')
+call SetupCommandAlias('ss','s//g\<Left>\<Left>')
 " 2}}} Command Alias
 
 " spelling
