@@ -362,8 +362,6 @@ nmap <BS>         mz[s1z=`z
 " Move a line of text
 xnoremap J :m'>+<cr>`<my`>mzgv`yo`z
 xnoremap K :m'<-2<cr>`>my`<mzgv`yo`z
-xnoremap < <gv
-xnoremap > >gv
 
 snoremap <BS> <BS>i
 " 1}}} "Editing
