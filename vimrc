@@ -46,11 +46,6 @@ Plug 'junegunn/fzf.vim'
 if has('patch-7.4.775')
 	let g:mymu_enabled=1
 	let g:mylsc_enabled=1
-	if executable('node')
-		Plug 'othree/jspc.vim', { 'for': ['javascript',  'html', 'javascript.jsx'] }
-		" This may not be needed
-		Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'html', 'javascript.jsx'] }
-	endif
 	" Java completion is slow with lsp
 	Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 	" let g:JavaComplete_UsePython3 = 1
