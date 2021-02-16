@@ -359,7 +359,6 @@ nmap <silent><leader>O  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
 let g:quickdict='~/.vim/extra/dict/en_common.dict'
 nnoremap <silent> <leader>ss :call dotvim#WordProcessor()<CR>
 nmap <BS>         mz[s1z=`z
-nmap <leader><BS> 1z=
 
 " Move a line of text
 xnoremap J :m'>+<cr>`<my`>mzgv`yo`z
