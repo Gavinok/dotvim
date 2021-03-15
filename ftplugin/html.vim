@@ -30,6 +30,6 @@ endif
 imap <C-e> <plug>(emmet-expand-abbr)
 
 " enable tern inside html
-call tern#Enable()
-nnoremap <buffer> K :TernDoc<CR>
-setlocal completefunc=tern#Complete
+" call tern#Enable()
+" nnoremap <buffer> K :TernDoc<CR>
+" setlocal completefunc=tern#Complete
