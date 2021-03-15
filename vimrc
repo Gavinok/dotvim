@@ -40,8 +40,6 @@ augroup PLUGGED
 	endif
 augroup end
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 " Auto completion {{{2 "
 if has('patch-7.4.775')
 	let g:mymu_enabled=1
