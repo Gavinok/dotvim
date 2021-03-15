@@ -132,11 +132,6 @@ colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 
-if exists('g:started_by_firenvim')
-	set laststatus=0
-else
-	set laststatus=2 "show statusbar
-endif
 
 function! s:statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
