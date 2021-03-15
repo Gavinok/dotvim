@@ -63,9 +63,6 @@ if has('nvim')
 else
 	set completeopt+=preview
 endif
-if has('nvim-0.5')
-	Plug 'nvim-treesitter/nvim-treesitter'
-endif
 " 2}}} "Auto completion
 " Snippets {{{2 "
 Plug 'Gavinok/vim-minisnip', { 'branch': 'optionalautoindent' }
