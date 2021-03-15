@@ -10,6 +10,3 @@
 if exists('g:mymu_enabled')
 	setlocal omnifunc=lsc#complete#complete
 endif
-if has("nvim-0.5")
-	TSEnableAll highlight c
-endif
