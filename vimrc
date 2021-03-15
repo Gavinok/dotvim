@@ -133,7 +133,7 @@ highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 
 
-function! s:statusline_expr()
+function! Statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
 	let fug  = "%3*%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
@@ -145,7 +145,8 @@ function! s:statusline_expr()
 
 	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
 endfunction
-let &statusline = s:statusline_expr()
+let &statusline = Statusline_expr()
+set laststatus=2 "show statusbar
 
 if has('gui_running')
 	call dotvim#LoadGui()
