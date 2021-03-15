@@ -107,7 +107,7 @@ Plug 'tommcdo/vim-lion' " aligning text
 
 " color support
 if executable('go')
-	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+	Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' , 'on' : [] }
 	let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 endif
 " Plug 'axvr/org.vim'
@@ -117,9 +117,13 @@ Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
 call plug#end()
 
-augroup LazyLoadFugitive
+augroup LazyLoadPlug
 	autocmd!
-	autocmd CursorHold,CursorHoldI * call plug#load('vim-fugitive') | call plug#load('vim-scriptease') | autocmd! LazyLoadFugitive
+	autocmd CursorHold,CursorHoldI *
+				\ call plug#load('vim-fugitive') |
+				\ call plug#load('vim-scriptease') |
+				\ call plug#load('vim-hexokinase') |
+				\ autocmd! LazyLoadPlug
 augroup end
 " 1}}} "Plugins
 
