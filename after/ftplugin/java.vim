@@ -12,7 +12,3 @@ if exists('g:JavaComplete_PluginLoaded')
 elseif exists('g:mylsc_enabled')
 	setlocal omnifunc=lsc#complete#complete
 endif
-
-if has("nvim-0.5")
-	TSEnableAll highlight java
-endif
