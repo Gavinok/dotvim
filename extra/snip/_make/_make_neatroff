@@ -1,5 +1,5 @@
 # Neatroff settings
-BASE = {{+$(HOME)/.local/share/neat+}}
+BASE = {{+/opt/share/neatroff+}}
 ROFF = $(BASE)/neatroff/roff
 POST = $(BASE)/neatpost/post
 PPDF = $(BASE)/neatpost/pdf
