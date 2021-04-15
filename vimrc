@@ -132,7 +132,6 @@ colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
 
-
 function! Statusline_expr()
 	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
 	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
@@ -275,7 +274,6 @@ if has('nvim-0.5.0')
 else
 	cnoremap <expr> / wildmenumode() ? "\<C-E>" : "/"
 endif
-
 
 "quick substitution
 " if we have 3 * in a row make them into **/*
