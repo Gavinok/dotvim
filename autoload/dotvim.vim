@@ -280,6 +280,10 @@ function! dotvim#GroffScreenShot(desc, dir, filename)
 	call setline('.', printf('.PSPIC %s/%s', a:dir, a:filename))
 endfunction
 
+function! dotvim#NeatroffScreenShot(desc, dir, filename)
+	call setline('.', printf('.EPS %s/%s C', a:dir, a:filename))
+endfunction
+
 "add a screenshot to a markdown file
 function! dotvim#ImportScreenShot(screenshotfunc, extension)
 	let dir = 'pic'
