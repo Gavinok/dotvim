@@ -127,13 +127,6 @@ augroup LazyLoadPlug
 				\ autocmd! LazyLoadPlug
 augroup end
 " 1}}} "Plugins
-augroup zepl
-    autocmd!
-    autocmd FileType apl let b:repl_config = { 'cmd': 'apl' }
-    autocmd FileType sh let b:repl_config = { 'cmd': 'dash' }
-    autocmd FileType python let b:repl_config = { 'cmd': 'python' }
-    autocmd FileType scheme     let b:repl_config = { 'cmd': 'racket' }
-augroup END
 
 " Aesthetics: {{{1 "
 colorscheme spaceway
@@ -366,6 +359,17 @@ snoremap <BS> <BS>i
 " 1}}} "Editing
 
 " Plugin Configuration: {{{1 "
+" zepl {{{ "2
+augroup zepl
+    autocmd!
+    autocmd FileType apl        let b:repl_config = { 'cmd': 'apl' }
+    autocmd FileType sh         let b:repl_config = { 'cmd': 'dash' }
+    autocmd FileType python     let b:repl_config = { 'cmd': 'python' }
+    autocmd FileType scheme     let b:repl_config = { 'cmd': 'racket' }
+    autocmd FileType math       let b:repl_config = { 'cmd': 'qalc' }
+    autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
+augroup END
+" 2}}} "zepl
 " Surround {{{2
 imap <C-SPACE> <Plug>Isurround
 " 2}}} "Surround
