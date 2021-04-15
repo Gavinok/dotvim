@@ -9,7 +9,6 @@
 " Functions I want to autoload in my config
 scriptencoding utf-8 " ensure mulitbyte chars in this file are supported
 
-
 " ToggleQuickfix {{{1
 function! dotvim#ToggleQuickfix() abort
 	let nr = winnr('$')
