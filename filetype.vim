@@ -19,4 +19,5 @@ augroup filetypedetect
 	" autocmd! BufRead,BufNewFile *.ms,*.mom,*.me,*.mm setlocal filetype=groff
 	autocmd! BufRead,BufNewFile tuir*                setlocal filetype=markdown
     autocmd! BufRead,BufNewFile *.rkt,*.rktl         setlocal filetype=scheme
+	autocmd! BufRead,BufNewFile *.txp                setlocal filetype=patoline
 augroup END
