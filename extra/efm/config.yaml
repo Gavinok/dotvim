@@ -14,6 +14,20 @@ tools:
     lint-formats:
       - '%f:%l:%c:%m'
 
+  joker-edn: &joker-edn
+    lint-command: 'joker --lint --dialect edn ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c:%m'
+
+  joker: &joker
+    lint-command: 'joker --lint ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c:%m'
+
   proselint: &proselint
     lint-command: 'proselint ${INPUT}'
     lint-stdin: false
@@ -143,6 +157,12 @@ languages:
 
   mail:
     - <<: *writegood
+
+  fennel:
+    - <<: *joker-edn
+
+  clojure:
+    - <<: *joker
 
   nroff:
     - <<: *writegood
