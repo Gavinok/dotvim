@@ -136,23 +136,18 @@ languages:
   markdown:
     - <<: *markdown-markdownlint
     - <<: *markdown-pandoc
-    - <<: *proselint
     - <<: *writegood
 
   text:
-    - <<: *proselint
     - <<: *writegood
 
   mail:
-    - <<: *proselint
     - <<: *writegood
 
   nroff:
-    - <<: *proselint
     - <<: *writegood
 
   groff:
-    - <<: *proselint
     - <<: *writegood
 
   rst:
