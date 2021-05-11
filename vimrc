@@ -79,7 +79,7 @@ imap <Nop> <Plug>(minisnip-complete)
 Plug 'christoomey/vim-tmux-navigator'
 " 2}}} "Terminal
 " Git {{{2 "
-Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gpush', 'Gedit', 'Ggrep'] }
+Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gedit', 'Git'] }
 if has('nvim') || has('patch-8.0.902')
 	Plug 'mhinz/vim-signify'
 endif
@@ -113,6 +113,22 @@ if executable('go')
 endif
 " Plug 'axvr/org.vim'
 Plug 'dhruvasagar/vim-dotoo'
+Plug 'emaniacs/OrgEval.vim'
+let g:org_eval_run_cmd = { 
+			\'python': 'python3',
+			\'clojure': 'clojure',
+			\'racket': 'racket',
+			\'haskell': 'runhaskell',
+			\'sh': 'sh',
+			\'bash': 'bash',
+			\'awk': 'awk -f',
+			\'java': 'java --source 11',
+			\'c': 'tcc -run',
+			\'math': 'qalc',
+			\'apl': 'apl -s',
+			\'javascript': 'node',
+			\'r': 'Rscript -'}
+
 nmap <Nop> <Plug>(dotoo-capture)
 Plug 'justinmk/vim-dirvish'
 " 2}}} "etc.
@@ -129,6 +145,7 @@ augroup end
 " 1}}} "Plugins
 
 " Aesthetics: {{{1 "
+" colorscheme acme
 colorscheme spaceway
 highlight Normal ctermbg=NONE
 highlight Conceal ctermbg=NONE
@@ -178,6 +195,7 @@ if has('nvim')
 		autocmd BufLeave term://* stopinsert
 		au TermOpen * setlocal nonumber
 		au TermOpen * setlocal norelativenumber
+		au TermOpen * setlocal nolist
 	augroup end
 	map <leader>ct :w! \| :split \| te cheat.sh <c-r>%
 	tnoremap <leader>esc <C-\><C-N>
@@ -366,10 +384,19 @@ augroup zepl
     autocmd FileType sh         let b:repl_config = { 'cmd': 'dash' }
     autocmd FileType python     let b:repl_config = { 'cmd': 'python' }
     autocmd FileType scheme     let b:repl_config = { 'cmd': 'racket' }
+    autocmd FileType racket     let b:repl_config = { 'cmd': 'racket' }
+    autocmd FileType fennel     let b:repl_config = { 'cmd': 'fennel' }
     autocmd FileType math       let b:repl_config = { 'cmd': 'qalc' }
     autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
 augroup END
 " 2}}} "zepl
+" tpipeline {{{ "2
+" 	tpipeline comes bundled with its own custom minimal statusline seen above
+" 	set laststatus=0 "show statusbar
+" 	let g:tpipeline_cursormoved = 1
+" 	let g:tpipeline_statusline = '%!Statusline_expr()'
+" 	hi StatusLine ctermbg=NONE ctermfg=232 guibg=NONE guifg=#B3B8C4
+" 2}}} "tpipeline
 " Surround {{{2
 imap <C-SPACE> <Plug>Isurround
 " 2}}} "Surround
@@ -465,7 +492,6 @@ set smarttab
 set conceallevel=2
 set shiftwidth=4                                    "Shorter shiftwidth
 set autoindent                                      "Auto indent newline
-set ruler                                           "Show line number and column
 set scrolljump=-15                                  "Jump 15 when moving cursor bellow screen
 set lazyredraw                                      "redraw only when needed faster macros
 set shortmess=aAtcT                                 "get rid of annoying messagesc
@@ -539,12 +565,6 @@ augroup AUTOEXEC
 	" Run xrdb whenever Xresources are updated.
 	autocmd BufWritePost *Xresources !xrdb ~/.Xresources
 augroup end
-
-augroup VIM
-	autocmd!
-	" used by
-	autocmd BufRead *.vimrc nnoremap <buffer><silent> gx yi':!<C-R>=dotvim#Open()<CR> https://github.com/<C-r>0<CR>
-augroup END
 
 augroup WRIGHTING
 	autocmd!
