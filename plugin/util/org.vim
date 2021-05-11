@@ -58,6 +58,7 @@ let g:dotoo_headline_highlight_colors = [
 			\ 'Constant']
 
 let g:dotoo#agenda#warning_days = '30d'
+let g:dotoo#agenda_view#agenda#start_of = 'today'
 hi dotoo_shade_stars ctermfg=NONE guifg='#000000'
 hi link orgHeading2 Normal
 let g:org_time='%H:%M'
