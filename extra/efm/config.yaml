@@ -7,6 +7,14 @@ commands:
 
 tools:
 
+  diction: &diction
+    lint-command: 'diction --suggest --beginner ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l: %m'
+      - '%-G%.%#'
+
   writegood: &writegood
     lint-command: 'writegood --parse ${INPUT}'
     lint-stdin: false
@@ -151,24 +159,37 @@ languages:
     - <<: *markdown-markdownlint
     - <<: *markdown-pandoc
     - <<: *writegood
+    - <<: *diction
 
   text:
     - <<: *writegood
+    - <<: *diction
 
   mail:
     - <<: *writegood
+    - <<: *diction
+
+  nroff:
+    - <<: *writegood
+    - <<: *diction
+
+  groff:
+    - <<: *writegood
+    - <<: *diction
+
+  org:
+    - <<: *writegood
+    - <<: *diction
+
+  dotoo:
+    - <<: *writegood
+    - <<: *diction
 
   fennel:
     - <<: *joker-edn
 
   clojure:
     - <<: *joker
-
-  nroff:
-    - <<: *writegood
-
-  groff:
-    - <<: *writegood
 
   rst:
     - <<: *rst-lint
