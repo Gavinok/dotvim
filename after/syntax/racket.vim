@@ -9,6 +9,7 @@
 " Extra syntax for racket slides
 
 
+runtime! syntax/scheme.vim
 syn keyword racketSyntax slide item subitem t it bt bit tt rt title title
 syn keyword racketSyntax text clickback interactive
 

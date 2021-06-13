@@ -6,7 +6,17 @@
 " See :help license
 "
 " Description:
-" ftplucin for racket
+" ftplugin for racket
+if executable('racket')
+	let b:lsc_config = {
+				\ 'command': 'racket -l racket-langserver',
+				\}
+
+	if exists('g:mylsc_enabled')
+		call RegisterLanguageServer('racket', b:lsc_config)
+		setlocal omnifunc=lsc#complete#complete
+	endif
+endif
 
  " No tabs!
 setlocal expandtab
